@@ -9,5 +9,6 @@ export type InitialState = {
     zIndex: number;
     fullScreen: boolean;
     focused: boolean;
+    logo: string;
   }[];
 };

@@ -1,7 +1,12 @@
 import { Box, Typography } from '@mui/material';
-import WidgetsIcon from '@mui/icons-material/Widgets';
+import chess from '@/public/chess.svg';
 
-const WindowTitle = ({ title }: { title: string }) => {
+type Props = {
+  title: string;
+  logo: string;
+};
+
+const WindowTitle = ({ title, logo }: Props) => {
   return (
     <Box
       position={'absolute'}
@@ -17,7 +22,7 @@ const WindowTitle = ({ title }: { title: string }) => {
       padding={'0 15px 0 10px'}
       gap={'10px'}
     >
-      <WidgetsIcon color="action" />
+      <img height={'70%'} src={logo} alt="logo" />
       <Typography
         color={'rgba(225, 235, 245, 255)'}
         fontSize={15}

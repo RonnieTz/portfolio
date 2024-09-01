@@ -4,8 +4,8 @@ import Window from './components/Window';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { setStartOpen } from '@/redux/appSlice';
-import Iframe from 'react-iframe';
 import ProjectWindow from './components/ProjectWindow';
+import ChessProject from './components/projects/ChessProject';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,8 @@ const DesktopMainArea = () => {
           left={window.position.x}
           id={window.id}
           focused={window.focused}
-          children={<ProjectWindow />}
+          logo={window.logo}
+          children={<ChessProject />}
         />
       ))}
     </div>

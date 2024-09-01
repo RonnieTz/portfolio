@@ -5,7 +5,7 @@ import description from '@/public/description.png';
 import github from '@/public/github.svg';
 import codesandbox from '@/public/codesandbox.svg';
 import live from '@/public/live.png';
-import { Typography } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 
 type Props = {
   selectedWindow: string;
@@ -16,6 +16,7 @@ const ProjectWindowNavigation = ({
   selectedWindow,
   setSelectedWindow,
 }: Props) => {
+  const [show, setShow] = useState(false);
   return (
     <div
       style={{
@@ -87,12 +88,13 @@ const ProjectWindowNavigation = ({
           Live
         </Typography>
       </div>
-      <a
+      <Link
         href="https://github.com/RonnieTz/chess_game"
         target="_blank"
         className="project-navigation"
-        onClick={() => {}}
-        style={{
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        sx={{
           border:
             selectedWindow === 'github'
               ? '1px solid rgb(122, 152, 175)'
@@ -102,15 +104,29 @@ const ProjectWindowNavigation = ({
           textDecoration: 'none',
           color: 'black',
           fontSize: '0.9rem',
+          position: 'relative',
         }}
       >
+        <Typography
+          border={'2px solid black'}
+          sx={{ backgroundColor: 'white', textWrap: 'nowrap' }}
+          position={'absolute'}
+          fontSize={'0.7rem'}
+          bottom={'-30px'}
+          left={'10px'}
+          display={show ? 'block' : 'none'}
+          padding={'0.1rem 0.4rem'}
+          zIndex={1000}
+        >
+          This will open in a new tab
+        </Typography>
         <img
           style={{ height: '50px' }}
           src={github.src}
           alt="description logo"
         />
         Github
-      </a>
+      </Link>
     </div>
   );
 };

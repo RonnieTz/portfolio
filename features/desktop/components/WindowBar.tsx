@@ -21,6 +21,7 @@ type WindowBarProps = {
   id: string;
   focused: boolean;
   title: string;
+  logo: string;
 };
 
 const WindowBar = ({
@@ -30,6 +31,7 @@ const WindowBar = ({
   id,
   focused,
   title,
+  logo,
 }: WindowBarProps) => {
   const ref = useRef({ x: 0, y: 0 });
   const dispatch = useDispatch();
@@ -73,7 +75,7 @@ const WindowBar = ({
         cursor: '-webkit-grab',
       }}
     >
-      <WindowTitle title={title} />
+      <WindowTitle logo={logo} title={title} />
       <WindowBarBackground focused={focused} />
       <WindowBarButtons id={id} fullScreen={fullScreen} />
     </div>

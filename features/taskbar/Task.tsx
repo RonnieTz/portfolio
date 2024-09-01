@@ -13,9 +13,10 @@ type TaskProps = {
   title: string;
   focused: boolean;
   id: string;
+  logo: string;
 };
 
-const Task = ({ focused, id, title }: TaskProps) => {
+const Task = ({ focused, id, title, logo }: TaskProps) => {
   const dispatch = useDispatch();
   return (
     <div
@@ -48,7 +49,7 @@ const Task = ({ focused, id, title }: TaskProps) => {
         filter: 'contrast(1.2)',
       }}
     >
-      <WidgetsIcon color="action" />
+      <img height={'70%'} src={logo} alt="logo" />
       <Typography
         color={'rgba(225, 235, 245, 255)'}
         fontSize={15}

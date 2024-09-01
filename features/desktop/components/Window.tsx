@@ -18,6 +18,7 @@ type WindowProps = {
   id: string;
   focused: boolean;
   children: ReactNode;
+  logo: string;
 };
 
 const Window = ({
@@ -31,6 +32,7 @@ const Window = ({
   id,
   focused,
   children,
+  logo,
 }: WindowProps) => {
   const [position, setPosition] = useState({ x: left, y: top });
   const windowRef = useRef<HTMLDivElement>(null);
@@ -73,6 +75,7 @@ const Window = ({
           id={id}
           focused={focused}
           title={title}
+          logo={logo}
         />
         <WindowBody children={children} link={link} />
       </div>

@@ -74,7 +74,12 @@ const appSlice = createSlice({
     },
     newWindow: (
       state,
-      action: PayloadAction<{ id: string; title: string; link: string }>
+      action: PayloadAction<{
+        id: string;
+        title: string;
+        link: string;
+        logo: string;
+      }>
     ) => {
       state.windows.forEach((window) => {
         window.focused = false;
@@ -89,6 +94,7 @@ const appSlice = createSlice({
         zIndex: 10,
         fullScreen: true,
         focused: true,
+        logo: action.payload.logo,
       });
 
       state.start.open = false;

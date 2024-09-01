@@ -31,6 +31,7 @@ const TaskArea = () => {
               focused={window.focused}
               id={window.id}
               key={window.id}
+              logo={window.logo}
             />
           );
         })}
