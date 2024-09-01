@@ -36,7 +36,7 @@ const DesktopMainArea = () => {
           left={window.position.x}
           id={window.id}
           focused={window.focused}
-          children={ProjectWindow()}
+          children={<ProjectWindow />}
         />
       ))}
     </div>
