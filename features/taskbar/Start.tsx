@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { setStartOpen, setStartHover } from '@/redux/appSlice';
@@ -25,6 +25,7 @@ const Start = () => {
         opacity: start.open ? 0.3 : 0,
         borderRadius: '0 10px 10px 0',
         ':hover': { opacity: start.open ? 0.3 : 0.1 },
+        transition: 'all 0.2s',
       }}
     ></Box>
   );

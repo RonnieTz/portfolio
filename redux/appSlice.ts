@@ -1,23 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { InitialState } from './types';
+import { set_WindowPosition } from './reducers/setWindowPosition';
+import { set_WindowFullScreen } from './reducers/setWindowFullScreen';
 
-const initialState: {
-  start: { open: boolean; hover: boolean };
-  windows: {
-    position: { y: number; x: number };
-    link: string;
-    id: string;
-    title: string;
-    minimized: boolean;
-    zIndex: number;
-    fullScreen: boolean;
-    focused: boolean;
-  }[];
-  tasks: { title: string; focused: boolean; id: string }[];
-} = {
+const initialState: InitialState = {
   start: { open: false, hover: false },
   windows: [],
-  tasks: [],
 };
 
 const appSlice = createSlice({
@@ -34,119 +22,75 @@ const appSlice = createSlice({
       state,
       action: PayloadAction<{ y: number; x: number; id: string }>
     ) => {
-      const window = state.windows.find(
-        (window) => window.id === action.payload.id
-      );
-      if (window) {
-        window.position.y = action.payload.y;
-        window.position.x = action.payload.x;
-      }
+      set_WindowPosition(state, action);
     },
     setWindowFullScreen: (
       state,
       action: PayloadAction<{ id: string; fullscreen: boolean }>
     ) => {
-      const window = state.windows.find(
-        (window) => window.id === action.payload.id
-      );
-      if (window) {
-        window.fullScreen = action.payload.fullscreen;
-      }
-    },
-    minimizeWindow: (state, action: PayloadAction<{ id: string }>) => {
-      const window = state.windows.find(
-        (window) => window.id === action.payload.id
-      );
-      const task = state.tasks.find((task) => task.id === action.payload.id);
-
-      if (window && task) {
-        window.minimized = true;
-        window.focused = false;
-        task.focused = false;
-      }
-    },
-    focusWindow: (state, action: PayloadAction<{ id: string }>) => {
-      const window = state.windows.find(
-        (window) => window.id === action.payload.id
-      );
-
-      state.tasks.forEach((task) => {
-        if (task.id === action.payload.id) {
-          task.focused = true;
-        } else {
-          task.focused = false;
-        }
-      });
-
-      if (window) {
-        window.focused = true;
-        window.zIndex = 50;
-        state.windows.forEach((window) => {
-          if (window.id !== action.payload.id) {
-            window.focused = false;
-            window.zIndex = 1;
-          }
-        });
-        state.windows.sort((a, b) => {
-          return a.focused === b.focused ? 0 : a.focused ? 1 : -1;
-        });
-      }
-    },
-    clickTask: (state, action: PayloadAction<{ id: string }>) => {
-      const task = state.tasks.find((task) => task.id === action.payload.id);
-      const window = state.windows.find(
-        (window) => window.id === action.payload.id
-      );
-      if (window) {
-        window.minimized = false;
-        window.focused = true;
-        window.zIndex = 50;
-        state.windows.forEach((window) => {
-          if (window.id !== action.payload.id) {
-            window.focused = false;
-            window.zIndex = 1;
-          }
-        });
-        state.windows.sort((a, b) => {
-          return a.focused === b.focused ? 0 : a.focused ? 1 : -1;
-        });
-      }
-      if (task) {
-        state.tasks.forEach((task) => {
-          if (task.id === action.payload.id) {
-            task.focused = true;
-          } else {
-            task.focused = false;
-          }
-        });
-      }
+      set_WindowFullScreen(state, action);
     },
 
     closeWindow: (state, action: PayloadAction<{ id: string }>) => {
       state.windows = state.windows.filter(
         (window) => window.id !== action.payload.id
       );
-      state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
+    },
+    setMinimize: (
+      state,
+      action: PayloadAction<{ id: string; minimize: boolean }>
+    ) => {
+      const window = state.windows.find(
+        (window) => window.id === action.payload.id
+      );
+      if (window) {
+        window.minimized = action.payload.minimize;
+      }
+    },
+    focusWindow: (
+      state,
+      action: PayloadAction<{ id: string; focus: boolean }>
+    ) => {
+      state.windows.forEach((window) => {
+        if (window.id === action.payload.id) {
+          window.focused = true;
+          window.zIndex = 10;
+        } else {
+          window.focused = false;
+          window.zIndex = 1;
+        }
+      });
+    },
+    setFocus: (
+      state,
+      action: PayloadAction<{ id: string; focus: boolean }>
+    ) => {
+      const window = state.windows.find(
+        (window) => window.id === action.payload.id
+      );
+      if (window) {
+        window.focused = action.payload.focus;
+      }
     },
     newWindow: (
       state,
       action: PayloadAction<{ id: string; title: string; link: string }>
     ) => {
+      state.windows.forEach((window) => {
+        window.focused = false;
+        window.zIndex = 1;
+      });
       state.windows.push({
-        position: { y: 0, x: 0 },
+        position: { y: 100, x: 100 },
         link: action.payload.link,
         id: action.payload.id,
         title: action.payload.title,
         minimized: false,
-        zIndex: 1,
+        zIndex: 10,
         fullScreen: true,
         focused: true,
       });
-      state.tasks.push({
-        title: action.payload.title,
-        focused: true,
-        id: action.payload.id,
-      });
+
       state.start.open = false;
     },
   },
@@ -157,10 +101,10 @@ export const {
   setStartHover,
   setWindowPosition,
   setWindowFullScreen,
-  minimizeWindow,
-  focusWindow,
+  setMinimize,
   closeWindow,
-  clickTask,
   newWindow,
+  focusWindow,
+  setFocus,
 } = appSlice.actions;
 export default appSlice.reducer;

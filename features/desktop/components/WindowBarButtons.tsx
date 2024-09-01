@@ -2,11 +2,7 @@
 
 import { Box } from '@mui/material';
 import ButtonLayer from './ButtonLayer';
-import {
-  setWindowFullScreen,
-  minimizeWindow,
-  closeWindow,
-} from '@/redux/appSlice';
+import { setWindowFullScreen, closeWindow } from '@/redux/appSlice';
 import windowButtons from '@/public/windowButtons.jpg';
 
 type WindowBarButtonsProps = {
@@ -28,16 +24,9 @@ const WindowBarButtons = ({ id, fullScreen }: WindowBarButtonsProps) => {
       sx={{ cursor: 'default' }}
       zIndex={10}
     >
-      <ButtonLayer
-        id={id}
-        fullScreen={fullScreen}
-        func={closeWindow}
-        right="4px"
-        name="exit"
-      />
+      <ButtonLayer id={id} fullScreen={fullScreen} right="4px" name="exit" />
       <ButtonLayer
         fullScreen={fullScreen}
-        func={setWindowFullScreen}
         right="32.5px"
         id={id}
         name="fullscreen"
@@ -45,7 +34,6 @@ const WindowBarButtons = ({ id, fullScreen }: WindowBarButtonsProps) => {
       <ButtonLayer
         id={id}
         fullScreen={fullScreen}
-        func={minimizeWindow}
         right="61.5px"
         name="minimize"
       />

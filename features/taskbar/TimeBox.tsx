@@ -14,9 +14,9 @@ const TimeBox = () => {
       const minute = new Date().getMinutes();
       const seconds = new Date().getSeconds();
       setTime(
-        `${hour}:${String(minute).length === 1 ? 0 : ''}${minute}:${
-          String(seconds).length === 1 ? 0 : ''
-        }${seconds}`
+        `${String(hour).length === 1 ? 0 : ''}${hour}:${
+          String(minute).length === 1 ? 0 : ''
+        }${minute}:${String(seconds).length === 1 ? 0 : ''}${seconds}`
       );
     }, 1000);
     return () => clearInterval(interval);

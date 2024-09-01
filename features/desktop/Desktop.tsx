@@ -7,6 +7,7 @@ import Menu from '../startMenu/Menu';
 import Window from './components/Window';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import DesktopMainArea from './DesktopMainArea';
 
 const Desktop = () => {
   const { windows } = useSelector((state: RootState) => state.app);
@@ -18,20 +19,6 @@ const Desktop = () => {
       position={'relative'}
       overflow={'hidden'}
     >
-      {windows.map((window, i) => (
-        <Window
-          key={window.id}
-          fullScreen={window.fullScreen}
-          minimized={window.minimized}
-          link={window.link}
-          title={window.title}
-          zIndex={window.zIndex + 100}
-          top={window.position.y}
-          left={window.position.x}
-          id={window.id}
-          focused={window.focused}
-        />
-      ))}
       <Image
         src={image}
         layout={'fill'}
@@ -39,6 +26,7 @@ const Desktop = () => {
         alt="backgroundImage"
         style={{ position: 'absolute' }}
       />
+      <DesktopMainArea />
       <Taskbar />
       <Menu />
     </Box>

@@ -1,10 +1,13 @@
 'use client';
 
-import React from 'react';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { clickTask } from '@/redux/appSlice';
+import {
+  focusWindow,
+  setMinimize,
+  setWindowFullScreen,
+} from '@/redux/appSlice';
 
 type TaskProps = {
   title: string;
@@ -17,8 +20,13 @@ const Task = ({ focused, id, title }: TaskProps) => {
   return (
     <div
       onClick={() => {
-        dispatch(clickTask({ id }));
+        dispatch(focusWindow({ id, focus: true }));
+        dispatch(setMinimize({ id, minimize: false }));
       }}
+      onDoubleClick={() => {
+        dispatch(setWindowFullScreen({ id, fullscreen: true }));
+      }}
+      className="task"
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -37,6 +45,7 @@ const Task = ({ focused, id, title }: TaskProps) => {
         minWidth: '170px',
         cursor: 'pointer',
         transition: 'all 0.2s',
+        filter: 'contrast(1.2)',
       }}
     >
       <WidgetsIcon color="action" />

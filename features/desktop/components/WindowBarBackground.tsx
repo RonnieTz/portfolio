@@ -18,7 +18,7 @@ const WindowBarBackground = ({ focused }: { focused: boolean }) => {
         bgcolor={'rgb(150, 200, 250)'}
         top={1}
         left={1}
-        zIndex={10}
+        // zIndex={10}
         sx={{ opacity: focused ? 0 : 0.4, transition: 'opacity 0.2s' }}
       ></Box>
     </>

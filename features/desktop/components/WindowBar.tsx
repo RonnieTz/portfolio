@@ -1,8 +1,13 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { setWindowPosition, focusWindow } from '@/redux/appSlice';
+import {
+  setWindowPosition,
+  setWindowFullScreen,
+  focusWindow,
+} from '@/redux/appSlice';
 import WindowBarBackground from './WindowBarBackground';
 import WindowBarButtons from './WindowBarButtons';
+import WindowTitle from './WindowTitle';
 
 type WindowBarProps = {
   fullScreen: boolean;
@@ -15,6 +20,7 @@ type WindowBarProps = {
   >;
   id: string;
   focused: boolean;
+  title: string;
 };
 
 const WindowBar = ({
@@ -23,6 +29,7 @@ const WindowBar = ({
   setPosition,
   id,
   focused,
+  title,
 }: WindowBarProps) => {
   const ref = useRef({ x: 0, y: 0 });
   const dispatch = useDispatch();
@@ -30,15 +37,16 @@ const WindowBar = ({
     <div
       id="window"
       draggable={!fullScreen}
-      onClick={() => {
-        dispatch(focusWindow({ id }));
+      onClick={() => {}}
+      onDoubleClick={() => {
+        dispatch(setWindowFullScreen({ id, fullscreen: !fullScreen }));
       }}
       onDragStart={(e) => {
         const x = e.clientX;
         const y = e.clientY;
         e.dataTransfer.setDragImage(new Image(), 0, 0);
         ref.current = { x: x - position.x, y: y - position.y };
-        dispatch(focusWindow({ id }));
+        dispatch(focusWindow({ id, focus: true }));
       }}
       onDragEnd={(e) => {
         const x = e.clientX;
@@ -65,6 +73,7 @@ const WindowBar = ({
         cursor: '-webkit-grab',
       }}
     >
+      <WindowTitle title={title} />
       <WindowBarBackground focused={focused} />
       <WindowBarButtons id={id} fullScreen={fullScreen} />
     </div>
