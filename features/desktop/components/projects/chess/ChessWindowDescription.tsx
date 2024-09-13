@@ -1,11 +1,10 @@
 import { Box, Typography } from '@mui/material';
-import javascript from '@/public/javascript.svg';
-import Javascript from './technologyIcons/Javascript';
-import Typescript from './technologyIcons/Typescript';
-import HTML from './technologyIcons/HTML';
-import CSS from './technologyIcons/CSS';
+import Javascript from '../../technologyIcons/Javascript';
+import Typescript from '../../technologyIcons/Typescript';
+import HTML from '../../technologyIcons/HTML';
+import CSS from '../../technologyIcons/CSS';
 
-const ProjectWindowDescription = () => {
+const ChessWindowDescription = () => {
   return (
     <div
       style={{
@@ -34,7 +33,7 @@ const ProjectWindowDescription = () => {
       >
         Chess Game
       </Typography>
-      <Box marginBottom={6}>
+      <Box width={'80%'} margin={'0 auto'} minWidth={'300px'} marginBottom={6}>
         <Typography
           textAlign={'center'}
           marginBottom={1}
@@ -44,7 +43,7 @@ const ProjectWindowDescription = () => {
         >
           Introduction
         </Typography>
-        <Typography lineHeight={1.4} fontSize={'1rem'}>
+        <Typography lineHeight={1.4} fontSize={'0.9rem'}>
           The Chess Board Web App is a simple, elegant chess application built
           using JavaScript. Designed for two players on the same screen, it
           highlights all legal moves and enforces standard chess rules. The app
@@ -79,7 +78,7 @@ const ProjectWindowDescription = () => {
           <CSS />
         </div>
       </Box>
-      <Box>
+      <Box width={'80%'} margin={'0 auto'} minWidth={'300px'} marginBottom={5}>
         <Typography
           textAlign={'center'}
           marginBottom={1}
@@ -89,37 +88,42 @@ const ProjectWindowDescription = () => {
         >
           Challenges and Lessons
         </Typography>
-        <Typography lineHeight={1.4} fontSize={'1rem'}>
-          <Typography marginBottom={'5px'}>
-            One of the most challenging aspects of developing the Chess Board
-            Web App was creating the algorithm to predict the legal moves for
-            each chess piece. Chess is a highly complex game with nearly
-            infinite possible position combinations, making it difficult to
-            design an efficient and accurate algorithm. Implementing logic that
-            could handle the unique movement rules for each piece—while also
-            considering board boundaries, potential captures, and special moves
-            like castling—required careful thought and meticulous testing.
-          </Typography>
-          <Typography marginBottom={'5px'}>
-            Another significant challenge was ensuring that the algorithm only
-            accepts moves that do not leave the king in check. This added a
-            layer of complexity, as I had to simulate each possible move and
-            then evaluate whether it would expose the king to capture. The
-            recursive nature of this problem made it particularly tricky, as it
-            required a balance between performance and correctness.
-          </Typography>
-          <Typography>
-            Through this process, I gained a deeper understanding of algorithm
-            design, problem-solving, and the importance of edge case handling in
-            game development. The project not only improved my proficiency in
-            JavaScript, TypeScript, and CSS but also taught me valuable lessons
-            in patience, perseverance, and the intricacies of creating a robust,
-            rule-based system.
-          </Typography>
+        <Typography lineHeight={1.4} fontSize={'0.9rem'}>
+          One of the biggest challenges in developing the Chess Board Web App
+          was designing the algorithm to predict legal moves, as chess involves
+          nearly infinite position combinations. Handling unique piece
+          movements, like castling and en passant, while ensuring the app only
+          allows moves that don't put the king in check, was particularly
+          complex. This required simulating moves and checking for threats to
+          the king, adding significant difficulty. Through this process, I
+          improved my understanding of algorithm design, JavaScript, and
+          TypeScript, learning to balance efficiency with accuracy in a
+          rules-based system.
+        </Typography>
+      </Box>
+      <Box width={'80%'} margin={'0 auto'} minWidth={'300px'}>
+        <Typography
+          textAlign={'center'}
+          marginBottom={1}
+          variant="h2"
+          fontSize={'1.5rem'}
+          fontWeight={400}
+        >
+          How to use
+        </Typography>
+        <Typography lineHeight={1.4} fontSize={'0.9rem'}>
+          To start playing visit the live demo link. The chess board will
+          appear, ready for a two-player game on the same screen. Players take
+          turns by clicking on their pieces; the app will highlight all legal
+          moves for the selected piece. Move a piece by clicking on the desired
+          destination square. Use the back and next buttons to navigate through
+          the move history, allowing you to review and analyze previous moves.
+          To view the board from the other player's perspective, click the
+          rotation button to rotate the board.
         </Typography>
       </Box>
     </div>
   );
 };
 
-export default ProjectWindowDescription;
+export default ChessWindowDescription;

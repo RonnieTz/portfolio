@@ -16,6 +16,7 @@
     "@mui/material": "^5.16.7",
     "@reduxjs/toolkit": "^2.2.7",
     "next": "14.2.5",
+    "portofolio": "file:",
     "react": "^18",
     "react-dom": "^18",
     "react-iframe": "^1.8.5",

@@ -7,8 +7,8 @@ const ContactMail = () => {
     <Box
       position={'absolute'}
       zIndex={100}
-      bottom={13}
-      left={20}
+      bottom={'2.4%'}
+      left={'4%'}
       display={'flex'}
       alignItems={'center'}
       justifyContent={'center'}

@@ -1,12 +1,12 @@
 'use client';
 
-import WidgetsIcon from '@mui/icons-material/Widgets';
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import {
   focusWindow,
   setMinimize,
   setWindowFullScreen,
+  setFocus,
 } from '@/redux/appSlice';
 
 type TaskProps = {
@@ -21,6 +21,11 @@ const Task = ({ focused, id, title, logo }: TaskProps) => {
   return (
     <div
       onClick={() => {
+        if (focused) {
+          dispatch(setMinimize({ id, minimize: true }));
+          dispatch(setFocus({ id, focus: false }));
+          return;
+        }
         dispatch(focusWindow({ id, focus: true }));
         dispatch(setMinimize({ id, minimize: false }));
       }}

@@ -16,7 +16,7 @@ const ProjectWindowExternal = ({ link, show }: Props) => {
         right: 0,
         zIndex: show ? 10 : -10,
       }}
-      title="RonnieTz/chess_game/main"
+      title="RonnieTz/quiz/main"
       allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
     ></iframe>

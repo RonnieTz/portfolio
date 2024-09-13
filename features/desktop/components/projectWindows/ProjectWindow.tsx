@@ -1,11 +1,22 @@
 'use client';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProjectWindowNavigation from './ProjectWindowNavigation';
-import ProjectWindowDescription from './ProjectWindowDescription';
 import ProjectWindowExternal from './ProjectWindowExternal';
 
-const ProjectWindow = () => {
+type Props = {
+  liveLink: string;
+  codesandboxLink: string;
+  gitHubLink: string;
+  children: React.ReactNode;
+};
+
+const ProjectWindow = ({
+  codesandboxLink,
+  liveLink,
+  children,
+  gitHubLink,
+}: Props) => {
   const [selectedWindow, setSelectedWindow] = useState('description');
   return (
     <div
@@ -16,20 +27,18 @@ const ProjectWindow = () => {
         overflow: 'hidden',
       }}
     >
-      {selectedWindow === 'description' && <ProjectWindowDescription />}
+      {selectedWindow === 'description' && children}
       <ProjectWindowNavigation
         selectedWindow={selectedWindow}
         setSelectedWindow={setSelectedWindow}
+        link={gitHubLink}
       />
 
       <ProjectWindowExternal
-        link="https://codesandbox.io/p/github/RonnieTz/chess_game/main?import=true&embed=1"
+        link={codesandboxLink}
         show={selectedWindow === 'codesandbox'}
       />
-      <ProjectWindowExternal
-        link="https://chess-game-flax.vercel.app/"
-        show={selectedWindow === 'live'}
-      />
+      <ProjectWindowExternal link={liveLink} show={selectedWindow === 'live'} />
     </div>
   );
 };

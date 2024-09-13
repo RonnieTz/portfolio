@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
+* {
+  user-select: none;
+}
+
 body {
   margin: 0;
+  filter: hue-rotate();
 }
 
 main {
@@ -12,6 +17,10 @@ main {
   width: 100%;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.window {
+  animation: fadeIn 0.2s forwards;
 }
 
 .window-enter {
@@ -54,4 +63,60 @@ main {
 .project-navigation:hover {
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.2);
   background-color: rgb(245, 245, 240) important;
+}
+
+.all-projects-button {
+  width: 46%;
+  height: 30px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 2%;
+  gap: 10px;
+  transition: all 0.2s;
+  color: rgb(48, 52, 56);
+}
+
+.all-projects-menu-item:hover {
+  background-color: rgb(49, 106, 197);
+  color: white;
+}
+
+.all-projects-button:hover {
+  background-color: rgb(49, 106, 197);
+  color: white;
+}
+
+.all-projects-menu {
+  opacity: 0;
+  animation: fadeIn 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    scale: 0.9;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes tooltip {
+  0% {
+    opacity: 0;
+    scale: 0.9;
+  }
+
+  80% {
+    scale: 1.3;
+  }
+
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
 }

@@ -2,13 +2,7 @@ import { Box } from '@mui/material';
 import React, { ReactNode } from 'react';
 import windowBody from '@/public/windowBody.jpg';
 
-const WindowBody = ({
-  link,
-  children,
-}: {
-  link: string;
-  children: ReactNode;
-}) => {
+const WindowBody = ({ children }: { link: string; children: ReactNode }) => {
   return (
     <Box
       height={'calc(100% - 40px)'}

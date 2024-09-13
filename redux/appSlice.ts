@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { InitialState } from './types';
+import { initialState } from './initialState';
+
 import { set_WindowPosition } from './reducers/setWindowPosition';
 import { set_WindowFullScreen } from './reducers/setWindowFullScreen';
-
-const initialState: InitialState = {
-  start: { open: false, hover: false },
-  windows: [],
-};
 
 const appSlice = createSlice({
   name: 'app',
@@ -57,7 +53,7 @@ const appSlice = createSlice({
           window.zIndex = 10;
         } else {
           window.focused = false;
-          window.zIndex = 1;
+          window.zIndex = 5;
         }
       });
     },
@@ -77,17 +73,19 @@ const appSlice = createSlice({
       action: PayloadAction<{
         id: string;
         title: string;
-        link: string;
         logo: string;
+        liveLink?: string;
+        codesadnboxLink?: string;
+        gitHubLink?: string;
       }>
     ) => {
       state.windows.forEach((window) => {
         window.focused = false;
-        window.zIndex = 1;
+        window.zIndex = 5;
       });
       state.windows.push({
         position: { y: 100, x: 100 },
-        link: action.payload.link,
+        liveLink: action.payload.liveLink,
         id: action.payload.id,
         title: action.payload.title,
         minimized: false,
@@ -95,9 +93,25 @@ const appSlice = createSlice({
         fullScreen: true,
         focused: true,
         logo: action.payload.logo,
+        codesandboxLink: action.payload.codesadnboxLink,
+        gitHubLink: action.payload.gitHubLink,
       });
 
       state.start.open = false;
+    },
+    selectShortcut: (state, action: PayloadAction<{ name: string }>) => {
+      state.desktopShortcuts.forEach((project) => {
+        if (project.name === action.payload.name) {
+          project.selected = true;
+        } else {
+          project.selected = false;
+        }
+      });
+    },
+    unSelectAllShortcuts: (state) => {
+      state.desktopShortcuts.forEach((project) => {
+        project.selected = false;
+      });
     },
   },
 });
@@ -112,5 +126,7 @@ export const {
   newWindow,
   focusWindow,
   setFocus,
+  selectShortcut,
+  unSelectAllShortcuts,
 } = appSlice.actions;
 export default appSlice.reducer;

@@ -10,11 +10,13 @@ import { Link, Typography } from '@mui/material';
 type Props = {
   selectedWindow: string;
   setSelectedWindow: Dispatch<SetStateAction<string>>;
+  link: string;
 };
 
 const ProjectWindowNavigation = ({
   selectedWindow,
   setSelectedWindow,
+  link,
 }: Props) => {
   const [show, setShow] = useState(false);
   return (
@@ -89,7 +91,7 @@ const ProjectWindowNavigation = ({
         </Typography>
       </div>
       <Link
-        href="https://github.com/RonnieTz/chess_game"
+        href={link}
         target="_blank"
         className="project-navigation"
         onMouseEnter={() => setShow(true)}
@@ -109,7 +111,11 @@ const ProjectWindowNavigation = ({
       >
         <Typography
           border={'2px solid black'}
-          sx={{ backgroundColor: 'white', textWrap: 'nowrap' }}
+          sx={{
+            backgroundColor: 'white',
+            textWrap: 'nowrap',
+            animation: 'tooltip 0.5s forwards',
+          }}
           position={'absolute'}
           fontSize={'0.7rem'}
           bottom={'-30px'}
