@@ -6,7 +6,7 @@ import ChessProject from './components/projects/chess/ChessProject';
 import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
 import Shortcut from './components/shortcuts/Shortcut';
-import FolderWindow from './components/folderWindows/FolderWindow';
+// import FolderWindow from './components/folderWindows/FolderWindow';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
@@ -64,7 +64,10 @@ const DesktopMainArea = () => {
             ) : window.title === 'My Profile' ? (
               <Profile />
             ) : window.title === 'Projects' ? (
-              <FolderWindow />
+              // <FolderWindow />
+              <>
+                <p>test</p>
+              </>
             ) : (
               <p>Not Found</p>
             )
