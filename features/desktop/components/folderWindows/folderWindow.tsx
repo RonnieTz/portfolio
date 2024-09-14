@@ -4,7 +4,7 @@ import './styles.css';
 import TopBar from './TopBar';
 import MainArea from './MainArea';
 
-const folderWindow = () => {
+const FolderWindow = () => {
   return (
     <div className="folder-window-container">
       <TopBar />
@@ -14,4 +14,4 @@ const folderWindow = () => {
     </div>
   );
 };
-export default folderWindow;
+export default FolderWindow;
