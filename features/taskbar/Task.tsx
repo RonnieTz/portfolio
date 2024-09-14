@@ -20,6 +20,9 @@ const Task = ({ focused, id, title, logo }: TaskProps) => {
   const dispatch = useDispatch();
   return (
     <div
+      onDoubleClick={() => {
+        dispatch(setWindowFullScreen({ id, fullscreen: true }));
+      }}
       onClick={() => {
         if (focused) {
           dispatch(setMinimize({ id, minimize: true }));
@@ -28,9 +31,6 @@ const Task = ({ focused, id, title, logo }: TaskProps) => {
         }
         dispatch(focusWindow({ id, focus: true }));
         dispatch(setMinimize({ id, minimize: false }));
-      }}
-      onDoubleClick={() => {
-        dispatch(setWindowFullScreen({ id, fullscreen: true }));
       }}
       className="task"
       style={{
@@ -48,10 +48,12 @@ const Task = ({ focused, id, title, logo }: TaskProps) => {
           : '0 0 1px 0px black, 0 0 7px 0px rgba(90, 190, 255, 255) inset',
         borderRadius: '5px',
         height: '100%',
-        minWidth: '170px',
+        minWidth: '50px',
+        width: '15%',
         cursor: 'pointer',
         transition: 'all 0.2s',
         filter: 'contrast(1.2)',
+        overflow: 'hidden',
       }}
     >
       <img height={'70%'} src={logo} alt="logo" />
@@ -60,7 +62,7 @@ const Task = ({ focused, id, title, logo }: TaskProps) => {
         fontSize={15}
         fontWeight={500}
         fontFamily={'Gill Sans, sans-serif'}
-        sx={{ textShadow: '1px 1px 3px black' }}
+        sx={{ textShadow: '1px 1px 3px black', textWrap: 'nowrap' }}
       >
         {title}
       </Typography>

@@ -9,8 +9,10 @@ type Props = {
 };
 
 const QuizMenuItem = ({ setOpenMenu }: Props) => {
-  const { projects } = useSelector((state: RootState) => state.app);
-  const project = projects.find((project) => project.name === 'Quiz Game');
+  const { desktopShortcuts } = useSelector((state: RootState) => state.app);
+  const project = desktopShortcuts.find(
+    (project) => project.name === 'Quiz Game'
+  );
   const dispatch = useDispatch();
   return (
     <div

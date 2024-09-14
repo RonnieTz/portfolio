@@ -1,6 +1,7 @@
 import { InitialState } from './types';
 import chess from '@/public/chess.svg';
 import quiz from '@/public/quiz.svg';
+import project from '@/public/project.svg';
 
 export const initialState: InitialState = {
   start: { open: false, hover: false },
@@ -23,6 +24,11 @@ export const initialState: InitialState = {
       gitHubLink: 'https://github.com/RonnieTz/quiz',
       logo: quiz.src,
       selected: false,
+    },
+    {
+      name: 'Projects',
+      selected: false,
+      logo: project.src,
     },
   ],
 };

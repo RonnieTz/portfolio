@@ -22,6 +22,8 @@ const Menu = () => {
       style={{
         width: !start.open ? '0' : '35%',
         height: !start.open ? '0' : '75%',
+        minWidth: !start.open ? '0' : '350px',
+        minHeight: !start.open ? '0' : '580px',
         borderRadius: '10px 10px 0 0',
         overflow: 'hidden',
         backgroundColor: '#f0f0f0',

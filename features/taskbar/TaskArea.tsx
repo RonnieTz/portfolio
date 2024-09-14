@@ -1,8 +1,6 @@
 import { Box } from '@mui/material';
 import React from 'react';
 import Task from './Task';
-import Image from 'next/image';
-import taskbar from '@/public/taskbar.jpg';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 
@@ -10,17 +8,12 @@ const TaskArea = () => {
   const { windows } = useSelector((state: RootState) => state.app);
   return (
     <Box>
-      <Image
-        style={{ filter: 'contrast(1.1)' }}
-        src={taskbar}
-        layout={'fill'}
-        alt="taskbar"
-      />
       <Box
         position={'absolute'}
-        width={'83.6%'}
+        width={'calc(100% - 220px)'}
+        zIndex={100}
         height={'78%'}
-        right={'7.2%'}
+        right={'110px'}
         top={'12%'}
         display={'flex'}
       >

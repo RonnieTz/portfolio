@@ -1,0 +1,111 @@
+.folder-window-container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.topbar {
+  height: 35px;
+  width: 100%;
+  background-color: rgb(240, 240, 232);
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+}
+
+.navbar {
+  height: 50px;
+  width: 100%;
+  background-color: rgb(240, 240, 232);
+  border-width: 2px 0px;
+  border-style: solid;
+  border-color: rgb(226, 221, 203);
+  box-shadow: 0px 1px 0px 1px rgb(247, 251, 246) inset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.address-bar {
+  height: 35px;
+  width: 100%;
+  background-color: rgb(240, 240, 232);
+  box-sizing: border-box;
+  border-top: 2px solid rgb(247, 251, 246);
+  display: flex;
+}
+
+.main-area {
+  height: calc(100% - 120px);
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.sidebar {
+  height: 100%;
+  width: 20%;
+  min-width: 200px;
+  background: linear-gradient(
+    180deg,
+    rgb(125, 162, 230) 0%,
+    rgb(98, 118, 215) 100%
+  );
+  border-right: 1px solid rgb(247, 251, 246);
+  box-sizing: border-box;
+  border-width: 0px 0px 2px 2px;
+  border-style: solid;
+  border-color: transparent rgb(209, 222, 241) transparent rgb(231, 236, 246);
+}
+
+.folder-area {
+  height: 100%;
+  flex: 1;
+}
+
+.logo-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  background-color: rgb(248, 252, 248);
+  border-left: 2px solid rgb(219, 212, 190);
+  position: absolute;
+  right: 0;
+}
+
+.back-button {
+  height: 100%;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  gap: 7px;
+}
+
+.back-arrow {
+  height: 70%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(102, 192, 40);
+  box-shadow: 0 0 1px 0 rgb(20, 87, 15);
+  border-radius: 50%;
+}
+
+.back-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(24, 24, 24);
+  text-shadow: 0 0 0.5px rgb(68, 68, 68);
+  font-weight: 100;
+  font-family: 'winXP';
+}
+
+.arrow-down {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}

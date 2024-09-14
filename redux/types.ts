@@ -18,7 +18,7 @@ export type InitialState = {
     liveLink?: string;
     codesandboxLink?: string;
     gitHubLink?: string;
-    logo?: string;
+    logo: string;
     selected: boolean;
   }[];
 };

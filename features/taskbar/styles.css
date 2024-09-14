@@ -1,0 +1,74 @@
+.taskbar {
+  height: 37px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.taskbar-background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.start-button {
+  height: 100%;
+  width: 110px;
+  position: relative;
+  z-index: 1;
+}
+
+.start-tooltip {
+  position: absolute;
+  top: -20px;
+  left: 30px;
+  height: 0.9rem;
+  width: 100px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  font-size: 12px;
+  font-family: winXP, Gill Sans, sans-serif;
+  padding: 2px 4px;
+  animation: fadeIn 0.2s forwards;
+}
+
+.timebox {
+  height: 100%;
+  width: 110px;
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.time {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 100;
+  color: white;
+  text-shadow: 1px 1px 5px black;
+  font-family: Monaco, monospace;
+}
+.date {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  width: 110px;
+  height: 0.9rem;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  font-size: 12px;
+  font-family: winXP, Gill Sans, sans-serif;
+  padding: 2px 4px;
+  animation: fadeIn 0.2s forwards;
+}

@@ -6,6 +6,7 @@ import ChessProject from './components/projects/chess/ChessProject';
 import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
 import Shortcut from './components/shortcuts/Shortcut';
+import FolderWindow from './components/folderWindows/FolderWindow';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
@@ -62,6 +63,8 @@ const DesktopMainArea = () => {
               />
             ) : window.title === 'My Profile' ? (
               <Profile />
+            ) : window.title === 'Projects' ? (
+              <FolderWindow />
             ) : (
               <p>Not Found</p>
             )
@@ -72,12 +75,12 @@ const DesktopMainArea = () => {
         return (
           <Shortcut
             key={project.name}
-            logo={project.logo!}
+            logo={project.logo}
             title={project.name}
             selected={project.selected}
-            codesadnboxLink={project.codesandboxLink!}
-            gitHubLink={project.gitHubLink!}
-            liveLink={project.liveLink!}
+            codesadnboxLink={project.codesandboxLink}
+            gitHubLink={project.gitHubLink}
+            liveLink={project.liveLink}
           />
         );
       })}

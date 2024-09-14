@@ -1,7 +1,5 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
-import Image from 'next/image';
 import timeBox from '@/public/timebox.jpg';
 import { useState, useEffect } from 'react';
 
@@ -23,62 +21,24 @@ const TimeBox = () => {
   }, []);
 
   return (
-    <Box
-      height={'100%'}
-      width={'7%'}
-      bgcolor={'red'}
-      right={0}
-      position={'absolute'}
-      display={'flex'}
-      alignItems={'center'}
-      justifyContent={'center'}
+    <div
+      onMouseEnter={(e) => {
+        setShowDate(true);
+      }}
+      onMouseLeave={(e) => {
+        setShowDate(false);
+      }}
+      className="timebox"
     >
-      <Box
-        position={'absolute'}
-        height={'0.9rem'}
-        width={'110px'}
-        zIndex={100}
-        border={'2px solid black'}
-        top={-20}
-        right={0}
-        display={showDate ? 'flex' : 'none'}
-        alignItems={'center'}
-        justifyContent={'center'}
-        bgcolor={'white'}
-        color={'black'}
-        padding={'2px 4px'}
-        fontSize={12}
-        fontFamily={'Gill Sans, sans-serif'}
-      >
-        {new Date().toDateString()}
-      </Box>
-      <Image
-        style={{ position: 'absolute' }}
-        src={timeBox}
-        layout={'fill'}
-        alt="taskbar"
+      <img
+        width={'100%'}
+        height={'100%'}
+        src={timeBox.src}
+        alt="time box background"
       />
-
-      <Typography
-        fontWeight={100}
-        fontFamily={'Monaco, monospace'}
-        fontSize={14}
-        sx={{ textShadow: '1px 1px 5px black', cursor: 'default' }}
-        position={'absolute'}
-        color={'white'}
-      >
-        <span
-          onMouseEnter={(e) => {
-            setShowDate(true);
-          }}
-          onMouseLeave={(e) => {
-            setShowDate(false);
-          }}
-        >
-          {time}
-        </span>
-      </Typography>
-    </Box>
+      <p className="time">{time}</p>
+      {showDate && <div className="date">{new Date().toDateString()}</div>}
+    </div>
   );
 };
 

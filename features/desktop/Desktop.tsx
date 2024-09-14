@@ -5,8 +5,19 @@ import image from '@/public/image.jpg';
 import Taskbar from '../taskbar/Taskbar';
 import Menu from '../startMenu/Menu';
 import DesktopMainArea from './DesktopMainArea';
+import { useEffect } from 'react';
 
 const Desktop = () => {
+  useEffect(() => {
+    document.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+    });
+    return () => {
+      document.removeEventListener('contextmenu', (event) => {
+        event.preventDefault();
+      });
+    };
+  }, []);
   return (
     <Box
       height={'100vh'}

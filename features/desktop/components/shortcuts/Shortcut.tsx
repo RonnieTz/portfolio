@@ -60,7 +60,7 @@ const Shortcut = ({
         setTimeout(() => {
           dispatch(
             newWindow({
-              title: 'Chess Game',
+              title,
               liveLink,
               gitHubLink,
               id: String(Math.floor(Math.random() * 1000)),

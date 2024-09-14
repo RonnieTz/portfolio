@@ -1,27 +1,19 @@
 'use client';
-
-import { Box } from '@mui/material';
+import './styles.css';
 import React from 'react';
-import Start from './Start';
 import TimeBox from './TimeBox';
-import StartTooltip from './StartTooltip';
 import TaskArea from './TaskArea';
+import Background from './Background';
+import StartButton from './StartButton';
 
 const Taskbar = () => {
   return (
-    <Box
-      height={'37px'}
-      width={'100%'}
-      bgcolor={'blue'}
-      position={'absolute'}
-      bottom={'0'}
-      zIndex={100}
-    >
-      <StartTooltip />
-      <Start />
-      <TaskArea />
+    <div className="taskbar">
       <TimeBox />
-    </Box>
+      <TaskArea />
+      <Background />
+      <StartButton />
+    </div>
   );
 };
 
