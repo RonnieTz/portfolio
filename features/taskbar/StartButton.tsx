@@ -12,7 +12,7 @@ const StartButton = () => {
   return (
     <div
       onClick={() => {
-        dispatch(setStartOpen(true));
+        dispatch(setStartOpen(!start.open));
       }}
       onMouseEnter={() => {
         dispatch(setStartHover(true));
