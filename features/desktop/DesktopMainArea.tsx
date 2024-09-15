@@ -6,7 +6,7 @@ import ChessProject from './components/projects/chess/ChessProject';
 import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
 import Shortcut from './components/shortcuts/Shortcut';
-import FolderWindow from './components/folderWindows/FolderWindow';
+import FolderWindow from './components/folderWindows/Window';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
