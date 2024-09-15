@@ -3,7 +3,6 @@ import Navbar from './navbar/Navbar';
 import './styles.css';
 import TopBar from './topbar/TopBar';
 import MainArea from './MainArea';
-//changed
 
 const FolderWindow = () => {
   return (
