@@ -4,27 +4,24 @@ import { Box } from '@mui/material';
 import ButtonLayer from './ButtonLayer';
 import { setWindowFullScreen, closeWindow } from '@/redux/appSlice';
 import windowButtons from '@/public/windowButtons.jpg';
+import ExitButton from './ExitButton';
+import MinimizeButton from './MinimizeButton';
+import MaximizeButton from './MaximizeButton';
 
 type WindowBarButtonsProps = {
   id: string;
   fullScreen: boolean;
+  focused: boolean;
 };
 
-const WindowBarButtons = ({ id, fullScreen }: WindowBarButtonsProps) => {
+const WindowBarButtons = ({
+  id,
+  fullScreen,
+  focused,
+}: WindowBarButtonsProps) => {
   return (
-    <Box
-      width={'88px'}
-      height={'30px'}
-      bgcolor={'white'}
-      position={'absolute'}
-      right={3}
-      top={5}
-      borderRadius={'5px'}
-      overflow={'hidden'}
-      sx={{ cursor: 'default' }}
-      zIndex={10}
-    >
-      <ButtonLayer id={id} fullScreen={fullScreen} right="4px" name="exit" />
+    <div className="button-container">
+      {/* <ButtonLayer id={id} fullScreen={fullScreen} right="4px" name="exit" />
       <ButtonLayer
         fullScreen={fullScreen}
         right="32.5px"
@@ -36,9 +33,11 @@ const WindowBarButtons = ({ id, fullScreen }: WindowBarButtonsProps) => {
         fullScreen={fullScreen}
         right="61.5px"
         name="minimize"
-      />
-      <img src={windowButtons.src} alt="window buttons" height={'100%'} />
-    </Box>
+      /> */}
+      <MinimizeButton focused={focused} id={id} />
+      <MaximizeButton focused={focused} fullScreen={fullScreen} id={id} />
+      <ExitButton focused={focused} id={id} />
+    </div>
   );
 };
 

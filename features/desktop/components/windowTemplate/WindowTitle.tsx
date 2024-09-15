@@ -14,7 +14,7 @@ const WindowTitle = ({ title, logo }: Props) => {
       height={'35px'}
       minWidth={'100px'}
       top={'3px'}
-      left={'1%'}
+      left={'1px'}
       display={'flex'}
       alignItems={'center'}
       justifyContent={'center'}
@@ -27,7 +27,7 @@ const WindowTitle = ({ title, logo }: Props) => {
         color={'rgba(225, 235, 245, 255)'}
         fontSize={15}
         fontWeight={500}
-        fontFamily={'Gill Sans, sans-serif'}
+        fontFamily={'winXP, Gill Sans, sans-serif'}
         sx={{ textShadow: '1px 1px 3px black' }}
       >
         {title}

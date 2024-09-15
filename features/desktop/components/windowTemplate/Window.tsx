@@ -1,5 +1,5 @@
 'use client';
-
+import './styles.css';
 import React, { useState, ReactNode, useRef } from 'react';
 import WindowBody from './WindowBody';
 import WindowBar from './WindowBar';

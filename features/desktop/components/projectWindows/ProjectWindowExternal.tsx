@@ -11,7 +11,7 @@ const ProjectWindowExternal = ({ link, show }: Props) => {
         height: '100%',
         border: 0,
         borderRadius: '4px',
-        overflow: 'hidden;',
+        overflow: 'hidden',
         position: 'absolute',
         right: 0,
         zIndex: show ? 10 : -10,

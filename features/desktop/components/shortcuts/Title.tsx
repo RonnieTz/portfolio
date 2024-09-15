@@ -5,6 +5,7 @@ const Title = ({ title, selected }: { title: string; selected: boolean }) => {
         fontSize: '0.7rem',
         color: 'rgb(227, 230, 225)',
         textShadow: '0.5px 0.5px 3px rgb(20, 20, 20)',
+        fontFamily: 'winXP, Gill Sans, sans-serif',
         letterSpacing: '0.1px',
         cursor: 'default',
         backgroundColor: selected ? 'rgb(48, 94, 192)' : 'transparent',

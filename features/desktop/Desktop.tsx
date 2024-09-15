@@ -1,6 +1,5 @@
 'use client';
 import { Box } from '@mui/material';
-import Image from 'next/image';
 import image from '@/public/image.jpg';
 import Taskbar from '../taskbar/Taskbar';
 import Menu from '../startMenu/Menu';
@@ -26,12 +25,15 @@ const Desktop = () => {
       position={'relative'}
       overflow={'hidden'}
     >
-      <Image
-        src={image}
-        layout={'fill'}
-        objectFit={'cover'}
+      <img
+        src={image.src}
         alt="backgroundImage"
-        style={{ position: 'absolute' }}
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
       />
       <DesktopMainArea />
       <Taskbar />

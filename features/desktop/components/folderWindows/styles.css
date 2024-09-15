@@ -24,6 +24,8 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  gap: 5px;
+  padding-left: 2px;
 }
 
 .address-bar {
@@ -33,6 +35,7 @@
   box-sizing: border-box;
   border-top: 2px solid rgb(247, 251, 246);
   display: flex;
+  position: relative;
 }
 
 .main-area {
@@ -76,12 +79,27 @@
 }
 
 .back-button {
-  height: 100%;
-  width: 100px;
+  height: 95%;
+  width: 92px;
   display: flex;
   align-items: center;
   padding-left: 10px;
   gap: 7px;
+  border: 1px solid transparent;
+  border-width: 1px 1.5px 1.5px 1px;
+  color: rgb(24, 24, 24);
+}
+
+.forward-button {
+  height: 95%;
+  width: 55px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-width: 1px 1.5px 1.5px 1px;
+  margin-right: 10px;
 }
 
 .back-arrow {
@@ -98,7 +116,6 @@
 .back-text {
   font-size: 14px;
   font-weight: 500;
-  color: rgb(24, 24, 24);
   text-shadow: 0 0 0.5px rgb(68, 68, 68);
   font-weight: 100;
   font-family: 'winXP';
@@ -108,4 +125,89 @@
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.vertical-divider {
+  height: 90%;
+  width: 1px;
+  background-color: rgb(204, 200, 174);
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(222, 220, 208) rgb(229, 232, 225) rgb(223, 225, 215)
+    rgb(222, 224, 213);
+}
+
+.button-disabled {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+.views {
+  height: 90%;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid transparent;
+  border-width: 1px 1.5px 1.5px 1px;
+}
+
+.hover {
+  background: linear-gradient(rgb(250, 250, 250), rgb(240, 240, 232));
+  border-width: 1px 1.5px 1.5px 1px;
+  border-style: solid;
+  border-color: rgb(205, 209, 198);
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0 0 0 1px rgb(230, 230, 220) inset;
+  transition: all 0.1s;
+}
+
+.hover:active {
+  background: rgb(224, 228, 216);
+  color: rgb(241, 244, 238);
+}
+
+.label {
+  width: 65px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.1px;
+  font-size: 14px;
+  font-weight: 100;
+  font-family: 'winXP';
+  background-color: rgb(232, 236, 232);
+  border-bottom: 1.5px solid rgb(206, 206, 190);
+  box-sizing: border-box;
+  color: rgb(131, 135, 123);
+  text-shadow: 0 0 1px rgb(202, 206, 194);
+}
+
+.address-button {
+  height: 100%;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  gap: 8px;
+  position: absolute;
+  right: 0;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-width: 1px 1.5px 1.5px 1px;
+  border-bottom: 1.5px solid rgb(206, 206, 190);
+}
+
+.address-arrow {
+  height: 70%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(102, 192, 40);
+  box-shadow: 0 0 1px 0 rgb(20, 87, 15);
+  border-radius: 5px;
 }

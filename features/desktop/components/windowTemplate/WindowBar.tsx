@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
   setWindowPosition,
   setWindowFullScreen,
-  focusWindow,
+  // focusWindow,
 } from '@/redux/appSlice';
 import WindowBarBackground from './WindowBarBackground';
 import WindowBarButtons from './WindowBarButtons';
@@ -48,7 +48,7 @@ const WindowBar = ({
         const y = e.clientY;
         e.dataTransfer.setDragImage(new Image(), 0, 0);
         ref.current = { x: x - position.x, y: y - position.y };
-        dispatch(focusWindow({ id, focus: true }));
+        // dispatch(focusWindow({ id, focus: true }));
       }}
       onDragEnd={(e) => {
         const x = e.clientX;
@@ -75,9 +75,9 @@ const WindowBar = ({
         cursor: '-webkit-grab',
       }}
     >
-      <WindowTitle logo={logo} title={title} />
       <WindowBarBackground focused={focused} />
-      <WindowBarButtons id={id} fullScreen={fullScreen} />
+      <WindowTitle logo={logo} title={title} />
+      <WindowBarButtons focused={focused} id={id} fullScreen={fullScreen} />
     </div>
   );
 };

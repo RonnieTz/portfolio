@@ -23,7 +23,12 @@ const MyProfile = () => {
       className="menu-item-link"
     >
       <img height={'60%'} src={profile.src} alt="chess logo" />
-      <Typography padding={0} fontWeight={500} fontSize={'0.9rem'}>
+      <Typography
+        padding={0}
+        fontWeight={500}
+        fontSize={'0.9rem'}
+        fontFamily={'winXP'}
+      >
         My Profile
       </Typography>
     </div>

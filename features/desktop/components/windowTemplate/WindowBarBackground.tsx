@@ -6,21 +6,15 @@ const WindowBarBackground = ({ focused }: { focused: boolean }) => {
   return (
     <>
       <img
+        style={{
+          filter: focused ? 'none' : 'brightness(1.4)',
+          transition: 'all 0.2s',
+        }}
         src={windowBar.src}
         width={'100%'}
         height={'100%'}
         alt="window bar"
       />
-      <Box
-        position={'absolute'}
-        width={'100%'}
-        height={'93%'}
-        bgcolor={'rgb(150, 200, 250)'}
-        top={1}
-        left={1}
-        // zIndex={10}
-        sx={{ opacity: focused ? 0 : 0.4, transition: 'opacity 0.2s' }}
-      ></Box>
     </>
   );
 };
