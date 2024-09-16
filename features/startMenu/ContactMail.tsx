@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const ContactMail = () => {
   const [hover, setHover] = useState(false);
+  const [copied, setCopied] = useState(false);
   return (
     <Box
       position={'absolute'}
@@ -21,10 +22,16 @@ const ContactMail = () => {
         alt="email"
         style={{ width: '25px', height: '25px' }}
       />
-      <a
+      <div
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        href="mailto:ronis.tzol@gmail.com"
+        onClick={() => {
+          navigator.clipboard.writeText('ronis.tzol@gmail.com');
+          setCopied(true);
+          setTimeout(() => {
+            setCopied(false);
+          }, 2000);
+        }}
         style={{
           textShadow: '0 0 2px rgba(99, 158, 227, 255)',
           display: 'inline',
@@ -35,11 +42,29 @@ const ContactMail = () => {
           cursor: 'pointer',
           transition: 'all 0.3s',
           textDecoration: 'none',
-          scale: !hover ? 1 : 1.1,
         }}
       >
         ronis.tzol@gmail.com
-      </a>
+      </div>
+      {hover && (
+        <div
+          style={{
+            position: 'relative',
+            color: 'black',
+            backgroundColor: 'white',
+            borderRadius: '5px',
+            padding: '0.2rem 0.5rem',
+            fontSize: '0.8rem',
+            border: '1px solid black',
+            left: '-160px',
+            top: '-20px',
+            // transition: 'all 0.2s',
+            animation: 'fadeIn 0.2s',
+          }}
+        >
+          {!copied ? 'Copy email address to clipboard' : 'Copied!'}
+        </div>
+      )}
     </Box>
   );
 };
