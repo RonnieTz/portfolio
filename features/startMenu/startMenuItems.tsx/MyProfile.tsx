@@ -1,4 +1,4 @@
-import profile from '@/public/profile.svg';
+import profile from '@/public/profile.png';
 import './styles.css';
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
@@ -12,11 +12,8 @@ const MyProfile = () => {
         dispatch(
           newWindow({
             title: 'My Profile',
-            liveLink: '',
-            gitHubLink: '',
             id: String(Math.floor(Math.random() * 100000)),
             logo: profile.src,
-            codesadnboxLink: '',
           })
         );
       }}

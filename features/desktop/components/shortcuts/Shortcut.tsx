@@ -16,6 +16,7 @@ type Props = {
   liveLink?: string;
   gitHubLink?: string;
   codesadnboxLink?: string;
+  type: string;
 };
 
 const Shortcut = ({
@@ -25,6 +26,7 @@ const Shortcut = ({
   codesadnboxLink,
   gitHubLink,
   liveLink,
+  type,
 }: Props) => {
   const dispatch = useDispatch();
 
@@ -41,7 +43,7 @@ const Shortcut = ({
             codesadnboxLink,
           })
         );
-        dispatch(unSelectAllShortcuts());
+        dispatch(unSelectAllShortcuts({ type }));
       }
     };
     document.addEventListener('keyup', myfunction);
@@ -54,7 +56,7 @@ const Shortcut = ({
     <div
       onClick={(e) => {
         e.stopPropagation();
-        dispatch(selectShortcut({ name: title }));
+        dispatch(selectShortcut({ name: title, type }));
       }}
       onDoubleClick={() => {
         setTimeout(() => {
@@ -68,7 +70,7 @@ const Shortcut = ({
               codesadnboxLink,
             })
           );
-          dispatch(unSelectAllShortcuts());
+          dispatch(unSelectAllShortcuts({ type }));
         }, 200);
       }}
       style={{
@@ -83,7 +85,7 @@ const Shortcut = ({
     >
       <Arrow />
       <Logo logo={logo} selected={selected} />
-      <Title title={title} selected={selected} />
+      <Title title={title} selected={selected} type={type} />
     </div>
   );
 };

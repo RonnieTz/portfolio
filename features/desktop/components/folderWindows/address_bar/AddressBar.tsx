@@ -1,13 +1,16 @@
-import BackArrow from '../navbar/BackArrow';
 import Label from './Label';
 import AddressGoButton from './AddressGoButton';
 import AddressArea from './AddressArea';
 
-const AddressBar = () => {
+type Props = {
+  title: string;
+};
+
+const AddressBar = ({ title }: Props) => {
   return (
     <div className="address-bar">
       <Label />
-      <AddressArea />
+      <AddressArea title={title} />
       <AddressGoButton />
     </div>
   );

@@ -4,14 +4,15 @@ import VerticalDivider from './VerticalDivider';
 import { useState } from 'react';
 
 const BackArrow = () => {
-  const [className, setClassName] = useState('back-button');
+  const [className, setClassName] = useState('back-button button-disabled');
   return (
     <div
       onMouseEnter={() => {
-        setClassName('back-button hover');
+        if (!className.includes('button-disabled'))
+          setClassName('back-button button-disabled hover');
       }}
       onMouseLeave={() => {
-        setClassName('back-button');
+        setClassName('back-button button-disabled');
       }}
       className={className}
     >

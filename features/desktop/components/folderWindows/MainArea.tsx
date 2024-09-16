@@ -1,5 +1,5 @@
-import FolderArea from './FolderArea';
-import Sidebar from './Sidebar';
+import FolderArea from './folderArea/FolderArea';
+import Sidebar from './sidebar/Sidebar';
 
 const MainArea = () => {
   return (

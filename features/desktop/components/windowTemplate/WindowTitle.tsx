@@ -20,7 +20,7 @@ const WindowTitle = ({ title, logo }: Props) => {
       justifyContent={'center'}
       boxSizing={'border-box'}
       padding={'0 15px 0 10px'}
-      gap={'10px'}
+      gap={'2px'}
     >
       <img height={'70%'} src={logo} alt="logo" />
       <Typography
@@ -28,7 +28,7 @@ const WindowTitle = ({ title, logo }: Props) => {
         fontSize={15}
         fontWeight={500}
         fontFamily={'winXP, Gill Sans, sans-serif'}
-        sx={{ textShadow: '1px 1px 3px black' }}
+        sx={{ textShadow: '1px 1px 3px black', translate: '0 2px' }}
       >
         {title}
       </Typography>

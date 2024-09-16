@@ -83,33 +83,59 @@ const appSlice = createSlice({
         window.focused = false;
         window.zIndex = 5;
       });
-      state.windows.push({
-        position: { y: 100, x: 100 },
-        liveLink: action.payload.liveLink,
-        id: action.payload.id,
-        title: action.payload.title,
-        minimized: false,
-        zIndex: 10,
-        fullScreen: true,
-        focused: true,
-        logo: action.payload.logo,
-        codesandboxLink: action.payload.codesadnboxLink,
-        gitHubLink: action.payload.gitHubLink,
-      });
-
       state.start.open = false;
+      const windowIndex = state.windows.findIndex(
+        (window) => window.title === action.payload.title
+      );
+
+      if (windowIndex === -1) {
+        state.windows.push({
+          position: { y: 100, x: 100 },
+          liveLink: action.payload.liveLink,
+          id: action.payload.id,
+          title: action.payload.title,
+          minimized: false,
+          zIndex: 10,
+          fullScreen: true,
+          focused: true,
+          logo: action.payload.logo,
+          codesandboxLink: action.payload.codesadnboxLink,
+          gitHubLink: action.payload.gitHubLink,
+        });
+      } else {
+        state.windows[windowIndex].focused = true;
+        state.windows[windowIndex].minimized = false;
+        state.windows[windowIndex].zIndex = 10;
+      }
     },
-    selectShortcut: (state, action: PayloadAction<{ name: string }>) => {
-      state.desktopShortcuts.forEach((project) => {
-        if (project.name === action.payload.name) {
-          project.selected = true;
-        } else {
-          project.selected = false;
-        }
+    selectShortcut: (
+      state,
+      action: PayloadAction<{ name: string; type: string }>
+    ) => {
+      if (action.payload.type === 'project') {
+        state.projects.forEach((project) => {
+          if (project.name === action.payload.name) {
+            project.selected = true;
+          } else {
+            project.selected = false;
+          }
+        });
+      }
+      if (action.payload.type === 'shortcut') {
+        state.shortcuts.forEach((project) => {
+          if (project.name === action.payload.name) {
+            project.selected = true;
+          } else {
+            project.selected = false;
+          }
+        });
+      }
+    },
+    unSelectAllShortcuts: (state, action: PayloadAction<{ type: string }>) => {
+      state.projects.forEach((project) => {
+        project.selected = false;
       });
-    },
-    unSelectAllShortcuts: (state) => {
-      state.desktopShortcuts.forEach((project) => {
+      state.shortcuts.forEach((project) => {
         project.selected = false;
       });
     },

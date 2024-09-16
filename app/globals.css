@@ -97,12 +97,15 @@ main {
 }
 
 @keyframes fadeIn {
-  from {
+  0% {
+    opacity: 0;
+  }
+  50% {
     opacity: 0;
     scale: 0.9;
   }
 
-  to {
+  100% {
     opacity: 1;
   }
 }

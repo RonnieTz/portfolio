@@ -10,15 +10,13 @@ import FolderWindow from './components/folderWindows/Window';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
-  const { windows, desktopShortcuts } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { windows, shortcuts } = useSelector((state: RootState) => state.app);
 
   return (
     <div
       onClick={() => {
         dispatch(setStartOpen(false));
-        dispatch(unSelectAllShortcuts());
+        dispatch(unSelectAllShortcuts({ type: 'shortcut' }));
       }}
       style={{
         position: 'absolute',
@@ -64,23 +62,21 @@ const DesktopMainArea = () => {
             ) : window.title === 'My Profile' ? (
               <Profile />
             ) : window.title === 'Projects' ? (
-              <FolderWindow />
+              <FolderWindow title={window.title} />
             ) : (
               <p>Not Found</p>
             )
           }
         />
       ))}
-      {desktopShortcuts.map((project) => {
+      {shortcuts.map((project) => {
         return (
           <Shortcut
             key={project.name}
             logo={project.logo}
             title={project.name}
             selected={project.selected}
-            codesadnboxLink={project.codesandboxLink}
-            gitHubLink={project.gitHubLink}
-            liveLink={project.liveLink}
+            type={project.type}
           />
         );
       })}

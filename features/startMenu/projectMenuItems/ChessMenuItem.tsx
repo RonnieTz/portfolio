@@ -9,10 +9,8 @@ type Props = {
 };
 
 const ChessMenuItem = ({ setOpenMenu }: Props) => {
-  const { desktopShortcuts } = useSelector((state: RootState) => state.app);
-  const project = desktopShortcuts.find(
-    (project) => project.name === 'Chess Game'
-  );
+  const { projects } = useSelector((state: RootState) => state.app);
+  const project = projects.find((project) => project.name === 'Chess Game');
   const dispatch = useDispatch();
   return (
     <div

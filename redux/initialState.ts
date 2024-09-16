@@ -1,12 +1,13 @@
 import { InitialState } from './types';
 import chess from '@/public/chess.svg';
 import quiz from '@/public/quiz.svg';
-import project from '@/public/project.svg';
+import project from '@/public/project.png';
+import profile from '@/public/profile.png';
 
 export const initialState: InitialState = {
   start: { open: false, hover: false },
   windows: [],
-  desktopShortcuts: [
+  projects: [
     {
       name: 'Chess Game',
       liveLink: 'https://chess-game-flax.vercel.app/',
@@ -15,6 +16,7 @@ export const initialState: InitialState = {
       gitHubLink: 'https://github.com/RonnieTz/chess_game',
       logo: chess.src,
       selected: false,
+      type: 'project',
     },
     {
       name: 'Quiz Game',
@@ -24,11 +26,21 @@ export const initialState: InitialState = {
       gitHubLink: 'https://github.com/RonnieTz/quiz',
       logo: quiz.src,
       selected: false,
+      type: 'project',
+    },
+  ],
+  shortcuts: [
+    {
+      name: 'My Profile',
+      selected: false,
+      logo: profile.src,
+      type: 'shortcut',
     },
     {
       name: 'Projects',
       selected: false,
       logo: project.src,
+      type: 'shortcut',
     },
   ],
 };
