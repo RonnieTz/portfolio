@@ -1,16 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { setStartOpen, newWindow } from '@/redux/appSlice';
-import logo from '@/public/quiz.svg';
+import logo from '@/public/portfolio.svg';
 import { Typography } from '@mui/material';
 
 type Props = {
   setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const QuizMenuItem = ({ setOpenMenu }: Props) => {
+const PortfolioMenuItem = ({ setOpenMenu }: Props) => {
   const { projects } = useSelector((state: RootState) => state.app);
-  const project = projects.find((project) => project.name === 'Quiz Game');
+  const project = projects.find((project) => project.name === 'Portfolio');
   const dispatch = useDispatch();
   return (
     <div
@@ -21,7 +21,7 @@ const QuizMenuItem = ({ setOpenMenu }: Props) => {
         setTimeout(() => {
           dispatch(
             newWindow({
-              title: 'Quiz Game',
+              title: 'Portfolio',
               liveLink: project?.liveLink!,
               gitHubLink: project?.gitHubLink!,
               id: String(Math.floor(Math.random() * 1000)),
@@ -44,9 +44,9 @@ const QuizMenuItem = ({ setOpenMenu }: Props) => {
     >
       <img height={'60%'} src={logo.src} alt="logo" />
       <Typography padding={0} fontWeight={400} fontSize={'0.9rem'}>
-        Quiz Game
+        Portfolio
       </Typography>
     </div>
   );
 };
-export default QuizMenuItem;
+export default PortfolioMenuItem;

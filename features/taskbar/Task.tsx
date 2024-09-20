@@ -2,6 +2,7 @@
 
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import {
   focusWindow,
   setMinimize,
@@ -18,8 +19,11 @@ type TaskProps = {
 
 const Task = ({ focused, id, title, logo }: TaskProps) => {
   const dispatch = useDispatch();
+  const [hover, setHover] = useState(false);
   return (
     <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       onDoubleClick={() => {
         dispatch(setWindowFullScreen({ id, fullscreen: true }));
       }}
@@ -52,7 +56,7 @@ const Task = ({ focused, id, title, logo }: TaskProps) => {
         width: '15%',
         cursor: 'pointer',
         transition: 'all 0.2s',
-        filter: 'contrast(1.2)',
+        filter: '',
         overflow: 'hidden',
       }}
     >

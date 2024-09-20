@@ -11,12 +11,13 @@ const About = () => {
         For the past few years, I've been building projects and gaining
         expertise in technologies like React, JavaScript, and TypeScript. While
         I don't have professional web development experience, my portfolio
-        showcases real-world projects that highlight my skills and commitment to
-        learning.
+        showcases projects that highlight my skills and commitment to learning.
       </p>
       <p>
-        I'm always eager to take on new challenges and continue growing as a
-        developer.
+        I’m always eager to take on new challenges, refine my skills, and
+        collaborate on exciting projects. Whether it’s building responsive web
+        applications or solving complex coding problems, I’m ready to bring
+        fresh ideas and technical know-how to every project.
       </p>
     </div>
   );

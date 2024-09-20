@@ -10,6 +10,7 @@ import MenuBackgroundImage from './MenuBackgroundImage';
 import RightSide from './RightSide';
 import Divider from './Divider';
 import StartMenuPhoto from './StartMenuPhoto';
+import TurnOff from './TurnOff';
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const Menu = () => {
       }}
     >
       <MenuBackgroundImage />
-      <ContactMail />
+      <TurnOff />
       <RightSide></RightSide>
       <AllProjectsButton
         setTimeoutID={setTimeoutID}

@@ -1,0 +1,108 @@
+.load-screen-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.load-screen-logo {
+  aspect-ratio: 1/1;
+  height: 70%;
+  position: relative;
+}
+
+.load-screen-windows {
+  color: rgb(232, 236, 232);
+  font-size: 6rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  text-shadow: 0.5px 0.5px 0.5px rgba(123, 123, 123),
+    -0.5px -0.5px 0.5px rgba(123, 123, 123);
+  position: absolute;
+  top: 45%;
+  left: 12%;
+}
+
+.load-screen-microsoft {
+  color: rgb(200, 200, 200);
+  font-size: 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  text-shadow: 0.5px 0.5px 0.5px rgba(123, 123, 123),
+    -0.5px -0.5px 0.5px rgba(123, 123, 123);
+  position: absolute;
+  top: 42%;
+  left: 12%;
+}
+
+.load-screen-XP {
+  color: rgb(232, 100, 24);
+  font-size: 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-shadow: 0.5px 0.5px 0.5px rgba(117, 34, 0),
+    -0.5px -0.5px 0.5px rgba(117, 34, 0);
+  position: absolute;
+  top: 48%;
+  right: 6%;
+}
+
+.load-screen-loader {
+  position: absolute;
+  border: 1.5px solid rgb(165, 165, 165);
+  border-radius: 10px;
+  width: 40%;
+  height: 5%;
+  bottom: 18%;
+  left: 30%;
+  box-shadow: 0 0 0.5px 1px rgb(53, 53, 53), 0 0 0.5px 1px rgb(75, 75, 75) inset;
+  overflow: hidden;
+}
+
+.load-bar-container {
+  position: absolute;
+  height: 100%;
+  width: 25%;
+  left: 3%;
+}
+
+.load-screen-loader-bar {
+  width: 25%;
+  height: 76%;
+  position: absolute;
+  top: 12%;
+  border-top: 1.5px solid rgb(20, 28, 96);
+  border-bottom: 1.5px solid rgb(6, 6, 6);
+  box-sizing: border-box;
+}
+
+.bar-1 {
+  background: linear-gradient(
+    180deg,
+    rgb(54, 75, 204),
+    rgb(128, 156, 240) 30%,
+    rgb(40, 56, 192) 60%
+  );
+  left: 1%;
+}
+.bar-2 {
+  background: linear-gradient(
+    180deg,
+    rgb(54, 75, 204),
+    rgb(128, 156, 240) 30%,
+    rgb(40, 56, 192) 75%
+  );
+  left: 34%;
+}
+.bar-3 {
+  background: linear-gradient(
+    180deg,
+    rgb(54, 75, 204),
+    rgb(128, 156, 240) 30%,
+    rgb(40, 56, 192) 90%
+  );
+  left: 67%;
+}

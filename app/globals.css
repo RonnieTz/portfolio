@@ -8,6 +8,7 @@
 body {
   margin: 0;
   filter: hue-rotate();
+  background-color: black;
 }
 
 main {
@@ -43,8 +44,7 @@ main {
 }
 
 .task:hover {
-  background-color: black;
-  filter: contrast(1.2);
+  filter: brightness(1.2);
 }
 
 .project-navigation {

@@ -1,4 +1,6 @@
-import icon from '@/public/Maximize.png';
+import maximize from '@/public/Maximize.png';
+import restore from '@/public/Restore.png';
+
 import { useDispatch } from 'react-redux';
 import { setWindowFullScreen } from '@/redux/appSlice';
 
@@ -15,7 +17,7 @@ const MaximizeButton = ({ fullScreen, id, focused }: Props) => {
     >
       <img
         style={{ filter: focused ? undefined : 'brightness(1.4)' }}
-        src={icon.src}
+        src={!fullScreen ? maximize.src : restore.src}
         height={'100%'}
         alt="exit"
       />

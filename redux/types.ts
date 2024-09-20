@@ -1,5 +1,6 @@
 export type InitialState = {
   start: { open: boolean; hover: boolean };
+  welcome: boolean;
   windows: {
     position: { y: number; x: number };
     liveLink?: string;
@@ -28,4 +29,6 @@ export type InitialState = {
     selected: boolean;
     type: string;
   }[];
+  turnOff: boolean;
+  loaded: boolean;
 };

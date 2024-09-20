@@ -8,6 +8,12 @@ const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setTurnOff: (state, action: PayloadAction<boolean>) => {
+      state.turnOff = action.payload;
+    },
+    setWelcome: (state, action: PayloadAction<boolean>) => {
+      state.welcome = action.payload;
+    },
     setStartOpen: (state, action) => {
       state.start.open = action.payload;
     },
@@ -90,13 +96,13 @@ const appSlice = createSlice({
 
       if (windowIndex === -1) {
         state.windows.push({
-          position: { y: 100, x: 100 },
+          position: { y: Math.random() * 100, x: Math.random() * 760 },
           liveLink: action.payload.liveLink,
           id: action.payload.id,
           title: action.payload.title,
           minimized: false,
           zIndex: 10,
-          fullScreen: true,
+          fullScreen: false,
           focused: true,
           logo: action.payload.logo,
           codesandboxLink: action.payload.codesadnboxLink,
@@ -139,6 +145,9 @@ const appSlice = createSlice({
         project.selected = false;
       });
     },
+    setLoaded: (state) => {
+      state.loaded = true;
+    },
   },
 });
 
@@ -154,5 +163,8 @@ export const {
   setFocus,
   selectShortcut,
   unSelectAllShortcuts,
+  setWelcome,
+  setTurnOff,
+  setLoaded,
 } = appSlice.actions;
 export default appSlice.reducer;

@@ -1,4 +1,5 @@
 import ChessMenuItem from './projectMenuItems/ChessMenuItem';
+import PortfolioMenuItem from './projectMenuItems/PortfolioMenuItem';
 import QuizMenuItem from './projectMenuItems/QuizMenuItem';
 type Props = {
   timeoutID: NodeJS.Timeout | null;
@@ -47,6 +48,7 @@ const AllProjectsMenu = ({ timeoutID, setTimeoutID, setOpenMenu }: Props) => {
           zIndex: -20,
         }}
       ></div>
+      <PortfolioMenuItem setOpenMenu={setOpenMenu} />
       <ChessMenuItem setOpenMenu={setOpenMenu} />
       <QuizMenuItem setOpenMenu={setOpenMenu} />
     </div>

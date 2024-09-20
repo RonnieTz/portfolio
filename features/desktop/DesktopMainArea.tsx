@@ -1,12 +1,19 @@
 import Window from './components/windowTemplate/Window';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { setStartOpen, unSelectAllShortcuts } from '@/redux/appSlice';
+import profile from '@/public/profile.png';
+import {
+  setStartOpen,
+  unSelectAllShortcuts,
+  newWindow,
+} from '@/redux/appSlice';
 import ChessProject from './components/projects/chess/ChessProject';
 import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
 import Shortcut from './components/shortcuts/Shortcut';
 import FolderWindow from './components/folderWindows/Window';
+import { useEffect } from 'react';
+import PortfolioProject from './components/projects/portfolio/PortfolioProject';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
@@ -47,6 +54,13 @@ const DesktopMainArea = () => {
           children={
             window.title === 'Chess Game' ? (
               <ChessProject
+                key={window.id}
+                codesandboxLink={window.codesandboxLink!}
+                liveLink={window.liveLink!}
+                gitHubLink={window.gitHubLink!}
+              />
+            ) : window.title === 'Portfolio' ? (
+              <PortfolioProject
                 key={window.id}
                 codesandboxLink={window.codesandboxLink!}
                 liveLink={window.liveLink!}
