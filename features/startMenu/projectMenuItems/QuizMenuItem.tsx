@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { setStartOpen, newWindow } from '@/redux/appSlice';
-import logo from '@/public/quiz.svg';
+import logo from '@/public/quiz.png';
 import { Typography } from '@mui/material';
 
 type Props = {
@@ -12,6 +12,7 @@ const QuizMenuItem = ({ setOpenMenu }: Props) => {
   const { projects } = useSelector((state: RootState) => state.app);
   const project = projects.find((project) => project.name === 'Quiz Game');
   const dispatch = useDispatch();
+
   return (
     <div
       className="all-projects-menu-item"
@@ -27,6 +28,9 @@ const QuizMenuItem = ({ setOpenMenu }: Props) => {
               id: String(Math.floor(Math.random() * 1000)),
               logo: logo.src,
               codesadnboxLink: project?.codesandboxLink!,
+              ratio: undefined,
+              type: 'project',
+              items: [],
             })
           );
         }, 200);

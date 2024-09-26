@@ -1,3 +1,15 @@
+export type Folder = {
+  name: string;
+  selected: boolean;
+  logo: string;
+  type: string;
+  items?: Folder[];
+  liveLink?: string;
+  codesandboxLink?: string;
+  gitHubLink?: string;
+  location?: string;
+};
+
 export type InitialState = {
   start: { open: boolean; hover: boolean };
   welcome: boolean;
@@ -13,22 +25,15 @@ export type InitialState = {
     fullScreen: boolean;
     focused: boolean;
     logo: string;
-  }[];
-  shortcuts: {
-    name: string;
-    logo: string;
-    selected: boolean;
+    ratio: number | undefined;
     type: string;
+    items: Folder[];
   }[];
-  projects: {
-    name: string;
-    liveLink?: string;
-    codesandboxLink?: string;
-    gitHubLink?: string;
-    logo: string;
-    selected: boolean;
-    type: string;
-  }[];
+  projects: Folder[];
   turnOff: boolean;
   loaded: boolean;
+  folders: {
+    locations: { location: string; items: Folder[] }[];
+  };
+  folderHistory: { history: string[]; currentFolder: number };
 };

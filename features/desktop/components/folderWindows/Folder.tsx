@@ -8,7 +8,7 @@ type Props = {
   title: string;
 };
 
-const Window = ({ title }: Props) => {
+const Folder = ({ title }: Props) => {
   return (
     <div className="folder-window-container">
       <TopBar />
@@ -18,4 +18,4 @@ const Window = ({ title }: Props) => {
     </div>
   );
 };
-export default Window;
+export default Folder;

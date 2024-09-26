@@ -18,6 +18,7 @@ const ProjectWindow = ({
   gitHubLink,
 }: Props) => {
   const [selectedWindow, setSelectedWindow] = useState('description');
+
   return (
     <div
       style={{

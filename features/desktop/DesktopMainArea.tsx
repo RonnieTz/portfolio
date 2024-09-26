@@ -1,29 +1,29 @@
 import Window from './components/windowTemplate/Window';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/redux/store';
-import profile from '@/public/profile.png';
-import {
-  setStartOpen,
-  unSelectAllShortcuts,
-  newWindow,
-} from '@/redux/appSlice';
+import { setStartOpen, unSelectAllShortcuts } from '@/redux/appSlice';
 import ChessProject from './components/projects/chess/ChessProject';
 import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
-import Shortcut from './components/shortcuts/Shortcut';
-import FolderWindow from './components/folderWindows/Window';
-import { useEffect } from 'react';
+import FolderWindow from './components/folderWindows/Folder';
 import PortfolioProject from './components/projects/portfolio/PortfolioProject';
+import Minesweeper from '../XP_programs/minesweeper/Minesweeper';
+import Shortcut from './components/shortcuts/Shortcut';
+import Project from './components/projects/Project';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
-  const { windows, shortcuts } = useSelector((state: RootState) => state.app);
+  const { windows, folders } = useSelector((state: RootState) => state.app);
+
+  const desktopItems = folders.locations.find(
+    (item) => item.location === 'Desktop'
+  )?.items;
 
   return (
     <div
       onClick={() => {
         dispatch(setStartOpen(false));
-        dispatch(unSelectAllShortcuts({ type: 'shortcut' }));
+        dispatch(unSelectAllShortcuts({ location: 'Desktop' }));
       }}
       style={{
         position: 'absolute',
@@ -52,48 +52,56 @@ const DesktopMainArea = () => {
           focused={window.focused}
           logo={window.logo}
           children={
-            window.title === 'Chess Game' ? (
-              <ChessProject
-                key={window.id}
-                codesandboxLink={window.codesandboxLink!}
-                liveLink={window.liveLink!}
-                gitHubLink={window.gitHubLink!}
-              />
-            ) : window.title === 'Portfolio' ? (
-              <PortfolioProject
-                key={window.id}
-                codesandboxLink={window.codesandboxLink!}
-                liveLink={window.liveLink!}
-                gitHubLink={window.gitHubLink!}
-              />
-            ) : window.title === 'Quiz Game' ? (
-              <QuizProject
-                key={window.id}
-                codesandboxLink={window.codesandboxLink!}
-                liveLink={window.liveLink!}
-                gitHubLink={window.gitHubLink!}
-              />
-            ) : window.title === 'My Profile' ? (
-              <Profile />
-            ) : window.title === 'Projects' ? (
+            window.type === 'project' ? (
+              <Project key={window.id}>
+                {window.title === 'Chess Game' && (
+                  <ChessProject
+                    codesandboxLink={window.codesandboxLink!}
+                    gitHubLink={window.gitHubLink!}
+                    liveLink={window.liveLink!}
+                    key={window.id}
+                  />
+                )}
+                {window.title === 'Quiz Game' && (
+                  <QuizProject
+                    codesandboxLink={window.codesandboxLink!}
+                    gitHubLink={window.gitHubLink!}
+                    liveLink={window.liveLink!}
+                    key={window.id}
+                  />
+                )}
+                {window.title === 'Portfolio' && (
+                  <PortfolioProject
+                    codesandboxLink={window.codesandboxLink!}
+                    gitHubLink={window.gitHubLink!}
+                    liveLink={window.liveLink!}
+                    key={window.id}
+                  />
+                )}
+              </Project>
+            ) : window.type === 'folder' ? (
               <FolderWindow title={window.title} />
             ) : (
-              <p>Not Found</p>
+              <></>
             )
           }
         />
       ))}
-      {shortcuts.map((project) => {
-        return (
-          <Shortcut
-            key={project.name}
-            logo={project.logo}
-            title={project.name}
-            selected={project.selected}
-            type={project.type}
-          />
-        );
-      })}
+      {desktopItems?.map((item) => (
+        <Shortcut
+          key={item.name}
+          color="light"
+          items={item.items!}
+          logo={item.logo}
+          selected={item.selected}
+          title={item.name}
+          type={item.type}
+          codesadnboxLink={item.codesandboxLink}
+          gitHubLink={item.gitHubLink}
+          liveLink={item.liveLink}
+          location={item.location!}
+        />
+      ))}
     </div>
   );
 };

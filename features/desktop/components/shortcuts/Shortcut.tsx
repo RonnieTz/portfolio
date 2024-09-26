@@ -1,13 +1,17 @@
 import Arrow from './Arrow';
 import Logo from './Logo';
 import Title from './Title';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 import {
-  selectShortcut,
   newWindow,
   unSelectAllShortcuts,
+  selectShortcut,
+  addWindowToHistory,
+  changeToFolder,
 } from '@/redux/appSlice';
 import { useEffect } from 'react';
+import { Folder } from '@/redux/types';
 
 type Props = {
   logo: string;
@@ -17,6 +21,9 @@ type Props = {
   gitHubLink?: string;
   codesadnboxLink?: string;
   type: string;
+  color: 'dark' | 'light';
+  items: Folder[];
+  location: string;
 };
 
 const Shortcut = ({
@@ -27,8 +34,12 @@ const Shortcut = ({
   gitHubLink,
   liveLink,
   type,
+  color,
+  items,
+  location,
 }: Props) => {
   const dispatch = useDispatch();
+  const { windows } = useSelector((state: RootState) => state.app);
 
   useEffect(() => {
     const myfunction = (e: KeyboardEvent) => {
@@ -41,9 +52,15 @@ const Shortcut = ({
             id: String(Math.floor(Math.random() * 1000)),
             logo,
             codesadnboxLink,
+            ratio: 1,
+            type,
+            items,
           })
         );
-        dispatch(unSelectAllShortcuts({ type }));
+        if (type === 'folder') {
+          dispatch(addWindowToHistory({ folderName: title }));
+        }
+        dispatch(unSelectAllShortcuts({ location }));
       }
     };
     document.addEventListener('keyup', myfunction);
@@ -56,9 +73,20 @@ const Shortcut = ({
     <div
       onClick={(e) => {
         e.stopPropagation();
-        dispatch(selectShortcut({ name: title, type }));
+        dispatch(selectShortcut({ name: title, location }));
       }}
       onDoubleClick={() => {
+        const folderWindowIsOpen = windows.some(
+          (window) => window.type === type
+        );
+        dispatch(unSelectAllShortcuts({ location }));
+        if (type === 'folder') {
+          dispatch(addWindowToHistory({ folderName: title }));
+        }
+        if (folderWindowIsOpen) {
+          dispatch(changeToFolder({ folderName: title }));
+          return;
+        }
         setTimeout(() => {
           dispatch(
             newWindow({
@@ -68,9 +96,11 @@ const Shortcut = ({
               id: String(Math.floor(Math.random() * 1000)),
               logo,
               codesadnboxLink,
+              ratio: 1,
+              type,
+              items,
             })
           );
-          dispatch(unSelectAllShortcuts({ type }));
         }, 200);
       }}
       style={{
@@ -83,9 +113,9 @@ const Shortcut = ({
         position: 'relative',
       }}
     >
-      <Arrow />
+      {type !== 'folder' && <Arrow />}
       <Logo logo={logo} selected={selected} />
-      <Title title={title} selected={selected} type={type} />
+      <Title title={title} selected={selected} type={type} color={color} />
     </div>
   );
 };

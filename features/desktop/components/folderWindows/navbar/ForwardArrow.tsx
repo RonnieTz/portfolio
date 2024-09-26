@@ -1,20 +1,34 @@
 import forwardArrow from '@/public/arrow-forward.svg';
 import arrow from '@/public/triangle-down.svg';
 import VerticalDivider from './VerticalDivider';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/redux/store';
 import { useState } from 'react';
+import { navigateFolderForward } from '@/redux/appSlice';
 
 const ForwardArrow = () => {
-  const [className, setClassName] = useState('forward-button button-disabled');
+  const [hover, setHover] = useState(false);
+  const dispatch = useDispatch();
+  const { folderHistory } = useSelector((state: RootState) => state.app);
+  const { currentFolder, history } = folderHistory;
+  const className =
+    currentFolder < history.length - 1
+      ? 'forward-button'
+      : 'forward-button button-disabled';
   return (
     <div
+      onClick={() => {
+        if (currentFolder < history.length - 1) {
+          dispatch(navigateFolderForward());
+        }
+      }}
       onMouseEnter={() => {
-        if (!className.includes('button-disabled'))
-          setClassName('forward-button button-disabled hover');
+        setHover(true);
       }}
       onMouseLeave={() => {
-        setClassName('forward-button button-disabled');
+        setHover(false);
       }}
-      className={className}
+      className={`${className} ${hover ? 'hover' : ''}`}
     >
       <span className="back-arrow">
         <img height={'70%'} src={forwardArrow.src} alt="forward arrow" />

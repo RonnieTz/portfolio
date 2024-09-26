@@ -3,6 +3,8 @@ import { initialState } from './initialState';
 
 import { set_WindowPosition } from './reducers/setWindowPosition';
 import { set_WindowFullScreen } from './reducers/setWindowFullScreen';
+import { Folder } from './types';
+import { act } from 'react';
 
 const appSlice = createSlice({
   name: 'app',
@@ -83,6 +85,9 @@ const appSlice = createSlice({
         liveLink?: string;
         codesadnboxLink?: string;
         gitHubLink?: string;
+        ratio: number | undefined;
+        type: string;
+        items: Folder[];
       }>
     ) => {
       state.windows.forEach((window) => {
@@ -107,7 +112,13 @@ const appSlice = createSlice({
           logo: action.payload.logo,
           codesandboxLink: action.payload.codesadnboxLink,
           gitHubLink: action.payload.gitHubLink,
+          ratio: action.payload.ratio,
+          type: action.payload.type,
+          items: action.payload.items,
         });
+        if (action.payload.type === 'folder') {
+          state.folderHistory.history.push();
+        }
       } else {
         state.windows[windowIndex].focused = true;
         state.windows[windowIndex].minimized = false;
@@ -116,37 +127,76 @@ const appSlice = createSlice({
     },
     selectShortcut: (
       state,
-      action: PayloadAction<{ name: string; type: string }>
+      action: PayloadAction<{ location: string; name: string }>
     ) => {
-      if (action.payload.type === 'project') {
-        state.projects.forEach((project) => {
-          if (project.name === action.payload.name) {
-            project.selected = true;
+      const folder = state.folders.locations.find(
+        (folder) => folder.location === action.payload.location
+      );
+      if (folder) {
+        folder.items.forEach((item) => {
+          if (item.name === action.payload.name) {
+            item.selected = true;
           } else {
-            project.selected = false;
-          }
-        });
-      }
-      if (action.payload.type === 'shortcut') {
-        state.shortcuts.forEach((project) => {
-          if (project.name === action.payload.name) {
-            project.selected = true;
-          } else {
-            project.selected = false;
+            item.selected = false;
           }
         });
       }
     },
-    unSelectAllShortcuts: (state, action: PayloadAction<{ type: string }>) => {
-      state.projects.forEach((project) => {
-        project.selected = false;
-      });
-      state.shortcuts.forEach((project) => {
-        project.selected = false;
-      });
+    unSelectAllShortcuts: (
+      state,
+      action: PayloadAction<{ location: string }>
+    ) => {
+      const folder = state.folders.locations.find(
+        (folder) => folder.location === action.payload.location
+      );
+      if (folder) {
+        folder.items.forEach((item) => {
+          item.selected = false;
+        });
+      }
     },
     setLoaded: (state) => {
       state.loaded = true;
+    },
+    addWindowToHistory: (
+      state,
+      action: PayloadAction<{ folderName: string }>
+    ) => {
+      const historyLength = state.folderHistory.history.length;
+      state.folderHistory.history = Array.from(
+        new Set([...state.folderHistory.history, action.payload.folderName])
+      );
+      const index = state.folderHistory.history.findIndex(
+        (folder) => folder === action.payload.folderName
+      );
+      state.folderHistory.currentFolder = index;
+    },
+    changeToFolder: (state, action: PayloadAction<{ folderName: string }>) => {
+      const window = state.windows.find((window) => window.type === 'folder');
+      if (window) {
+        window.title = action.payload.folderName;
+      }
+    },
+    navigateFolderBack: (state) => {
+      const window = state.windows.find((window) => window.type === 'folder');
+      if (state.folderHistory.currentFolder > 0) {
+        state.folderHistory.currentFolder -= 1;
+        if (window)
+          window.title =
+            state.folderHistory.history[state.folderHistory.currentFolder];
+      }
+    },
+    navigateFolderForward: (state) => {
+      const window = state.windows.find((window) => window.type === 'folder');
+      if (
+        state.folderHistory.currentFolder <
+        state.folderHistory.history.length - 1
+      ) {
+        state.folderHistory.currentFolder += 1;
+        if (window)
+          window.title =
+            state.folderHistory.history[state.folderHistory.currentFolder];
+      }
     },
   },
 });
@@ -166,5 +216,9 @@ export const {
   setWelcome,
   setTurnOff,
   setLoaded,
+  addWindowToHistory,
+  changeToFolder,
+  navigateFolderBack,
+  navigateFolderForward,
 } = appSlice.actions;
 export default appSlice.reducer;

@@ -14,9 +14,9 @@ const WindowBody = ({ children }: { link: string; children: ReactNode }) => {
         width={'100%'}
         height={'100%'}
         sx={{
-          border: '1px solid blue',
+          border: '1px solid rgb(0, 84, 224)',
           boxSizing: 'border-box',
-          borderWidth: ' 0 2px 2px 2px',
+          borderWidth: ' 0 2.5px 2.5px 2.5px',
         }}
       >
         {children}

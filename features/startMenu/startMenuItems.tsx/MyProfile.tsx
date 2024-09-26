@@ -14,6 +14,7 @@ const MyProfile = () => {
             title: 'My Profile',
             id: String(Math.floor(Math.random() * 100000)),
             logo: profile.src,
+            ratio: undefined,
           })
         );
       }}

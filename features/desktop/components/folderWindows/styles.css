@@ -357,4 +357,9 @@
 .folder-area {
   display: flex;
   padding: 5px;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: start;
+  overflow: auto;
+  align-content: start;
 }

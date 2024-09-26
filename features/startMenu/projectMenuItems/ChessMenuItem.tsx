@@ -27,6 +27,9 @@ const ChessMenuItem = ({ setOpenMenu }: Props) => {
               id: String(Math.floor(Math.random() * 1000)),
               logo: chess.src,
               codesadnboxLink: project?.codesandboxLink!,
+              ratio: undefined,
+              type: 'project',
+              items: [],
             })
           );
         }, 200);

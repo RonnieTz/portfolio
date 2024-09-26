@@ -1,21 +1,39 @@
 import Shortcut from '../../shortcuts/Shortcut';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/redux/store';
+import { unSelectAllShortcuts } from '@/redux/appSlice';
 
 const FolderArea = () => {
-  const { projects } = useSelector((state: RootState) => state.app);
+  const dispatch = useDispatch();
+  const { folderHistory, folders } = useSelector(
+    (state: RootState) => state.app
+  );
+  const { currentFolder, history } = folderHistory;
+  const currentFolderName = history[currentFolder];
+  const currentFolderItems = folders.locations.find(
+    (folder) => folder.location === currentFolderName
+  )?.items;
+
   return (
-    <div className="folder-area">
-      {projects.map((shortcut, index) => (
+    <div
+      onClick={() => {
+        dispatch(unSelectAllShortcuts({ location: currentFolderName }));
+      }}
+      className="folder-area"
+    >
+      {currentFolderItems?.map((item) => (
         <Shortcut
-          key={index}
-          logo={shortcut.logo}
-          title={shortcut.name}
-          selected={shortcut.selected}
-          codesadnboxLink={shortcut.codesandboxLink}
-          gitHubLink={shortcut.gitHubLink}
-          liveLink={shortcut.liveLink}
-          type={shortcut.type}
+          key={item.name}
+          title={item.name}
+          logo={item.logo}
+          selected={item.selected}
+          type={item.type}
+          items={item.items!}
+          location={item.location!}
+          color="dark"
+          liveLink={item.liveLink}
+          gitHubLink={item.gitHubLink}
+          codesadnboxLink={item.codesandboxLink}
         />
       ))}
     </div>

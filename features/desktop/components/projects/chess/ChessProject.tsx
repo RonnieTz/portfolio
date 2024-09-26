@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectWindow from '../../projectWindows/ProjectWindow';
+import ProjectWindow from '../projectWindows/ProjectWindow';
 import ChessWindowDescription from './ChessWindowDescription';
 
 type Props = {

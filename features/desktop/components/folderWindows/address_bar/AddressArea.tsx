@@ -1,4 +1,4 @@
-import logo from '@/public/profile.svg';
+import logo from '@/public/Folder Closed.png';
 
 type Props = {
   title: string;

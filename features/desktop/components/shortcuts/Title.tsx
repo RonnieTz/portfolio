@@ -2,21 +2,23 @@ const Title = ({
   title,
   selected,
   type,
+  color,
 }: {
   title: string;
   selected: boolean;
   type: string;
+  color: 'dark' | 'light';
 }) => {
   return (
     <div
       style={{
         fontSize: '0.7rem',
         color:
-          type === 'shortcut' || (type === 'project' && selected)
+          color === 'light' || (color === 'dark' && selected)
             ? 'rgb(227, 230, 225)'
             : 'rgb(25, 25, 25)',
         textShadow:
-          type === 'shortcut'
+          color === 'light'
             ? '0.5px 0.5px 3px rgb(20, 20, 20)'
             : '0.5px 0.5px 0.5px rgb(73, 73, 73)',
         fontFamily: 'winXP, Gill Sans, sans-serif',
