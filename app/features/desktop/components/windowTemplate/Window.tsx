@@ -77,7 +77,7 @@ const Window = ({
           title={title}
           logo={logo}
         />
-        <WindowBody children={children} link={link} />
+        <WindowBody link={link}>{children}</WindowBody>
       </div>
     </CSSTransition>
   );

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import ContactMail from './ContactMail';
 import AllProjectsButton from './AllProjectsButton';
 import AllProjectsMenu from './AllProjectsMenu';
 import MenuBackgroundImage from './MenuBackgroundImage';

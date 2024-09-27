@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import { setStartHover, setStartOpen } from '@/app/redux/appSlice';
 import StartTooltip from './StartTooltip';
+import Image from 'next/image';
 
 const StartButton = () => {
   const { start } = useSelector((state: RootState) => state.app);
@@ -22,15 +23,14 @@ const StartButton = () => {
       }}
       className="start-button"
     >
-      <img
-        width={'100%'}
-        height={'100%'}
+      <Image
+        style={{ height: '100%', width: 'auto' }}
         src={
           start.open
-            ? startButtonOpen.src
+            ? startButtonOpen
             : start.hover
-            ? startButtonHover.src
-            : startButton.src
+            ? startButtonHover
+            : startButton
         }
         alt="start button"
       />

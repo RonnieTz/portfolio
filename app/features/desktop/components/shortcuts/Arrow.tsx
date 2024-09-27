@@ -1,4 +1,5 @@
 import arrow from '@/public/icon-arrow.svg';
+import Image from 'next/image';
 
 const Arrow = () => {
   return (
@@ -18,7 +19,7 @@ const Arrow = () => {
         zIndex: 1,
       }}
     >
-      <img width={'70%'} src={arrow.src} alt="arrow" />
+      <Image style={{ width: '70%', height: 'auto' }} src={arrow} alt="arrow" />
     </div>
   );
 };

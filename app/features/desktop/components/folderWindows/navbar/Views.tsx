@@ -1,6 +1,7 @@
 import views from '@/public/views.png';
 import arrow from '@/public/triangle-down.svg';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const Views = () => {
   const [className, setClassName] = useState('views');
@@ -14,9 +15,17 @@ const Views = () => {
       }}
       className={className}
     >
-      <img height={'70%'} src={views.src} alt="Views Icon" />
+      <Image
+        style={{ height: '70%', width: 'auto' }}
+        src={views}
+        alt="Views Icon"
+      />
       <span className="arrow-down">
-        <img height={'35%'} src={arrow.src} alt="arrow down" />
+        <Image
+          style={{ height: '35%', width: '100%' }}
+          src={arrow}
+          alt="arrow down"
+        />
       </span>
     </div>
   );

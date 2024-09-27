@@ -2,6 +2,7 @@ import './styles.css';
 import img from '@/public/Power.png';
 import { useDispatch } from 'react-redux';
 import { setTurnOff } from '@/app/redux/appSlice';
+import Image from 'next/image';
 
 const TurnOff = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,11 @@ const TurnOff = () => {
       }}
       className="turn-off-button"
     >
-      <img height={'100%'} src={img.src} alt="turn-off" />
+      <Image
+        style={{ height: '100%', width: 'auto' }}
+        src={img}
+        alt="turn-off"
+      />
       <span>Turn off computer</span>
     </div>
   );

@@ -3,6 +3,7 @@ import { RootState } from '@/app/redux/store';
 import { setStartOpen, newWindow } from '@/app/redux/appSlice';
 import logo from '@/public/quiz.png';
 import { Typography } from '@mui/material';
+import Image from 'next/image';
 
 type Props = {
   setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,7 +47,7 @@ const QuizMenuItem = ({ setOpenMenu }: Props) => {
         boxSizing: 'border-box',
       }}
     >
-      <img height={'60%'} src={logo.src} alt="logo" />
+      <Image style={{ height: '60%', width: 'auto' }} src={logo} alt="logo" />
       <Typography padding={0} fontWeight={400} fontSize={'0.9rem'}>
         Quiz Game
       </Typography>

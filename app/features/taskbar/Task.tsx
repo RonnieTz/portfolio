@@ -2,13 +2,13 @@
 
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 import {
   focusWindow,
   setMinimize,
   setWindowFullScreen,
   setFocus,
 } from '@/app/redux/appSlice';
+import Image from 'next/image';
 
 type TaskProps = {
   title: string;
@@ -19,11 +19,8 @@ type TaskProps = {
 
 const Task = ({ focused, id, title, logo }: TaskProps) => {
   const dispatch = useDispatch();
-  const [hover, setHover] = useState(false);
   return (
     <div
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
       onDoubleClick={() => {
         dispatch(setWindowFullScreen({ id, fullscreen: true }));
       }}
@@ -60,7 +57,11 @@ const Task = ({ focused, id, title, logo }: TaskProps) => {
         overflow: 'hidden',
       }}
     >
-      <img height={'70%'} src={logo} alt="logo" />
+      <Image
+        src={logo}
+        alt="logo"
+        style={{ cursor: 'pointer', width: 'auto', height: '70%' }}
+      />
       <Typography
         color={'rgba(225, 235, 245, 255)'}
         fontSize={15}

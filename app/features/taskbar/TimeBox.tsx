@@ -2,6 +2,7 @@
 
 import timeBox from '@/public/timebox.jpg';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 const TimeBox = () => {
   const [time, setTime] = useState('');
@@ -30,10 +31,9 @@ const TimeBox = () => {
       }}
       className="timebox"
     >
-      <img
-        width={'100%'}
-        height={'100%'}
-        src={timeBox.src}
+      <Image
+        style={{ width: '100%', height: '100%' }}
+        src={timeBox}
         alt="time box background"
       />
       <p className="time">{time}</p>

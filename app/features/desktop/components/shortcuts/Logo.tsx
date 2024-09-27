@@ -1,6 +1,8 @@
+import Image from 'next/image';
+
 const Logo = ({ logo, selected }: { logo: string; selected: boolean }) => {
   return (
-    <img
+    <Image
       src={logo}
       alt="logo"
       style={{

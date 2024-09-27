@@ -11,6 +11,7 @@ import { setWelcome, setLoaded, newWindow } from '@/app/redux/appSlice';
 import WelcomeScreen from './components/welcome/WelcomeScreen';
 import TurnOffWindow from '../startMenu/TurnOffWindow';
 import LoadScreen from './components/load/LoadScreen';
+import Image from 'next/image';
 
 const Desktop = () => {
   const { welcome, turnOff, loaded } = useSelector(
@@ -39,7 +40,7 @@ const Desktop = () => {
         event.preventDefault();
       });
     };
-  }, []);
+  }, [dispatch, sessionLoaded]);
   return (
     <>
       {turnOff && <TurnOffWindow />}
@@ -53,8 +54,18 @@ const Desktop = () => {
           position={'relative'}
           overflow={'hidden'}
         >
-          <img
+          {/* <img
             src={image.src}
+            alt="backgroundImage"
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          /> */}
+          <Image
+            src={image}
             alt="backgroundImage"
             style={{
               position: 'absolute',

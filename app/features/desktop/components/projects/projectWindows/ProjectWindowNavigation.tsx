@@ -6,6 +6,7 @@ import github from '@/public/github.svg';
 import codesandbox from '@/public/codesandbox.svg';
 import live from '@/public/live.png';
 import { Link, Typography } from '@mui/material';
+import Image from 'next/image';
 
 type Props = {
   selectedWindow: string;
@@ -45,11 +46,12 @@ const ProjectWindowNavigation = ({
         }}
         className="project-navigation"
       >
-        <img
-          style={{ height: '50px' }}
-          src={description.src}
+        <Image
+          style={{ height: '50px', width: 'auto' }}
+          src={description}
           alt="description logo"
         />
+
         <Typography fontSize={'0.9rem'} fontWeight={400}>
           Description
         </Typography>
@@ -67,9 +69,9 @@ const ProjectWindowNavigation = ({
             selectedWindow === 'codesandbox' ? 'white' : 'transparent',
         }}
       >
-        <img
-          style={{ height: '50px' }}
-          src={codesandbox.src}
+        <Image
+          style={{ height: '50px', width: 'auto' }}
+          src={codesandbox}
           alt="description logo"
         />
         <Typography fontSize={'0.9rem'} fontWeight={400}>
@@ -85,7 +87,11 @@ const ProjectWindowNavigation = ({
           backgroundColor: selectedWindow === 'live' ? 'white' : undefined,
         }}
       >
-        <img style={{ height: '50px' }} src={live.src} alt="description logo" />
+        <Image
+          style={{ height: '50px', width: 'auto' }}
+          src={live}
+          alt="description logo"
+        />
         <Typography fontSize={'0.9rem'} fontWeight={400}>
           Live
         </Typography>
@@ -126,9 +132,9 @@ const ProjectWindowNavigation = ({
         >
           This will open in a new tab
         </Typography>
-        <img
-          style={{ height: '50px' }}
-          src={github.src}
+        <Image
+          style={{ height: '50px', width: 'auto' }}
+          src={github}
           alt="description logo"
         />
         Github

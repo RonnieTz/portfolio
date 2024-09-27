@@ -10,7 +10,7 @@ import {
   addWindowToHistory,
   changeToFolder,
 } from '@/app/redux/appSlice';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Folder } from '@/app/redux/types';
 
 type Props = {
@@ -41,22 +41,36 @@ const Shortcut = ({
   const dispatch = useDispatch();
   const { windows } = useSelector((state: RootState) => state.app);
 
+  const openWindow = useCallback(() => {
+    dispatch(
+      newWindow({
+        title,
+        liveLink,
+        gitHubLink,
+        id: String(Math.floor(Math.random() * 1000)),
+        logo,
+        codesadnboxLink,
+        ratio: 1,
+        type,
+        items,
+      })
+    );
+  }, [
+    dispatch,
+    title,
+    liveLink,
+    gitHubLink,
+    logo,
+    codesadnboxLink,
+    type,
+    items,
+  ]);
+
   useEffect(() => {
     const myfunction = (e: KeyboardEvent) => {
       if (selected && e.key === 'Enter') {
-        dispatch(
-          newWindow({
-            title,
-            liveLink,
-            gitHubLink,
-            id: String(Math.floor(Math.random() * 1000)),
-            logo,
-            codesadnboxLink,
-            ratio: 1,
-            type,
-            items,
-          })
-        );
+        openWindow();
+
         if (type === 'folder') {
           dispatch(addWindowToHistory({ folderName: title }));
         }
@@ -67,7 +81,7 @@ const Shortcut = ({
     return () => {
       document.removeEventListener('keyup', myfunction);
     };
-  }, [selected]);
+  }, [selected, dispatch, title, type, location, openWindow]);
 
   return (
     <div
@@ -88,19 +102,7 @@ const Shortcut = ({
           return;
         }
         setTimeout(() => {
-          dispatch(
-            newWindow({
-              title,
-              liveLink,
-              gitHubLink,
-              id: String(Math.floor(Math.random() * 1000)),
-              logo,
-              codesadnboxLink,
-              ratio: 1,
-              type,
-              items,
-            })
-          );
+          openWindow();
         }, 200);
       }}
       style={{

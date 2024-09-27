@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import css from '@/public/css.svg';
+import Image from 'next/image';
 
 const CSS = () => {
   return (
@@ -12,7 +13,7 @@ const CSS = () => {
         marginTop: '10px',
       }}
     >
-      <img height={'60%'} src={css.src} alt="" />
+      <Image style={{ height: '60%', width: 'auto' }} src={css} alt="" />
       <Typography
         sx={{ ':hover': { cursor: 'default' } }}
         textAlign={'center'}

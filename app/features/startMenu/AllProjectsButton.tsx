@@ -1,7 +1,7 @@
 import play from '@/public/play.png';
 import { Typography } from '@mui/material';
-import { time } from 'console';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 type Props = {
   setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,7 +51,7 @@ const AllProjectsButton = ({ setOpenMenu, setTimeoutID, timeoutID }: Props) => {
       >
         All Projects
       </Typography>
-      <img height={'90%'} src={play.src} alt="logo" />
+      <Image style={{ height: '90%', width: 'auto' }} src={play} alt="logo" />
     </div>
   );
 };

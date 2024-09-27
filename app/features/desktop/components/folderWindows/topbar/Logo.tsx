@@ -1,9 +1,14 @@
 import logo from '@/public/XP_logo.png';
+import Image from 'next/image';
 
 const Logo = () => {
   return (
     <div className="logo-container">
-      <img height={'80%'} src={logo.src} alt="XP logo" />
+      <Image
+        style={{ width: 'auto', height: '80%' }}
+        src={logo}
+        alt="XP logo"
+      />
     </div>
   );
 };

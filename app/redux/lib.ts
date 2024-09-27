@@ -8,7 +8,7 @@ export const chess = {
   codesandboxLink:
     'https://codesandbox.io/p/github/RonnieTz/chess_game/main?import=true&embed=1',
   gitHubLink: 'https://github.com/RonnieTz/chess_game',
-  logo: logo.src as string,
+  logo: logo as any,
   selected: false,
   type: 'project',
 };
@@ -19,7 +19,7 @@ export const quiz = {
   codesandboxLink:
     'https://codesandbox.io/p/github/RonnieTz/quiz/main?import=true&embed=1&file=%2Fapi%2Findex.js&showConsole=false',
   gitHubLink: 'https://github.com/RonnieTz/quiz',
-  logo: quizLogo.src,
+  logo: quizLogo as any,
   selected: false,
   type: 'project',
 };
@@ -30,7 +30,7 @@ export const portfolio = {
   codesandboxLink:
     'https://codesandbox.io/p/github/RonnieTz/portfolio/master?import=true&embed=1',
   gitHubLink: 'https://github.com/RonnieTz/portfolio',
-  logo: portfolioLogo.src,
+  logo: portfolioLogo as any,
   selected: false,
   type: 'project',
 };

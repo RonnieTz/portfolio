@@ -48,11 +48,11 @@ const QuizWindowDescription = () => {
           The Quiz Game is an interactive app built with React and TypeScript.
           Users can customize their quiz by selecting categories, difficulties
           (easy, medium, hard), and the number of questions. After starting the
-          quiz, players answer questions one at a time, with a "Next" button
-          appearing after each selection. Once all questions are completed,
-          users can view their results in a two-tab window: one showing the
-          total correct answers, and the other displaying a breakdown of all
-          their responses.
+          quiz, players answer questions one at a time, with a &quot;Next&quot;
+          button appearing after each selection. Once all questions are
+          completed, users can view their results in a two-tab window: one
+          showing the total correct answers, and the other displaying a
+          breakdown of all their responses.
         </Typography>
       </Box>
       <Box marginBottom={6}>
@@ -94,11 +94,11 @@ const QuizWindowDescription = () => {
         </Typography>
         <Typography lineHeight={1.4} fontSize={'0.9rem'}>
           A key challenge in developing the Quiz Game was integrating an API to
-          dynamically fetch questions based on the user's selected categories,
-          difficulty levels, and number of questions. Ensuring smooth
-          interaction between the API and the app, while handling various user
-          inputs, required careful management of asynchronous data fetching in
-          React with TypeScript. Another challenge was maintaining efficient
+          dynamically fetch questions based on the user&apos;s selected
+          categories, difficulty levels, and number of questions. Ensuring
+          smooth interaction between the API and the app, while handling various
+          user inputs, required careful management of asynchronous data fetching
+          in React with TypeScript. Another challenge was maintaining efficient
           state management to track user progress and answers, ensuring seamless
           transitions between questions. This project enhanced my skills in
           working with APIs, managing complex state in React, and creating a

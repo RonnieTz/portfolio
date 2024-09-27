@@ -12,9 +12,10 @@ const PortfolioProject = ({ liveLink, codesandboxLink, gitHubLink }: Props) => {
     <ProjectWindow
       codesandboxLink={codesandboxLink}
       liveLink={liveLink}
-      children={<PortfolioWindowDescription />}
       gitHubLink={gitHubLink}
-    />
+    >
+      <PortfolioWindowDescription />
+    </ProjectWindow>
   );
 };
 

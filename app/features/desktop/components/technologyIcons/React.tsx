@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import react from '@/public/react.svg';
+import Image from 'next/image';
 
 const Javascript = () => {
   return (
@@ -12,7 +13,8 @@ const Javascript = () => {
         marginTop: '10px',
       }}
     >
-      <img height={'60%'} src={react.src} alt="" />
+      {/* <img height={'60%'} src={react.src} alt="" /> */}
+      <Image style={{ height: '60%', width: 'auto' }} src={react} alt="" />
       <Typography
         sx={{ ':hover': { cursor: 'default' } }}
         textAlign={'center'}

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { navigateFolderBack } from '@/app/redux/appSlice';
 import { RootState } from '@/app/redux/store';
 import { useState } from 'react';
+import Image from 'next/image';
 
 const BackArrow = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,11 @@ const BackArrow = () => {
       className={`${className} ${hover ? 'hover' : ''}`}
     >
       <span className="back-arrow">
-        <img height={'70%'} src={backArrow.src} alt="back arrow" />
+        <Image
+          style={{ width: '70%', height: '70%' }}
+          src={backArrow}
+          alt="back arrow"
+        />
       </span>
       <span className="back-text">Back</span>
       {hover && (
@@ -47,7 +52,11 @@ const BackArrow = () => {
         </span>
       )}
       <span className="arrow-down">
-        <img height={'35%'} src={arrow.src} alt="arrow down" />
+        <Image
+          style={{ height: '35%', width: '100%' }}
+          src={arrow}
+          alt="arrow down"
+        />
       </span>
     </div>
   );

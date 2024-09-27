@@ -51,41 +51,40 @@ const DesktopMainArea = () => {
           id={window.id}
           focused={window.focused}
           logo={window.logo}
-          children={
-            window.type === 'project' ? (
-              <Project key={window.id}>
-                {window.title === 'Chess Game' && (
-                  <ChessProject
-                    codesandboxLink={window.codesandboxLink!}
-                    gitHubLink={window.gitHubLink!}
-                    liveLink={window.liveLink!}
-                    key={window.id}
-                  />
-                )}
-                {window.title === 'Quiz Game' && (
-                  <QuizProject
-                    codesandboxLink={window.codesandboxLink!}
-                    gitHubLink={window.gitHubLink!}
-                    liveLink={window.liveLink!}
-                    key={window.id}
-                  />
-                )}
-                {window.title === 'Portfolio' && (
-                  <PortfolioProject
-                    codesandboxLink={window.codesandboxLink!}
-                    gitHubLink={window.gitHubLink!}
-                    liveLink={window.liveLink!}
-                    key={window.id}
-                  />
-                )}
-              </Project>
-            ) : window.type === 'folder' ? (
-              <FolderWindow title={window.title} />
-            ) : (
-              <></>
-            )
-          }
-        />
+        >
+          {window.type === 'project' ? (
+            <Project key={window.id}>
+              {window.title === 'Chess Game' && (
+                <ChessProject
+                  codesandboxLink={window.codesandboxLink!}
+                  gitHubLink={window.gitHubLink!}
+                  liveLink={window.liveLink!}
+                  key={window.id}
+                />
+              )}
+              {window.title === 'Quiz Game' && (
+                <QuizProject
+                  codesandboxLink={window.codesandboxLink!}
+                  gitHubLink={window.gitHubLink!}
+                  liveLink={window.liveLink!}
+                  key={window.id}
+                />
+              )}
+              {window.title === 'Portfolio' && (
+                <PortfolioProject
+                  codesandboxLink={window.codesandboxLink!}
+                  gitHubLink={window.gitHubLink!}
+                  liveLink={window.liveLink!}
+                  key={window.id}
+                />
+              )}
+            </Project>
+          ) : window.type === 'folder' ? (
+            <FolderWindow title={window.title} />
+          ) : (
+            <></>
+          )}
+        </Window>
       ))}
       {desktopItems?.map((item) => (
         <Shortcut

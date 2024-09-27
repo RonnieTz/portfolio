@@ -1,4 +1,5 @@
 import photo from '@/public/photo1.jpg';
+import Image from 'next/image';
 
 const StartMenuPhoto = () => {
   return (
@@ -14,7 +15,12 @@ const StartMenuPhoto = () => {
         zIndex: 100,
       }}
     >
-      <img width={'100%'} height={'100%'} src={photo.src} alt="photo" />
+      {/* <img width={'100%'} height={'100%'} src={photo.src} alt="photo" /> */}
+      <Image
+        style={{ width: '100%', height: '100%' }}
+        src={photo}
+        alt="photo"
+      />
     </div>
   );
 };

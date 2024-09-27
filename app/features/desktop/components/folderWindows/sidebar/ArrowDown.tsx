@@ -1,14 +1,15 @@
 type Props = { logo: string; isExpanded: boolean };
+import Image from 'next/image';
 const ArrowDown = ({ logo, isExpanded }: Props) => {
   return (
     <div className="sidebar-item-arrow">
-      <img
+      <Image
         style={{
+          height: '60%',
+          width: '60%',
           rotate: isExpanded ? '180deg' : undefined,
           transition: '0.2s',
         }}
-        height={'60%'}
-        width={'60%'}
         src={logo}
         alt="Arrow down"
       />

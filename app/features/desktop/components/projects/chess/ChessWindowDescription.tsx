@@ -93,7 +93,7 @@ const ChessWindowDescription = () => {
           was designing the algorithm to predict legal moves, as chess involves
           nearly infinite position combinations. Handling unique piece
           movements, like castling and en passant, while ensuring the app only
-          allows moves that don't put the king in check, was particularly
+          allows moves that don&apos;t put the king in check, was particularly
           complex. This required simulating moves and checking for threats to
           the king, adding significant difficulty. Through this process, I
           improved my understanding of algorithm design, JavaScript, and
@@ -118,7 +118,7 @@ const ChessWindowDescription = () => {
           moves for the selected piece. Move a piece by clicking on the desired
           destination square. Use the back and next buttons to navigate through
           the move history, allowing you to review and analyze previous moves.
-          To view the board from the other player's perspective, click the
+          To view the board from the other player&apos;s perspective, click the
           rotation button to rotate the board.
         </Typography>
       </Box>

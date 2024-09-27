@@ -8,10 +8,7 @@ const SidebarItemTitle = ({ isHovered, title, isExpanded }: Props) => {
   return (
     <div className="sidebar-item-title">
       <span>{title}</span>
-      <ArrowDown
-        isExpanded={isExpanded}
-        logo={isHovered ? logoLight.src : logo.src}
-      />
+      <ArrowDown isExpanded={isExpanded} logo={isHovered ? logoLight : logo} />
     </div>
   );
 };

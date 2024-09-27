@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import chess from '@/public/chess.svg';
+import Image from 'next/image';
 
 type Props = {
   title: string;
@@ -22,7 +23,7 @@ const WindowTitle = ({ title, logo }: Props) => {
       padding={'0 15px 0 10px'}
       gap={'2px'}
     >
-      <img height={'70%'} src={logo} alt="logo" />
+      <Image style={{ height: '70%', width: 'auto' }} src={logo} alt="logo" />
       <Typography
         color={'rgba(225, 235, 245, 255)'}
         fontSize={15}

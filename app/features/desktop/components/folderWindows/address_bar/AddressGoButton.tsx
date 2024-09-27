@@ -1,4 +1,5 @@
 import forwardArrow from '@/public/arrow-forward.svg';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const AddressGoButton = () => {
@@ -14,7 +15,11 @@ const AddressGoButton = () => {
       className={className}
     >
       <span className="address-arrow">
-        <img height={'70%'} src={forwardArrow.src} alt="forward arrow" />
+        <Image
+          style={{ width: '70%', height: '70%' }}
+          src={forwardArrow}
+          alt="forward arrow"
+        />
       </span>
       <span className="back-text">Go</span>
     </div>

@@ -1,4 +1,5 @@
 import logo from '@/public/Folder Closed.png';
+import Image from 'next/image';
 
 type Props = {
   title: string;
@@ -6,7 +7,7 @@ type Props = {
 const AddressArea = ({ title }: Props) => {
   return (
     <div className="address-area">
-      <img height={'50%'} src={logo.src} alt="logo" />
+      <Image style={{ height: '25px', width: '25px' }} src={logo} alt="logo" />
       <span>{title}</span>
     </div>
   );

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import { useState } from 'react';
 import { navigateFolderForward } from '@/app/redux/appSlice';
+import Image from 'next/image';
 
 const ForwardArrow = () => {
   const [hover, setHover] = useState(false);
@@ -31,7 +32,12 @@ const ForwardArrow = () => {
       className={`${className} ${hover ? 'hover' : ''}`}
     >
       <span className="back-arrow">
-        <img height={'70%'} src={forwardArrow.src} alt="forward arrow" />
+        {/* <img height={'70%'} src={forwardArrow.src} alt="forward arrow" /> */}
+        <Image
+          style={{ width: '70%', height: '70%' }}
+          src={forwardArrow}
+          alt="forward arrow"
+        />
       </span>
       {className.includes('hover') && (
         <span
@@ -46,7 +52,11 @@ const ForwardArrow = () => {
         </span>
       )}
       <span className="arrow-down">
-        <img height={'35%'} src={arrow.src} alt="arrow down" />
+        <Image
+          style={{ height: '35%', width: '100%' }}
+          src={arrow}
+          alt="arrow down"
+        />
       </span>
     </div>
   );

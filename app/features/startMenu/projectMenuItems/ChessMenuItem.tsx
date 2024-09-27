@@ -3,6 +3,7 @@ import { RootState } from '@/app/redux/store';
 import { setStartOpen, newWindow } from '@/app/redux/appSlice';
 import chess from '@/public/chess.svg';
 import { Typography } from '@mui/material';
+import Image from 'next/image';
 
 type Props = {
   setOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,7 +46,11 @@ const ChessMenuItem = ({ setOpenMenu }: Props) => {
         boxSizing: 'border-box',
       }}
     >
-      <img height={'60%'} src={chess.src} alt="chess logo" />
+      <Image
+        style={{ height: '60%', width: 'auto' }}
+        src={chess}
+        alt="chess logo"
+      />
       <Typography padding={0} fontWeight={400} fontSize={'0.9rem'}>
         Chess Game
       </Typography>

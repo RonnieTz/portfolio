@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import nodejs from '@/public/nodejs.svg';
+import Image from 'next/image';
 
 const Nodejs = () => {
   return (
@@ -12,7 +13,7 @@ const Nodejs = () => {
         marginTop: '10px',
       }}
     >
-      <img height={'60%'} src={nodejs.src} alt="" />
+      <Image style={{ height: '60%', width: 'auto' }} src={nodejs} alt="" />
       <Typography
         sx={{ ':hover': { cursor: 'default' } }}
         textAlign={'center'}

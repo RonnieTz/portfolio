@@ -3,6 +3,7 @@ import './styles.css';
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { newWindow } from '@/app/redux/appSlice';
+import Image from 'next/image';
 
 const MyProfile = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,12 @@ const MyProfile = () => {
       }}
       className="menu-item-link"
     >
-      <img height={'60%'} src={profile.src} alt="chess logo" />
+      {/* <img height={'60%'} src={profile.src} alt="chess logo" /> */}
+      <Image
+        style={{ height: '60%', width: 'auto' }}
+        src={profile}
+        alt="profile"
+      />
       <Typography
         padding={0}
         fontWeight={500}

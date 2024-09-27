@@ -24,7 +24,7 @@ export const initialState: InitialState = {
           {
             name: 'Projects',
             selected: false,
-            logo: folder.src,
+            logo: folder as any,
             type: 'folder',
             items: [
               { ...chess, location: 'Desktop' },
@@ -44,7 +44,7 @@ export const initialState: InitialState = {
           {
             name: 'Test Folder',
             selected: false,
-            logo: folder.src,
+            logo: folder as any,
             type: 'folder',
             items: [{ ...chess, location: 'Test Folder' }],
             location: 'Projects',

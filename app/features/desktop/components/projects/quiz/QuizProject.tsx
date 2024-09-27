@@ -12,9 +12,10 @@ const QuizProject = ({ liveLink, codesandboxLink, gitHubLink }: Props) => {
     <ProjectWindow
       codesandboxLink={codesandboxLink}
       liveLink={liveLink}
-      children={<QuizWindowDescription />}
       gitHubLink={gitHubLink}
-    />
+    >
+      <QuizWindowDescription />
+    </ProjectWindow>
   );
 };
 
