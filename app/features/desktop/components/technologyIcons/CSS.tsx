@@ -13,7 +13,12 @@ const CSS = () => {
         marginTop: '10px',
       }}
     >
-      <Image style={{ height: '60%', width: 'auto' }} src={css} alt="" />
+      <Image
+        priority={true}
+        style={{ height: '60%', width: 'auto' }}
+        src={css}
+        alt=""
+      />
       <Typography
         sx={{ ':hover': { cursor: 'default' } }}
         textAlign={'center'}

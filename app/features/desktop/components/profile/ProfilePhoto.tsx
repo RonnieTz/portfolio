@@ -4,8 +4,8 @@ import Image from 'next/image';
 const ProfilePhoto = () => {
   return (
     <div className="profile-photo">
-      {/* <img height={'100%'} src={photo.src} alt="Profile Photo" /> */}
       <Image
+        priority={true}
         style={{ height: '100%', width: 'auto' }}
         src={photo}
         alt="Profile Photo"

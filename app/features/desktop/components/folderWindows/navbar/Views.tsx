@@ -16,12 +16,14 @@ const Views = () => {
       className={className}
     >
       <Image
+        priority={true}
         style={{ height: '70%', width: 'auto' }}
         src={views}
         alt="Views Icon"
       />
       <span className="arrow-down">
         <Image
+          priority={true}
           style={{ height: '35%', width: '100%' }}
           src={arrow}
           alt="arrow down"

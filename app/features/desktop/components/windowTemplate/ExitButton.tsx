@@ -15,6 +15,7 @@ const ExitButton = ({ id, focused }: Props) => {
       className="window-button"
     >
       <Image
+        priority={true}
         style={{
           filter: focused ? undefined : 'brightness(1.4)',
           height: '100%',

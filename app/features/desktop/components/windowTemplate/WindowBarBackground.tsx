@@ -5,6 +5,7 @@ import Image from 'next/image';
 const WindowBarBackground = ({ focused }: { focused: boolean }) => {
   return (
     <Image
+      priority={true}
       style={{
         filter: focused ? 'none' : 'brightness(1.4)',
         transition: 'all 0.2s',

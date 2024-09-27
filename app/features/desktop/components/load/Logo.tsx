@@ -11,6 +11,7 @@ const Logo = () => {
         alt="logo"
       /> */}
       <Image
+        priority={true}
         style={{
           width: '40%',
           position: 'absolute',

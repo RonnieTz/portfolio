@@ -4,6 +4,7 @@ const ArrowDown = ({ logo, isExpanded }: Props) => {
   return (
     <div className="sidebar-item-arrow">
       <Image
+        priority={true}
         style={{
           height: '60%',
           width: '60%',

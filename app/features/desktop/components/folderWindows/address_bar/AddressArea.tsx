@@ -7,7 +7,12 @@ type Props = {
 const AddressArea = ({ title }: Props) => {
   return (
     <div className="address-area">
-      <Image style={{ height: '25px', width: '25px' }} src={logo} alt="logo" />
+      <Image
+        priority={true}
+        style={{ height: '25px', width: '25px' }}
+        src={logo}
+        alt="logo"
+      />
       <span>{title}</span>
     </div>
   );

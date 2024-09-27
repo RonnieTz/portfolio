@@ -23,6 +23,7 @@ const MaximizeButton = ({ fullScreen, id, focused }: Props) => {
         alt="exit"
       /> */}
       <Image
+        priority={true}
         style={{
           filter: focused ? undefined : 'brightness(1.4)',
           height: '100%',

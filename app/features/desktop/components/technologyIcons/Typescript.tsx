@@ -14,7 +14,12 @@ const Typescript = () => {
       }}
     >
       {/* <img height={'60%'} src={typescript.src} alt="" /> */}
-      <Image style={{ height: '60%', width: 'auto' }} src={typescript} alt="" />
+      <Image
+        priority={true}
+        style={{ height: '60%', width: 'auto' }}
+        src={typescript}
+        alt=""
+      />
       <Typography
         sx={{ ':hover': { cursor: 'default' } }}
         textAlign={'center'}

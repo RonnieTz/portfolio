@@ -65,6 +65,7 @@ const Desktop = () => {
             }}
           /> */}
           <Image
+            priority={true}
             src={image}
             alt="backgroundImage"
             style={{

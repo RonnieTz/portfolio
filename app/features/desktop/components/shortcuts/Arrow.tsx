@@ -19,7 +19,12 @@ const Arrow = () => {
         zIndex: 1,
       }}
     >
-      <Image style={{ width: '70%', height: 'auto' }} src={arrow} alt="arrow" />
+      <Image
+        priority={true}
+        style={{ width: '70%', height: 'auto' }}
+        src={arrow}
+        alt="arrow"
+      />
     </div>
   );
 };

@@ -14,6 +14,7 @@ const TurnOff = () => {
       className="turn-off-button"
     >
       <Image
+        priority={true}
         style={{ height: '100%', width: 'auto' }}
         src={img}
         alt="turn-off"

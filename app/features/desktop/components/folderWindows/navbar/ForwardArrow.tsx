@@ -34,6 +34,7 @@ const ForwardArrow = () => {
       <span className="back-arrow">
         {/* <img height={'70%'} src={forwardArrow.src} alt="forward arrow" /> */}
         <Image
+          priority={true}
           style={{ width: '70%', height: '70%' }}
           src={forwardArrow}
           alt="forward arrow"
@@ -53,6 +54,7 @@ const ForwardArrow = () => {
       )}
       <span className="arrow-down">
         <Image
+          priority={true}
           style={{ height: '35%', width: '100%' }}
           src={arrow}
           alt="arrow down"

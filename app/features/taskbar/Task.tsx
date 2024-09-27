@@ -58,6 +58,7 @@ const Task = ({ focused, id, title, logo }: TaskProps) => {
       }}
     >
       <Image
+        priority={true}
         src={logo}
         alt="logo"
         style={{ cursor: 'pointer', width: 'auto', height: '70%' }}

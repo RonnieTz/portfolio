@@ -47,7 +47,12 @@ const QuizMenuItem = ({ setOpenMenu }: Props) => {
         boxSizing: 'border-box',
       }}
     >
-      <Image style={{ height: '60%', width: 'auto' }} src={logo} alt="logo" />
+      <Image
+        priority={true}
+        style={{ height: '60%', width: 'auto' }}
+        src={logo}
+        alt="logo"
+      />
       <Typography padding={0} fontWeight={400} fontSize={'0.9rem'}>
         Quiz Game
       </Typography>

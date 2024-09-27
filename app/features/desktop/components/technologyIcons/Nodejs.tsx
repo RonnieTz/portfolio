@@ -13,7 +13,12 @@ const Nodejs = () => {
         marginTop: '10px',
       }}
     >
-      <Image style={{ height: '60%', width: 'auto' }} src={nodejs} alt="" />
+      <Image
+        priority={true}
+        style={{ height: '60%', width: 'auto' }}
+        src={nodejs}
+        alt=""
+      />
       <Typography
         sx={{ ':hover': { cursor: 'default' } }}
         textAlign={'center'}

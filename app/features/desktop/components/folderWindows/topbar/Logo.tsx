@@ -5,6 +5,7 @@ const Logo = () => {
   return (
     <div className="logo-container">
       <Image
+        priority={true}
         style={{ width: 'auto', height: '80%' }}
         src={logo}
         alt="XP logo"

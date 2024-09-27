@@ -51,7 +51,12 @@ const AllProjectsButton = ({ setOpenMenu, setTimeoutID, timeoutID }: Props) => {
       >
         All Projects
       </Typography>
-      <Image style={{ height: '90%', width: 'auto' }} src={play} alt="logo" />
+      <Image
+        priority={true}
+        style={{ height: '90%', width: 'auto' }}
+        src={play}
+        alt="logo"
+      />
     </div>
   );
 };

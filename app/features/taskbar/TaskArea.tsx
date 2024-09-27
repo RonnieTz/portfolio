@@ -10,7 +10,7 @@ const TaskArea = () => {
     <Box>
       <Box
         position={'absolute'}
-        width={'calc(100% - 220px)'}
+        width={'calc(100% - 230px)'}
         zIndex={100}
         height={'78%'}
         right={'110px'}

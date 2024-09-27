@@ -47,6 +47,7 @@ const ProjectWindowNavigation = ({
         className="project-navigation"
       >
         <Image
+          priority={true}
           style={{ height: '50px', width: 'auto' }}
           src={description}
           alt="description logo"
@@ -70,6 +71,7 @@ const ProjectWindowNavigation = ({
         }}
       >
         <Image
+          priority={true}
           style={{ height: '50px', width: 'auto' }}
           src={codesandbox}
           alt="description logo"
@@ -88,6 +90,7 @@ const ProjectWindowNavigation = ({
         }}
       >
         <Image
+          priority={true}
           style={{ height: '50px', width: 'auto' }}
           src={live}
           alt="description logo"
@@ -133,6 +136,7 @@ const ProjectWindowNavigation = ({
           This will open in a new tab
         </Typography>
         <Image
+          priority={true}
           style={{ height: '50px', width: 'auto' }}
           src={github}
           alt="description logo"

@@ -24,6 +24,7 @@ const StartButton = () => {
       className="start-button"
     >
       <Image
+        priority={true}
         style={{ height: '100%', width: 'auto' }}
         src={
           start.open

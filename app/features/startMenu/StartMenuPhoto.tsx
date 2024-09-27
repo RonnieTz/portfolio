@@ -15,8 +15,8 @@ const StartMenuPhoto = () => {
         zIndex: 100,
       }}
     >
-      {/* <img width={'100%'} height={'100%'} src={photo.src} alt="photo" /> */}
       <Image
+        priority={true}
         style={{ width: '100%', height: '100%' }}
         src={photo}
         alt="photo"

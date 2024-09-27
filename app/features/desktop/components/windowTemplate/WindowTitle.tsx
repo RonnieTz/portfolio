@@ -23,7 +23,12 @@ const WindowTitle = ({ title, logo }: Props) => {
       padding={'0 15px 0 10px'}
       gap={'2px'}
     >
-      <Image style={{ height: '70%', width: 'auto' }} src={logo} alt="logo" />
+      <Image
+        priority={true}
+        style={{ height: '70%', width: 'auto' }}
+        src={logo}
+        alt="logo"
+      />
       <Typography
         color={'rgba(225, 235, 245, 255)'}
         fontSize={15}

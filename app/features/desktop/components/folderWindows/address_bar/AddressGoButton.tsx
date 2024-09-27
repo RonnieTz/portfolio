@@ -16,6 +16,7 @@ const AddressGoButton = () => {
     >
       <span className="address-arrow">
         <Image
+          priority={true}
           style={{ width: '70%', height: '70%' }}
           src={forwardArrow}
           alt="forward arrow"

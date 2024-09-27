@@ -23,8 +23,8 @@ const MyProfile = () => {
       }}
       className="menu-item-link"
     >
-      {/* <img height={'60%'} src={profile.src} alt="chess logo" /> */}
       <Image
+        priority={true}
         style={{ height: '60%', width: 'auto' }}
         src={profile}
         alt="profile"

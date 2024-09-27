@@ -14,7 +14,12 @@ const Javascript = () => {
       }}
     >
       {/* <img height={'60%'} src={react.src} alt="" /> */}
-      <Image style={{ height: '60%', width: 'auto' }} src={react} alt="" />
+      <Image
+        priority={true}
+        style={{ height: '60%', width: 'auto' }}
+        src={react}
+        alt=""
+      />
       <Typography
         sx={{ ':hover': { cursor: 'default' } }}
         textAlign={'center'}

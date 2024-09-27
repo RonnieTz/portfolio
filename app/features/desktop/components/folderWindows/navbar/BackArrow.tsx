@@ -33,6 +33,7 @@ const BackArrow = () => {
     >
       <span className="back-arrow">
         <Image
+          priority={true}
           style={{ width: '70%', height: '70%' }}
           src={backArrow}
           alt="back arrow"
@@ -53,6 +54,7 @@ const BackArrow = () => {
       )}
       <span className="arrow-down">
         <Image
+          priority={true}
           style={{ height: '35%', width: '100%' }}
           src={arrow}
           alt="arrow down"

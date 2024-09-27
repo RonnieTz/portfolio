@@ -47,6 +47,7 @@ const ChessMenuItem = ({ setOpenMenu }: Props) => {
       }}
     >
       <Image
+        priority={true}
         style={{ height: '60%', width: 'auto' }}
         src={chess}
         alt="chess logo"
