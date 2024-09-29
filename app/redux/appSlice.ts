@@ -128,6 +128,23 @@ const appSlice = createSlice({
         state.windows[windowIndex].zIndex = 10;
       }
     },
+    resizeWindow: (
+      state,
+      action: PayloadAction<{
+        id: string;
+        size: { width: number; height: number };
+      }>
+    ) => {
+      const window = state.windows.find(
+        (window) => window.title === action.payload.id
+      );
+      console.log(window);
+      console.log(action.payload.size);
+
+      if (window) {
+        window.size = action.payload.size;
+      }
+    },
     selectShortcut: (
       state,
       action: PayloadAction<{ location: string; name: string }>
@@ -326,16 +343,42 @@ const appSlice = createSlice({
       });
     },
     ms_reset: (state) => {
-      state.mineswweeper.board = Array.from({ length: 10 }, () =>
-        Array.from({ length: 10 }, () => ({
-          clicked: false,
-          flag: false,
-          value: 0,
-        }))
+      const { mode } = state.mineswweeper;
+
+      state.mineswweeper.board = Array.from(
+        {
+          length:
+            mode === 'begginer'
+              ? 12
+              : mode === 'intermediate'
+              ? 20
+              : mode === 'expert'
+              ? 20
+              : 12,
+        },
+        () =>
+          Array.from(
+            {
+              length:
+                mode === 'begginer'
+                  ? 12
+                  : mode === 'intermediate'
+                  ? 20
+                  : mode === 'expert'
+                  ? 40
+                  : 12,
+            },
+            () => ({
+              clicked: false,
+              flag: false,
+              value: 0,
+            })
+          )
       );
       state.mineswweeper.bombClicked = { clicked: false, x: 0, y: 0 };
       state.mineswweeper.firstClick = true;
-      state.mineswweeper.totalBombs = 10;
+      state.mineswweeper.totalBombs =
+        mode === 'begginer' ? 20 : mode === 'intermediate' ? 60 : 100;
       state.mineswweeper.timer = 0;
       state.mineswweeper.gameover = false;
     },
@@ -354,6 +397,44 @@ const appSlice = createSlice({
     },
     setSuccessClick: (state, action: PayloadAction<boolean>) => {
       state.mineswweeper.successClick = action.payload;
+    },
+    setMsMode: (
+      state,
+      action: PayloadAction<'begginer' | 'intermediate' | 'expert'>
+    ) => {
+      state.mineswweeper.mode = action.payload;
+      switch (action.payload) {
+        case 'begginer':
+          state.mineswweeper.totalBombs = 20;
+          state.mineswweeper.board = Array.from({ length: 12 }, () =>
+            Array.from({ length: 12 }, () => ({
+              clicked: false,
+              flag: false,
+              value: 0,
+            }))
+          );
+          break;
+        case 'intermediate':
+          state.mineswweeper.totalBombs = 60;
+          state.mineswweeper.board = Array.from({ length: 20 }, () =>
+            Array.from({ length: 20 }, () => ({
+              clicked: false,
+              flag: false,
+              value: 0,
+            }))
+          );
+          break;
+        case 'expert':
+          state.mineswweeper.totalBombs = 100;
+          state.mineswweeper.board = Array.from({ length: 20 }, () =>
+            Array.from({ length: 40 }, () => ({
+              clicked: false,
+              flag: false,
+              value: 0,
+            }))
+          );
+          break;
+      }
     },
   },
 });
@@ -385,5 +466,7 @@ export const {
   setTimer,
   setGameOver,
   setSuccessClick,
+  setMsMode,
+  resizeWindow,
 } = appSlice.actions;
 export default appSlice.reducer;

@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "@reduxjs/toolkit": "^2.2.7",
+    "mongoose": "^8.7.0",
     "next": "^14.2.12",
     "portofolio": "file:",
     "react": "^18",

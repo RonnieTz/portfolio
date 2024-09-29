@@ -13,7 +13,7 @@ const Minesweeper = () => {
         dispatch(
           newWindow({
             title: 'Minesweeper',
-            id: String(Math.floor(Math.random() * 100000)),
+            id: 'Minesweeper',
             logo: logo as any,
             ratio: undefined,
             type: 'program',

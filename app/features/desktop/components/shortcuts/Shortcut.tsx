@@ -49,7 +49,7 @@ const Shortcut = ({
         title,
         liveLink,
         gitHubLink,
-        id: String(Math.floor(Math.random() * 1000)),
+        id: title,
         logo,
         codesadnboxLink,
         ratio: 1,

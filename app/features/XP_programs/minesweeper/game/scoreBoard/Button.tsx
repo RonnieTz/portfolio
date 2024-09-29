@@ -3,12 +3,12 @@ import surprise from '@/public/surprise.png';
 import sad from '@/public/sad.png';
 import happy from '@/public/happy.png';
 import sunglasses from '@/public/sunglasses.png';
-import { readData, writeData } from '../../jsonAPI';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import { ms_reset } from '@/app/redux/appSlice';
+import { databaseConnect } from '@/app/utilities/database/databaseConnect';
 
 const Button = () => {
   const [isClicked, setIsClicked] = useState(false);
@@ -22,6 +22,7 @@ const Button = () => {
     if (mineswweeper.gameover) return sunglasses;
     return smile;
   };
+
   return (
     <div
       onMouseDown={() => {
@@ -30,7 +31,7 @@ const Button = () => {
       onMouseUp={async () => {
         setIsClicked(false);
         dispatch(ms_reset());
-        console.log(await writeData({ newData: 'newData' }));
+        await databaseConnect();
       }}
       className="ms-button"
     >

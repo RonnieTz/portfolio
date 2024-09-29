@@ -74,5 +74,6 @@ export const initialState: InitialState = {
     timer: 0,
     gameover: false,
     successClick: false,
+    mode: 'begginer',
   },
 };

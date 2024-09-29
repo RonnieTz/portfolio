@@ -47,5 +47,6 @@ export type InitialState = {
     successClick: boolean;
     timer: number;
     gameover: boolean;
+    mode: 'begginer' | 'intermediate' | 'expert';
   };
 };
