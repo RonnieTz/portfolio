@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import MyProfile from './startMenuItems.tsx/MyProfile';
+import Minesweeper from './startMenuItems.tsx/Minesweeper';
 
 const RightSide = () => {
   return (
@@ -12,6 +13,7 @@ const RightSide = () => {
       boxSizing={'border-box'}
     >
       <MyProfile />
+      <Minesweeper />
     </Box>
   );
 };

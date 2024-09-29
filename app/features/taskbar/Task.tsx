@@ -15,13 +15,15 @@ type TaskProps = {
   focused: boolean;
   id: string;
   logo: string;
+  fixedSize: boolean;
 };
 
-const Task = ({ focused, id, title, logo }: TaskProps) => {
+const Task = ({ focused, id, title, logo, fixedSize }: TaskProps) => {
   const dispatch = useDispatch();
   return (
     <div
       onDoubleClick={() => {
+        if (fixedSize) return;
         dispatch(setWindowFullScreen({ id, fullscreen: true }));
       }}
       onClick={() => {

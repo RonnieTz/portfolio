@@ -13,7 +13,6 @@ const Javascript = () => {
         marginTop: '10px',
       }}
     >
-      {/* <img height={'60%'} src={react.src} alt="" /> */}
       <Image
         priority={true}
         style={{ height: '60%', width: 'auto' }}

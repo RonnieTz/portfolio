@@ -32,8 +32,8 @@ const TimeBox = () => {
       className="timebox"
     >
       <Image
+        fill={true}
         priority={true}
-        style={{ width: '100%', height: '100%' }}
         src={timeBox}
         alt="time box background"
       />

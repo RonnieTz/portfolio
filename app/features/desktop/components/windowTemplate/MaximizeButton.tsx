@@ -5,23 +5,23 @@ import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { setWindowFullScreen } from '@/app/redux/appSlice';
 
-type Props = { fullScreen: boolean; id: string; focused: boolean };
+type Props = {
+  fullScreen: boolean;
+  id: string;
+  focused: boolean;
+  fixedSize: boolean;
+};
 
-const MaximizeButton = ({ fullScreen, id, focused }: Props) => {
+const MaximizeButton = ({ fullScreen, id, focused, fixedSize }: Props) => {
   const dispatch = useDispatch();
   return (
     <div
       onClick={() => {
+        if (fixedSize) return;
         dispatch(setWindowFullScreen({ id, fullscreen: !fullScreen }));
       }}
-      className="window-button"
+      className={`window-button ${fixedSize ? 'button-disabled' : ''}`}
     >
-      {/* <img
-        style={{ filter: focused ? undefined : 'brightness(1.4)' }}
-        src={!fullScreen ? maximize.src : restore.src}
-        height={'100%'}
-        alt="exit"
-      /> */}
       <Image
         priority={true}
         style={{

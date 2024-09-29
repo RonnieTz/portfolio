@@ -34,6 +34,7 @@ const FolderArea = () => {
           liveLink={item.liveLink}
           gitHubLink={item.gitHubLink}
           codesadnboxLink={item.codesandboxLink}
+          size={item.size!}
         />
       ))}
     </div>

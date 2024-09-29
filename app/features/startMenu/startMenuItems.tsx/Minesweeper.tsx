@@ -1,25 +1,25 @@
-import profile from '@/public/profile.png';
+import logo from '@/public/Minesweeper.png';
 import './styles.css';
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { newWindow } from '@/app/redux/appSlice';
 import Image from 'next/image';
 
-const MyProfile = () => {
+const Minesweeper = () => {
   const dispatch = useDispatch();
   return (
     <div
       onClick={() => {
         dispatch(
           newWindow({
-            title: 'My Profile',
+            title: 'Minesweeper',
             id: String(Math.floor(Math.random() * 100000)),
-            logo: profile as any,
+            logo: logo as any,
             ratio: undefined,
             type: 'program',
             items: [],
             fixedSize: true,
-            size: { width: 650, height: 650 },
+            size: { width: 400, height: 400 * 1.3 },
           })
         );
       }}
@@ -28,7 +28,7 @@ const MyProfile = () => {
       <Image
         priority={true}
         style={{ height: '60%', width: 'auto' }}
-        src={profile}
+        src={logo}
         alt="profile"
       />
       <Typography
@@ -36,10 +36,11 @@ const MyProfile = () => {
         fontWeight={500}
         fontSize={'0.9rem'}
         fontFamily={'winXP'}
+        letterSpacing={'0.5px'}
       >
-        My Profile
+        Minesweeper
       </Typography>
     </div>
   );
 };
-export default MyProfile;
+export default Minesweeper;

@@ -32,6 +32,7 @@ export const initialState: InitialState = {
               { ...portfolio, location: 'Desktop' },
             ],
             location: 'Desktop',
+            size: { width: 650, height: 650 },
           },
         ],
       },
@@ -48,6 +49,7 @@ export const initialState: InitialState = {
             type: 'folder',
             items: [{ ...chess, location: 'Test Folder' }],
             location: 'Projects',
+            size: { width: 650, height: 650 },
           },
         ],
       },
@@ -58,4 +60,19 @@ export const initialState: InitialState = {
     ],
   },
   folderHistory: { history: ['Desktop'], currentFolder: 0 },
+  mineswweeper: {
+    board: new Array(12)
+      .fill(0)
+      .map(() =>
+        new Array(12)
+          .fill(0)
+          .map(() => ({ clicked: false, value: 0, flag: false }))
+      ),
+    totalBombs: 20,
+    firstClick: true,
+    bombClicked: { clicked: false, x: 0, y: 0 },
+    timer: 0,
+    gameover: false,
+    successClick: false,
+  },
 };

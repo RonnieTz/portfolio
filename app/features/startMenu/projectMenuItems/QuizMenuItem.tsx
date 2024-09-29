@@ -32,6 +32,8 @@ const QuizMenuItem = ({ setOpenMenu }: Props) => {
               ratio: undefined,
               type: 'project',
               items: [],
+              fixedSize: false,
+              size: { width: 650, height: 650 },
             })
           );
         }, 200);

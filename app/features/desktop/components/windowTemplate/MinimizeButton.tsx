@@ -2,6 +2,7 @@ import icon from '@/public/Minimize.png';
 import { setMinimize, setFocus } from '@/app/redux/appSlice';
 import { useDispatch } from 'react-redux';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 type Props = { id: string; focused: boolean };
 

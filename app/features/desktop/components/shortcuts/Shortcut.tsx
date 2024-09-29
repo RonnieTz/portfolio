@@ -24,6 +24,7 @@ type Props = {
   color: 'dark' | 'light';
   items: Folder[];
   location: string;
+  size: { width: number; height: number };
 };
 
 const Shortcut = ({
@@ -37,6 +38,7 @@ const Shortcut = ({
   color,
   items,
   location,
+  size,
 }: Props) => {
   const dispatch = useDispatch();
   const { windows } = useSelector((state: RootState) => state.app);
@@ -53,6 +55,8 @@ const Shortcut = ({
         ratio: 1,
         type,
         items,
+        fixedSize: type === 'program' ? true : false,
+        size,
       })
     );
   }, [

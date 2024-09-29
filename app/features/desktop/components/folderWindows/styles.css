@@ -232,6 +232,9 @@
   filter: grayscale(100%);
   opacity: 0.5;
 }
+.button-disabled:hover {
+  cursor: not-allowed;
+}
 .views {
   height: 90%;
   width: 60px;

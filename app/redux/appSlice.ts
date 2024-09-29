@@ -4,7 +4,6 @@ import { initialState } from './initialState';
 import { set_WindowPosition } from './reducers/setWindowPosition';
 import { set_WindowFullScreen } from './reducers/setWindowFullScreen';
 import { Folder } from './types';
-import { act } from 'react';
 
 const appSlice = createSlice({
   name: 'app',
@@ -88,6 +87,8 @@ const appSlice = createSlice({
         ratio: number | undefined;
         type: string;
         items: Folder[];
+        fixedSize: boolean;
+        size: { width: number; height: number };
       }>
     ) => {
       state.windows.forEach((window) => {
@@ -115,6 +116,8 @@ const appSlice = createSlice({
           ratio: action.payload.ratio,
           type: action.payload.type,
           items: action.payload.items,
+          fixedSize: action.payload.fixedSize,
+          size: action.payload.size,
         });
         if (action.payload.type === 'folder') {
           state.folderHistory.history.push();
@@ -198,6 +201,160 @@ const appSlice = createSlice({
             state.folderHistory.history[state.folderHistory.currentFolder];
       }
     },
+    ms_selectCell: (state, action: PayloadAction<{ i: number; j: number }>) => {
+      const cell = state.mineswweeper.board[action.payload.i][action.payload.j];
+
+      const selectAllEmptyCells = (i: number, j: number) => {
+        const neighbors = [
+          [i - 1, j - 1],
+          [i - 1, j],
+          [i - 1, j + 1],
+          [i, j - 1],
+          [i, j + 1],
+          [i + 1, j - 1],
+          [i + 1, j],
+          [i + 1, j + 1],
+        ];
+
+        neighbors.forEach(([x, y]) => {
+          if (
+            x >= 0 &&
+            x < state.mineswweeper.board.length &&
+            y >= 0 &&
+            y < state.mineswweeper.board[0].length
+          ) {
+            const neighborCell = state.mineswweeper.board[x][y];
+            if (!neighborCell.clicked && !neighborCell.flag) {
+              neighborCell.clicked = true;
+              if (neighborCell.value === 0) {
+                selectAllEmptyCells(x, y);
+              }
+            }
+          }
+        });
+      };
+      if (cell.value === 0) {
+        selectAllEmptyCells(action.payload.i, action.payload.j);
+      }
+      cell.clicked = true;
+      if (
+        state.mineswweeper.board.every((row) => {
+          return row.every((cell) => {
+            return cell.value === 'bomb' || cell.clicked;
+          });
+        })
+      ) {
+        console.log('game over');
+        state.mineswweeper.gameover = true;
+      }
+    },
+    ms_flagCell: (state, action: PayloadAction<{ i: number; j: number }>) => {
+      const cell = state.mineswweeper.board[action.payload.i][action.payload.j];
+      cell.flag = !cell.flag;
+    },
+    ms_assignBomb: (state, action: PayloadAction<{ i: number; j: number }>) => {
+      const { i, j } = action.payload;
+
+      for (let x = 0; x < state.mineswweeper.totalBombs; ) {
+        const randomRow = Math.floor(
+          Math.random() * state.mineswweeper.board.length
+        );
+        const randomCol = Math.floor(
+          Math.random() * state.mineswweeper.board[0].length
+        );
+
+        if (randomRow === i && randomCol === j) {
+          continue;
+        }
+
+        if (state.mineswweeper.board[randomRow][randomCol].value !== 'bomb') {
+          state.mineswweeper.board[randomRow][randomCol].value = 'bomb';
+        }
+
+        x++;
+      }
+      const neighborCellIsBomb = (i: number, j: number) => {
+        const neighbors = [
+          [i - 1, j - 1],
+          [i - 1, j],
+          [i - 1, j + 1],
+          [i, j - 1],
+          [i, j + 1],
+          [i + 1, j - 1],
+          [i + 1, j],
+          [i + 1, j + 1],
+        ];
+
+        let bombCount = 0;
+        neighbors.forEach(([x, y]) => {
+          if (
+            x >= 0 &&
+            x < state.mineswweeper.board.length &&
+            y >= 0 &&
+            y < state.mineswweeper.board[0].length
+          ) {
+            if (state.mineswweeper.board[x][y].value === 'bomb') {
+              bombCount++;
+            }
+          }
+        });
+        return bombCount;
+      };
+
+      state.mineswweeper.board.forEach((row, i) => {
+        row.forEach((cell, j) => {
+          if (cell.value !== 'bomb') {
+            cell.value = neighborCellIsBomb(i, j);
+          }
+        });
+      });
+      state.mineswweeper.firstClick = false;
+    },
+    clickBomb: (state, action: PayloadAction<{ x: number; y: number }>) => {
+      state.mineswweeper.bombClicked = {
+        clicked: true,
+        x: action.payload.x,
+        y: action.payload.y,
+      };
+
+      state.mineswweeper.board.forEach((row) => {
+        row.forEach((cell) => {
+          if (cell.value === 'bomb' && !cell.flag) {
+            cell.clicked = true;
+          }
+        });
+      });
+    },
+    ms_reset: (state) => {
+      state.mineswweeper.board = Array.from({ length: 10 }, () =>
+        Array.from({ length: 10 }, () => ({
+          clicked: false,
+          flag: false,
+          value: 0,
+        }))
+      );
+      state.mineswweeper.bombClicked = { clicked: false, x: 0, y: 0 };
+      state.mineswweeper.firstClick = true;
+      state.mineswweeper.totalBombs = 10;
+      state.mineswweeper.timer = 0;
+      state.mineswweeper.gameover = false;
+    },
+    setTimer: (state) => {
+      if (
+        state.mineswweeper.firstClick ||
+        state.mineswweeper.bombClicked.clicked ||
+        state.mineswweeper.gameover
+      ) {
+        return;
+      }
+      state.mineswweeper.timer += 1;
+    },
+    setGameOver: (state) => {
+      state.mineswweeper.gameover = true;
+    },
+    setSuccessClick: (state, action: PayloadAction<boolean>) => {
+      state.mineswweeper.successClick = action.payload;
+    },
   },
 });
 
@@ -220,5 +377,13 @@ export const {
   changeToFolder,
   navigateFolderBack,
   navigateFolderForward,
+  ms_selectCell,
+  ms_flagCell,
+  ms_assignBomb,
+  clickBomb,
+  ms_reset,
+  setTimer,
+  setGameOver,
+  setSuccessClick,
 } = appSlice.actions;
 export default appSlice.reducer;

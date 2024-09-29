@@ -32,7 +32,6 @@ const ForwardArrow = () => {
       className={`${className} ${hover ? 'hover' : ''}`}
     >
       <span className="back-arrow">
-        {/* <img height={'70%'} src={forwardArrow.src} alt="forward arrow" /> */}
         <Image
           priority={true}
           style={{ width: '70%', height: '70%' }}

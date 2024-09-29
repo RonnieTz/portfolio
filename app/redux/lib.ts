@@ -11,6 +11,7 @@ export const chess = {
   logo: logo as any,
   selected: false,
   type: 'project',
+  size: { width: 650, height: 650 },
 };
 
 export const quiz = {
@@ -22,6 +23,7 @@ export const quiz = {
   logo: quizLogo as any,
   selected: false,
   type: 'project',
+  size: { width: 650, height: 650 },
 };
 
 export const portfolio = {
@@ -33,4 +35,5 @@ export const portfolio = {
   logo: portfolioLogo as any,
   selected: false,
   type: 'project',
+  size: { width: 650, height: 650 },
 };

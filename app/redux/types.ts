@@ -8,6 +8,7 @@ export type Folder = {
   codesandboxLink?: string;
   gitHubLink?: string;
   location?: string;
+  size: { width: number; height: number };
 };
 
 export type InitialState = {
@@ -28,6 +29,8 @@ export type InitialState = {
     ratio: number | undefined;
     type: string;
     items: Folder[];
+    fixedSize: boolean;
+    size: { width: number; height: number };
   }[];
   projects: Folder[];
   turnOff: boolean;
@@ -36,4 +39,13 @@ export type InitialState = {
     locations: { location: string; items: Folder[] }[];
   };
   folderHistory: { history: string[]; currentFolder: number };
+  mineswweeper: {
+    board: { clicked: boolean; value: number | 'bomb'; flag: boolean }[][];
+    totalBombs: number;
+    firstClick: boolean;
+    bombClicked: { clicked: boolean; x: number; y: number };
+    successClick: boolean;
+    timer: number;
+    gameover: boolean;
+  };
 };

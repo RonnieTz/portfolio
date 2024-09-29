@@ -25,6 +25,7 @@ const TaskArea = () => {
               id={window.id}
               key={window.id}
               logo={window.logo}
+              fixedSize={window.fixedSize}
             />
           );
         })}

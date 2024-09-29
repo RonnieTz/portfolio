@@ -19,6 +19,8 @@ type WindowProps = {
   focused: boolean;
   children: ReactNode;
   logo: string;
+  fixedSize: boolean;
+  size: { width: number; height: number };
 };
 
 const Window = ({
@@ -33,18 +35,15 @@ const Window = ({
   focused,
   children,
   logo,
+  fixedSize,
+  size,
 }: WindowProps) => {
   const [position, setPosition] = useState({ x: left, y: top });
   const windowRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
   return (
-    <CSSTransition
-      nodeRef={windowRef}
-      in={!minimized}
-      timeout={200}
-      classNames={'window'}
-    >
+    <CSSTransition in={!minimized} timeout={200} classNames={'window'}>
       <div
         className="window"
         ref={windowRef}
@@ -53,8 +52,8 @@ const Window = ({
         }}
         style={{
           backgroundColor: 'whitesmoke',
-          height: fullScreen ? '100%' : `650px`,
-          width: fullScreen ? '100%' : `650px`,
+          height: fullScreen ? '100%' : `${size.height}px`,
+          width: fullScreen ? '100%' : `${size.width}px`,
           position: 'absolute',
           zIndex: zIndex,
           top: fullScreen ? 0 : position.y,
@@ -62,13 +61,14 @@ const Window = ({
           borderRadius: '5px 5px 3px 3px',
           overflow: 'hidden',
           display: minimized ? 'none' : 'initial',
-          minHeight: '650px',
-          minWidth: '650px',
+          minHeight: `${size.height}px`,
+          minWidth: `${size.width}px`,
           transition: '',
-          resize: !fullScreen ? 'both' : 'none',
+          resize: !fullScreen && !fixedSize ? 'both' : 'none',
         }}
       >
         <WindowBar
+          fixedSize={fixedSize}
           fullScreen={fullScreen}
           position={position}
           setPosition={setPosition}

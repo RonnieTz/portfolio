@@ -10,6 +10,7 @@ import PortfolioProject from './components/projects/portfolio/PortfolioProject';
 import Minesweeper from '../XP_programs/minesweeper/Minesweeper';
 import Shortcut from './components/shortcuts/Shortcut';
 import Project from './components/projects/Project';
+import { useEffect } from 'react';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const DesktopMainArea = () => {
       {windows.map((window, i) => (
         <Window
           key={window.id}
+          fixedSize={window.fixedSize}
           fullScreen={window.fullScreen}
           minimized={window.minimized}
           link={window.liveLink!}
@@ -51,6 +53,7 @@ const DesktopMainArea = () => {
           id={window.id}
           focused={window.focused}
           logo={window.logo}
+          size={window.size}
         >
           {window.type === 'project' ? (
             <Project key={window.id}>
@@ -81,6 +84,14 @@ const DesktopMainArea = () => {
             </Project>
           ) : window.type === 'folder' ? (
             <FolderWindow title={window.title} />
+          ) : window.type === 'program' ? (
+            window.title === 'My Profile' ? (
+              <Profile />
+            ) : window.title === 'Minesweeper' ? (
+              <Minesweeper />
+            ) : (
+              <></>
+            )
           ) : (
             <></>
           )}
@@ -99,6 +110,7 @@ const DesktopMainArea = () => {
           gitHubLink={item.gitHubLink}
           liveLink={item.liveLink}
           location={item.location!}
+          size={item.size!}
         />
       ))}
     </div>

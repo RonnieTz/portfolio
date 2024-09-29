@@ -124,3 +124,19 @@ main {
     scale: 1;
   }
 }
+
+.exit {
+  animation: exit 0.2s forwards;
+}
+
+@keyframes exit {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+
+  100% {
+    opacity: 0;
+    scale: 0.9;
+  }
+}

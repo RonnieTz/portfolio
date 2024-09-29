@@ -5,11 +5,6 @@ import Image from 'next/image';
 const Logo = () => {
   return (
     <div className="load-screen-logo">
-      {/* <img
-        style={{ width: '40%', position: 'absolute', right: '17%', top: '15%' }}
-        src={logo.src}
-        alt="logo"
-      /> */}
       <Image
         priority={true}
         style={{

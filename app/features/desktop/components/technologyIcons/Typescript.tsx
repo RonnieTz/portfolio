@@ -13,7 +13,6 @@ const Typescript = () => {
         marginTop: '10px',
       }}
     >
-      {/* <img height={'60%'} src={typescript.src} alt="" /> */}
       <Image
         priority={true}
         style={{ height: '60%', width: 'auto' }}

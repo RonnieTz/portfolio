@@ -54,16 +54,6 @@ const Desktop = () => {
           position={'relative'}
           overflow={'hidden'}
         >
-          {/* <img
-            src={image.src}
-            alt="backgroundImage"
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          /> */}
           <Image
             priority={true}
             src={image}

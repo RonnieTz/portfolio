@@ -1,10 +1,6 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  setWindowPosition,
-  setWindowFullScreen,
-  // focusWindow,
-} from '@/app/redux/appSlice';
+import { setWindowPosition, setWindowFullScreen } from '@/app/redux/appSlice';
 import WindowBarBackground from './WindowBarBackground';
 import WindowBarButtons from './WindowBarButtons';
 import WindowTitle from './WindowTitle';
@@ -22,6 +18,7 @@ type WindowBarProps = {
   focused: boolean;
   title: string;
   logo: string;
+  fixedSize: boolean;
 };
 
 const WindowBar = ({
@@ -32,6 +29,7 @@ const WindowBar = ({
   focused,
   title,
   logo,
+  fixedSize,
 }: WindowBarProps) => {
   const ref = useRef({ x: 0, y: 0 });
   const dispatch = useDispatch();
@@ -41,6 +39,7 @@ const WindowBar = ({
       draggable={!fullScreen}
       onClick={() => {}}
       onDoubleClick={() => {
+        if (fixedSize) return;
         dispatch(setWindowFullScreen({ id, fullscreen: !fullScreen }));
       }}
       onDragStart={(e) => {
@@ -48,7 +47,6 @@ const WindowBar = ({
         const y = e.clientY;
         e.dataTransfer.setDragImage(new Image(), 0, 0);
         ref.current = { x: x - position.x, y: y - position.y };
-        // dispatch(focusWindow({ id, focus: true }));
       }}
       onDragEnd={(e) => {
         const x = e.clientX;
@@ -77,7 +75,12 @@ const WindowBar = ({
     >
       <WindowBarBackground focused={focused} />
       <WindowTitle logo={logo} title={title} />
-      <WindowBarButtons focused={focused} id={id} fullScreen={fullScreen} />
+      <WindowBarButtons
+        fixedSize={fixedSize}
+        focused={focused}
+        id={id}
+        fullScreen={fullScreen}
+      />
     </div>
   );
 };
