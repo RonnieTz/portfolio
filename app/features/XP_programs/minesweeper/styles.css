@@ -208,3 +208,97 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.ms-scores {
+  position: absolute;
+  top: 45px;
+  left: 5px;
+  height: 430px;
+  width: 300px;
+  background-color: rgb(232, 232, 216);
+  border: 2px solid rgb(0, 84, 224);
+  box-shadow: 0 0 0px 1px rgba(0, 0, 255, 0.5);
+  border-radius: 2px 2px 0 0;
+  box-sizing: border-box;
+}
+
+.ms-scores-exit {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  cursor: pointer;
+  z-index: 100;
+  transition: all 0.1s;
+}
+
+.ms-scores-exit:hover {
+  filter: brightness(1.2);
+}
+
+.ms-scores-table {
+  width: 80%;
+  height: 27%;
+  margin: 10px auto;
+  box-sizing: border-box;
+}
+
+.ms-new-score {
+  width: 250px;
+  height: 220px;
+  position: absolute;
+  top: 110px;
+  left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 40px 20px;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: rgb(247, 250, 246) rgb(187, 187, 171) rgb(187, 187, 171)
+    rgb(247, 250, 246);
+  background-color: rgb(232, 232, 216);
+  box-shadow: 1.5px 1.5px 1px 0px rgb(140, 138, 124);
+}
+.ms-new-score div {
+  color: rgb(24, 24, 24);
+  text-shadow: 0.5px 0.5px 0.5px rgb(160, 160, 150),
+    -0.5px -0.5px 0.5px rgb(160, 160, 150);
+}
+
+.ms-new-score input {
+  width: 80%;
+  height: 30px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  border: 1.5px solid rgb(133, 166, 190);
+  border-radius: 2px;
+  box-sizing: border-box;
+  box-shadow: 0 0 2px 0px rgb(160, 160, 160) inset;
+  padding: 3px 7px;
+  font-size: 16px;
+}
+
+.ms-new-score button {
+  width: 90px;
+  height: 40px;
+  border: 1.5px solid rgb(75, 118, 173);
+  border-radius: 5px;
+  background-color: rgb(240, 244, 240);
+  box-shadow: 0 0 2px 0px rgb(116, 146, 168) inset;
+  cursor: pointer;
+  transition: all 0.1s;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  color: rgb(24, 24, 24);
+  text-shadow: 0.5px 0.5px 0.5px rgb(160, 160, 150),
+    -0.5px -0.5px 0.5px rgb(160, 160, 150);
+  transition: all 0.1s;
+}
+.ms-new-score button:active {
+  filter: brightness(0.9);
+}

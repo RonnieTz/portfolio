@@ -1,18 +1,15 @@
 import { Schema, model, models } from 'mongoose';
 
-export const userSchema = new Schema({
-  easy: {
-    username: String,
-    score: Number,
-  },
-  medium: {
-    username: String,
-    score: Number,
-  },
-  hard: {
-    username: String,
-    score: Number,
-  },
+export const scoreSchema = new Schema({
+  app: String,
+  scores: [
+    {
+      level: String,
+      first: { name: String, time: Number },
+      second: { name: String, time: Number },
+      third: { name: String, time: Number },
+    },
+  ],
 });
 
-export const User = models.User || model('User', userSchema);
+export const Score = models.Score || model('Score', scoreSchema);

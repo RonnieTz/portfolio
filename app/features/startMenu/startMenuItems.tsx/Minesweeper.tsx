@@ -1,12 +1,15 @@
 import logo from '@/public/Minesweeper.png';
 import './styles.css';
 import { Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/app/redux/store';
 import { newWindow } from '@/app/redux/appSlice';
 import Image from 'next/image';
 
 const Minesweeper = () => {
   const dispatch = useDispatch();
+  const { mineswweeper } = useSelector((state: RootState) => state.app);
+  const { mode } = mineswweeper;
   return (
     <div
       onClick={() => {
@@ -19,7 +22,24 @@ const Minesweeper = () => {
             type: 'program',
             items: [],
             fixedSize: true,
-            size: { width: 400, height: 400 * 1.3 },
+            size: {
+              width:
+                mode === 'begginer'
+                  ? 400
+                  : mode === 'intermediate'
+                  ? 500
+                  : mode === 'expert'
+                  ? 965
+                  : 400,
+              height:
+                mode === 'begginer'
+                  ? 400 * 1.3
+                  : mode === 'intermediate'
+                  ? 500 * 1.3
+                  : mode === 'expert'
+                  ? 500 * 1.3
+                  : 400 * 1.3,
+            },
           })
         );
       }}

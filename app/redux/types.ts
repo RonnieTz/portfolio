@@ -48,5 +48,15 @@ export type InitialState = {
     timer: number;
     gameover: boolean;
     mode: 'begginer' | 'intermediate' | 'expert';
+    highScores: {
+      show: boolean;
+      scores: {
+        level: string;
+        scores: {
+          name: string;
+          time: number;
+        }[];
+      }[];
+    };
   };
 };

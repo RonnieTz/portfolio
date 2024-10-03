@@ -57,12 +57,7 @@ const GameBoardContainer = () => {
                 if (cell.value === 'bomb') {
                   dispatch(clickBomb({ x: i, y: j }));
                 }
-                if (
-                  cell.value === 0 &&
-                  !cell.flag &&
-                  !cell.clicked &&
-                  !mineswweeper.firstClick
-                ) {
+                if (cell.value === 0 && !cell.flag && !cell.clicked) {
                   dispatch(setSuccessClick(true));
                   setTimeout(() => {
                     dispatch(setSuccessClick(false));

@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
-
+import { fetchHighScores } from './reducers/fetchHighScores';
 import { set_WindowPosition } from './reducers/setWindowPosition';
 import { set_WindowFullScreen } from './reducers/setWindowFullScreen';
 import { Folder } from './types';
+import type { ScoreType } from '../utilities/database/getScores';
 
 const appSlice = createSlice({
   name: 'app',
@@ -138,8 +139,6 @@ const appSlice = createSlice({
       const window = state.windows.find(
         (window) => window.title === action.payload.id
       );
-      console.log(window);
-      console.log(action.payload.size);
 
       if (window) {
         window.size = action.payload.size;
@@ -261,8 +260,8 @@ const appSlice = createSlice({
           });
         })
       ) {
-        console.log('game over');
         state.mineswweeper.gameover = true;
+        console.log('gameover');
       }
     },
     ms_flagCell: (state, action: PayloadAction<{ i: number; j: number }>) => {
@@ -280,7 +279,10 @@ const appSlice = createSlice({
           Math.random() * state.mineswweeper.board[0].length
         );
 
-        if (randomRow === i && randomCol === j) {
+        if (
+          (randomRow === i || randomRow === i + 1 || randomRow === i - 1) &&
+          (randomCol === j || randomCol === j + 1 || randomCol === j - 1)
+        ) {
           continue;
         }
 
@@ -436,6 +438,28 @@ const appSlice = createSlice({
           break;
       }
     },
+    showHighScores: (state, action: PayloadAction<boolean>) => {
+      state.mineswweeper.highScores.show = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      fetchHighScores.fulfilled,
+      (state, action: PayloadAction<ScoreType>) => {
+        const scores = action.payload.scores.map((score) => {
+          return {
+            level: score.level,
+            scores: [
+              { name: score.first.name, time: score.first.time },
+              { name: score.second.name, time: score.second.time },
+              { name: score.third.name, time: score.third.time },
+            ],
+          };
+        });
+        state.mineswweeper.highScores.scores = scores;
+        console.log(scores);
+      }
+    );
   },
 });
 
@@ -468,5 +492,6 @@ export const {
   setSuccessClick,
   setMsMode,
   resizeWindow,
+  showHighScores,
 } = appSlice.actions;
 export default appSlice.reducer;

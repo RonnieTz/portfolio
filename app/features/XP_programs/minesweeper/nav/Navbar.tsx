@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import Tooltip from './Tooltip';
+import Scores from './Scores';
 
 const Navbar = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -19,22 +20,7 @@ const Navbar = () => {
         onClick={() => {
           setIsHovered(!isHovered);
         }}
-        // onMouseEnter={(e) => {
-        //   e.stopPropagation();
-        //   timestamp.current = Date.now();
-        //   setMouseInTimer(
-        //     setTimeout(() => {
-        //       setIsHovered(true);
-        //     }, 200)
-        //   );
-        // }}
         onMouseOut={(e) => {
-          // e.stopPropagation();
-          // setMouseOutTimer(
-          //   setTimeout(() => {
-          //     setIsHovered(false);
-          //   }, 300)
-          // );
           if (Date.now() - timestamp.current < 200) {
             clearTimeout(mouseInTimer!);
           }

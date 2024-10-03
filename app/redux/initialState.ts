@@ -1,8 +1,5 @@
 import { InitialState } from './types';
-import project from '@/public/project.png';
-import profile from '@/public/profile.png';
 import folder from '@/public/Folder Closed.png';
-import minesweeper from '@/public/Minesweeper.png';
 import { chess, quiz, portfolio } from './lib';
 
 export const initialState: InitialState = {
@@ -75,5 +72,34 @@ export const initialState: InitialState = {
     gameover: false,
     successClick: false,
     mode: 'begginer',
+    highScores: {
+      show: false,
+      scores: [
+        {
+          level: 'begginer',
+          scores: [
+            { name: 'Anonymous', time: 999 },
+            { name: 'Anonymous', time: 999 },
+            { name: 'Anonymous', time: 999 },
+          ],
+        },
+        {
+          level: 'intermediate',
+          scores: [
+            { name: 'Anonymous', time: 999 },
+            { name: 'Anonymous', time: 999 },
+            { name: 'Anonymous', time: 999 },
+          ],
+        },
+        {
+          level: 'expert',
+          scores: [
+            { name: 'Anonymous', time: 999 },
+            { name: 'Anonymous', time: 999 },
+            { name: 'Anonymous', time: 999 },
+          ],
+        },
+      ],
+    },
   },
 };

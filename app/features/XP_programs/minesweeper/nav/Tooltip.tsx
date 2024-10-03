@@ -8,6 +8,7 @@ import {
   ms_reset,
   resizeWindow,
   closeWindow,
+  showHighScores,
 } from '@/app/redux/appSlice';
 
 type Props = {
@@ -17,15 +18,11 @@ type Props = {
 };
 
 const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
-  const [selected, setSelected] = useState<
-    'begginer' | 'intermediate' | 'expert'
-  >('begginer');
   const dispatch = useDispatch();
   const { mineswweeper, windows } = useSelector(
     (state: RootState) => state.app
   );
-  const { mode } = mineswweeper;
-  console.log(windows);
+  const { mode, highScores } = mineswweeper;
 
   return (
     <div
@@ -55,8 +52,10 @@ const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
       <TooltipDivider />
       <p
         onClick={() => {
+          if (mode === 'begginer') return;
           dispatch(setMsMode('begginer'));
           setIsHovered(false);
+          dispatch(ms_reset());
           dispatch(
             resizeWindow({
               size: { width: 400, height: 400 * 1.3 },
@@ -71,8 +70,10 @@ const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
       </p>
       <p
         onClick={() => {
+          if (mode === 'intermediate') return;
           dispatch(setMsMode('intermediate'));
           setIsHovered(false);
+          dispatch(ms_reset());
           dispatch(
             resizeWindow({
               size: { width: 500, height: 500 * 1.3 },
@@ -87,8 +88,10 @@ const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
       </p>
       <p
         onClick={() => {
+          if (mode === 'expert') return;
           dispatch(setMsMode('expert'));
           setIsHovered(false);
+          dispatch(ms_reset());
           dispatch(
             resizeWindow({
               size: { width: 965, height: 965 * 0.67 },
@@ -102,7 +105,15 @@ const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
         Expert
       </p>
       <TooltipDivider />
-      <p className="ms-tooltip-item">Best scores...</p>
+      <p
+        onClick={() => {
+          dispatch(showHighScores(true));
+          setIsHovered(false);
+        }}
+        className="ms-tooltip-item"
+      >
+        Best scores...
+      </p>
       <TooltipDivider />
       <p
         onClick={() => {
