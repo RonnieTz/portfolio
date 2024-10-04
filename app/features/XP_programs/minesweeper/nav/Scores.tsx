@@ -4,14 +4,14 @@ import exit from '@/public/Exit.png';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/redux/store';
-import { showHighScores } from '@/app/redux/appSlice';
+import { showHighScores } from '@/app/redux/minesweeperSlice';
 import { getScores } from '@/app/utilities/database/getScores';
 import { useEffect } from 'react';
 import { fetchHighScores } from '@/app/redux/reducers/fetchHighScores';
 
 const Scores = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { mineswweeper } = useSelector((state: RootState) => state.app);
+  const mineswweeper = useSelector((state: RootState) => state.minesweeper);
   const { highScores } = mineswweeper;
   const easy = highScores.scores.find((score) => score.level === 'begginer');
   const intermediate = highScores.scores.find(
@@ -80,7 +80,7 @@ const Scores = () => {
         <thead>
           <tr>
             <th align="left" colSpan={3}>
-              InterMediate
+              Intermediate
             </th>
           </tr>
         </thead>

@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/redux/store';
-import { ms_reset, showHighScores } from '@/app/redux/appSlice';
+import { ms_reset, showHighScores } from '@/app/redux/minesweeperSlice';
 import { getScores, addNewScore } from '@/app/utilities/database/getScores';
 import { useState } from 'react';
 
 const AddNewScore = () => {
   const [name, setName] = useState('');
   const dispatch = useDispatch<AppDispatch>();
-  const { mineswweeper } = useSelector((state: RootState) => state.app);
+  const mineswweeper = useSelector((state: RootState) => state.minesweeper);
   const { highScores, timer, mode } = mineswweeper;
   const { scores } = highScores;
   const currentMode = scores.find((score) => score.level === mode);

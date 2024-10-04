@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import Tooltip from './Tooltip';
-import Scores from './Scores';
 
 const Navbar = () => {
   const [isHovered, setIsHovered] = useState(false);

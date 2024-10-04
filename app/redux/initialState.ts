@@ -57,49 +57,4 @@ export const initialState: InitialState = {
     ],
   },
   folderHistory: { history: ['Desktop'], currentFolder: 0 },
-  mineswweeper: {
-    board: new Array(12)
-      .fill(0)
-      .map(() =>
-        new Array(12)
-          .fill(0)
-          .map(() => ({ clicked: false, value: 0, flag: false }))
-      ),
-    totalBombs: 20,
-    firstClick: true,
-    bombClicked: { clicked: false, x: 0, y: 0 },
-    timer: 0,
-    gameover: false,
-    successClick: false,
-    mode: 'begginer',
-    highScores: {
-      show: false,
-      scores: [
-        {
-          level: 'begginer',
-          scores: [
-            { name: 'Anonymous', time: 999 },
-            { name: 'Anonymous', time: 999 },
-            { name: 'Anonymous', time: 999 },
-          ],
-        },
-        {
-          level: 'intermediate',
-          scores: [
-            { name: 'Anonymous', time: 999 },
-            { name: 'Anonymous', time: 999 },
-            { name: 'Anonymous', time: 999 },
-          ],
-        },
-        {
-          level: 'expert',
-          scores: [
-            { name: 'Anonymous', time: 999 },
-            { name: 'Anonymous', time: 999 },
-            { name: 'Anonymous', time: 999 },
-          ],
-        },
-      ],
-    },
-  },
 };

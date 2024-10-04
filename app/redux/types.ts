@@ -39,24 +39,4 @@ export type InitialState = {
     locations: { location: string; items: Folder[] }[];
   };
   folderHistory: { history: string[]; currentFolder: number };
-  mineswweeper: {
-    board: { clicked: boolean; value: number | 'bomb'; flag: boolean }[][];
-    totalBombs: number;
-    firstClick: boolean;
-    bombClicked: { clicked: boolean; x: number; y: number };
-    successClick: boolean;
-    timer: number;
-    gameover: boolean;
-    mode: 'begginer' | 'intermediate' | 'expert';
-    highScores: {
-      show: boolean;
-      scores: {
-        level: string;
-        scores: {
-          name: string;
-          time: number;
-        }[];
-      }[];
-    };
-  };
 };

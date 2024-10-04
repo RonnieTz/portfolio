@@ -3,13 +3,12 @@ import TooltipDivider from './TooltipDivider';
 import Tick from './Tick';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
+import { resizeWindow, closeWindow } from '@/app/redux/appSlice';
 import {
   setMsMode,
   ms_reset,
-  resizeWindow,
-  closeWindow,
   showHighScores,
-} from '@/app/redux/appSlice';
+} from '@/app/redux/minesweeperSlice';
 
 type Props = {
   setIsHovered: Dispatch<SetStateAction<boolean>>;
@@ -19,9 +18,10 @@ type Props = {
 
 const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
   const dispatch = useDispatch();
-  const { mineswweeper, windows } = useSelector(
-    (state: RootState) => state.app
-  );
+  const { windows } = useSelector((state: RootState) => state.app);
+
+  const mineswweeper = useSelector((state: RootState) => state.minesweeper);
+
   const { mode, highScores } = mineswweeper;
 
   return (

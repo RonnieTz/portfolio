@@ -10,8 +10,8 @@ import { useEffect } from 'react';
 
 const Minesweeper = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { mineswweeper } = useSelector((state: RootState) => state.app);
-  const { highScores, gameover } = mineswweeper;
+  const minesweeper = useSelector((state: RootState) => state.minesweeper);
+  const { highScores, gameover } = minesweeper;
   useEffect(() => {
     dispatch(fetchHighScores());
   }, [dispatch]);

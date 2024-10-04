@@ -9,11 +9,11 @@ import {
   ms_assignBomb,
   clickBomb,
   setSuccessClick,
-} from '@/app/redux/appSlice';
+} from '@/app/redux/minesweeperSlice';
 import dynamic from 'next/dynamic';
 
 const GameBoardContainer = () => {
-  const { mineswweeper } = useSelector((state: RootState) => state.app);
+  const mineswweeper = useSelector((state: RootState) => state.minesweeper);
   const dispatch = useDispatch();
 
   return (

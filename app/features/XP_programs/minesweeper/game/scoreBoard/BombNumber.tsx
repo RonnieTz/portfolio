@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 
 const BombNumber = () => {
-  const { mineswweeper } = useSelector((state: RootState) => state.app);
+  const mineswweeper = useSelector((state: RootState) => state.minesweeper);
   const { totalBombs } = mineswweeper;
   const totalFlags = mineswweeper.board.reduce(
     (acc, row) =>

@@ -8,8 +8,8 @@ import Image from 'next/image';
 
 const Minesweeper = () => {
   const dispatch = useDispatch();
-  const { mineswweeper } = useSelector((state: RootState) => state.app);
-  const { mode } = mineswweeper;
+  const minesweeper = useSelector((state: RootState) => state.minesweeper);
+  const { mode } = minesweeper;
   return (
     <div
       onClick={() => {

@@ -7,11 +7,11 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { ms_reset } from '@/app/redux/appSlice';
+import { ms_reset } from '@/app/redux/minesweeperSlice';
 
 const Button = () => {
   const [isClicked, setIsClicked] = useState(false);
-  const { mineswweeper } = useSelector((state: RootState) => state.app);
+  const mineswweeper = useSelector((state: RootState) => state.minesweeper);
   const { bombClicked } = mineswweeper;
   const dispatch = useDispatch();
   const emoji = () => {
