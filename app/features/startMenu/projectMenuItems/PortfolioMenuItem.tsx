@@ -33,6 +33,7 @@ const PortfolioMenuItem = ({ setOpenMenu }: Props) => {
               items: [],
               fixedSize: false,
               size: { width: 650, height: 650 },
+              content: { id: 'Portfolio' },
             })
           );
         }, 200);

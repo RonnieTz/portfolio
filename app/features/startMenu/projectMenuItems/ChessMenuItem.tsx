@@ -33,6 +33,7 @@ const ChessMenuItem = ({ setOpenMenu }: Props) => {
               items: [],
               fixedSize: false,
               size: { width: 650, height: 650 },
+              content: { id: 'Chess Game' },
             })
           );
         }, 200);

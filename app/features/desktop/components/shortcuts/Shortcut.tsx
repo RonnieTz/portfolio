@@ -71,6 +71,8 @@ const Shortcut = ({
     codesadnboxLink,
     type,
     items,
+    size,
+    content,
   ]);
 
   useEffect(() => {

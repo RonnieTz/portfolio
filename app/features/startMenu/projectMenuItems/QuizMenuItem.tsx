@@ -34,6 +34,7 @@ const QuizMenuItem = ({ setOpenMenu }: Props) => {
               items: [],
               fixedSize: false,
               size: { width: 650, height: 650 },
+              content: { id: 'Quiz Game' },
             })
           );
         }, 200);
