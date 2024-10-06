@@ -40,6 +40,7 @@ const Minesweeper = () => {
                   ? 500 * 1.3
                   : 400 * 1.3,
             },
+            content: { id: 'Minesweeper' },
           })
         );
       }}

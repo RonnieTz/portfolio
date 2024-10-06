@@ -20,6 +20,7 @@ const MyProfile = () => {
             items: [],
             fixedSize: true,
             size: { width: 650, height: 650 },
+            content: { id: 'My Profile' },
           })
         );
       }}
