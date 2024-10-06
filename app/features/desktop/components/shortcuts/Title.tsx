@@ -30,6 +30,7 @@ const Title = ({
         border: selected
           ? '1.2px dotted rgb(175, 137, 68)'
           : '1.2px solid transparent',
+        textAlign: 'center',
       }}
     >
       {title}

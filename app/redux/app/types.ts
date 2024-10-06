@@ -8,6 +8,7 @@ export type Folder = {
   codesandboxLink?: string;
   gitHubLink?: string;
   location?: string;
+  content?: { id: string };
   size: { width: number; height: number };
 };
 
@@ -31,6 +32,9 @@ export type InitialState = {
     items: Folder[];
     fixedSize: boolean;
     size: { width: number; height: number };
+    subWindow: string;
+    content: { id: string };
+    parent: string;
   }[];
   projects: Folder[];
   turnOff: boolean;

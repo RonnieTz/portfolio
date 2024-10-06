@@ -1,5 +1,5 @@
 import icon from '@/public/Minimize.png';
-import { setMinimize, setFocus } from '@/app/redux/appSlice';
+import { setMinimize, setFocus } from '@/app/redux/app/appSlice';
 import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { useRef } from 'react';

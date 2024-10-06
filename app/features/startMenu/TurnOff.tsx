@@ -1,7 +1,7 @@
 import './styles.css';
 import img from '@/public/Power.png';
 import { useDispatch } from 'react-redux';
-import { setTurnOff } from '@/app/redux/appSlice';
+import { setTurnOff } from '@/app/redux/app/appSlice';
 import Image from 'next/image';
 
 const TurnOff = () => {

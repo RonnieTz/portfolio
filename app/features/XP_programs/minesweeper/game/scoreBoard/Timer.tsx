@@ -2,7 +2,7 @@ import Number from './Number';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import { useEffect } from 'react';
-import { setTimer } from '@/app/redux/minesweeperSlice';
+import { setTimer } from '@/app/redux/minesweeper/minesweeperSlice';
 
 const Timer = () => {
   const mineswweeper = useSelector((state: RootState) => state.minesweeper);

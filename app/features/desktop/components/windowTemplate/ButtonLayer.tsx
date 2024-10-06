@@ -7,7 +7,7 @@ import {
   setMinimize,
   closeWindow,
   setFocus,
-} from '@/app/redux/appSlice';
+} from '@/app/redux/app/appSlice';
 
 type ButtonLayerProps = {
   right: string;
@@ -30,7 +30,6 @@ const ButtonLayer = ({ right, fullScreen, id, name }: ButtonLayerProps) => {
         if (name === 'minimize') {
           dispatch(setMinimize({ id, minimize: true }));
           dispatch(setFocus({ id, focus: false }));
-          console.log(e);
         }
         if (name === 'exit') {
           dispatch(closeWindow({ id }));

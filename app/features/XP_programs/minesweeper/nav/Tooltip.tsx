@@ -3,12 +3,16 @@ import TooltipDivider from './TooltipDivider';
 import Tick from './Tick';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { resizeWindow, closeWindow } from '@/app/redux/appSlice';
+import {
+  resizeWindow,
+  closeWindow,
+  newSubWindow,
+} from '@/app/redux/app/appSlice';
 import {
   setMsMode,
   ms_reset,
   showHighScores,
-} from '@/app/redux/minesweeperSlice';
+} from '@/app/redux/minesweeper/minesweeperSlice';
 
 type Props = {
   setIsHovered: Dispatch<SetStateAction<boolean>>;
@@ -106,8 +110,17 @@ const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
       </p>
       <TooltipDivider />
       <p
-        onClick={() => {
-          dispatch(showHighScores(true));
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch(
+            newSubWindow({
+              subWindowName: 'Scores',
+              subWindowSize: { width: 300, height: 400 },
+              windowID: 'Minesweeper',
+              position: { y: e.nativeEvent.clientY, x: e.nativeEvent.clientX },
+              content: { id: '' },
+            })
+          );
           setIsHovered(false);
         }}
         className="ms-tooltip-item"

@@ -3,7 +3,7 @@ import './styles.css';
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { newWindow } from '@/app/redux/appSlice';
+import { newWindow } from '@/app/redux/app/appSlice';
 import Image from 'next/image';
 
 const Minesweeper = () => {

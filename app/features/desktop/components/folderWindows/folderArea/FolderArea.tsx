@@ -1,7 +1,7 @@
 import Shortcut from '../../shortcuts/Shortcut';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { unSelectAllShortcuts } from '@/app/redux/appSlice';
+import { unSelectAllShortcuts } from '@/app/redux/app/appSlice';
 
 const FolderArea = () => {
   const dispatch = useDispatch();
@@ -35,6 +35,7 @@ const FolderArea = () => {
           gitHubLink={item.gitHubLink}
           codesadnboxLink={item.codesandboxLink}
           size={item.size!}
+          content={item.content!}
         />
       ))}
     </div>

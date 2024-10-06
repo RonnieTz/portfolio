@@ -1,7 +1,7 @@
 import Window from './components/windowTemplate/Window';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { setStartOpen, unSelectAllShortcuts } from '@/app/redux/appSlice';
+import { setStartOpen, unSelectAllShortcuts } from '@/app/redux/app/appSlice';
 import ChessProject from './components/projects/chess/ChessProject';
 import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
@@ -10,12 +10,13 @@ import PortfolioProject from './components/projects/portfolio/PortfolioProject';
 import Minesweeper from '../XP_programs/minesweeper/Minesweeper';
 import Shortcut from './components/shortcuts/Shortcut';
 import Project from './components/projects/Project';
-import { useEffect } from 'react';
+import EditorContainer from './components/textEditor/EditorContainer';
+import Scores from '../XP_programs/minesweeper/nav/Scores';
+import FontOptions from './components/textEditor/navbar/FontOptions';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
   const { windows, folders } = useSelector((state: RootState) => state.app);
-
   const desktopItems = folders.locations.find(
     (item) => item.location === 'Desktop'
   )?.items;
@@ -39,7 +40,7 @@ const DesktopMainArea = () => {
         gap: '10px',
       }}
     >
-      {windows.map((window, i) => (
+      {windows.map((window) => (
         <Window
           key={window.id}
           fixedSize={window.fixedSize}
@@ -54,6 +55,7 @@ const DesktopMainArea = () => {
           focused={window.focused}
           logo={window.logo}
           size={window.size}
+          subWindow={window.subWindow}
         >
           {window.type === 'project' ? (
             <Project key={window.id}>
@@ -92,6 +94,16 @@ const DesktopMainArea = () => {
             ) : (
               <></>
             )
+          ) : window.type === 'textFile' ? (
+            <EditorContainer content={window.content!} />
+          ) : window.type === 'subWindow' ? (
+            window.title === 'Scores' ? (
+              <Scores />
+            ) : window.title === 'Font' ? (
+              <FontOptions id={window.parent} />
+            ) : (
+              <></>
+            )
           ) : (
             <></>
           )}
@@ -111,6 +123,7 @@ const DesktopMainArea = () => {
           liveLink={item.liveLink}
           location={item.location!}
           size={item.size!}
+          content={item.content!}
         />
       ))}
     </div>

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setTurnOff } from '@/app/redux/appSlice';
+import { setTurnOff } from '@/app/redux/app/appSlice';
 
 const TurnOffWindow = () => {
   const dispatch = useDispatch();

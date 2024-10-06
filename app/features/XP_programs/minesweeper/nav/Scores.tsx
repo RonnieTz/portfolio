@@ -4,10 +4,9 @@ import exit from '@/public/Exit.png';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/redux/store';
-import { showHighScores } from '@/app/redux/minesweeperSlice';
-import { getScores } from '@/app/utilities/database/getScores';
+import { showHighScores } from '@/app/redux/minesweeper/minesweeperSlice';
 import { useEffect } from 'react';
-import { fetchHighScores } from '@/app/redux/reducers/fetchHighScores';
+import { fetchHighScores } from '@/app/redux/minesweeper/fetchHighScores';
 
 const Scores = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,31 +24,6 @@ const Scores = () => {
 
   return (
     <div className="ms-scores">
-      <Image src={bar} alt="bar" style={{ width: '100%', height: '30px' }} />
-      <Image
-        src={logo}
-        alt="bar"
-        style={{
-          width: '24px',
-          height: '24px',
-          position: 'absolute',
-          zIndex: 1,
-          top: '2px',
-          left: '5px',
-        }}
-      />
-      <span
-        onClick={() => {
-          dispatch(showHighScores(false));
-        }}
-        className="ms-scores-exit"
-      >
-        <Image
-          src={exit}
-          alt="exit"
-          style={{ width: '100%', height: '100%' }}
-        />
-      </span>
       <table className="ms-scores-table">
         <thead>
           <tr>

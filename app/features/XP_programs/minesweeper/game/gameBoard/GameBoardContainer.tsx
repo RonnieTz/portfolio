@@ -9,12 +9,14 @@ import {
   ms_assignBomb,
   clickBomb,
   setSuccessClick,
-} from '@/app/redux/minesweeperSlice';
+} from '@/app/redux/minesweeper/minesweeperSlice';
 import dynamic from 'next/dynamic';
 
 const GameBoardContainer = () => {
   const mineswweeper = useSelector((state: RootState) => state.minesweeper);
+  const { windows } = useSelector((state: RootState) => state.app);
   const dispatch = useDispatch();
+  const window = windows.find((window) => window.title === 'Minesweeper');
 
   return (
     <div
@@ -44,7 +46,8 @@ const GameBoardContainer = () => {
                   cell.flag ||
                   cell.clicked ||
                   mineswweeper.bombClicked.clicked ||
-                  mineswweeper.gameover
+                  mineswweeper.gameover ||
+                  window?.subWindow
                 ) {
                   return;
                 }
@@ -69,7 +72,8 @@ const GameBoardContainer = () => {
                 if (
                   cell.clicked ||
                   mineswweeper.bombClicked.clicked ||
-                  mineswweeper.gameover
+                  mineswweeper.gameover ||
+                  window?.subWindow
                 )
                   return;
                 e.stopPropagation();

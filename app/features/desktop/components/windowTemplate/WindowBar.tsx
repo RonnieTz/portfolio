@@ -1,6 +1,9 @@
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { setWindowPosition, setWindowFullScreen } from '@/app/redux/appSlice';
+import {
+  setWindowPosition,
+  setWindowFullScreen,
+} from '@/app/redux/app/appSlice';
 import WindowBarBackground from './WindowBarBackground';
 import WindowBarButtons from './WindowBarButtons';
 import WindowTitle from './WindowTitle';
@@ -19,6 +22,7 @@ type WindowBarProps = {
   title: string;
   logo: string;
   fixedSize: boolean;
+  subWindow: string;
 };
 
 const WindowBar = ({
@@ -30,6 +34,7 @@ const WindowBar = ({
   title,
   logo,
   fixedSize,
+  subWindow,
 }: WindowBarProps) => {
   const ref = useRef({ x: 0, y: 0 });
   const dispatch = useDispatch();
@@ -80,6 +85,7 @@ const WindowBar = ({
         focused={focused}
         id={id}
         fullScreen={fullScreen}
+        subWindow={subWindow}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { setStartOpen, newWindow } from '@/app/redux/appSlice';
+import { setStartOpen, newWindow } from '@/app/redux/app/appSlice';
 import logo from '@/public/portfolio.svg';
 import { Typography } from '@mui/material';
 import Image from 'next/image';

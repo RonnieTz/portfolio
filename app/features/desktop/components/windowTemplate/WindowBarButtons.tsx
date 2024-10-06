@@ -9,6 +9,7 @@ type WindowBarButtonsProps = {
   fullScreen: boolean;
   focused: boolean;
   fixedSize: boolean;
+  subWindow: string;
 };
 
 const WindowBarButtons = ({
@@ -16,6 +17,7 @@ const WindowBarButtons = ({
   fullScreen,
   focused,
   fixedSize,
+  subWindow,
 }: WindowBarButtonsProps) => {
   return (
     <div className="button-container">
@@ -26,7 +28,7 @@ const WindowBarButtons = ({
         fullScreen={fullScreen}
         id={id}
       />
-      <ExitButton focused={focused} id={id} />
+      <ExitButton focused={focused} subWindow={subWindow} id={id} />
     </div>
   );
 };

@@ -7,11 +7,13 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { ms_reset } from '@/app/redux/minesweeperSlice';
+import { ms_reset } from '@/app/redux/minesweeper/minesweeperSlice';
 
 const Button = () => {
   const [isClicked, setIsClicked] = useState(false);
   const mineswweeper = useSelector((state: RootState) => state.minesweeper);
+  const { windows } = useSelector((state: RootState) => state.app);
+  const window = windows.find((window) => window.title === 'Minesweeper');
   const { bombClicked } = mineswweeper;
   const dispatch = useDispatch();
   const emoji = () => {
@@ -29,6 +31,7 @@ const Button = () => {
       }}
       onMouseUp={async () => {
         setIsClicked(false);
+        if (window?.subWindow) return;
         dispatch(ms_reset());
       }}
       className="ms-button"

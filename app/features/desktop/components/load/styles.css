@@ -6,6 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  animation: load 1s forwards;
 }
 
 .load-screen-logo {
@@ -105,4 +107,13 @@
     rgb(40, 56, 192) 90%
   );
   left: 67%;
+}
+
+@keyframes load {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

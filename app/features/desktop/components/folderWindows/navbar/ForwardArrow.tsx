@@ -4,7 +4,7 @@ import VerticalDivider from './VerticalDivider';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import { useState } from 'react';
-import { navigateFolderForward } from '@/app/redux/appSlice';
+import { navigateFolderForward } from '@/app/redux/app/appSlice';
 import Image from 'next/image';
 
 const ForwardArrow = () => {

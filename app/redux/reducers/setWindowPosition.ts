@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { InitialState } from '../types';
+import { InitialState } from '../app/types';
 
 export const set_WindowPosition = (
   state: InitialState,

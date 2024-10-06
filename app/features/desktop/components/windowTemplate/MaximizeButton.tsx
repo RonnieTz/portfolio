@@ -3,7 +3,7 @@ import restore from '@/public/Restore.png';
 import Image from 'next/image';
 
 import { useDispatch } from 'react-redux';
-import { setWindowFullScreen } from '@/app/redux/appSlice';
+import { setWindowFullScreen } from '@/app/redux/app/appSlice';
 
 type Props = {
   fullScreen: boolean;

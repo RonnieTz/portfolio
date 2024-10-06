@@ -2,7 +2,7 @@ import backArrow from '@/public/arrow-back.svg';
 import arrow from '@/public/triangle-down.svg';
 import VerticalDivider from './VerticalDivider';
 import { useSelector, useDispatch } from 'react-redux';
-import { navigateFolderBack } from '@/app/redux/appSlice';
+import { navigateFolderBack } from '@/app/redux/app/appSlice';
 import { RootState } from '@/app/redux/store';
 import { useState } from 'react';
 import Image from 'next/image';

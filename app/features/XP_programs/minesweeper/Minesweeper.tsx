@@ -5,12 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/redux/store';
 import './styles.css';
 import AddNewScore from './game/scoreBoard/AddNewScore';
-import { fetchHighScores } from '@/app/redux/reducers/fetchHighScores';
+import { fetchHighScores } from '@/app/redux/minesweeper/fetchHighScores';
 import { useEffect } from 'react';
 
 const Minesweeper = () => {
   const dispatch = useDispatch<AppDispatch>();
   const minesweeper = useSelector((state: RootState) => state.minesweeper);
+
   const { highScores, gameover } = minesweeper;
   useEffect(() => {
     dispatch(fetchHighScores());

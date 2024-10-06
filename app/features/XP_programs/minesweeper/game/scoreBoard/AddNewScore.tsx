@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/redux/store';
-import { ms_reset, showHighScores } from '@/app/redux/minesweeperSlice';
+import {
+  ms_reset,
+  showHighScores,
+} from '@/app/redux/minesweeper/minesweeperSlice';
 import { getScores, addNewScore } from '@/app/utilities/database/getScores';
 import { useState } from 'react';
 
@@ -25,7 +28,7 @@ const AddNewScore = () => {
         {position <= 3 &&
           `You have the ${
             position === 2 ? `2nd ` : position === 3 ? `3rd ` : ''
-          } fastest time for the begginer level.`}
+          } fastest time for the ${mode} level.`}
         {position > 3 && `You did not make the top 3 fastest times.`}
       </div>
       {position <= 3 && (

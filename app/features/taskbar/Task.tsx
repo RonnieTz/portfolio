@@ -7,7 +7,7 @@ import {
   setMinimize,
   setWindowFullScreen,
   setFocus,
-} from '@/app/redux/appSlice';
+} from '@/app/redux/app/appSlice';
 import Image from 'next/image';
 
 type TaskProps = {
@@ -16,9 +16,17 @@ type TaskProps = {
   id: string;
   logo: string;
   fixedSize: boolean;
+  subWindow: string;
 };
 
-const Task = ({ focused, id, title, logo, fixedSize }: TaskProps) => {
+const Task = ({
+  focused,
+  id,
+  title,
+  logo,
+  fixedSize,
+  subWindow,
+}: TaskProps) => {
   const dispatch = useDispatch();
   return (
     <div
@@ -32,8 +40,15 @@ const Task = ({ focused, id, title, logo, fixedSize }: TaskProps) => {
           dispatch(setFocus({ id, focus: false }));
           return;
         }
-        dispatch(focusWindow({ id, focus: true }));
-        dispatch(setMinimize({ id, minimize: false }));
+        if (subWindow) {
+          dispatch(focusWindow({ id: subWindow, focus: true }));
+          dispatch(setMinimize({ id: subWindow, minimize: false }));
+          dispatch(setMinimize({ id, minimize: false }));
+          return;
+        } else {
+          dispatch(setMinimize({ id, minimize: false }));
+          dispatch(focusWindow({ id, focus: true }));
+        }
       }}
       className="task"
       style={{
@@ -51,8 +66,10 @@ const Task = ({ focused, id, title, logo, fixedSize }: TaskProps) => {
           : '0 0 1px 0px black, 0 0 7px 0px rgba(90, 190, 255, 255) inset',
         borderRadius: '5px',
         height: '100%',
-        minWidth: '50px',
-        width: '15%',
+        minWidth: '30px',
+        // width: '15%',
+        flex: '1',
+        maxWidth: 'max-content',
         cursor: 'pointer',
         transition: 'all 0.2s',
         filter: '',

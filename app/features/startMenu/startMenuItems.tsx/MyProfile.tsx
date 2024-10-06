@@ -2,7 +2,7 @@ import profile from '@/public/profile.png';
 import './styles.css';
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { newWindow } from '@/app/redux/appSlice';
+import { newWindow } from '@/app/redux/app/appSlice';
 import Image from 'next/image';
 
 const MyProfile = () => {

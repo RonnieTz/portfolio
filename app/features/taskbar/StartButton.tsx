@@ -3,7 +3,7 @@ import startButtonHover from '@/public/start-button-hover.png';
 import startButtonOpen from '@/public/start-button-open.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { setStartHover, setStartOpen } from '@/app/redux/appSlice';
+import { setStartHover, setStartOpen } from '@/app/redux/app/appSlice';
 import StartTooltip from './StartTooltip';
 import Image from 'next/image';
 

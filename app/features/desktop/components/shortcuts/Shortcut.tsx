@@ -9,9 +9,9 @@ import {
   selectShortcut,
   addWindowToHistory,
   changeToFolder,
-} from '@/app/redux/appSlice';
+} from '@/app/redux/app/appSlice';
 import { useEffect, useCallback } from 'react';
-import { Folder } from '@/app/redux/types';
+import { Folder } from '@/app/redux/app/types';
 
 type Props = {
   logo: string;
@@ -25,6 +25,7 @@ type Props = {
   items: Folder[];
   location: string;
   size: { width: number; height: number };
+  content: { id: string };
 };
 
 const Shortcut = ({
@@ -39,6 +40,7 @@ const Shortcut = ({
   items,
   location,
   size,
+  content,
 }: Props) => {
   const dispatch = useDispatch();
   const { windows } = useSelector((state: RootState) => state.app);
@@ -57,6 +59,7 @@ const Shortcut = ({
         items,
         fixedSize: type === 'program' ? true : false,
         size,
+        content,
       })
     );
   }, [
@@ -95,7 +98,7 @@ const Shortcut = ({
       }}
       onDoubleClick={() => {
         const folderWindowIsOpen = windows.some(
-          (window) => window.type === type
+          (window) => window.type === type && type === 'folder'
         );
         dispatch(unSelectAllShortcuts({ location }));
         if (type === 'folder') {
@@ -115,11 +118,13 @@ const Shortcut = ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start',
+        gap: '10px',
         position: 'relative',
+        paddingTop: '5px',
       }}
     >
-      {type !== 'folder' && <Arrow />}
+      {type !== 'folder' && type !== 'textFile' && <Arrow />}
       <Logo logo={logo} selected={selected} />
       <Title title={title} selected={selected} type={type} color={color} />
     </div>

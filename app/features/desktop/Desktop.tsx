@@ -7,7 +7,7 @@ import DesktopMainArea from './DesktopMainArea';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { setWelcome, setLoaded, newWindow } from '@/app/redux/appSlice';
+import { setWelcome, setLoaded, newWindow } from '@/app/redux/app/appSlice';
 import WelcomeScreen from './components/welcome/WelcomeScreen';
 import TurnOffWindow from '../startMenu/TurnOffWindow';
 import LoadScreen from './components/load/LoadScreen';

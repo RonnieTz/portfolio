@@ -1,5 +1,6 @@
 import { InitialState } from './types';
 import folder from '@/public/Folder Closed.png';
+import text from '@/public/text.png';
 import { chess, quiz, portfolio } from './lib';
 
 export const initialState: InitialState = {
@@ -47,6 +48,28 @@ export const initialState: InitialState = {
             items: [{ ...chess, location: 'Test Folder' }],
             location: 'Projects',
             size: { width: 650, height: 650 },
+          },
+          {
+            name: 'New text document file',
+            selected: false,
+            logo: text as any,
+            type: 'textFile',
+            location: 'Projects',
+            size: { width: 650, height: 650 },
+            content: {
+              id: 'text123',
+            },
+          },
+          {
+            name: 'New text document file 2',
+            selected: false,
+            logo: text as any,
+            type: 'textFile',
+            location: 'Projects',
+            size: { width: 650, height: 650 },
+            content: {
+              id: 'text1234',
+            },
           },
         ],
       },
