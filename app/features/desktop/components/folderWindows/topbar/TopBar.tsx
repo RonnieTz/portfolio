@@ -9,7 +9,13 @@ const TopBar = () => {
     })
   );
   return (
-    <div className="topbar">
+    <div
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+      className="topbar"
+    >
       {titles.map((title, index) => (
         <div
           onMouseEnter={() => {

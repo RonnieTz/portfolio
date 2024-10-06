@@ -10,8 +10,14 @@ import {
   addWindowToHistory,
   changeToFolder,
 } from '@/app/redux/app/appSlice';
+import {
+  showContextMenu,
+  setPosition,
+  setTarget,
+} from '@/app/redux/contextMenu/contextSlice';
 import { useEffect, useCallback } from 'react';
 import { Folder } from '@/app/redux/app/types';
+import './styles.css';
 
 type Props = {
   logo: string;
@@ -96,6 +102,7 @@ const Shortcut = ({
     <div
       onClick={(e) => {
         e.stopPropagation();
+        dispatch(unSelectAllShortcuts({ location }));
         dispatch(selectShortcut({ name: title, location }));
       }}
       onDoubleClick={() => {
@@ -113,6 +120,17 @@ const Shortcut = ({
         setTimeout(() => {
           openWindow();
         }, 200);
+      }}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const x = e.clientX;
+        const y = e.clientY;
+        dispatch(unSelectAllShortcuts({ location }));
+        dispatch(selectShortcut({ name: title, location }));
+        dispatch(setPosition({ x, y }));
+        dispatch(showContextMenu());
+        dispatch(setTarget({ target: { type: 'File', name: title } }));
       }}
       style={{
         width: '80px',

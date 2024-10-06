@@ -5,7 +5,13 @@ import Views from './Views';
 
 const Navbar = () => {
   return (
-    <div className="navbar">
+    <div
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+      className="navbar"
+    >
       <BackArrow />
       <ForwardArrow />
       <VerticalDivider />

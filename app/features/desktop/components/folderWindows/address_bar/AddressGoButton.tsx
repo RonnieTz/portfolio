@@ -3,14 +3,14 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const AddressGoButton = () => {
-  const [className, setClassName] = useState('address-button');
+  const [className, setClassName] = useState('address-button button-disabled');
   return (
     <div
       onMouseEnter={() => {
-        setClassName('address-button hover');
+        setClassName('address-button hover button-disabled');
       }}
       onMouseLeave={() => {
-        setClassName('address-button');
+        setClassName('address-button button-disabled');
       }}
       className={className}
     >

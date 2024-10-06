@@ -2,6 +2,11 @@ import Shortcut from '../../shortcuts/Shortcut';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import { unSelectAllShortcuts } from '@/app/redux/app/appSlice';
+import {
+  showContextMenu,
+  setPosition,
+  setTarget,
+} from '@/app/redux/contextMenu/contextSlice';
 
 const FolderArea = () => {
   const dispatch = useDispatch();
@@ -16,6 +21,23 @@ const FolderArea = () => {
 
   return (
     <div
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(showContextMenu());
+        dispatch(
+          setPosition({
+            x: e.clientX,
+            y: e.clientY,
+            location: currentFolderName,
+          })
+        );
+        dispatch(
+          setTarget({
+            target: { name: history[currentFolder], type: 'Folder' },
+          })
+        );
+      }}
       onClick={() => {
         dispatch(unSelectAllShortcuts({ location: currentFolderName }));
       }}

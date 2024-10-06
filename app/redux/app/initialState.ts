@@ -24,13 +24,9 @@ export const initialState: InitialState = {
             selected: false,
             logo: folder as any,
             type: 'folder',
-            items: [
-              { ...chess, location: 'Desktop' },
-              { ...quiz, location: 'Desktop' },
-              { ...portfolio, location: 'Desktop' },
-            ],
             location: 'Desktop',
             size: { width: 650, height: 650 },
+            id: 'ProjectsDesktop',
           },
         ],
       },
@@ -48,6 +44,7 @@ export const initialState: InitialState = {
             items: [{ ...chess, location: 'Test Folder' }],
             location: 'Projects',
             size: { width: 650, height: 650 },
+            id: 'TestFolderProjects',
           },
           {
             name: 'New text document file',
@@ -59,6 +56,7 @@ export const initialState: InitialState = {
             content: {
               id: 'text123',
             },
+            id: 'text123',
           },
           {
             name: 'New text document file 2',
@@ -70,6 +68,7 @@ export const initialState: InitialState = {
             content: {
               id: 'text1234',
             },
+            id: 'text1234',
           },
         ],
       },
@@ -79,5 +78,5 @@ export const initialState: InitialState = {
       },
     ],
   },
-  folderHistory: { history: ['Desktop'], currentFolder: 0 },
+  folderHistory: { history: [], currentFolder: 0 },
 };

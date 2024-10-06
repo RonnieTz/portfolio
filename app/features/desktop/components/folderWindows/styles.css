@@ -232,9 +232,7 @@
   filter: grayscale(100%);
   opacity: 0.5;
 }
-.button-disabled:hover {
-  cursor: not-allowed;
-}
+
 .views {
   height: 90%;
   width: 60px;
@@ -323,6 +321,8 @@
   align-items: center;
   padding-left: 10px;
   text-shadow: 0px 0px 1px rgb(40, 32, 20);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 14px;
 }
 
 .topbar-title {

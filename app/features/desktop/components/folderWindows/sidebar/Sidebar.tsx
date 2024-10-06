@@ -2,7 +2,13 @@ import SidebarItem from './SidebarItem';
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <div
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+      className="sidebar"
+    >
       <SidebarItem title="System Tasks" />
       <SidebarItem title="Other Places" />
       <SidebarItem title="Details" />

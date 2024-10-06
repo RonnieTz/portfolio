@@ -224,14 +224,11 @@ const appSlice = createSlice({
       state,
       action: PayloadAction<{ location: string }>
     ) => {
-      const folder = state.folders.locations.find(
-        (folder) => folder.location === action.payload.location
-      );
-      if (folder) {
+      state.folders.locations.forEach((folder) => {
         folder.items.forEach((item) => {
           item.selected = false;
         });
-      }
+      });
     },
     setLoaded: (state) => {
       state.loaded = true;

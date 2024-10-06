@@ -2,15 +2,17 @@ import Label from './Label';
 import AddressGoButton from './AddressGoButton';
 import AddressArea from './AddressArea';
 
-type Props = {
-  title: string;
-};
-
-const AddressBar = ({ title }: Props) => {
+const AddressBar = () => {
   return (
-    <div className="address-bar">
+    <div
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+      className="address-bar"
+    >
       <Label />
-      <AddressArea title={title} />
+      <AddressArea />
       <AddressGoButton />
     </div>
   );

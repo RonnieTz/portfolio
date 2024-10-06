@@ -1,0 +1,35 @@
+.context-container {
+  width: 120px;
+  /* height: 200px; */
+  background-color: rgb(248, 252, 248);
+  border: 1.5px solid rgb(177, 176, 162);
+  border-radius: 1px;
+  box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.4);
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  z-index: 1000;
+  padding: 3px;
+}
+
+.context-menu-item {
+  padding: 4px 0 4px 10px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  transition: all 0.1s;
+  color: rgb(10, 10, 10);
+  position: relative;
+}
+
+.context-menu-item:hover {
+  background-color: rgb(48, 104, 192);
+  color: rgb(228, 237, 242);
+}
+
+.context-menu-divider {
+  height: 0;
+  width: 95%;
+  border-top: 1.5px solid rgb(177, 176, 162);
+  margin: 4px auto;
+}

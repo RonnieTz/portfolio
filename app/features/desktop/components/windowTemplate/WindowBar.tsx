@@ -71,6 +71,10 @@ const WindowBar = ({
           y: e.clientY - ref.current.y,
         });
       }}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
       style={{
         height: '40px',
         width: '100%',

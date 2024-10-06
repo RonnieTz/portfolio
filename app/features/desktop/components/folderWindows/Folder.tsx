@@ -4,16 +4,12 @@ import './styles.css';
 import TopBar from './topbar/TopBar';
 import MainArea from './MainArea';
 
-type Props = {
-  title: string;
-};
-
-const Folder = ({ title }: Props) => {
+const Folder = () => {
   return (
     <div className="folder-window-container">
       <TopBar />
       <Navbar />
-      <AddressBar title={title} />
+      <AddressBar />
       <MainArea />
     </div>
   );

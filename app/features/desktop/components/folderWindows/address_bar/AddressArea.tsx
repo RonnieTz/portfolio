@@ -1,10 +1,13 @@
 import logo from '@/public/Folder Closed.png';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/redux/store';
 
-type Props = {
-  title: string;
-};
-const AddressArea = ({ title }: Props) => {
+const AddressArea = () => {
+  const { folderHistory } = useSelector((state: RootState) => state.app);
+  const { history, currentFolder } = folderHistory;
+  const folderName = history.slice(0, currentFolder + 1).join('/');
+
   return (
     <div className="address-area">
       <Image
@@ -13,7 +16,7 @@ const AddressArea = ({ title }: Props) => {
         src={logo}
         alt="logo"
       />
-      <span>{title}</span>
+      <span>{folderName}</span>
     </div>
   );
 };

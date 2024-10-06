@@ -10,6 +10,7 @@ export type Folder = {
   location?: string;
   content?: { id: string };
   size: { width: number; height: number };
+  id: string;
 };
 
 export type InitialState = {

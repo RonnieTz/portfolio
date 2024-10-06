@@ -12,6 +12,7 @@ export const chess = {
   selected: false,
   type: 'project',
   size: { width: 650, height: 650 },
+  id: 'Chess Game',
 };
 
 export const quiz = {
@@ -24,6 +25,7 @@ export const quiz = {
   selected: false,
   type: 'project',
   size: { width: 650, height: 650 },
+  id: 'Quiz Game',
 };
 
 export const portfolio = {
@@ -36,4 +38,5 @@ export const portfolio = {
   selected: false,
   type: 'project',
   size: { width: 650, height: 650 },
+  id: 'Portfolio',
 };

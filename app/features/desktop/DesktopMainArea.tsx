@@ -13,10 +13,18 @@ import Project from './components/projects/Project';
 import EditorContainer from './components/textEditor/EditorContainer';
 import Scores from '../XP_programs/minesweeper/nav/Scores';
 import FontOptions from './components/textEditor/navbar/FontOptions';
+import Container from './components/contextMenu/Container';
+import {
+  hideContextMenu,
+  setPosition,
+  showContextMenu,
+  setTarget,
+} from '@/app/redux/contextMenu/contextSlice';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
   const { windows, folders } = useSelector((state: RootState) => state.app);
+  const { showContext } = useSelector((state: RootState) => state.context);
   const desktopItems = folders.locations.find(
     (item) => item.location === 'Desktop'
   )?.items;
@@ -26,6 +34,13 @@ const DesktopMainArea = () => {
       onClick={() => {
         dispatch(setStartOpen(false));
         dispatch(unSelectAllShortcuts({ location: 'Desktop' }));
+        dispatch(hideContextMenu());
+      }}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        dispatch(showContextMenu());
+        dispatch(setPosition({ x: e.clientX, y: e.clientY }));
+        dispatch(setTarget({ target: { type: 'Folder', name: 'Desktop' } }));
       }}
       style={{
         position: 'absolute',
@@ -85,7 +100,7 @@ const DesktopMainArea = () => {
               )}
             </Project>
           ) : window.type === 'folder' ? (
-            <FolderWindow title={window.title} />
+            <FolderWindow />
           ) : window.type === 'program' ? (
             window.title === 'My Profile' ? (
               <Profile />
@@ -126,6 +141,7 @@ const DesktopMainArea = () => {
           content={item.content!}
         />
       ))}
+      {showContext && <Container />}
     </div>
   );
 };

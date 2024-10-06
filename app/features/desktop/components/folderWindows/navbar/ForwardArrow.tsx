@@ -24,7 +24,7 @@ const ForwardArrow = () => {
         }
       }}
       onMouseEnter={() => {
-        setHover(true);
+        if (currentFolder < history.length - 1) setHover(true);
       }}
       onMouseLeave={() => {
         setHover(false);

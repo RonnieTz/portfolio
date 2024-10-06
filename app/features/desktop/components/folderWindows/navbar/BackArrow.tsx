@@ -13,7 +13,7 @@ const BackArrow = () => {
   const [hover, setHover] = useState(false);
   const { currentFolder, history } = folderHistory;
   const className =
-    currentFolder > 1 && history.length > 1
+    currentFolder > 0 && history.length > 1
       ? 'back-button'
       : 'back-button button-disabled';
   return (
@@ -24,7 +24,7 @@ const BackArrow = () => {
         }
       }}
       onMouseEnter={() => {
-        setHover(true);
+        if (currentFolder > 0 && history.length > 1) setHover(true);
       }}
       onMouseLeave={() => {
         setHover(false);
