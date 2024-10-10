@@ -15,23 +15,23 @@ import {
   setPosition,
   setTarget,
 } from '@/app/redux/contextMenu/contextSlice';
-import { useEffect, useCallback } from 'react';
-import { Folder } from '@/app/redux/app/types';
+import { useEffect } from 'react';
 import './styles.css';
 
 type Props = {
   logo: string;
   title: string;
+  windowID: string;
   selected: boolean;
-  liveLink?: string;
-  gitHubLink?: string;
-  codesadnboxLink?: string;
+  liveLink: string;
+  gitHubLink: string;
+  codesadnboxLink: string;
   type: string;
   color: 'dark' | 'light';
-  items: Folder[];
-  location: string;
+  locationID: string;
+  itemID: string;
   size: { width: number; height: number };
-  content: { id: string };
+  contentID: string;
 };
 
 const Shortcut = ({
@@ -44,42 +44,33 @@ const Shortcut = ({
   type,
   color,
   items,
-  location,
+  locationID,
   size,
-  content,
+  contentID,
+  windowID,
+  itemID,
 }: Props) => {
   const dispatch = useDispatch();
   const { windows } = useSelector((state: RootState) => state.app);
 
-  const openWindow = useCallback(() => {
+  const openWindow = () => {
     dispatch(
       newWindow({
         title,
         liveLink,
         gitHubLink,
-        id: title,
+        windowID,
         logo,
         codesadnboxLink,
-        ratio: 1,
         type,
         items,
         fixedSize: type === 'program' ? true : false,
         size,
-        content,
+        contentID,
+        locationID,
       })
     );
-  }, [
-    dispatch,
-    title,
-    liveLink,
-    gitHubLink,
-    logo,
-    codesadnboxLink,
-    type,
-    items,
-    size,
-    content,
-  ]);
+  };
 
   useEffect(() => {
     const myfunction = (e: KeyboardEvent) => {
@@ -87,9 +78,8 @@ const Shortcut = ({
         openWindow();
 
         if (type === 'folder') {
-          dispatch(addWindowToHistory({ folderName: title }));
         }
-        dispatch(unSelectAllShortcuts({ location }));
+        dispatch(unSelectAllShortcuts());
       }
     };
     document.addEventListener('keyup', myfunction);
@@ -102,20 +92,17 @@ const Shortcut = ({
     <div
       onClick={(e) => {
         e.stopPropagation();
-        dispatch(unSelectAllShortcuts({ location }));
-        dispatch(selectShortcut({ name: title, location }));
+        dispatch(unSelectAllShortcuts());
+        dispatch(selectShortcut({ locationID, itemID }));
       }}
       onDoubleClick={() => {
         const folderWindowIsOpen = windows.some(
           (window) => window.type === type && type === 'folder'
         );
-        dispatch(unSelectAllShortcuts({ location }));
+        dispatch(unSelectAllShortcuts());
         if (type === 'folder') {
-          dispatch(addWindowToHistory({ folderName: title }));
         }
         if (folderWindowIsOpen) {
-          dispatch(changeToFolder({ folderName: title }));
-          return;
         }
         setTimeout(() => {
           openWindow();
@@ -126,8 +113,8 @@ const Shortcut = ({
         e.stopPropagation();
         const x = e.clientX;
         const y = e.clientY;
-        dispatch(unSelectAllShortcuts({ location }));
-        dispatch(selectShortcut({ name: title, location }));
+        dispatch(unSelectAllShortcuts());
+        dispatch(selectShortcut({ itemID, locationID }));
         dispatch(setPosition({ x, y }));
         dispatch(showContextMenu());
         dispatch(setTarget({ target: { type: 'File', name: title } }));

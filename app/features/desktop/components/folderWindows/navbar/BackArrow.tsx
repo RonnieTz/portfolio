@@ -9,27 +9,25 @@ import Image from 'next/image';
 
 const BackArrow = () => {
   const dispatch = useDispatch();
-  const { folderHistory } = useSelector((state: RootState) => state.app);
   const [hover, setHover] = useState(false);
-  const { currentFolder, history } = folderHistory;
-  const className =
-    currentFolder > 0 && history.length > 1
-      ? 'back-button'
-      : 'back-button button-disabled';
+  // const className =
+  //   currentFolder > 0 && locationHistory.length > 1
+  //     ? 'back-button'
+  //     : 'back-button button-disabled';
   return (
     <div
       onClick={() => {
-        if (currentFolder > 0) {
-          dispatch(navigateFolderBack());
-        }
+        // if (currentFolder > 0) {
+        //   dispatch(navigateFolderBack());
+        // }
       }}
       onMouseEnter={() => {
-        if (currentFolder > 0 && history.length > 1) setHover(true);
+        // if (currentFolder > 0 && locationHistory.length > 1) setHover(true);
       }}
       onMouseLeave={() => {
         setHover(false);
       }}
-      className={`${className} ${hover ? 'hover' : ''}`}
+      className={'forward-button button-disabled'}
     >
       <span className="back-arrow">
         <Image

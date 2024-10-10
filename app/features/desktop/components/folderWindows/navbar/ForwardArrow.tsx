@@ -10,26 +10,24 @@ import Image from 'next/image';
 const ForwardArrow = () => {
   const [hover, setHover] = useState(false);
   const dispatch = useDispatch();
-  const { folderHistory } = useSelector((state: RootState) => state.app);
-  const { currentFolder, history } = folderHistory;
-  const className =
-    currentFolder < history.length - 1
-      ? 'forward-button'
-      : 'forward-button button-disabled';
+  // const className =
+  //   currentFolder < locationHistory.length - 1
+  //     ? 'forward-button'
+  //     : 'forward-button button-disabled';
   return (
     <div
       onClick={() => {
-        if (currentFolder < history.length - 1) {
-          dispatch(navigateFolderForward());
-        }
+        // if (currentFolder < locationHistory.length - 1) {
+        //   dispatch(navigateFolderForward());
+        // }
       }}
       onMouseEnter={() => {
-        if (currentFolder < history.length - 1) setHover(true);
+        // if (currentFolder < locationHistory.length - 1) setHover(true);
       }}
       onMouseLeave={() => {
         setHover(false);
       }}
-      className={`${className} ${hover ? 'hover' : ''}`}
+      className={'forward-button button-disabled'}
     >
       <span className="back-arrow">
         <Image
@@ -39,7 +37,7 @@ const ForwardArrow = () => {
           alt="forward arrow"
         />
       </span>
-      {className.includes('hover') && (
+      {/* {className.includes('hover') && (
         <span
           style={{
             height: '100%',
@@ -50,7 +48,7 @@ const ForwardArrow = () => {
         >
           <VerticalDivider />
         </span>
-      )}
+      )} */}
       <span className="arrow-down">
         <Image
           priority={true}

@@ -13,7 +13,7 @@ import Image from 'next/image';
 type TaskProps = {
   title: string;
   focused: boolean;
-  id: string;
+  windowID: string;
   logo: string;
   fixedSize: boolean;
   subWindow: string;
@@ -21,7 +21,7 @@ type TaskProps = {
 
 const Task = ({
   focused,
-  id,
+  windowID,
   title,
   logo,
   fixedSize,
@@ -32,23 +32,25 @@ const Task = ({
     <div
       onDoubleClick={() => {
         if (fixedSize) return;
-        dispatch(setWindowFullScreen({ id, fullscreen: true }));
+        dispatch(setWindowFullScreen({ windowID, fullscreen: true }));
       }}
       onClick={() => {
+        console.log(subWindow);
+
         if (focused) {
-          dispatch(setMinimize({ id, minimize: true }));
-          dispatch(setFocus({ id, focus: false }));
+          dispatch(setMinimize({ windowID, minimize: true }));
+          dispatch(setFocus({ windowID, focus: false }));
           return;
         }
+
         if (subWindow) {
-          dispatch(focusWindow({ id: subWindow, focus: true }));
-          dispatch(setMinimize({ id: subWindow, minimize: false }));
-          dispatch(setMinimize({ id, minimize: false }));
+          dispatch(focusWindow({ windowID: subWindow, focus: true }));
+          dispatch(setMinimize({ windowID: subWindow, minimize: false }));
           return;
-        } else {
-          dispatch(setMinimize({ id, minimize: false }));
-          dispatch(focusWindow({ id, focus: true }));
         }
+
+        dispatch(setMinimize({ windowID, minimize: false }));
+        dispatch(focusWindow({ windowID, focus: true }));
       }}
       className="task"
       style={{
@@ -67,9 +69,9 @@ const Task = ({
         borderRadius: '5px',
         height: '100%',
         minWidth: '30px',
-        // width: '15%',
+        width: '150px',
         flex: '1',
-        maxWidth: 'max-content',
+        maxWidth: '150px',
         cursor: 'pointer',
         transition: 'all 0.2s',
         filter: '',

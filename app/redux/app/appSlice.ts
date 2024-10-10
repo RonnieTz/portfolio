@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
 import { set_WindowPosition } from '../reducers/setWindowPosition';
 import { set_WindowFullScreen } from '../reducers/setWindowFullScreen';
-import { Folder } from './types';
 import logo from '@/public/description.png';
 
 const appSlice = createSlice({
@@ -23,39 +22,53 @@ const appSlice = createSlice({
     },
     setWindowPosition: (
       state,
-      action: PayloadAction<{ y: number; x: number; id: string }>
+      action: PayloadAction<{ y: number; x: number; windowID: string }>
     ) => {
       set_WindowPosition(state, action);
     },
     setWindowFullScreen: (
       state,
-      action: PayloadAction<{ id: string; fullscreen: boolean }>
+      action: PayloadAction<{ windowID: string; fullscreen: boolean }>
     ) => {
       set_WindowFullScreen(state, action);
     },
 
-    closeWindow: (state, action: PayloadAction<{ id: string }>) => {
-      state.windows = state.windows.filter(
-        (window) => window.id !== action.payload.id
+    closeWindow: (state, action: PayloadAction<{ windowID: string }>) => {
+      const window = state.windows.find(
+        (window) => window.windowID === action.payload.windowID
+      );
+
+      if (window) {
+        window.open = false;
+      }
+
+      state.taskList = state.taskList.filter(
+        (window) => window.windowID !== action.payload.windowID
       );
     },
     setMinimize: (
       state,
-      action: PayloadAction<{ id: string; minimize: boolean }>
+      action: PayloadAction<{ windowID: string; minimize: boolean }>
     ) => {
       const window = state.windows.find(
-        (window) => window.id === action.payload.id
+        (window) => window.windowID === action.payload.windowID
+      );
+      const taskListWindow = state.taskList.find(
+        (window) => window.windowID === action.payload.windowID
       );
       if (window) {
         window.minimized = action.payload.minimize;
       }
+      if (taskListWindow) {
+        taskListWindow.minimized = action.payload.minimize;
+      }
     },
     focusWindow: (
       state,
-      action: PayloadAction<{ id: string; focus: boolean }>
+      action: PayloadAction<{ windowID: string; focus: boolean }>
     ) => {
       state.windows.forEach((window) => {
-        if (window.id === action.payload.id) {
+        if (window.windowID === action.payload.windowID) {
           window.focused = true;
           window.zIndex = 10;
         } else {
@@ -63,131 +76,83 @@ const appSlice = createSlice({
           window.zIndex = 5;
         }
       });
+      state.taskList.forEach((window) => {
+        if (window.windowID === action.payload.windowID) {
+          window.focused = true;
+        } else {
+          window.focused = false;
+        }
+      });
     },
     setFocus: (
       state,
-      action: PayloadAction<{ id: string; focus: boolean }>
+      action: PayloadAction<{ windowID: string; focus: boolean }>
     ) => {
       const window = state.windows.find(
-        (window) => window.id === action.payload.id
+        (window) => window.windowID === action.payload.windowID
+      );
+      const taskListWindow = state.taskList.find(
+        (window) => window.windowID === action.payload.windowID
       );
       if (window) {
         window.focused = action.payload.focus;
       }
-    },
-    newWindow: (
-      state,
-      action: PayloadAction<{
-        id: string;
-        title: string;
-        logo: string;
-        liveLink?: string;
-        codesadnboxLink?: string;
-        gitHubLink?: string;
-        ratio: number | undefined;
-        type: string;
-        items: Folder[];
-        fixedSize: boolean;
-        size: { width: number; height: number };
-        content: { id: string };
-      }>
-    ) => {
-      state.windows.forEach((window) => {
-        window.focused = false;
-        window.zIndex = 5;
-      });
-      state.start.open = false;
-      const windowIndex = state.windows.findIndex(
-        (window) => window.title === action.payload.title
-      );
-
-      if (windowIndex === -1) {
-        state.windows.push({
-          position: { y: Math.random() * 100, x: Math.random() * 300 },
-          liveLink: action.payload.liveLink,
-          id: action.payload.id,
-          title: action.payload.title,
-          minimized: false,
-          zIndex: 10,
-          fullScreen: false,
-          focused: true,
-          logo: action.payload.logo,
-          codesandboxLink: action.payload.codesadnboxLink,
-          gitHubLink: action.payload.gitHubLink,
-          ratio: action.payload.ratio,
-          type: action.payload.type,
-          items: action.payload.items,
-          fixedSize: action.payload.fixedSize,
-          size: action.payload.size,
-          subWindow: '',
-          content: action.payload.content,
-          parent: '',
-        });
-        if (action.payload.type === 'folder') {
-          state.folderHistory.history.push();
-        }
-      } else {
-        state.windows[windowIndex].focused = true;
-        state.windows[windowIndex].minimized = false;
-        state.windows[windowIndex].zIndex = 10;
+      if (taskListWindow) {
+        taskListWindow.focused = action.payload.focus;
       }
     },
-    newSubWindow: (
-      state,
-      action: PayloadAction<{
-        windowID: string;
-        subWindowName: string;
-        subWindowSize: { width: number; height: number };
-        position: { y: number; x: number };
-        content: { id: string };
-      }>
-    ) => {
+    openWindow: (state, action: PayloadAction<{ windowID: string }>) => {
       const window = state.windows.find(
-        (window) => window.id === action.payload.windowID
+        (window) => window.windowID === action.payload.windowID
       );
       if (window) {
-        window.subWindow = action.payload.subWindowName;
-        window.focused = false;
-        state.windows.push({
-          position: {
-            y: action.payload.position.y - 100,
-            x: action.payload.position.x - 50,
-          },
-          liveLink: '',
-          id: action.payload.subWindowName,
-          title: action.payload.subWindowName,
-          minimized: false,
-          zIndex: 10,
-          fullScreen: false,
-          focused: true,
-          logo: logo as any,
-          codesandboxLink: '',
-          gitHubLink: '',
-          ratio: 1,
-          type: 'subWindow',
-          items: [],
-          fixedSize: true,
-          size: action.payload.subWindowSize,
-          subWindow: '',
-          content: action.payload.content,
-          parent: action.payload.content.id,
-        });
+        window.open = true;
+        window.minimized = false;
+        window.focused = true;
+        window.zIndex = 10;
+        if (
+          state.taskList.every(
+            (task) => task.windowID !== action.payload.windowID
+          )
+        ) {
+          state.taskList.push(window);
+        }
       }
-    },
-    closeSubWindow: (
-      state,
-      action: PayloadAction<{ subWindowName: string }>
-    ) => {
       state.windows.forEach((window) => {
-        if (window.subWindow === action.payload.subWindowName) {
-          window.focused = true;
-          window.subWindow = '';
+        if (window.windowID !== action.payload.windowID) {
+          window.focused = false;
+          window.zIndex = 5;
         }
       });
-      state.windows = state.windows.filter(
-        (window) => window.id !== action.payload.subWindowName
-      );
+      state.taskList.forEach((window) => {
+        if (window.windowID !== action.payload.windowID) {
+          window.focused = false;
+        }
+      });
     },
+
+    setSubWindow: (
+      state,
+      action: PayloadAction<{ subWindow: string; windowID: string }>
+    ) => {
+      const window = state.windows.find(
+        (window) => window.windowID === action.payload.windowID
+      );
+      const taskListWindow = state.taskList.find(
+        (window) => window.windowID === action.payload.windowID
+      );
+      if (window) {
+        if (window.type === 'program') {
+          window.subWindow = action.payload.subWindow;
+        }
+      }
+      if (taskListWindow) {
+        if (taskListWindow.type === 'program') {
+          taskListWindow.subWindow = action.payload.subWindow;
+        }
+      }
+    },
+
     resizeWindow: (
       state,
       action: PayloadAction<{
@@ -203,76 +168,48 @@ const appSlice = createSlice({
         window.size = action.payload.size;
       }
     },
-    selectShortcut: (
-      state,
-      action: PayloadAction<{ location: string; name: string }>
-    ) => {
-      const folder = state.folders.locations.find(
-        (folder) => folder.location === action.payload.location
-      );
-      if (folder) {
-        folder.items.forEach((item) => {
-          if (item.name === action.payload.name) {
-            item.selected = true;
-          } else {
-            item.selected = false;
-          }
-        });
-      }
+    selectShortcut: (state, action: PayloadAction<{ linkID: string }>) => {
+      state.links.forEach((link) => {
+        if (link.linkID === action.payload.linkID) {
+          link.selected = true;
+        } else {
+          link.selected = false;
+        }
+      });
     },
-    unSelectAllShortcuts: (
-      state,
-      action: PayloadAction<{ location: string }>
-    ) => {
-      state.folders.locations.forEach((folder) => {
-        folder.items.forEach((item) => {
-          item.selected = false;
-        });
+    unSelectAllShortcuts: (state) => {
+      state.links.forEach((link) => {
+        link.selected = false;
       });
     },
     setLoaded: (state) => {
       state.loaded = true;
     },
-    addWindowToHistory: (
+
+    changeToFolder: (
       state,
-      action: PayloadAction<{ folderName: string }>
+      action: PayloadAction<{
+        windowID: string;
+        title: string;
+        location: string;
+      }>
     ) => {
-      const historyLength = state.folderHistory.history.length;
-      state.folderHistory.history = Array.from(
-        new Set([...state.folderHistory.history, action.payload.folderName])
+      const window = state.windows.find(
+        (window) => window.windowID === action.payload.windowID
       );
-      const index = state.folderHistory.history.findIndex(
-        (folder) => folder === action.payload.folderName
-      );
-      state.folderHistory.currentFolder = index;
-    },
-    changeToFolder: (state, action: PayloadAction<{ folderName: string }>) => {
-      const window = state.windows.find((window) => window.type === 'folder');
-      if (window) {
-        window.title = action.payload.folderName;
+      if (window?.type === 'folder') {
+        window.history.locations.push({
+          title: action.payload.title,
+          locationID: action.payload.location,
+        });
+        if (window.history.locations.length === 1) {
+          return;
+        }
+        window.history.currentLocation = window.history.locations.length - 1;
       }
     },
-    navigateFolderBack: (state) => {
-      const window = state.windows.find((window) => window.type === 'folder');
-      if (state.folderHistory.currentFolder > 0) {
-        state.folderHistory.currentFolder -= 1;
-        if (window)
-          window.title =
-            state.folderHistory.history[state.folderHistory.currentFolder];
-      }
-    },
-    navigateFolderForward: (state) => {
-      const window = state.windows.find((window) => window.type === 'folder');
-      if (
-        state.folderHistory.currentFolder <
-        state.folderHistory.history.length - 1
-      ) {
-        state.folderHistory.currentFolder += 1;
-        if (window)
-          window.title =
-            state.folderHistory.history[state.folderHistory.currentFolder];
-      }
-    },
+    navigateFolderBack: (state) => {},
+    navigateFolderForward: (state) => {},
   },
 });
 
@@ -283,7 +220,7 @@ export const {
   setWindowFullScreen,
   setMinimize,
   closeWindow,
-  newWindow,
+  openWindow,
   focusWindow,
   setFocus,
   selectShortcut,
@@ -291,12 +228,10 @@ export const {
   setWelcome,
   setTurnOff,
   setLoaded,
-  addWindowToHistory,
   changeToFolder,
   navigateFolderBack,
   navigateFolderForward,
   resizeWindow,
-  newSubWindow,
-  closeSubWindow,
+  setSubWindow,
 } = appSlice.actions;
 export default appSlice.reducer;

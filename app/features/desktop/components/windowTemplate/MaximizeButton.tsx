@@ -16,11 +16,14 @@ const MaximizeButton = ({ fullScreen, id, focused, fixedSize }: Props) => {
   const dispatch = useDispatch();
   return (
     <div
+      style={{ opacity: fixedSize ? 0.5 : 1 }}
       onClick={() => {
         if (fixedSize) return;
-        dispatch(setWindowFullScreen({ id, fullscreen: !fullScreen }));
+        dispatch(
+          setWindowFullScreen({ windowID: id, fullscreen: !fullScreen })
+        );
       }}
-      className={`window-button ${fixedSize ? 'button-disabled' : ''}`}
+      className="window-button"
     >
       <Image
         priority={true}

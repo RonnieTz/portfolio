@@ -12,8 +12,8 @@ const MinimizeButton = ({ id, focused }: Props) => {
     <div
       onClick={(e) => {
         e.stopPropagation();
-        dispatch(setFocus({ id, focus: false }));
-        dispatch(setMinimize({ id, minimize: true }));
+        dispatch(setFocus({ windowID: id, focus: false }));
+        dispatch(setMinimize({ windowID: id, minimize: true }));
       }}
       className="window-button"
     >

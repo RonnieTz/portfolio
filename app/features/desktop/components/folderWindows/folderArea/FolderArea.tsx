@@ -7,17 +7,17 @@ import {
   setPosition,
   setTarget,
 } from '@/app/redux/contextMenu/contextSlice';
+import ProjectLink from '../../shortcuts/ProjectLink';
+import { FolderWindow } from '@/app/redux/app/types';
 
-const FolderArea = () => {
+type Props = {
+  folderID: string;
+  folderLocation: string;
+};
+
+const FolderArea = ({ folderID, folderLocation }: Props) => {
   const dispatch = useDispatch();
-  const { folderHistory, folders } = useSelector(
-    (state: RootState) => state.app
-  );
-  const { currentFolder, history } = folderHistory;
-  const currentFolderName = history[currentFolder];
-  const currentFolderItems = folders.locations.find(
-    (folder) => folder.location === currentFolderName
-  )?.items;
+  const { links, windows } = useSelector((state: RootState) => state.app);
 
   return (
     <div
@@ -25,41 +25,33 @@ const FolderArea = () => {
         e.preventDefault();
         e.stopPropagation();
         dispatch(showContextMenu());
-        dispatch(
-          setPosition({
-            x: e.clientX,
-            y: e.clientY,
-            location: currentFolderName,
-          })
-        );
-        dispatch(
-          setTarget({
-            target: { name: history[currentFolder], type: 'Folder' },
-          })
-        );
       }}
       onClick={() => {
-        dispatch(unSelectAllShortcuts({ location: currentFolderName }));
+        dispatch(unSelectAllShortcuts());
       }}
       className="folder-area"
     >
-      {currentFolderItems?.map((item) => (
-        <Shortcut
-          key={item.name}
-          title={item.name}
-          logo={item.logo}
-          selected={item.selected}
-          type={item.type}
-          items={item.items!}
-          location={item.location!}
-          color="dark"
-          liveLink={item.liveLink}
-          gitHubLink={item.gitHubLink}
-          codesadnboxLink={item.codesandboxLink}
-          size={item.size!}
-          content={item.content!}
-        />
-      ))}
+      {links.map((link) => {
+        const window = windows.find(
+          (window) => window.windowID === link.folderLocation
+        )! as FolderWindow;
+
+        console.log(link.folderLocation, folderLocation);
+
+        if (link.folderLocation === folderLocation) {
+          return (
+            <ProjectLink
+              color="dark"
+              logo={link.logo}
+              selected={link.selected}
+              title={link.name}
+              windowID={link.windowID}
+              linkID={link.linkID}
+              key={link.windowID + 'link'}
+            />
+          );
+        }
+      })}
     </div>
   );
 };

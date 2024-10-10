@@ -19,6 +19,7 @@ const fontFamilies = [
   'Times New Roman',
   'Trebuchet MS',
   'Verdana',
+  'WinXP',
 ];
 
 const FontFamilyOptions = ({ fontFamily, setFontFamily }: Props) => {

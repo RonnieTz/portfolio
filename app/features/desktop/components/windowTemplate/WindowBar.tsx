@@ -17,7 +17,7 @@ type WindowBarProps = {
       y: number;
     }>
   >;
-  id: string;
+  windowID: string;
   focused: boolean;
   title: string;
   logo: string;
@@ -29,7 +29,7 @@ const WindowBar = ({
   fullScreen,
   position,
   setPosition,
-  id,
+  windowID,
   focused,
   title,
   logo,
@@ -45,7 +45,7 @@ const WindowBar = ({
       onClick={() => {}}
       onDoubleClick={() => {
         if (fixedSize) return;
-        dispatch(setWindowFullScreen({ id, fullscreen: !fullScreen }));
+        dispatch(setWindowFullScreen({ windowID, fullscreen: !fullScreen }));
       }}
       onDragStart={(e) => {
         const x = e.clientX;
@@ -61,7 +61,7 @@ const WindowBar = ({
           setWindowPosition({
             x: x - ref.current.x,
             y: y - ref.current.y,
-            id,
+            windowID,
           })
         );
       }}
@@ -87,7 +87,7 @@ const WindowBar = ({
       <WindowBarButtons
         fixedSize={fixedSize}
         focused={focused}
-        id={id}
+        windowID={windowID}
         fullScreen={fullScreen}
         subWindow={subWindow}
       />

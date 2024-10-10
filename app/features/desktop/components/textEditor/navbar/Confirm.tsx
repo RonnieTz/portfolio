@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { closeSubWindow } from '@/app/redux/app/appSlice';
+import { closeWindow } from '@/app/redux/app/appSlice';
 import { setFontOptions } from '@/app/redux/editor/editorSlice';
 
 type Props = {
@@ -24,7 +24,7 @@ const Confirm = ({ fontFamily, fontSize, fontStyle, id }: Props) => {
               id,
             })
           );
-          dispatch(closeSubWindow({ subWindowName: 'Font' }));
+          dispatch(closeWindow({ windowID: 'font' }));
         }}
         className="editor-font-options-button"
       >
@@ -32,7 +32,7 @@ const Confirm = ({ fontFamily, fontSize, fontStyle, id }: Props) => {
       </button>
       <button
         onClick={() => {
-          dispatch(closeSubWindow({ subWindowName: 'Font' }));
+          dispatch(closeWindow({ windowID: 'font' }));
         }}
         style={{ top: '18%' }}
         className="editor-font-options-button"

@@ -7,11 +7,9 @@ import {
 
 import Tooltip from './Tooltip';
 type Props = {
-  content: {
-    id: string;
-  };
+  contentID: string;
 };
-const Format = ({ content }: Props) => {
+const Format = ({ contentID }: Props) => {
   const dispatch = useDispatch();
   const { tooltipShow } = useSelector((state: RootState) => state.editor);
   return (
@@ -32,7 +30,7 @@ const Format = ({ content }: Props) => {
     >
       <span>Format</span>
       {tooltipShow.value === 'Format' && tooltipShow.show && (
-        <Tooltip content={content} />
+        <Tooltip contentID={contentID} />
       )}
     </span>
   );

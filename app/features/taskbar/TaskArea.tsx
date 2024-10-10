@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 
 const TaskArea = () => {
-  const { windows } = useSelector((state: RootState) => state.app);
+  const { windows, taskList } = useSelector((state: RootState) => state.app);
+
   return (
     <Box>
       <Box
@@ -17,16 +18,19 @@ const TaskArea = () => {
         top={'12%'}
         display={'flex'}
       >
-        {windows.map((window) => {
+        {taskList.map((window) => {
+          if (window.open === false) {
+            return <></>;
+          }
           return (
             <Task
               title={window.title}
               focused={window.focused}
-              id={window.id}
-              key={window.id}
+              windowID={window.windowID}
+              key={window.windowID}
               logo={window.logo}
               fixedSize={window.fixedSize}
-              subWindow={window.subWindow}
+              subWindow={window.type === 'program' ? window.subWindow : ''}
             />
           );
         })}

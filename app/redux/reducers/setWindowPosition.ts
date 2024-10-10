@@ -3,10 +3,10 @@ import { InitialState } from '../app/types';
 
 export const set_WindowPosition = (
   state: InitialState,
-  action: PayloadAction<{ y: number; x: number; id: string }>
+  action: PayloadAction<{ y: number; x: number; windowID: string }>
 ) => {
   const window = state.windows.find(
-    (window) => window.id === action.payload.id
+    (window) => window.windowID === action.payload.windowID
   );
   if (window) {
     window.position.y = action.payload.y;

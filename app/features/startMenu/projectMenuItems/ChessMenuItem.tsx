@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { setStartOpen, newWindow } from '@/app/redux/app/appSlice';
+import { setStartOpen, openWindow } from '@/app/redux/app/appSlice';
 import chess from '@/public/chess.svg';
 import { Typography } from '@mui/material';
 import Image from 'next/image';
@@ -10,9 +10,10 @@ type Props = {
 };
 
 const ChessMenuItem = ({ setOpenMenu }: Props) => {
-  const { projects } = useSelector((state: RootState) => state.app);
-  const project = projects.find((project) => project.name === 'Chess Game');
+  const { windows } = useSelector((state: RootState) => state.app);
+  const window = windows.find((window) => window.title === 'Chess Game');
   const dispatch = useDispatch();
+
   return (
     <div
       className="all-projects-menu-item"
@@ -20,22 +21,9 @@ const ChessMenuItem = ({ setOpenMenu }: Props) => {
         setOpenMenu(false);
         dispatch(setStartOpen(false));
         setTimeout(() => {
-          dispatch(
-            newWindow({
-              title: 'Chess Game',
-              liveLink: project?.liveLink!,
-              gitHubLink: project?.gitHubLink!,
-              id: String(Math.floor(Math.random() * 1000)),
-              logo: chess.src,
-              codesadnboxLink: project?.codesandboxLink!,
-              ratio: undefined,
-              type: 'project',
-              items: [],
-              fixedSize: false,
-              size: { width: 650, height: 650 },
-              content: { id: 'Chess Game' },
-            })
-          );
+          if (window) {
+            dispatch(openWindow({ windowID: window.windowID }));
+          }
         }, 200);
       }}
       style={{

@@ -21,7 +21,6 @@ const Navbar = () => {
           }
         }}
         onClick={() => {
-          if (window?.subWindow) return;
           setIsHovered(!isHovered);
         }}
         onMouseOut={(e) => {

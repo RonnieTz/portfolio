@@ -31,7 +31,7 @@ const Button = () => {
       }}
       onMouseUp={async () => {
         setIsClicked(false);
-        if (window?.subWindow) return;
+        if (window?.type === 'program' && window?.subWindow) return;
         dispatch(ms_reset());
       }}
       className="ms-button"

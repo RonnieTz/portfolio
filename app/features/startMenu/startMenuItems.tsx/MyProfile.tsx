@@ -2,7 +2,7 @@ import profile from '@/public/profile.png';
 import './styles.css';
 import { Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { newWindow } from '@/app/redux/app/appSlice';
+import { openWindow, setStartOpen } from '@/app/redux/app/appSlice';
 import Image from 'next/image';
 
 const MyProfile = () => {
@@ -11,18 +11,11 @@ const MyProfile = () => {
     <div
       onClick={() => {
         dispatch(
-          newWindow({
-            title: 'My Profile',
-            id: String(Math.floor(Math.random() * 100000)),
-            logo: profile as any,
-            ratio: undefined,
-            type: 'program',
-            items: [],
-            fixedSize: true,
-            size: { width: 650, height: 650 },
-            content: { id: 'My Profile' },
+          openWindow({
+            windowID: 'ProfileID123',
           })
         );
+        dispatch(setStartOpen(false));
       }}
       className="menu-item-link"
     >

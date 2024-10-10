@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { setStartOpen, newWindow } from '@/app/redux/app/appSlice';
+import { setStartOpen, openWindow } from '@/app/redux/app/appSlice';
 import logo from '@/public/portfolio.svg';
 import { Typography } from '@mui/material';
 import Image from 'next/image';
@@ -10,8 +10,8 @@ type Props = {
 };
 
 const PortfolioMenuItem = ({ setOpenMenu }: Props) => {
-  const { projects } = useSelector((state: RootState) => state.app);
-  const project = projects.find((project) => project.name === 'Portfolio');
+  const { windows } = useSelector((state: RootState) => state.app);
+  const window = windows.find((project) => project.title === 'Portfolio')!;
   const dispatch = useDispatch();
   return (
     <div
@@ -21,19 +21,8 @@ const PortfolioMenuItem = ({ setOpenMenu }: Props) => {
         dispatch(setStartOpen(false));
         setTimeout(() => {
           dispatch(
-            newWindow({
-              title: 'Portfolio',
-              liveLink: project?.liveLink!,
-              gitHubLink: project?.gitHubLink!,
-              id: String(Math.floor(Math.random() * 1000)),
-              logo: logo.src,
-              codesadnboxLink: project?.codesandboxLink!,
-              ratio: undefined,
-              type: 'project',
-              items: [],
-              fixedSize: false,
-              size: { width: 650, height: 650 },
-              content: { id: 'Portfolio' },
+            openWindow({
+              windowID: window.windowID,
             })
           );
         }, 200);

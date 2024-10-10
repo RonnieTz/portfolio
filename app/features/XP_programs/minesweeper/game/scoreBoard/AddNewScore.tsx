@@ -4,6 +4,7 @@ import {
   ms_reset,
   showHighScores,
 } from '@/app/redux/minesweeper/minesweeperSlice';
+import { openWindow, setSubWindow } from '@/app/redux/app/appSlice';
 import { getScores, addNewScore } from '@/app/utilities/database/getScores';
 import { useState } from 'react';
 
@@ -47,6 +48,13 @@ const AddNewScore = () => {
         onClick={async () => {
           dispatch(ms_reset());
           dispatch(showHighScores(true));
+          dispatch(openWindow({ windowID: 'ScoresID123' }));
+          dispatch(
+            setSubWindow({
+              windowID: 'MinesweeperID123',
+              subWindow: 'ScoresID123',
+            })
+          );
           await addNewScore({
             level: mode,
             time: timer,

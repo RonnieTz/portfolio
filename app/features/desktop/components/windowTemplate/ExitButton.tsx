@@ -3,25 +3,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import {
   closeWindow,
-  closeSubWindow,
   focusWindow,
+  setSubWindow,
 } from '@/app/redux/app/appSlice';
 import Image from 'next/image';
 
+import type { ProgramWindow } from '@/app/redux/app/types';
+
 type Props = { id: string; focused: boolean; subWindow: string };
 
-const ExitButton = ({ id, focused, subWindow }: Props) => {
+const ExitButton = ({ id, focused }: Props) => {
   const { windows } = useSelector((state: RootState) => state.app);
-  const window = windows.find((window) => window.subWindow === subWindow);
+  const currentWindow = windows.find(
+    (window) => window.windowID === id
+  )! as ProgramWindow;
+  const subWindow = currentWindow.windowID;
+  const parentWindowID = windows.find(
+    (window) => window.type === 'program' && window.subWindow === subWindow
+  )?.windowID;
+
   const dispatch = useDispatch();
   return (
     <div
       onClick={() => {
-        dispatch(closeSubWindow({ subWindowName: id }));
-        dispatch(closeWindow({ id }));
-        if (window) {
-          dispatch(focusWindow({ id: window.id, focus: true }));
-        }
+        setTimeout(() => {
+          dispatch(closeWindow({ windowID: id }));
+          dispatch(setSubWindow({ windowID: parentWindowID!, subWindow: '' }));
+          dispatch(focusWindow({ windowID: parentWindowID!, focus: true }));
+        }, 200);
       }}
       className="window-button"
     >

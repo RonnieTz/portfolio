@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { closeSubWindow } from '@/app/redux/app/appSlice';
 
 type Props = {
   fontStyle: string;

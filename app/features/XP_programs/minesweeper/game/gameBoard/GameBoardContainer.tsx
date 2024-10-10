@@ -47,7 +47,7 @@ const GameBoardContainer = () => {
                   cell.clicked ||
                   mineswweeper.bombClicked.clicked ||
                   mineswweeper.gameover ||
-                  window?.subWindow
+                  (window?.type === 'program' && window?.subWindow)
                 ) {
                   return;
                 }
@@ -73,7 +73,7 @@ const GameBoardContainer = () => {
                   cell.clicked ||
                   mineswweeper.bombClicked.clicked ||
                   mineswweeper.gameover ||
-                  window?.subWindow
+                  (window?.type === 'program' && window?.subWindow)
                 )
                   return;
                 e.stopPropagation();

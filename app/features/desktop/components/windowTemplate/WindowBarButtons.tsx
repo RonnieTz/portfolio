@@ -5,7 +5,7 @@ import MinimizeButton from './MinimizeButton';
 import MaximizeButton from './MaximizeButton';
 
 type WindowBarButtonsProps = {
-  id: string;
+  windowID: string;
   fullScreen: boolean;
   focused: boolean;
   fixedSize: boolean;
@@ -13,7 +13,7 @@ type WindowBarButtonsProps = {
 };
 
 const WindowBarButtons = ({
-  id,
+  windowID,
   fullScreen,
   focused,
   fixedSize,
@@ -21,14 +21,14 @@ const WindowBarButtons = ({
 }: WindowBarButtonsProps) => {
   return (
     <div className="button-container">
-      <MinimizeButton focused={focused} id={id} />
+      <MinimizeButton focused={focused} id={windowID} />
       <MaximizeButton
         fixedSize={fixedSize}
         focused={focused}
         fullScreen={fullScreen}
-        id={id}
+        id={windowID}
       />
-      <ExitButton focused={focused} subWindow={subWindow} id={id} />
+      <ExitButton focused={focused} subWindow={subWindow} id={windowID} />
     </div>
   );
 };

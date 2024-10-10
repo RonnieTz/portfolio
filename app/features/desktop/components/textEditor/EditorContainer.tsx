@@ -5,12 +5,10 @@ import { useDispatch } from 'react-redux';
 import { setEditorTooltipShow } from '@/app/redux/editor/editorSlice';
 
 type Props = {
-  content: {
-    id: string;
-  };
+  contentID: string;
 };
 
-const EditorContainer = ({ content }: Props) => {
+const EditorContainer = ({ contentID }: Props) => {
   const dispatch = useDispatch();
   return (
     <div
@@ -19,8 +17,8 @@ const EditorContainer = ({ content }: Props) => {
       }}
       className="editor-container"
     >
-      <Navbar content={content} />
-      <EditArea content={content} />
+      <Navbar contentID={contentID} />
+      <EditArea contentID={contentID} />
     </div>
   );
 };

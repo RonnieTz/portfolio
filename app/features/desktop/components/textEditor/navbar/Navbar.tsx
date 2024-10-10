@@ -4,12 +4,10 @@ import { RootState } from '@/app/redux/store';
 import { setEditorTooltipShowValue } from '@/app/redux/editor/editorSlice';
 
 type Props = {
-  content: {
-    id: string;
-  };
+  contentID: string;
 };
 
-const Navbar = ({ content }: Props) => {
+const Navbar = ({ contentID }: Props) => {
   const dispatch = useDispatch();
   const { tooltipShow } = useSelector((state: RootState) => state.editor);
   return (
@@ -40,7 +38,7 @@ const Navbar = ({ content }: Props) => {
       >
         <span>Edit</span>
       </span>
-      <Format content={content} />
+      <Format contentID={contentID} />
       <span
         onMouseEnter={() => {
           dispatch(setEditorTooltipShowValue({ tooltipShow: 'View' }));

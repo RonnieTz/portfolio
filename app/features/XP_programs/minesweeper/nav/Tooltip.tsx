@@ -6,13 +6,11 @@ import { RootState } from '@/app/redux/store';
 import {
   resizeWindow,
   closeWindow,
-  newSubWindow,
+  openWindow,
+  setWindowPosition,
+  setSubWindow,
 } from '@/app/redux/app/appSlice';
-import {
-  setMsMode,
-  ms_reset,
-  showHighScores,
-} from '@/app/redux/minesweeper/minesweeperSlice';
+import { setMsMode, ms_reset } from '@/app/redux/minesweeper/minesweeperSlice';
 
 type Props = {
   setIsHovered: Dispatch<SetStateAction<boolean>>;
@@ -111,17 +109,24 @@ const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
       <TooltipDivider />
       <p
         onClick={(e) => {
+          const x = e.clientX;
+          const y = e.clientY;
           e.stopPropagation();
+          setIsHovered(false);
           dispatch(
-            newSubWindow({
-              subWindowName: 'Scores',
-              subWindowSize: { width: 300, height: 400 },
-              windowID: 'Minesweeper',
-              position: { y: e.nativeEvent.clientY, x: e.nativeEvent.clientX },
-              content: { id: '' },
+            setWindowPosition({
+              x,
+              y,
+              windowID: 'ScoresID123',
             })
           );
-          setIsHovered(false);
+          dispatch(openWindow({ windowID: 'ScoresID123' }));
+          dispatch(
+            setSubWindow({
+              windowID: 'MinesweeperID123',
+              subWindow: 'ScoresID123',
+            })
+          );
         }}
         className="ms-tooltip-item"
       >
@@ -130,7 +135,7 @@ const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
       <TooltipDivider />
       <p
         onClick={() => {
-          dispatch(closeWindow({ id: 'Minesweeper' }));
+          dispatch(closeWindow({ windowID: 'Minesweeper' }));
           setIsHovered(false);
         }}
         className="ms-tooltip-item"

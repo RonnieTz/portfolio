@@ -1,10 +1,11 @@
 'use client';
 import './styles.css';
-import React, { useState, ReactNode, useRef } from 'react';
+import React, { useState, ReactNode, useEffect } from 'react';
 import WindowBody from './WindowBody';
 import WindowBar from './WindowBar';
 import { useDispatch } from 'react-redux';
 import { focusWindow, setMinimize } from '@/app/redux/app/appSlice';
+import { set } from 'mongoose';
 
 type WindowProps = {
   top: number;
@@ -14,7 +15,7 @@ type WindowProps = {
   minimized: boolean;
   zIndex: number;
   fullScreen: boolean;
-  id: string;
+  windowID: string;
   focused: boolean;
   children: ReactNode;
   logo: string;
@@ -31,7 +32,7 @@ const Window = ({
   title,
   top,
   zIndex,
-  id,
+  windowID,
   focused,
   children,
   logo,
@@ -40,24 +41,26 @@ const Window = ({
   subWindow,
 }: WindowProps) => {
   const [position, setPosition] = useState({ x: left, y: top });
-  const windowRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
   return (
     <div
+      onContextMenu={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
       className="window"
-      ref={windowRef}
       onClick={(e) => {
         const x = e.clientX;
         const y = e.clientY;
 
         if (subWindow) {
-          dispatch(focusWindow({ id: subWindow, focus: true }));
-          dispatch(setMinimize({ id: subWindow, minimize: false }));
+          dispatch(focusWindow({ windowID: subWindow, focus: true }));
+          dispatch(setMinimize({ windowID: subWindow, minimize: false }));
           return;
         }
 
-        dispatch(focusWindow({ id, focus: true }));
+        dispatch(focusWindow({ windowID, focus: true }));
       }}
       style={{
         backgroundColor: 'whitesmoke',
@@ -81,7 +84,7 @@ const Window = ({
         fullScreen={fullScreen}
         position={position}
         setPosition={setPosition}
-        id={id}
+        windowID={windowID}
         focused={focused}
         title={title}
         logo={logo}

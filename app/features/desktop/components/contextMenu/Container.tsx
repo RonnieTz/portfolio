@@ -15,7 +15,6 @@ import ContextDetailsButton from './ContextDetailsButton';
 
 const Container = () => {
   const { position, target } = useSelector((state: RootState) => state.context);
-  console.log(target);
 
   return (
     <div

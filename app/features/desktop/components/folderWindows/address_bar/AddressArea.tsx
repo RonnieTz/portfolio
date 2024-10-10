@@ -4,9 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 
 const AddressArea = () => {
-  const { folderHistory } = useSelector((state: RootState) => state.app);
-  const { history, currentFolder } = folderHistory;
-  const folderName = history.slice(0, currentFolder + 1).join('/');
+  const {} = useSelector((state: RootState) => state.app);
 
   return (
     <div className="address-area">
@@ -16,7 +14,7 @@ const AddressArea = () => {
         src={logo}
         alt="logo"
       />
-      <span>{folderName}</span>
+      <span></span>
     </div>
   );
 };

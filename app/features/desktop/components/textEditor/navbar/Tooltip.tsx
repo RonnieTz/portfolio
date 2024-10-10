@@ -5,19 +5,16 @@ import {
   setTextWrap,
   setEditorTooltipShow,
 } from '@/app/redux/editor/editorSlice';
-import { newSubWindow } from '@/app/redux/app/appSlice';
+import { openWindow } from '@/app/redux/app/appSlice';
 
 type Props = {
-  content: {
-    id: string;
-  };
+  contentID: string;
 };
 
-const Tooltip = ({ content }: Props) => {
+const Tooltip = ({ contentID }: Props) => {
   const dispatch = useDispatch();
   const { textFiles } = useSelector((state: RootState) => state.editor);
-  const file = textFiles.find((file) => file.id === content.id)!;
-  console.log(content);
+  const file = textFiles.find((file) => file.id === contentID)!;
 
   return (
     <div
@@ -28,7 +25,7 @@ const Tooltip = ({ content }: Props) => {
     >
       <span
         onClick={() => {
-          dispatch(setTextWrap({ fileId: content.id, textWrap: !file.wrap }));
+          dispatch(setTextWrap({ fileId: contentID, textWrap: !file.wrap }));
         }}
         className="editor-tooltip-item"
       >
@@ -40,13 +37,17 @@ const Tooltip = ({ content }: Props) => {
           const x = e.clientX;
           const y = e.clientY;
           dispatch(
-            newSubWindow({
-              subWindowName: 'Font',
-              content: { id: content.id },
-              position: { x, y },
-              windowID: file.name,
-              subWindowSize: { width: 500, height: 450 },
+            openWindow({
+              windowID: 'font',
             })
+            // newSubWindow({
+            //   subWindowName: 'Font',
+            //   position: { x, y },
+            //   windowID: file.name,
+            //   subWindowSize: { width: 500, height: 450 },
+            //   contentID: contentID,
+            //   subWindowID: 'Font' + Math.random() * 100000,
+            // })
           );
           dispatch(setEditorTooltipShow({ tooltipShow: false }));
         }}

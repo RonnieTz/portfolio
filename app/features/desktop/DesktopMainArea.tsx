@@ -5,7 +5,7 @@ import { setStartOpen, unSelectAllShortcuts } from '@/app/redux/app/appSlice';
 import ChessProject from './components/projects/chess/ChessProject';
 import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
-import FolderWindow from './components/folderWindows/Folder';
+import Folder from './components/folderWindows/Folder';
 import PortfolioProject from './components/projects/portfolio/PortfolioProject';
 import Minesweeper from '../XP_programs/minesweeper/Minesweeper';
 import Shortcut from './components/shortcuts/Shortcut';
@@ -14,26 +14,27 @@ import EditorContainer from './components/textEditor/EditorContainer';
 import Scores from '../XP_programs/minesweeper/nav/Scores';
 import FontOptions from './components/textEditor/navbar/FontOptions';
 import Container from './components/contextMenu/Container';
+import Program from '../XP_programs/Program';
 import {
   hideContextMenu,
   setPosition,
   showContextMenu,
   setTarget,
 } from '@/app/redux/contextMenu/contextSlice';
+import ProjectLink from './components/shortcuts/ProjectLink';
+import { Fragment } from 'react';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
-  const { windows, folders } = useSelector((state: RootState) => state.app);
+  const { windows, links } = useSelector((state: RootState) => state.app);
+
   const { showContext } = useSelector((state: RootState) => state.context);
-  const desktopItems = folders.locations.find(
-    (item) => item.location === 'Desktop'
-  )?.items;
 
   return (
     <div
       onClick={() => {
         dispatch(setStartOpen(false));
-        dispatch(unSelectAllShortcuts({ location: 'Desktop' }));
+        dispatch(unSelectAllShortcuts());
         dispatch(hideContextMenu());
       }}
       onContextMenu={(e) => {
@@ -55,93 +56,171 @@ const DesktopMainArea = () => {
         gap: '10px',
       }}
     >
-      {windows.map((window) => (
-        <Window
-          key={window.id}
-          fixedSize={window.fixedSize}
-          fullScreen={window.fullScreen}
-          minimized={window.minimized}
-          link={window.liveLink!}
-          title={window.title}
-          zIndex={window.zIndex}
-          top={window.position.y}
-          left={window.position.x}
-          id={window.id}
-          focused={window.focused}
-          logo={window.logo}
-          size={window.size}
-          subWindow={window.subWindow}
-        >
-          {window.type === 'project' ? (
-            <Project key={window.id}>
-              {window.title === 'Chess Game' && (
-                <ChessProject
-                  codesandboxLink={window.codesandboxLink!}
-                  gitHubLink={window.gitHubLink!}
-                  liveLink={window.liveLink!}
-                  key={window.id}
-                />
-              )}
-              {window.title === 'Quiz Game' && (
-                <QuizProject
-                  codesandboxLink={window.codesandboxLink!}
-                  gitHubLink={window.gitHubLink!}
-                  liveLink={window.liveLink!}
-                  key={window.id}
-                />
-              )}
-              {window.title === 'Portfolio' && (
-                <PortfolioProject
-                  codesandboxLink={window.codesandboxLink!}
-                  gitHubLink={window.gitHubLink!}
-                  liveLink={window.liveLink!}
-                  key={window.id}
-                />
-              )}
-            </Project>
-          ) : window.type === 'folder' ? (
-            <FolderWindow />
-          ) : window.type === 'program' ? (
-            window.title === 'My Profile' ? (
-              <Profile />
-            ) : window.title === 'Minesweeper' ? (
-              <Minesweeper />
-            ) : (
-              <></>
-            )
-          ) : window.type === 'textFile' ? (
-            <EditorContainer content={window.content!} />
-          ) : window.type === 'subWindow' ? (
-            window.title === 'Scores' ? (
-              <Scores />
-            ) : window.title === 'Font' ? (
-              <FontOptions id={window.parent} />
-            ) : (
-              <></>
-            )
-          ) : (
-            <></>
-          )}
-        </Window>
-      ))}
-      {desktopItems?.map((item) => (
-        <Shortcut
-          key={item.name}
-          color="light"
-          items={item.items!}
-          logo={item.logo}
-          selected={item.selected}
-          title={item.name}
-          type={item.type}
-          codesadnboxLink={item.codesandboxLink}
-          gitHubLink={item.gitHubLink}
-          liveLink={item.liveLink}
-          location={item.location!}
-          size={item.size!}
-          content={item.content!}
-        />
-      ))}
+      {links.map((link) => {
+        if (link.folderLocation === 'desktop') {
+          return (
+            <ProjectLink
+              color="light"
+              logo={link.logo}
+              selected={link.selected}
+              title={link.name}
+              windowID={link.windowID}
+              linkID={link.linkID}
+              key={link.windowID + 'link'}
+            />
+          );
+        }
+      })}
       {showContext && <Container />}
+
+      {windows.map((window) => {
+        if (window.type === 'project' && window.open) {
+          return (
+            <Project
+              fixedSize={window.fixedSize}
+              focused={window.focused}
+              fullScreen={window.fullScreen}
+              logo={window.logo}
+              minimized={window.minimized}
+              title={window.title}
+              liveLink={window.liveLink}
+              windowID={window.windowID}
+              key={window.windowID + 'project'}
+              size={window.size}
+              zIndex={window.zIndex}
+              codesandboxLink={window.codesandboxLink}
+              gitHubLink={window.gitHubLink}
+            />
+          );
+        }
+        {
+          if (window.type === 'program' && window.open) {
+            return (
+              <Program
+                fixedSize={window.fixedSize}
+                focused={window.focused}
+                fullScreen={window.fullScreen}
+                logo={window.logo}
+                minimized={window.minimized}
+                open={window.open}
+                position={window.position}
+                selected={window.selected}
+                size={window.size}
+                title={window.title}
+                windowID={window.windowID}
+                zIndex={window.zIndex}
+                key={window.windowID + 'program'}
+                subWindow={window.subWindow}
+              />
+            );
+          }
+        }
+        {
+          if (window.type === 'subWindow' && window.open) {
+            return (
+              <Window
+                fixedSize={window.fixedSize}
+                focused={window.focused}
+                fullScreen={window.fullScreen}
+                logo={window.logo}
+                minimized={window.minimized}
+                size={window.size}
+                title={window.title}
+                windowID={window.windowID}
+                zIndex={window.zIndex}
+                key={window.windowID + 'subWindow'}
+                left={100 + Math.random() * 100}
+                top={100 + Math.random() * 100}
+                link=""
+                subWindow=""
+              >
+                {window.title === 'Scores' && <Scores />}
+                {window.title === 'Fonts' && <FontOptions id={'text123'} />}
+              </Window>
+            );
+          }
+        }
+        {
+          if (window.type === 'profile' && window.open) {
+            return (
+              <Window
+                fixedSize={window.fixedSize}
+                focused={window.focused}
+                fullScreen={window.fullScreen}
+                logo={window.logo}
+                minimized={window.minimized}
+                size={window.size}
+                title={window.title}
+                windowID={window.windowID}
+                zIndex={window.zIndex}
+                key={window.windowID + 'profile'}
+                left={100 + Math.random() * 100}
+                top={100 + Math.random() * 100}
+                link=""
+                subWindow=""
+              >
+                <Profile />
+              </Window>
+            );
+          }
+        }
+        {
+          if (window.type === 'folder' && window.open) {
+            console.log(window);
+
+            const { history } = window;
+            const { currentLocation, locations } = history;
+            return (
+              <Window
+                fixedSize={window.fixedSize}
+                focused={window.focused}
+                fullScreen={window.fullScreen}
+                logo={window.logo}
+                minimized={window.minimized}
+                size={window.size}
+                title={locations[currentLocation]?.title}
+                windowID={window.windowID}
+                zIndex={window.zIndex}
+                key={window.windowID + 'profile'}
+                left={100 + Math.random() * 100}
+                top={100 + Math.random() * 100}
+                link=""
+                subWindow=""
+              >
+                <Folder
+                  folderID={window.windowID}
+                  folderLocation={locations[currentLocation]?.locationID}
+                />
+              </Window>
+            );
+          }
+        }
+        {
+          if (window.type === 'textFile' && window.open) {
+            return (
+              <Window
+                fixedSize={window.fixedSize}
+                focused={window.focused}
+                fullScreen={window.fullScreen}
+                logo={window.logo}
+                minimized={window.minimized}
+                size={window.size}
+                title={window.title}
+                windowID={window.windowID}
+                zIndex={window.zIndex}
+                key={window.windowID + 'chess'}
+                left={100 + Math.random() * 100}
+                top={100 + Math.random() * 100}
+                link=""
+                subWindow=""
+              >
+                <EditorContainer contentID={window.content} />
+              </Window>
+            );
+          }
+        }
+        return <Fragment key={window.windowID + 'program'} />;
+      })}
     </div>
   );
 };

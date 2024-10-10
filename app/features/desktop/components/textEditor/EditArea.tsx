@@ -5,17 +5,14 @@ import { saveTextFile } from '@/app/redux/editor/editorSlice';
 import { useRef } from 'react';
 
 type Props = {
-  content: {
-    id: string;
-  };
+  contentID: string;
 };
 
-const EditArea = ({ content }: Props) => {
+const EditArea = ({ contentID }: Props) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const dispatch = useDispatch();
   const { textFiles } = useSelector((state: RootState) => state.editor);
-  const file = textFiles.find((file) => file.id === content.id);
-  const { fontFamily, fontStyle, fontSize } = file?.fontOptions!;
+  const file = textFiles.find((file) => file.id === contentID);
   const [value, setValue] = useState(file ? file.content : '');
 
   return (
@@ -23,18 +20,18 @@ const EditArea = ({ content }: Props) => {
       ref={ref}
       style={{
         textWrap: file?.wrap ? 'wrap' : 'nowrap',
-        fontSize,
-        fontFamily,
-        fontStyle: fontStyle.toLowerCase().includes('italic')
+        fontSize: file?.fontOptions.fontSize,
+        fontFamily: file?.fontOptions.fontFamily,
+        fontStyle: file?.fontOptions.fontStyle.toLowerCase().includes('italic')
           ? 'italic'
           : 'normal',
-        fontWeight: fontStyle.toLowerCase().includes('bold')
+        fontWeight: file?.fontOptions.fontStyle.toLowerCase().includes('bold')
           ? 'bold'
           : 'normal',
       }}
       onChange={(e) => {
         setValue(e.target.value);
-        dispatch(saveTextFile({ id: content.id, text: e.target.value }));
+        dispatch(saveTextFile({ id: contentID, text: e.target.value }));
       }}
       className="edit-area"
       value={value}

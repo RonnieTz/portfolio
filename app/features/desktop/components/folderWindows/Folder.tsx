@@ -4,13 +4,18 @@ import './styles.css';
 import TopBar from './topbar/TopBar';
 import MainArea from './MainArea';
 
-const Folder = () => {
+type Props = {
+  folderID: string;
+  folderLocation: string;
+};
+
+const Folder = ({ folderID, folderLocation }: Props) => {
   return (
     <div className="folder-window-container">
       <TopBar />
       <Navbar />
       <AddressBar />
-      <MainArea />
+      <MainArea folderLocation={folderLocation} folderID={folderID} />
     </div>
   );
 };

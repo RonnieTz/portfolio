@@ -1,4 +1,4 @@
 const Name = () => {
-  return <div className="profile-name">Ronis Xholi</div>;
+  return <div className="profile-name">Ronis</div>;
 };
 export default Name;
