@@ -8,7 +8,6 @@ import Profile from './components/profile/Profile';
 import Folder from './components/folderWindows/Folder';
 import PortfolioProject from './components/projects/portfolio/PortfolioProject';
 import Minesweeper from '../XP_programs/minesweeper/Minesweeper';
-import Shortcut from './components/shortcuts/Shortcut';
 import Project from './components/projects/Project';
 import EditorContainer from './components/textEditor/EditorContainer';
 import Scores from '../XP_programs/minesweeper/nav/Scores';
@@ -27,7 +26,6 @@ import { Fragment } from 'react';
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
   const { windows, links } = useSelector((state: RootState) => state.app);
-
   const { showContext } = useSelector((state: RootState) => state.context);
 
   return (
@@ -41,7 +39,9 @@ const DesktopMainArea = () => {
         e.preventDefault();
         dispatch(showContextMenu());
         dispatch(setPosition({ x: e.clientX, y: e.clientY }));
-        dispatch(setTarget({ target: { type: 'Folder', name: 'Desktop' } }));
+        dispatch(
+          setTarget({ target: { type: 'folder', folderID: 'desktop' } })
+        );
       }}
       style={{
         position: 'absolute',
@@ -67,6 +67,7 @@ const DesktopMainArea = () => {
               windowID={link.windowID}
               linkID={link.linkID}
               key={link.windowID + 'link'}
+              rename={link.rename}
             />
           );
         }
@@ -135,7 +136,9 @@ const DesktopMainArea = () => {
                 subWindow=""
               >
                 {window.title === 'Scores' && <Scores />}
-                {window.title === 'Fonts' && <FontOptions id={'text123'} />}
+                {window.title === 'Fonts' && (
+                  <FontOptions contentID={window.content} />
+                )}
               </Window>
             );
           }
@@ -166,8 +169,6 @@ const DesktopMainArea = () => {
         }
         {
           if (window.type === 'folder' && window.open) {
-            console.log(window);
-
             const { history } = window;
             const { currentLocation, locations } = history;
             return (
@@ -212,7 +213,7 @@ const DesktopMainArea = () => {
                 left={100 + Math.random() * 100}
                 top={100 + Math.random() * 100}
                 link=""
-                subWindow=""
+                subWindow={window.subWindow}
               >
                 <EditorContainer contentID={window.content} />
               </Window>

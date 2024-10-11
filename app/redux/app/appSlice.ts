@@ -142,12 +142,15 @@ const appSlice = createSlice({
         (window) => window.windowID === action.payload.windowID
       );
       if (window) {
-        if (window.type === 'program') {
+        if (window.type === 'program' || window.type === 'textFile') {
           window.subWindow = action.payload.subWindow;
         }
       }
       if (taskListWindow) {
-        if (taskListWindow.type === 'program') {
+        if (
+          taskListWindow.type === 'program' ||
+          taskListWindow.type === 'textFile'
+        ) {
           taskListWindow.subWindow = action.payload.subWindow;
         }
       }
@@ -208,6 +211,37 @@ const appSlice = createSlice({
         window.history.currentLocation = window.history.locations.length - 1;
       }
     },
+    renameLink: (
+      state,
+      action: PayloadAction<{ linkID: string; newName: string }>
+    ) => {
+      const link = state.links.find(
+        (link) => link.linkID === action.payload.linkID
+      );
+      const window = state.windows.find(
+        (window) => window.windowID === link?.windowID
+      );
+      if (link) {
+        link.rename = false;
+      }
+      if (window?.type === 'project') {
+        return;
+      }
+      if (link) {
+        link.name = action.payload.newName;
+        if (window) {
+          window.title = action.payload.newName;
+        }
+      }
+    },
+    setRenameState: (state, action: PayloadAction<{ linkID: string }>) => {
+      const link = state.links.find(
+        (link) => link.linkID === action.payload.linkID
+      );
+      if (link) {
+        link.rename = true;
+      }
+    },
     navigateFolderBack: (state) => {},
     navigateFolderForward: (state) => {},
   },
@@ -233,5 +267,7 @@ export const {
   navigateFolderForward,
   resizeWindow,
   setSubWindow,
+  renameLink,
+  setRenameState,
 } = appSlice.actions;
 export default appSlice.reducer;

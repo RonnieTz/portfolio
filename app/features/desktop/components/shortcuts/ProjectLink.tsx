@@ -7,8 +7,15 @@ import {
   unSelectAllShortcuts,
   changeToFolder,
 } from '@/app/redux/app/appSlice';
+import {
+  showContextMenu,
+  setPosition,
+  setTarget,
+} from '@/app/redux/contextMenu/contextSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
+import Rename from './Rename';
+import './styles.css';
 
 type Props = {
   title: string;
@@ -17,6 +24,7 @@ type Props = {
   selected: boolean;
   color: 'dark' | 'light';
   linkID: string;
+  rename: boolean;
 };
 const ProjectLink = ({
   color,
@@ -25,6 +33,7 @@ const ProjectLink = ({
   title,
   windowID,
   linkID,
+  rename,
 }: Props) => {
   const dispatch = useDispatch();
   const { windows } = useSelector((state: RootState) => state.app);
@@ -33,10 +42,19 @@ const ProjectLink = ({
 
   return (
     <div
+      onContextMenu={(e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(selectShortcut({ linkID }));
+        dispatch(showContextMenu());
+        dispatch(setPosition({ x, y }));
+        dispatch(setTarget({ target: { type: 'link', linkID } }));
+      }}
       onClick={(e) => {
         e.stopPropagation();
         dispatch(selectShortcut({ linkID }));
-        console.log(title, linkID);
       }}
       onDoubleClick={() => {
         if (type === 'folder' && open) {
@@ -49,7 +67,10 @@ const ProjectLink = ({
       className="project-link"
     >
       <Logo key={windowID} logo={logo} selected={selected} />
-      <Title color={color} selected={selected} title={title} type="project" />
+      {!rename && (
+        <Title color={color} selected={selected} title={title} type="project" />
+      )}
+      {rename && <Rename placeholder={title} linkID={linkID} />}
     </div>
   );
 };

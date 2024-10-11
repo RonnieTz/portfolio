@@ -12,6 +12,7 @@ import ContextViewButton from './ContextViewButton';
 import ContextRefreshButton from './ContextRefreshButton';
 import ContextNewButton from './ContextNewButton';
 import ContextDetailsButton from './ContextDetailsButton';
+import { openWindow } from '@/app/redux/app/appSlice';
 
 const Container = () => {
   const { position, target } = useSelector((state: RootState) => state.context);
@@ -27,7 +28,10 @@ const Container = () => {
       }}
       className="context-container"
     >
-      <ContextOpenButton />
+      <ContextOpenButton
+        enabled={target?.type === 'link'}
+        linkID={target?.type === 'link' ? target.linkID : undefined}
+      />
       <ContextViewButton />
       <ContextRefreshButton />
       <Divider />
@@ -38,7 +42,9 @@ const Container = () => {
       <ContextNewButton />
       <Divider />
       <ContextDeleteButton />
-      <ContextRenameButton />
+      <ContextRenameButton
+        linkID={target?.type === 'link' ? target.linkID : undefined}
+      />
       <Divider />
       <ContextDetailsButton />
     </div>

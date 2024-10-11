@@ -6,22 +6,25 @@ type Props = {
   fontFamily: string;
   fontStyle: string;
   fontSize: number;
-  id: string;
+  contentID: string;
 };
 
-const Confirm = ({ fontFamily, fontSize, fontStyle, id }: Props) => {
+const Confirm = ({ fontFamily, fontSize, fontStyle, contentID }: Props) => {
   const dispatch = useDispatch();
 
   return (
     <>
       <button
+        onContextMenu={(e) => {
+          console.log(contentID);
+        }}
         onClick={() => {
           dispatch(
             setFontOptions({
               fontFamily,
               fontSize,
               fontStyle,
-              id,
+              id: contentID,
             })
           );
           dispatch(closeWindow({ windowID: 'font' }));

@@ -8,24 +8,24 @@ import {
 } from '@/app/redux/app/appSlice';
 import Image from 'next/image';
 
-import type { ProgramWindow } from '@/app/redux/app/types';
-
 type Props = { id: string; focused: boolean; subWindow: string };
 
-const ExitButton = ({ id, focused }: Props) => {
+const ExitButton = ({ id, focused, subWindow }: Props) => {
   const { windows } = useSelector((state: RootState) => state.app);
-  const currentWindow = windows.find(
-    (window) => window.windowID === id
-  )! as ProgramWindow;
-  const subWindow = currentWindow.windowID;
+
   const parentWindowID = windows.find(
-    (window) => window.type === 'program' && window.subWindow === subWindow
+    (window) =>
+      (window.type === 'program' || window.type === 'textFile') &&
+      window.subWindow === id
   )?.windowID;
 
   const dispatch = useDispatch();
   return (
     <div
+      onContextMenu={() => {}}
       onClick={() => {
+        dispatch(closeWindow({ windowID: subWindow }));
+
         setTimeout(() => {
           dispatch(closeWindow({ windowID: id }));
           dispatch(setSubWindow({ windowID: parentWindowID!, subWindow: '' }));

@@ -1,4 +1,3 @@
-import Shortcut from '../../shortcuts/Shortcut';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import { unSelectAllShortcuts } from '@/app/redux/app/appSlice';
@@ -25,6 +24,8 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
         e.preventDefault();
         e.stopPropagation();
         dispatch(showContextMenu());
+        dispatch(setPosition({ x: e.clientX, y: e.clientY }));
+        dispatch(setTarget({ target: { type: 'folder', folderID } }));
       }}
       onClick={() => {
         dispatch(unSelectAllShortcuts());
@@ -36,8 +37,6 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
           (window) => window.windowID === link.folderLocation
         )! as FolderWindow;
 
-        console.log(link.folderLocation, folderLocation);
-
         if (link.folderLocation === folderLocation) {
           return (
             <ProjectLink
@@ -48,6 +47,7 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
               windowID={link.windowID}
               linkID={link.linkID}
               key={link.windowID + 'link'}
+              rename={link.rename}
             />
           );
         }

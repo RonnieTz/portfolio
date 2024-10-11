@@ -14,7 +14,6 @@
 
 .context-menu-item {
   padding: 4px 0 4px 10px;
-  cursor: pointer;
   font-family: 'Roboto', sans-serif;
   font-size: 13px;
   transition: all 0.1s;
@@ -22,7 +21,7 @@
   position: relative;
 }
 
-.context-menu-item:hover {
+.context-menu-item:hover:not(.button-disabled) {
   background-color: rgb(48, 104, 192);
   color: rgb(228, 237, 242);
 }

@@ -5,7 +5,7 @@ import {
   setTextWrap,
   setEditorTooltipShow,
 } from '@/app/redux/editor/editorSlice';
-import { openWindow } from '@/app/redux/app/appSlice';
+import { openWindow, setSubWindow } from '@/app/redux/app/appSlice';
 
 type Props = {
   contentID: string;
@@ -40,14 +40,9 @@ const Tooltip = ({ contentID }: Props) => {
             openWindow({
               windowID: 'font',
             })
-            // newSubWindow({
-            //   subWindowName: 'Font',
-            //   position: { x, y },
-            //   windowID: file.name,
-            //   subWindowSize: { width: 500, height: 450 },
-            //   contentID: contentID,
-            //   subWindowID: 'Font' + Math.random() * 100000,
-            // })
+          );
+          dispatch(
+            setSubWindow({ subWindow: 'font', windowID: 'TextFileID123' })
           );
           dispatch(setEditorTooltipShow({ tooltipShow: false }));
         }}

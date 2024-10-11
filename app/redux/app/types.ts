@@ -31,6 +31,7 @@ export type SubWindow = {
   position: { y: number; x: number };
   selected: boolean;
   open: boolean;
+  content: string;
 };
 
 export type ProgramWindow = {
@@ -119,6 +120,7 @@ export type Link = {
   windowID: string;
   folderLocation: string;
   logo: any;
+  rename: boolean;
 };
 
 export type InitialState = {

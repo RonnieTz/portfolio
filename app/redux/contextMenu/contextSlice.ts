@@ -1,14 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-const initialState: {
-  showContext: boolean;
-  position: { x: number; y: number };
-  target: { type: string; name: string };
-} = {
-  showContext: false,
-  position: { x: 0, y: 0 },
-  target: { type: '', name: '' },
-};
+import { initialState } from './initialState';
+import { Target } from './types';
 
 const contextSlice = createSlice({
   name: 'context',
@@ -19,6 +11,7 @@ const contextSlice = createSlice({
     },
     hideContextMenu: (state) => {
       state.showContext = false;
+      state.target = undefined;
     },
     setPosition: (state, action) => {
       state.position = action.payload;
@@ -26,10 +19,7 @@ const contextSlice = createSlice({
     setTarget: (
       state,
       action: PayloadAction<{
-        target: {
-          type: string;
-          name: string;
-        };
+        target: Target;
       }>
     ) => {
       state.target = action.payload.target;

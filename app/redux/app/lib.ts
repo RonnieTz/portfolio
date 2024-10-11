@@ -42,6 +42,7 @@ export const chessLink: Link = {
   folderLocation: 'desktop',
   windowID: 'ChessID123',
   logo: logo as any,
+  rename: false,
 };
 
 export const quiz: ProjectWindow = {
@@ -71,6 +72,7 @@ export const quizLink: Link = {
   folderLocation: 'desktop',
   windowID: 'QuizID123',
   logo: quizLogo,
+  rename: false,
 };
 
 export const portfolio: ProjectWindow = {
@@ -100,6 +102,7 @@ export const portfolioLink: Link = {
   folderLocation: 'desktop',
   windowID: 'PortfolioID123',
   logo: portfolioLogo,
+  rename: false,
 };
 
 export const folder: FolderWindow = {
@@ -129,6 +132,7 @@ export const folderLink: Link = {
   folderLocation: 'desktop',
   windowID: 'FolderID123',
   logo: folderLogo,
+  rename: false,
 };
 
 export const minesweeper: ProgramWindow = {
@@ -155,6 +159,7 @@ export const minesweeperLink: Link = {
   folderLocation: 'desktop',
   windowID: 'MinesweeperID123',
   logo: minesweeperLogo,
+  rename: false,
 };
 
 export const scores: SubWindow = {
@@ -171,6 +176,7 @@ export const scores: SubWindow = {
   position: { y: Math.random() * 300, x: Math.random() * 400 },
   selected: false,
   open: false,
+  content: '',
 };
 
 export const textEditorFonts: SubWindow = {
@@ -187,6 +193,7 @@ export const textEditorFonts: SubWindow = {
   position: { y: Math.random() * 300, x: Math.random() * 400 },
   selected: false,
   open: false,
+  content: 'text123',
 };
 
 export const textFile: TextFileWindow = {
@@ -204,7 +211,7 @@ export const textFile: TextFileWindow = {
   subWindow: '',
   selected: false,
   type: 'textFile',
-  open: true,
+  open: false,
 };
 
 export const textFileLink: Link = {
@@ -214,6 +221,7 @@ export const textFileLink: Link = {
   folderLocation: 'desktop',
   windowID: 'TextFileID123',
   logo: textLogo,
+  rename: false,
 };
 
 export const profile: ProfileWindow = {
@@ -239,4 +247,5 @@ export const profileLink: Link = {
   folderLocation: 'desktop',
   windowID: 'ProfileID123',
   logo: profileLogo,
+  rename: false,
 };
