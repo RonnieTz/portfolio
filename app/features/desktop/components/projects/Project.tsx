@@ -70,6 +70,7 @@ const Project = ({
           codesandboxLink={codesandboxLink}
           gitHubLink={gitHubLink}
           liveLink={liveLink}
+          windowID={windowID}
         />
       )}
     </Window>

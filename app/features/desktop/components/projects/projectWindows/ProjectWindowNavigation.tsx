@@ -7,19 +7,25 @@ import codesandbox from '@/public/codesandbox.svg';
 import live from '@/public/live.png';
 import { Link, Typography } from '@mui/material';
 import Image from 'next/image';
-
+import { useDispatch } from 'react-redux';
+import { setMinimize, setFocus } from '@/app/redux/app/appSlice';
 type Props = {
   selectedWindow: string;
   setSelectedWindow: Dispatch<SetStateAction<string>>;
   link: string;
+  windowID: string;
+  title: string;
 };
 
 const ProjectWindowNavigation = ({
   selectedWindow,
   setSelectedWindow,
   link,
+  windowID,
+  title,
 }: Props) => {
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
   return (
     <div
       style={{
@@ -82,7 +88,15 @@ const ProjectWindowNavigation = ({
       </div>
       <div
         className="project-navigation"
-        onClick={() => setSelectedWindow('live')}
+        onClick={(e) => {
+          if (title === 'Portfolio') {
+            e.stopPropagation();
+            dispatch(setMinimize({ windowID, minimize: true }));
+            dispatch(setFocus({ windowID, focus: false }));
+          } else {
+            setSelectedWindow('live');
+          }
+        }}
         style={{
           border:
             selectedWindow === 'live' ? '1px solid rgb(122, 152, 175)' : 'none',

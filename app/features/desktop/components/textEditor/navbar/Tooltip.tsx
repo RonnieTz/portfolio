@@ -9,12 +9,14 @@ import { openWindow, setSubWindow } from '@/app/redux/app/appSlice';
 
 type Props = {
   contentID: string;
+  windowID: string;
+  subWindowID: string;
 };
 
-const Tooltip = ({ contentID }: Props) => {
+const Tooltip = ({ contentID, subWindowID, windowID }: Props) => {
   const dispatch = useDispatch();
   const { textFiles } = useSelector((state: RootState) => state.editor);
-  const file = textFiles.find((file) => file.id === contentID)!;
+  const file = textFiles.find((file) => file.contentID === contentID);
 
   return (
     <div
@@ -25,26 +27,25 @@ const Tooltip = ({ contentID }: Props) => {
     >
       <span
         onClick={() => {
-          dispatch(setTextWrap({ fileId: contentID, textWrap: !file.wrap }));
+          dispatch(setTextWrap({ contentID, textWrap: !file?.wrap }));
         }}
         className="editor-tooltip-item"
       >
         <span>Word Wrap</span>
-        {file.wrap && <Tick />}
+        {file?.wrap && <Tick />}
       </span>
       <span
         onClick={(e) => {
           const x = e.clientX;
           const y = e.clientY;
+
           dispatch(
             openWindow({
-              windowID: 'font',
+              windowID: windowID + 'font',
             })
           );
-          dispatch(
-            setSubWindow({ subWindow: 'font', windowID: 'TextFileID123' })
-          );
-          dispatch(setEditorTooltipShow({ tooltipShow: false }));
+          dispatch(setSubWindow({ subWindow: subWindowID, windowID }));
+          dispatch(setEditorTooltipShow({ tooltipShow: false, contentID }));
         }}
         className="editor-tooltip-item"
       >

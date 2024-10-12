@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initialState, TooltipShow } from './initialState';
+import { initialState, TooltipShow, TextFile } from './initialState';
 
 const editorSlice = createSlice({
   name: 'editor',
@@ -7,22 +7,32 @@ const editorSlice = createSlice({
   reducers: {
     setEditorTooltipShowValue: (
       state,
-      action: PayloadAction<{ tooltipShow: TooltipShow }>
+      action: PayloadAction<{ tooltipShow: TooltipShow; contentID: string }>
     ) => {
-      state.tooltipShow.value = action.payload.tooltipShow;
+      const file = state.textFiles.find(
+        (file) => file.contentID === action.payload.contentID
+      );
+      if (file) {
+        file.tooltipShow.value = action.payload.tooltipShow;
+      }
     },
     setEditorTooltipShow: (
       state,
-      action: PayloadAction<{ tooltipShow: boolean }>
+      action: PayloadAction<{ tooltipShow: boolean; contentID: string }>
     ) => {
-      state.tooltipShow.show = action.payload.tooltipShow;
+      const file = state.textFiles.find(
+        (file) => file.contentID === action.payload.contentID
+      );
+      if (file) {
+        file.tooltipShow.show = action.payload.tooltipShow;
+      }
     },
     setTextWrap: (
       state,
-      action: PayloadAction<{ textWrap: boolean; fileId: string }>
+      action: PayloadAction<{ textWrap: boolean; contentID: string }>
     ) => {
       const file = state.textFiles.find(
-        (file) => file.id === action.payload.fileId
+        (file) => file.contentID === action.payload.contentID
       );
       if (file) {
         file.wrap = action.payload.textWrap;
@@ -30,13 +40,13 @@ const editorSlice = createSlice({
     },
     saveTextFile: (
       state,
-      action: PayloadAction<{ id: string; text: string }>
+      action: PayloadAction<{ contentID: string; content: string }>
     ) => {
       const file = state.textFiles.find(
-        (file) => file.id === action.payload.id
+        (file) => file.contentID === action.payload.contentID
       );
       if (file) {
-        file.content = action.payload.text;
+        file.content = action.payload.content;
       }
     },
     setFontOptions: (
@@ -45,13 +55,11 @@ const editorSlice = createSlice({
         fontFamily: string;
         fontStyle: string;
         fontSize: number;
-        id: string;
+        contentID: string;
       }>
     ) => {
-      console.log(action.payload);
-
       const file = state.textFiles.find(
-        (file) => file.id === action.payload.id
+        (file) => file.contentID === action.payload.contentID
       );
       if (file) {
         file.fontOptions = {
@@ -60,6 +68,20 @@ const editorSlice = createSlice({
           fontSize: action.payload.fontSize,
         };
       }
+    },
+    newTextData: (state, action: PayloadAction<{ contentID: string }>) => {
+      const file: TextFile = {
+        contentID: action.payload.contentID,
+        content: '',
+        wrap: false,
+        fontOptions: {
+          fontFamily: 'Arial',
+          fontSize: 12,
+          fontStyle: 'Normal',
+        },
+        tooltipShow: { value: '', show: false },
+      };
+      state.textFiles.push(file);
     },
   },
 });
@@ -71,4 +93,5 @@ export const {
   setTextWrap,
   saveTextFile,
   setFontOptions,
+  newTextData,
 } = editorSlice.actions;

@@ -135,7 +135,7 @@ const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
       <TooltipDivider />
       <p
         onClick={() => {
-          dispatch(closeWindow({ windowID: 'Minesweeper' }));
+          dispatch(closeWindow({ windowID: 'MinesweeperID123' }));
           setIsHovered(false);
         }}
         className="ms-tooltip-item"

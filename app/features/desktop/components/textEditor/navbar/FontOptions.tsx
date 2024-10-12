@@ -7,9 +7,15 @@ import Sample from './Sample';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 
-const FontOptions = ({ contentID }: { contentID: string }) => {
+const FontOptions = ({
+  contentID,
+  windowID,
+}: {
+  contentID: string;
+  windowID: string;
+}) => {
   const { textFiles } = useSelector((state: RootState) => state.editor);
-  const file = textFiles.find((file) => file.id === contentID);
+  const file = textFiles.find((file) => file.contentID === contentID);
   const fontOptions = file?.fontOptions;
   const [fontFamilyOption, setFontFamilyOption] = useState(
     fontOptions?.fontFamily || 'Arial'
@@ -36,6 +42,7 @@ const FontOptions = ({ contentID }: { contentID: string }) => {
         fontSize={fontSizeOption}
         fontStyle={fontStyleOption}
         contentID={contentID}
+        windowID={windowID}
       />
       <Sample
         fontFamily={fontFamilyOption}

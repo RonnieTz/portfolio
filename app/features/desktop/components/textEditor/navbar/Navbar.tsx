@@ -5,20 +5,25 @@ import { setEditorTooltipShowValue } from '@/app/redux/editor/editorSlice';
 
 type Props = {
   contentID: string;
+  windowID: string;
+  subWindowID: string;
 };
 
-const Navbar = ({ contentID }: Props) => {
+const Navbar = ({ contentID, subWindowID, windowID }: Props) => {
   const dispatch = useDispatch();
-  const { tooltipShow } = useSelector((state: RootState) => state.editor);
+  const { textFiles } = useSelector((state: RootState) => state.editor);
+  const file = textFiles.find((file) => file.contentID === contentID);
   return (
     <div className="editor-navbar">
       <span
         onMouseEnter={() => {
-          dispatch(setEditorTooltipShowValue({ tooltipShow: 'File' }));
+          dispatch(
+            setEditorTooltipShowValue({ contentID, tooltipShow: 'File' })
+          );
         }}
         className={
           'editor-navbar-item' +
-          (tooltipShow.value === 'File' && tooltipShow.show
+          (file?.tooltipShow.value === 'File' && file?.tooltipShow.show
             ? ' editor-navbar-item-selected'
             : '')
         }
@@ -27,25 +32,33 @@ const Navbar = ({ contentID }: Props) => {
       </span>
       <span
         onMouseEnter={() => {
-          dispatch(setEditorTooltipShowValue({ tooltipShow: 'Edit' }));
+          dispatch(
+            setEditorTooltipShowValue({ tooltipShow: 'Edit', contentID })
+          );
         }}
         className={
           'editor-navbar-item' +
-          (tooltipShow.value === 'Edit' && tooltipShow.show
+          (file?.tooltipShow.value === 'Edit' && file?.tooltipShow.show
             ? ' editor-navbar-item-selected'
             : '')
         }
       >
         <span>Edit</span>
       </span>
-      <Format contentID={contentID} />
+      <Format
+        contentID={contentID}
+        subWindowID={subWindowID}
+        windowID={windowID}
+      />
       <span
         onMouseEnter={() => {
-          dispatch(setEditorTooltipShowValue({ tooltipShow: 'View' }));
+          dispatch(
+            setEditorTooltipShowValue({ tooltipShow: 'View', contentID })
+          );
         }}
         className={
           'editor-navbar-item' +
-          (tooltipShow.value === 'View' && tooltipShow.show
+          (file?.tooltipShow.value === 'View' && file?.tooltipShow.show
             ? ' editor-navbar-item-selected'
             : '')
         }
@@ -54,11 +67,13 @@ const Navbar = ({ contentID }: Props) => {
       </span>
       <span
         onMouseEnter={() => {
-          dispatch(setEditorTooltipShowValue({ tooltipShow: 'Help' }));
+          dispatch(
+            setEditorTooltipShowValue({ tooltipShow: 'Help', contentID })
+          );
         }}
         className={
           'editor-navbar-item' +
-          (tooltipShow.value === 'Help' && tooltipShow.show
+          (file?.tooltipShow.value === 'Help' && file?.tooltipShow.show
             ? ' editor-navbar-item-selected'
             : '')
         }

@@ -25,7 +25,9 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
         e.stopPropagation();
         dispatch(showContextMenu());
         dispatch(setPosition({ x: e.clientX, y: e.clientY }));
-        dispatch(setTarget({ target: { type: 'folder', folderID } }));
+        dispatch(
+          setTarget({ target: { type: 'folder', folderID: folderLocation } })
+        );
       }}
       onClick={() => {
         dispatch(unSelectAllShortcuts());
@@ -46,7 +48,7 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
               title={link.name}
               windowID={link.windowID}
               linkID={link.linkID}
-              key={link.windowID + 'link'}
+              key={link.linkID}
               rename={link.rename}
             />
           );

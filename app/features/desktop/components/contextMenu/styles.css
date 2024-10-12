@@ -19,6 +19,15 @@
   transition: all 0.1s;
   color: rgb(10, 10, 10);
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.context-menu-item span {
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  transition: all 0.1s;
+  color: rgb(10, 10, 10);
 }
 
 .context-menu-item:hover:not(.button-disabled) {
@@ -31,4 +40,18 @@
   width: 95%;
   border-top: 1.5px solid rgb(177, 176, 162);
   margin: 4px auto;
+}
+
+.context-menu-new-button-tooltip {
+  width: 130px;
+  /* height: 100px; */
+  position: absolute;
+  background-color: rgb(248, 252, 248);
+  border: 1.5px solid rgb(177, 176, 162);
+  border-radius: 1px;
+  box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.4);
+  left: 105px;
+  top: 0px;
+  z-index: 2000;
+  padding: 3px;
 }

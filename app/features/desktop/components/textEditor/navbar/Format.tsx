@@ -8,29 +8,45 @@ import {
 import Tooltip from './Tooltip';
 type Props = {
   contentID: string;
+  windowID: string;
+  subWindowID: string;
 };
-const Format = ({ contentID }: Props) => {
+const Format = ({ contentID, subWindowID, windowID }: Props) => {
   const dispatch = useDispatch();
-  const { tooltipShow } = useSelector((state: RootState) => state.editor);
+  const { textFiles } = useSelector((state: RootState) => state.editor);
+  const file = textFiles.find((file) => file.contentID === contentID);
   return (
     <span
       onClick={(e) => {
         e.stopPropagation();
-        dispatch(setEditorTooltipShow({ tooltipShow: !tooltipShow.show }));
+        console.log(file);
+
+        dispatch(
+          setEditorTooltipShow({
+            tooltipShow: !file?.tooltipShow.show!,
+            contentID,
+          })
+        );
       }}
       onMouseEnter={() => {
-        dispatch(setEditorTooltipShowValue({ tooltipShow: 'Format' }));
+        dispatch(
+          setEditorTooltipShowValue({ contentID, tooltipShow: 'Format' })
+        );
       }}
       className={
         'editor-navbar-item' +
-        (tooltipShow.value === 'Format' && tooltipShow.show
+        (file?.tooltipShow.value === 'Format' && file?.tooltipShow.show
           ? ' editor-navbar-item-selected'
           : '')
       }
     >
       <span>Format</span>
-      {tooltipShow.value === 'Format' && tooltipShow.show && (
-        <Tooltip contentID={contentID} />
+      {file?.tooltipShow.value === 'Format' && file?.tooltipShow.show && (
+        <Tooltip
+          contentID={contentID}
+          subWindowID={subWindowID}
+          windowID={windowID}
+        />
       )}
     </span>
   );

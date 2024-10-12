@@ -10,12 +10,15 @@ import ContextDeleteButton from './ContextDeleteButton';
 import ContextRenameButton from './ContextRenameButton';
 import ContextViewButton from './ContextViewButton';
 import ContextRefreshButton from './ContextRefreshButton';
-import ContextNewButton from './ContextNewButton';
+import ContextNewButton from './newButton/ContextNewButton';
 import ContextDetailsButton from './ContextDetailsButton';
-import { openWindow } from '@/app/redux/app/appSlice';
 
 const Container = () => {
   const { position, target } = useSelector((state: RootState) => state.context);
+  const { links } = useSelector((state: RootState) => state.app);
+
+  const folderID = target?.type === 'folder' ? target.folderID : undefined;
+  const windowID = links.find((link) => link.linkID === folderID)?.windowID;
 
   return (
     <div
@@ -39,7 +42,7 @@ const Container = () => {
       <ContextCutButton />
       <ContextPasteButton />
       <Divider />
-      <ContextNewButton />
+      <ContextNewButton folderID={folderID} windowID={windowID} />
       <Divider />
       <ContextDeleteButton />
       <ContextRenameButton

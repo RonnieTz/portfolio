@@ -13,6 +13,8 @@ const ChessProject = ({ liveLink, codesandboxLink, gitHubLink }: Props) => {
       codesandboxLink={codesandboxLink}
       liveLink={liveLink}
       gitHubLink={gitHubLink}
+      windowID="chess"
+      title="Chess Game"
     >
       <ChessWindowDescription />
     </ProjectWindow>

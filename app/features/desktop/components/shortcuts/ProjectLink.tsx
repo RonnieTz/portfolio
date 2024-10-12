@@ -11,6 +11,7 @@ import {
   showContextMenu,
   setPosition,
   setTarget,
+  hideContextMenu,
 } from '@/app/redux/contextMenu/contextSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
@@ -55,6 +56,7 @@ const ProjectLink = ({
       onClick={(e) => {
         e.stopPropagation();
         dispatch(selectShortcut({ linkID }));
+        dispatch(hideContextMenu());
       }}
       onDoubleClick={() => {
         if (type === 'folder' && open) {

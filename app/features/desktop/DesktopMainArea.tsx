@@ -1,7 +1,11 @@
 import Window from './components/windowTemplate/Window';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { setStartOpen, unSelectAllShortcuts } from '@/app/redux/app/appSlice';
+import {
+  setStartOpen,
+  unSelectAllShortcuts,
+  removeRenameStates,
+} from '@/app/redux/app/appSlice';
 import ChessProject from './components/projects/chess/ChessProject';
 import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
@@ -34,6 +38,7 @@ const DesktopMainArea = () => {
         dispatch(setStartOpen(false));
         dispatch(unSelectAllShortcuts());
         dispatch(hideContextMenu());
+        dispatch(removeRenameStates());
       }}
       onContextMenu={(e) => {
         e.preventDefault();
@@ -42,6 +47,7 @@ const DesktopMainArea = () => {
         dispatch(
           setTarget({ target: { type: 'folder', folderID: 'desktop' } })
         );
+        dispatch(removeRenameStates());
       }}
       style={{
         position: 'absolute',
@@ -136,8 +142,11 @@ const DesktopMainArea = () => {
                 subWindow=""
               >
                 {window.title === 'Scores' && <Scores />}
-                {window.title === 'Fonts' && (
-                  <FontOptions contentID={window.content} />
+                {window.title.includes('Fonts') && (
+                  <FontOptions
+                    contentID={window.content}
+                    windowID={window.windowID}
+                  />
                 )}
               </Window>
             );
@@ -215,7 +224,11 @@ const DesktopMainArea = () => {
                 link=""
                 subWindow={window.subWindow}
               >
-                <EditorContainer contentID={window.content} />
+                <EditorContainer
+                  contentID={window.content}
+                  windowID={window.windowID}
+                  subWindowID={window.subWindow}
+                />
               </Window>
             );
           }

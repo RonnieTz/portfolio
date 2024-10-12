@@ -1,16 +1,36 @@
-import { useDispatch } from 'react-redux';
-import { closeWindow } from '@/app/redux/app/appSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  closeWindow,
+  focusWindow,
+  setSubWindow,
+} from '@/app/redux/app/appSlice';
 import { setFontOptions } from '@/app/redux/editor/editorSlice';
+import { RootState } from '@/app/redux/store';
 
 type Props = {
   fontFamily: string;
   fontStyle: string;
   fontSize: number;
   contentID: string;
+  windowID: string;
 };
 
-const Confirm = ({ fontFamily, fontSize, fontStyle, contentID }: Props) => {
+const Confirm = ({
+  fontFamily,
+  fontSize,
+  fontStyle,
+  contentID,
+  windowID,
+}: Props) => {
   const dispatch = useDispatch();
+
+  const { windows } = useSelector((state: RootState) => state.app);
+
+  const parentWindowID = windows.find(
+    (window) =>
+      (window.type === 'program' || window.type === 'textFile') &&
+      window.subWindow === windowID
+  )?.windowID;
 
   return (
     <>
@@ -24,10 +44,12 @@ const Confirm = ({ fontFamily, fontSize, fontStyle, contentID }: Props) => {
               fontFamily,
               fontSize,
               fontStyle,
-              id: contentID,
+              contentID,
             })
           );
-          dispatch(closeWindow({ windowID: 'font' }));
+          dispatch(closeWindow({ windowID }));
+          dispatch(setSubWindow({ windowID: parentWindowID!, subWindow: '' }));
+          dispatch(focusWindow({ windowID: parentWindowID!, focus: true }));
         }}
         className="editor-font-options-button"
       >

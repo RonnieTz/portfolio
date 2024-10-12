@@ -9,6 +9,8 @@ type Props = {
   codesandboxLink: string;
   gitHubLink: string;
   children: React.ReactNode;
+  windowID: string;
+  title: string;
 };
 
 const ProjectWindow = ({
@@ -16,6 +18,8 @@ const ProjectWindow = ({
   liveLink,
   children,
   gitHubLink,
+  windowID,
+  title,
 }: Props) => {
   const [selectedWindow, setSelectedWindow] = useState('description');
 
@@ -30,9 +34,11 @@ const ProjectWindow = ({
     >
       {selectedWindow === 'description' && children}
       <ProjectWindowNavigation
+        windowID={windowID}
         selectedWindow={selectedWindow}
         setSelectedWindow={setSelectedWindow}
         link={gitHubLink}
+        title={title}
       />
 
       <ProjectWindowExternal

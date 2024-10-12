@@ -12,7 +12,7 @@ const EditArea = ({ contentID }: Props) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const dispatch = useDispatch();
   const { textFiles } = useSelector((state: RootState) => state.editor);
-  const file = textFiles.find((file) => file.id === contentID);
+  const file = textFiles.find((file) => file.contentID === contentID);
   const [value, setValue] = useState(file ? file.content : '');
 
   return (
@@ -31,7 +31,7 @@ const EditArea = ({ contentID }: Props) => {
       }}
       onChange={(e) => {
         setValue(e.target.value);
-        dispatch(saveTextFile({ id: contentID, text: e.target.value }));
+        dispatch(saveTextFile({ contentID, content: e.target.value }));
       }}
       className="edit-area"
       value={value}

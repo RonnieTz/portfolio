@@ -35,16 +35,6 @@ export const chess: ProjectWindow = {
   open: false,
 };
 
-export const chessLink: Link = {
-  name: 'Chess Game',
-  selected: false,
-  linkID: 'ChessLinkID1',
-  folderLocation: 'desktop',
-  windowID: 'ChessID123',
-  logo: logo as any,
-  rename: false,
-};
-
 export const quiz: ProjectWindow = {
   title: 'Quiz Game',
   liveLink: 'https://quiz-smoky-rho.vercel.app/',
@@ -63,16 +53,6 @@ export const quiz: ProjectWindow = {
   zIndex: 10,
   position: { y: Math.random() * 100, x: Math.random() * 300 },
   open: false,
-};
-
-export const quizLink: Link = {
-  name: 'Quiz Game',
-  selected: false,
-  linkID: 'QuizLinkID123',
-  folderLocation: 'desktop',
-  windowID: 'QuizID123',
-  logo: quizLogo,
-  rename: false,
 };
 
 export const portfolio: ProjectWindow = {
@@ -95,46 +75,6 @@ export const portfolio: ProjectWindow = {
   open: false,
 };
 
-export const portfolioLink: Link = {
-  name: 'Portfolio',
-  selected: false,
-  linkID: 'PortfolioLinkID123',
-  folderLocation: 'desktop',
-  windowID: 'PortfolioID123',
-  logo: portfolioLogo,
-  rename: false,
-};
-
-export const folder: FolderWindow = {
-  title: 'Folder',
-  logo: folderLogo,
-  selected: false,
-  type: 'folder',
-  size: { width: 650, height: 650 },
-  windowID: 'FolderID123',
-  fixedSize: false,
-  fullScreen: false,
-  minimized: false,
-  focused: true,
-  zIndex: 10,
-  position: { y: Math.random() * 100, x: Math.random() * 300 },
-  open: false,
-  history: {
-    locations: [],
-    currentLocation: 0,
-  },
-};
-
-export const folderLink: Link = {
-  name: 'Folder',
-  selected: false,
-  linkID: 'FolderLinkID1',
-  folderLocation: 'desktop',
-  windowID: 'FolderID123',
-  logo: folderLogo,
-  rename: false,
-};
-
 export const minesweeper: ProgramWindow = {
   title: 'Minesweeper',
   logo: minesweeperLogo,
@@ -150,16 +90,6 @@ export const minesweeper: ProgramWindow = {
   selected: false,
   type: 'program',
   open: false,
-};
-
-export const minesweeperLink: Link = {
-  name: 'Minesweeper',
-  selected: false,
-  linkID: 'MinesweeperLinkID123',
-  folderLocation: 'desktop',
-  windowID: 'MinesweeperID123',
-  logo: minesweeperLogo,
-  rename: false,
 };
 
 export const scores: SubWindow = {
@@ -181,7 +111,7 @@ export const scores: SubWindow = {
 
 export const textEditorFonts: SubWindow = {
   type: 'subWindow',
-  windowID: 'font',
+  windowID: 'TextFileID123font',
   title: 'Fonts',
   logo: textLogo,
   size: { width: 500, height: 450 },
@@ -214,16 +144,6 @@ export const textFile: TextFileWindow = {
   open: false,
 };
 
-export const textFileLink: Link = {
-  name: 'Text File',
-  selected: false,
-  linkID: 'TextFileLinkID123',
-  folderLocation: 'desktop',
-  windowID: 'TextFileID123',
-  logo: textLogo,
-  rename: false,
-};
-
 export const profile: ProfileWindow = {
   title: 'Profile',
   logo: profileLogo,
@@ -240,6 +160,26 @@ export const profile: ProfileWindow = {
   position: { y: Math.random() * 100, x: Math.random() * 300 },
 };
 
+export const folder: FolderWindow = {
+  title: 'Folder',
+  logo: folderLogo,
+  selected: false,
+  type: 'folder',
+  size: { width: 650, height: 650 },
+  windowID: 'FolderID123',
+  fixedSize: false,
+  fullScreen: false,
+  minimized: false,
+  focused: true,
+  zIndex: 10,
+  position: { y: Math.random() * 100, x: Math.random() * 300 },
+  open: false,
+  history: {
+    locations: [],
+    currentLocation: 0,
+  },
+};
+
 export const profileLink: Link = {
   name: 'Profile',
   selected: false,
@@ -247,5 +187,65 @@ export const profileLink: Link = {
   folderLocation: 'desktop',
   windowID: 'ProfileID123',
   logo: profileLogo,
+  rename: false,
+};
+
+export const minesweeperLink: Link = {
+  name: 'Minesweeper',
+  selected: false,
+  linkID: 'MinesweeperLinkID123',
+  folderLocation: 'desktop',
+  windowID: 'MinesweeperID123',
+  logo: minesweeperLogo,
+  rename: false,
+};
+
+export const textFileLink: Link = {
+  name: 'Text File',
+  selected: false,
+  linkID: 'TextFileLinkID123',
+  folderLocation: 'desktop',
+  windowID: 'TextFileID123',
+  logo: textLogo,
+  rename: false,
+};
+
+export const folderLink: Link = {
+  name: 'Folder',
+  selected: false,
+  linkID: 'FolderLinkID1',
+  folderLocation: 'desktop',
+  windowID: 'FolderID123',
+  logo: folderLogo,
+  rename: false,
+};
+
+export const chessLink: Link = {
+  name: 'Chess Game',
+  selected: false,
+  linkID: 'ChessLinkID1',
+  folderLocation: 'desktop',
+  windowID: 'ChessID123',
+  logo: logo as any,
+  rename: false,
+};
+
+export const quizLink: Link = {
+  name: 'Quiz Game',
+  selected: false,
+  linkID: 'QuizLinkID123',
+  folderLocation: 'desktop',
+  windowID: 'QuizID123',
+  logo: quizLogo,
+  rename: false,
+};
+
+export const portfolioLink: Link = {
+  name: 'Portfolio',
+  selected: false,
+  linkID: 'PortfolioLinkID123',
+  folderLocation: 'desktop',
+  windowID: 'PortfolioID123',
+  logo: portfolioLogo,
   rename: false,
 };
