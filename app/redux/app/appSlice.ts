@@ -1,14 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './initialState';
-import { set_WindowPosition } from '../reducers/setWindowPosition';
-import { set_WindowFullScreen } from '../reducers/setWindowFullScreen';
-import logo from '@/public/description.png';
-import textLogo from '@/public/text.png';
-import folderLogo from '@/public/Folder Closed.png';
-import { nanoid } from '@reduxjs/toolkit';
-import type { TextFileWindow, Link, SubWindow, FolderWindow } from './types';
-import { link } from 'fs';
-import { act } from 'react';
+import { set_WindowPosition } from './reducers/setWindowPosition';
+import { set_WindowFullScreen } from './reducers/setWindowFullScreen';
+import { allReducers } from './reducers/allReducers';
 
 const appSlice = createSlice({
   name: 'app',
@@ -46,6 +40,12 @@ const appSlice = createSlice({
 
       if (window) {
         window.open = false;
+      }
+      if (window?.type === 'folder') {
+        window.history = {
+          locations: [],
+          currentLocation: 0,
+        };
       }
 
       state.taskList = state.taskList.filter(
@@ -258,138 +258,7 @@ const appSlice = createSlice({
     },
     navigateFolderBack: (state) => {},
     navigateFolderForward: (state) => {},
-    newTextFile: (
-      state,
-      action: PayloadAction<{ folderID: string; contentID: string }>
-    ) => {
-      const existingLinkInFolder = state.links.filter(
-        (link) => link.folderLocation === action.payload.folderID
-      );
-
-      function findNewName() {
-        let i = 1;
-        let newName = 'New Text File';
-        while (existingLinkInFolder.some((link) => link.name === newName)) {
-          i++;
-          newName = `New Text File (${i})`;
-        }
-        return newName;
-      }
-      const windowID = nanoid();
-      const fontWindowID = windowID + 'font';
-      const linkID = nanoid();
-      const newLink: Link = {
-        linkID,
-        name: findNewName(),
-        folderLocation: action.payload.folderID,
-        logo: textLogo,
-        selected: false,
-        windowID,
-        rename: true,
-      };
-      const newWindow: TextFileWindow = {
-        windowID,
-        title: findNewName(),
-        logo: textLogo,
-        size: { width: 650, height: 650 },
-        fixedSize: false,
-        fullScreen: false,
-        minimized: false,
-        focused: true,
-        zIndex: 10,
-        position: { y: Math.random() * 100, x: Math.random() * 300 },
-        selected: false,
-        open: false,
-        type: 'textFile',
-        content: action.payload.contentID,
-        subWindow: '',
-      };
-      const newFontWindow: SubWindow = {
-        windowID: fontWindowID,
-        title: `Fonts`,
-        logo: textLogo,
-        size: { width: 500, height: 450 },
-        fixedSize: true,
-        fullScreen: false,
-        minimized: false,
-        focused: true,
-        zIndex: 10,
-        position: { y: Math.random() * 300, x: Math.random() * 400 },
-        selected: false,
-        open: false,
-        type: 'subWindow',
-        content: action.payload.contentID,
-      };
-      state.windows.push(newWindow, newFontWindow);
-      state.links.push(newLink);
-    },
-    newFolder: (
-      state,
-      action: PayloadAction<{ folderID: string; windowID: string }>
-    ) => {
-      const existingLinkInFolder = state.links.filter(
-        (link) => link.folderLocation === action.payload.folderID
-      );
-
-      function findNewName() {
-        let i = 1;
-        let newName = 'New Folder';
-        while (existingLinkInFolder.some((link) => link.name === newName)) {
-          i++;
-          newName = `New Folder (${i})`;
-        }
-        return newName;
-      }
-      const linkID = nanoid();
-      const newWindowID = nanoid();
-
-      if (action.payload.folderID === 'desktop') {
-        const newName = findNewName();
-        const newLink: Link = {
-          linkID,
-          name: newName,
-          folderLocation: 'desktop',
-          logo: folderLogo,
-          selected: false,
-          windowID: newWindowID,
-          rename: true,
-        };
-
-        const newWindow: FolderWindow = {
-          title: newName,
-          logo: folderLogo,
-          selected: false,
-          type: 'folder',
-          size: { width: 650, height: 650 },
-          windowID: newWindowID,
-          fixedSize: false,
-          fullScreen: false,
-          minimized: false,
-          focused: true,
-          zIndex: 10,
-          position: { y: Math.random() * 100, x: Math.random() * 300 },
-          open: false,
-          history: {
-            locations: [],
-            currentLocation: 0,
-          },
-        };
-        state.windows.push(newWindow);
-        state.links.push(newLink);
-        return;
-      }
-
-      const newLink: Link = {
-        linkID,
-        name: findNewName(),
-        folderLocation: action.payload.folderID,
-        logo: folderLogo,
-        selected: false,
-        windowID: action.payload.windowID,
-        rename: true,
-      };
-      state.links.push(newLink);
-    },
+    ...allReducers,
   },
 });
 
@@ -416,7 +285,8 @@ export const {
   renameLink,
   setRenameState,
   removeRenameStates,
-  newTextFile,
   newFolder,
+  deleteLink,
+  newTextFile,
 } = appSlice.actions;
 export default appSlice.reducer;

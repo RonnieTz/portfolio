@@ -11,6 +11,11 @@ export const store = configureStore({
     minesweeper: minesweeperSlice,
     context: contextSlice,
   },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -4,9 +4,10 @@ import { hideContextMenu } from '@/app/redux/contextMenu/contextSlice';
 
 type Props = {
   linkID: string | undefined;
+  enabled: boolean;
 };
 
-const ContextRenameButton = ({ linkID }: Props) => {
+const ContextRenameButton = ({ linkID, enabled }: Props) => {
   const dispatch = useDispatch();
   return (
     <div
@@ -14,7 +15,7 @@ const ContextRenameButton = ({ linkID }: Props) => {
         if (linkID) dispatch(setRenameState({ linkID }));
         dispatch(hideContextMenu());
       }}
-      className="context-menu-item"
+      className={`context-menu-item ${enabled ? '' : 'button-disabled'}`}
     >
       Rename
     </div>

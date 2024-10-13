@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { InitialState } from '../app/types';
+import { InitialState } from '../types';
 
 export const set_WindowFullScreen = (
   state: InitialState,

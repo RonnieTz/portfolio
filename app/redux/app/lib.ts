@@ -31,7 +31,7 @@ export const chess: ProjectWindow = {
   minimized: false,
   focused: true,
   zIndex: 10,
-  position: { y: Math.random() * 100, x: Math.random() * 300 },
+  position: { y: Math.random() * 20, x: Math.random() * 20 },
   open: false,
 };
 
@@ -51,7 +51,7 @@ export const quiz: ProjectWindow = {
   minimized: false,
   focused: true,
   zIndex: 10,
-  position: { y: Math.random() * 100, x: Math.random() * 300 },
+  position: { y: Math.random() * 20, x: Math.random() * 20 },
   open: false,
 };
 
@@ -71,7 +71,7 @@ export const portfolio: ProjectWindow = {
   minimized: false,
   focused: true,
   zIndex: 10,
-  position: { y: Math.random() * 100, x: Math.random() * 300 },
+  position: { y: Math.random() * 20, x: Math.random() * 20 },
   open: false,
 };
 
@@ -85,7 +85,7 @@ export const minesweeper: ProgramWindow = {
   minimized: false,
   focused: true,
   zIndex: 10,
-  position: { y: Math.random() * 100, x: Math.random() * 300 },
+  position: { y: Math.random() * 20, x: Math.random() * 20 },
   subWindow: '',
   selected: false,
   type: 'program',
@@ -103,7 +103,7 @@ export const scores: SubWindow = {
   minimized: false,
   focused: true,
   zIndex: 10,
-  position: { y: Math.random() * 300, x: Math.random() * 400 },
+  position: { y: Math.random() * 20, x: Math.random() * 20 },
   selected: false,
   open: false,
   content: '',
@@ -120,7 +120,7 @@ export const textEditorFonts: SubWindow = {
   minimized: false,
   focused: true,
   zIndex: 10,
-  position: { y: Math.random() * 300, x: Math.random() * 400 },
+  position: { y: Math.random() * 20, x: Math.random() * 20 },
   selected: false,
   open: false,
   content: 'text123',
@@ -137,7 +137,7 @@ export const textFile: TextFileWindow = {
   minimized: false,
   focused: true,
   zIndex: 10,
-  position: { y: Math.random() * 100, x: Math.random() * 300 },
+  position: { y: Math.random() * 20, x: Math.random() * 20 },
   subWindow: '',
   selected: false,
   type: 'textFile',
@@ -157,7 +157,7 @@ export const profile: ProfileWindow = {
   open: false,
   selected: false,
   type: 'profile',
-  position: { y: Math.random() * 100, x: Math.random() * 300 },
+  position: { y: Math.random() * 10, x: Math.random() * 10 },
 };
 
 export const folder: FolderWindow = {
@@ -165,14 +165,14 @@ export const folder: FolderWindow = {
   logo: folderLogo,
   selected: false,
   type: 'folder',
-  size: { width: 650, height: 650 },
+  size: { width: 500, height: 500 },
   windowID: 'FolderID123',
   fixedSize: false,
   fullScreen: false,
   minimized: false,
   focused: true,
   zIndex: 10,
-  position: { y: Math.random() * 100, x: Math.random() * 300 },
+  position: { y: Math.random() * 200, x: Math.random() * 200 },
   open: false,
   history: {
     locations: [],

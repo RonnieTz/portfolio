@@ -4,6 +4,7 @@ import {
   setWindowPosition,
   setWindowFullScreen,
 } from '@/app/redux/app/appSlice';
+import { hideContextMenu } from '@/app/redux/contextMenu/contextSlice';
 import WindowBarBackground from './WindowBarBackground';
 import WindowBarButtons from './WindowBarButtons';
 import WindowTitle from './WindowTitle';
@@ -52,6 +53,7 @@ const WindowBar = ({
         const y = e.clientY;
         e.dataTransfer.setDragImage(new Image(), 0, 0);
         ref.current = { x: x - position.x, y: y - position.y };
+        dispatch(hideContextMenu());
       }}
       onDragEnd={(e) => {
         const x = e.clientX;

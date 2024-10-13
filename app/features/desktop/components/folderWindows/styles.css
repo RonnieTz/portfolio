@@ -363,6 +363,6 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  overflow: auto;
+  overflow: hidden;
   align-content: flex-start;
 }

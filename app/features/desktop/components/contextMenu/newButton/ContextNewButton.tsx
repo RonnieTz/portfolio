@@ -12,22 +12,21 @@ import NewFolderButton from './NewFolderButton';
 type Props = {
   folderID: string | undefined;
   windowID: string | undefined;
+  enabled: boolean;
 };
 
-const ContextNewButton = ({ folderID, windowID }: Props) => {
-  const dispatch = useDispatch();
+const ContextNewButton = ({ folderID, windowID, enabled }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [newTextIsHovered, setNewTextIsHovered] = useState(false);
-  const [newFolderIsHovered, setNewFolderIsHovered] = useState(false);
   return (
     <div
       onMouseEnter={() => {
+        if (!enabled) return;
         setIsHovered(true);
       }}
       onMouseLeave={() => {
         setIsHovered(false);
       }}
-      className="context-menu-item"
+      className={`context-menu-item ${!enabled ? 'button-disabled' : ''}`}
     >
       <span
         style={{

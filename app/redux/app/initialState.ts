@@ -12,7 +12,6 @@ import {
   quizLink,
   portfolioLink,
   folderLink,
-  minesweeperLink,
   profileLink,
   textFileLink,
   textEditorFonts,

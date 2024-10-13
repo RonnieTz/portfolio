@@ -1,7 +1,5 @@
 import { Box } from '@mui/material';
 import React, { ReactNode } from 'react';
-import windowBody from '@/public/windowBody.jpg';
-import Image from 'next/image';
 
 const WindowBody = ({ children }: { link: string; children: ReactNode }) => {
   return (
@@ -22,13 +20,6 @@ const WindowBody = ({ children }: { link: string; children: ReactNode }) => {
       >
         {children}
       </Box>
-
-      <Image
-        priority={true}
-        style={{ height: '100%', width: '100%' }}
-        src={windowBody}
-        alt="window body"
-      />
     </Box>
   );
 };

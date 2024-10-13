@@ -6,6 +6,7 @@ export type TextFile = {
   wrap: boolean;
   fontOptions: { fontFamily: string; fontSize: number; fontStyle: string };
   tooltipShow: { value: TooltipShow; show: boolean };
+  dateModified: Date;
 };
 
 export const initialState: {
@@ -24,6 +25,7 @@ export const initialState: {
         fontStyle: 'Normal',
       },
       tooltipShow: { value: '', show: false },
+      dateModified: new Date(),
     },
   ],
 };

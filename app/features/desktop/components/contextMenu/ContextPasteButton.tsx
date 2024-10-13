@@ -1,13 +1,6 @@
 import { buttonDisabled } from './library';
 
 const ContextPasteButton = () => {
-  return (
-    <div
-      style={true ? buttonDisabled : undefined}
-      className="context-menu-item"
-    >
-      Paste
-    </div>
-  );
+  return <div className="context-menu-item button-disabled">Paste</div>;
 };
 export default ContextPasteButton;

@@ -13,6 +13,7 @@ const Title = ({
     <div
       style={{
         fontSize: '0.7rem',
+        maxWidth: '100%',
         color:
           color === 'light' || (color === 'dark' && selected)
             ? 'rgb(227, 230, 225)'
@@ -25,12 +26,17 @@ const Title = ({
         letterSpacing: '0.1px',
         cursor: 'default',
         backgroundColor: selected ? 'rgb(48, 94, 192)' : 'transparent',
-        padding: '0 4px',
+        padding: '2px 5px',
         transition: 'all 0.1s',
         border: selected
           ? '1.2px dotted rgb(175, 137, 68)'
           : '1.2px solid transparent',
         textAlign: 'center',
+        overflow: 'hidden',
+        textWrap: 'wrap',
+        boxSizing: 'border-box',
+        direction: 'ltr',
+        wordWrap: 'break-word',
       }}
     >
       {title}

@@ -6,12 +6,8 @@ import {
   unSelectAllShortcuts,
   removeRenameStates,
 } from '@/app/redux/app/appSlice';
-import ChessProject from './components/projects/chess/ChessProject';
-import QuizProject from './components/projects/quiz/QuizProject';
 import Profile from './components/profile/Profile';
 import Folder from './components/folderWindows/Folder';
-import PortfolioProject from './components/projects/portfolio/PortfolioProject';
-import Minesweeper from '../XP_programs/minesweeper/Minesweeper';
 import Project from './components/projects/Project';
 import EditorContainer from './components/textEditor/EditorContainer';
 import Scores from '../XP_programs/minesweeper/nav/Scores';
@@ -60,6 +56,10 @@ const DesktopMainArea = () => {
         flexDirection: 'column',
         padding: '10px',
         gap: '10px',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        alignContent: 'flex-start',
       }}
     >
       {links.map((link) => {
@@ -74,6 +74,7 @@ const DesktopMainArea = () => {
               linkID={link.linkID}
               key={link.windowID + 'link'}
               rename={link.rename}
+              folderLocation={link.folderLocation}
             />
           );
         }
@@ -136,8 +137,8 @@ const DesktopMainArea = () => {
                 windowID={window.windowID}
                 zIndex={window.zIndex}
                 key={window.windowID + 'subWindow'}
-                left={100 + Math.random() * 100}
-                top={100 + Math.random() * 100}
+                left={window.position.x}
+                top={window.position.y}
                 link=""
                 subWindow=""
               >
@@ -166,8 +167,8 @@ const DesktopMainArea = () => {
                 windowID={window.windowID}
                 zIndex={window.zIndex}
                 key={window.windowID + 'profile'}
-                left={100 + Math.random() * 100}
-                top={100 + Math.random() * 100}
+                left={window.position.x}
+                top={window.position.y}
                 link=""
                 subWindow=""
               >
@@ -192,8 +193,8 @@ const DesktopMainArea = () => {
                 windowID={window.windowID}
                 zIndex={window.zIndex}
                 key={window.windowID + 'profile'}
-                left={100 + Math.random() * 100}
-                top={100 + Math.random() * 100}
+                left={window.position.x}
+                top={window.position.y}
                 link=""
                 subWindow=""
               >
@@ -219,8 +220,8 @@ const DesktopMainArea = () => {
                 windowID={window.windowID}
                 zIndex={window.zIndex}
                 key={window.windowID + 'chess'}
-                left={100 + Math.random() * 100}
-                top={100 + Math.random() * 100}
+                left={window.position.x}
+                top={window.position.y}
                 link=""
                 subWindow={window.subWindow}
               >

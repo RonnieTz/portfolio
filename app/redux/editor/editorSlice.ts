@@ -47,6 +47,7 @@ const editorSlice = createSlice({
       );
       if (file) {
         file.content = action.payload.content;
+        file.dateModified = new Date();
       }
     },
     setFontOptions: (
@@ -80,6 +81,7 @@ const editorSlice = createSlice({
           fontStyle: 'Normal',
         },
         tooltipShow: { value: '', show: false },
+        dateModified: new Date(),
       };
       state.textFiles.push(file);
     },

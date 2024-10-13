@@ -2,17 +2,20 @@ import arrow from '@/public/triangle-down.svg';
 import Image from 'next/image';
 import { useState } from 'react';
 
-const ContextViewButton = () => {
+type Props = { enabled: boolean };
+
+const ContextViewButton = ({ enabled }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
       onMouseEnter={() => {
+        if (!enabled) return;
         setIsHovered(true);
       }}
       onMouseLeave={() => {
         setIsHovered(false);
       }}
-      className="context-menu-item"
+      className={`context-menu-item ${!enabled ? 'button-disabled' : ''}`}
     >
       <span
         style={{

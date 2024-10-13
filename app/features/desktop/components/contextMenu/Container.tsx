@@ -16,9 +16,10 @@ import ContextDetailsButton from './ContextDetailsButton';
 const Container = () => {
   const { position, target } = useSelector((state: RootState) => state.context);
   const { links } = useSelector((state: RootState) => state.app);
-
   const folderID = target?.type === 'folder' ? target.folderID : undefined;
   const windowID = links.find((link) => link.linkID === folderID)?.windowID;
+  const isLink = target?.type === 'link';
+  const isFolder = target?.type === 'folder';
 
   return (
     <div
@@ -32,24 +33,34 @@ const Container = () => {
       className="context-container"
     >
       <ContextOpenButton
-        enabled={target?.type === 'link'}
-        linkID={target?.type === 'link' ? target.linkID : undefined}
+        enabled={isLink}
+        linkID={isLink ? target.linkID : undefined}
       />
-      <ContextViewButton />
-      <ContextRefreshButton />
+      {folderID !== 'desktop' && isFolder && (
+        <ContextViewButton enabled={isFolder} />
+      )}
+      <ContextRefreshButton enabled={isFolder} />
       <Divider />
-      <ContextCopyButton />
-      <ContextCutButton />
+      <ContextCopyButton enabled={isLink} />
+      <ContextCutButton enabled={isLink} />
       <ContextPasteButton />
       <Divider />
-      <ContextNewButton folderID={folderID} windowID={windowID} />
-      <Divider />
-      <ContextDeleteButton />
-      <ContextRenameButton
-        linkID={target?.type === 'link' ? target.linkID : undefined}
+      <ContextNewButton
+        folderID={folderID}
+        windowID={windowID}
+        enabled={isFolder}
       />
       <Divider />
-      <ContextDetailsButton />
+      <ContextDeleteButton
+        enabled={isLink}
+        linkID={target?.type === 'link' ? target.linkID : ''}
+      />
+      <ContextRenameButton
+        enabled={isLink}
+        linkID={isLink ? target.linkID : undefined}
+      />
+      <Divider />
+      <ContextDetailsButton enabled={isLink} />
     </div>
   );
 };

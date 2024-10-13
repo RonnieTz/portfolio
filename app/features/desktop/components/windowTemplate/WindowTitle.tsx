@@ -34,7 +34,9 @@ const WindowTitle = ({ title, logo }: Props) => {
         fontSize={15}
         fontWeight={500}
         fontFamily={'winXP, Gill Sans, sans-serif'}
-        sx={{ textShadow: '1px 1px 3px black', translate: '0 2px' }}
+        maxWidth={'350px'}
+        overflow={'hidden'}
+        sx={{ textShadow: '0.5px 0.5px 2px black', translate: '0 2px' }}
       >
         {title}
       </Typography>

@@ -2,7 +2,11 @@ import Label from './Label';
 import AddressGoButton from './AddressGoButton';
 import AddressArea from './AddressArea';
 
-const AddressBar = () => {
+type Props = {
+  folderID: string;
+};
+
+const AddressBar = ({ folderID }: Props) => {
   return (
     <div
       onContextMenu={(e) => {
@@ -12,7 +16,7 @@ const AddressBar = () => {
       className="address-bar"
     >
       <Label />
-      <AddressArea />
+      <AddressArea folderID={folderID} />
       <AddressGoButton />
     </div>
   );

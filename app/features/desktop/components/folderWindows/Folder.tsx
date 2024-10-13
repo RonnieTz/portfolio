@@ -14,7 +14,7 @@ const Folder = ({ folderID, folderLocation }: Props) => {
     <div className="folder-window-container">
       <TopBar />
       <Navbar />
-      <AddressBar />
+      <AddressBar folderID={folderID} />
       <MainArea folderLocation={folderLocation} folderID={folderID} />
     </div>
   );

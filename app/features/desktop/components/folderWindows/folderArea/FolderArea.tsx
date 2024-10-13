@@ -35,10 +35,6 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
       className="folder-area"
     >
       {links.map((link) => {
-        const window = windows.find(
-          (window) => window.windowID === link.folderLocation
-        )! as FolderWindow;
-
         if (link.folderLocation === folderLocation) {
           return (
             <ProjectLink
@@ -50,6 +46,7 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
               linkID={link.linkID}
               key={link.linkID}
               rename={link.rename}
+              folderLocation={link.folderLocation}
             />
           );
         }

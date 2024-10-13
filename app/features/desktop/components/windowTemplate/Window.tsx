@@ -5,7 +5,6 @@ import WindowBody from './WindowBody';
 import WindowBar from './WindowBar';
 import { useDispatch } from 'react-redux';
 import { focusWindow, setMinimize } from '@/app/redux/app/appSlice';
-import { set } from 'mongoose';
 
 type WindowProps = {
   top: number;
