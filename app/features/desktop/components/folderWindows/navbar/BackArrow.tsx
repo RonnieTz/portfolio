@@ -6,28 +6,30 @@ import { navigateFolderBack } from '@/app/redux/app/appSlice';
 import { RootState } from '@/app/redux/store';
 import { useState } from 'react';
 import Image from 'next/image';
+import { FolderWindow } from '@/app/redux/app/types';
 
-const BackArrow = () => {
+type Props = {
+  windowID: string;
+};
+
+const BackArrow = ({ windowID }: Props) => {
   const dispatch = useDispatch();
-  const [hover, setHover] = useState(false);
-  // const className =
-  //   currentFolder > 0 && locationHistory.length > 1
-  //     ? 'back-button'
-  //     : 'back-button button-disabled';
+  const { windows } = useSelector((state: RootState) => state.app);
+  const { history } = windows.find(
+    (window) => window.windowID === windowID
+  )! as FolderWindow;
+
+  const { currentLocation, locations } = history;
+  console.log(locations.length);
+
   return (
     <div
       onClick={() => {
-        // if (currentFolder > 0) {
-        //   dispatch(navigateFolderBack());
-        // }
+        dispatch(navigateFolderBack({ windowID }));
       }}
-      onMouseEnter={() => {
-        // if (currentFolder > 0 && locationHistory.length > 1) setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-      className={'forward-button button-disabled'}
+      className={`forward-button ${
+        locations.length === 1 || currentLocation === 0 ? 'button-disabled' : ''
+      }`}
     >
       <span className="back-arrow">
         <Image
@@ -37,19 +39,8 @@ const BackArrow = () => {
           alt="back arrow"
         />
       </span>
+      <VerticalDivider />
       <span className="back-text">Back</span>
-      {hover && (
-        <span
-          style={{
-            height: '100%',
-            position: 'absolute',
-            left: '80%',
-            top: '5%',
-          }}
-        >
-          <VerticalDivider />
-        </span>
-      )}
       <span className="arrow-down">
         <Image
           priority={true}

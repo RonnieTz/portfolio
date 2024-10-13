@@ -182,7 +182,7 @@
 
 .forward-button {
   height: 95%;
-  width: 55px;
+  width: 80px;
   display: flex;
   align-items: center;
   padding-left: 10px;
@@ -226,6 +226,11 @@
   border-style: solid;
   border-color: rgb(222, 220, 208) rgb(229, 232, 225) rgb(223, 225, 215)
     rgb(222, 224, 213);
+  opacity: 0;
+}
+
+.forward-button:not(.button-disabled):hover .vertical-divider {
+  opacity: 1;
 }
 
 .button-disabled {
@@ -244,7 +249,7 @@
   border-width: 1px 1.5px 1.5px 1px;
 }
 
-.hover {
+.forward-button:not(.button-disabled):hover {
   background: linear-gradient(rgb(250, 250, 250), rgb(240, 240, 232));
   border-width: 1px 1.5px 1.5px 1px;
   border-style: solid;
@@ -255,7 +260,7 @@
   transition: all 0.1s;
 }
 
-.hover:active {
+.forward-button:not(.button-disabled):active {
   background: rgb(224, 228, 216);
   color: rgb(241, 244, 238);
 }

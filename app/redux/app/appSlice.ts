@@ -208,7 +208,11 @@ const appSlice = createSlice({
       const window = state.windows.find(
         (window) => window.windowID === action.payload.windowID
       );
+
       if (window?.type === 'folder') {
+        const { history } = window;
+        const { locations, currentLocation } = history;
+        window.history.locations = locations.slice(0, currentLocation + 1);
         window.history.locations.push({
           title: action.payload.title,
           locationID: action.payload.location,
@@ -256,8 +260,35 @@ const appSlice = createSlice({
         link.rename = false;
       });
     },
-    navigateFolderBack: (state) => {},
-    navigateFolderForward: (state) => {},
+    navigateFolderBack: (
+      state,
+      action: PayloadAction<{ windowID: string }>
+    ) => {
+      const window = state.windows.find(
+        (window) => window.windowID === action.payload.windowID
+      );
+      if (window?.type === 'folder') {
+        if (window.history.currentLocation > 0) {
+          window.history.currentLocation -= 1;
+        }
+      }
+    },
+    navigateFolderForward: (
+      state,
+      action: PayloadAction<{ windowID: string }>
+    ) => {
+      const window = state.windows.find(
+        (window) => window.windowID === action.payload.windowID
+      );
+      if (window?.type === 'folder') {
+        if (
+          window.history.currentLocation <
+          window.history.locations.length - 1
+        ) {
+          window.history.currentLocation += 1;
+        }
+      }
+    },
     ...allReducers,
   },
 });

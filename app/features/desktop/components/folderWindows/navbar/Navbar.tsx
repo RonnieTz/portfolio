@@ -3,7 +3,11 @@ import ForwardArrow from './ForwardArrow';
 import VerticalDivider from './VerticalDivider';
 import Views from './Views';
 
-const Navbar = () => {
+type Props = {
+  windowID: string;
+};
+
+const Navbar = ({ windowID }: Props) => {
   return (
     <div
       onContextMenu={(e) => {
@@ -12,8 +16,8 @@ const Navbar = () => {
       }}
       className="navbar"
     >
-      <BackArrow />
-      <ForwardArrow />
+      <BackArrow windowID={windowID} />
+      <ForwardArrow windowID={windowID} />
       <VerticalDivider />
       <Views />
     </div>

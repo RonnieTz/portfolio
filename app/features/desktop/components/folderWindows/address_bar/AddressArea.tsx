@@ -14,8 +14,11 @@ const AddressArea = ({ folderID }: Props) => {
     (window) => window.windowID === folderID
   )! as FolderWindow;
   const ref = useRef<HTMLInputElement>(null);
-  const { locations } = history;
-  const address = locations.map((location) => location.title).join('/');
+  const { locations, currentLocation } = history;
+  const address = locations
+    .slice(0, currentLocation + 1)
+    .map((location) => location.title)
+    .join('/');
   useEffect(() => {
     ref.current?.focus();
   }, [address]);

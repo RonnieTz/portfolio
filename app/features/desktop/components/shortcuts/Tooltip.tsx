@@ -64,13 +64,25 @@ const Tooltip = ({ windowID, folderLocation, linkID }: Props) => {
         >{`Date Modified: ${dateModified}`}</p>
       )}
       {window?.type === 'folder' && linksInFolder.length > 0 && (
-        <p style={{ textWrap: 'nowrap', margin: 0, overflow: 'clip' }}>
-          {`Folders: ${getFoldersInFolder(linksInFolder)}`}{' '}
+        <p
+          style={{
+            textWrap: 'nowrap',
+            margin: 0,
+            overflow: 'clip',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {`Folders: ${getFoldersInFolder(linksInFolder) || ''}`}{' '}
         </p>
       )}
       {window?.type === 'folder' && linksInFolder.length > 0 && (
         <p
-          style={{ textWrap: 'nowrap', margin: 0, overflow: 'clip' }}
+          style={{
+            textWrap: 'nowrap',
+            margin: 0,
+            overflow: 'clip',
+            textOverflow: 'ellipsis',
+          }}
         >{`Files: ${getLinksInFolder(linksInFolder)}`}</p>
       )}
       {window?.type === 'folder' && linksInFolder.length === 0 && (

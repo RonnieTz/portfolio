@@ -7,7 +7,6 @@ import {
   setTarget,
 } from '@/app/redux/contextMenu/contextSlice';
 import ProjectLink from '../../shortcuts/ProjectLink';
-import { FolderWindow } from '@/app/redux/app/types';
 
 type Props = {
   folderID: string;
@@ -16,7 +15,7 @@ type Props = {
 
 const FolderArea = ({ folderID, folderLocation }: Props) => {
   const dispatch = useDispatch();
-  const { links, windows } = useSelector((state: RootState) => state.app);
+  const { links } = useSelector((state: RootState) => state.app);
 
   return (
     <div

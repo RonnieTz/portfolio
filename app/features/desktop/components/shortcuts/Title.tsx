@@ -19,10 +19,8 @@ const Title = ({
             ? 'rgb(227, 230, 225)'
             : 'rgb(25, 25, 25)',
         textShadow:
-          color === 'light'
-            ? '0.5px 0.5px 3px rgb(20, 20, 20)'
-            : '0.5px 0.5px 0.5px rgb(73, 73, 73)',
-        fontFamily: 'winXP, Gill Sans, sans-serif',
+          color === 'light' ? '0.5px 0.5px 3px rgb(20, 20, 20)' : undefined,
+        fontFamily: 'Gill Sans, sans-serif',
         letterSpacing: '0.1px',
         cursor: 'default',
         backgroundColor: selected ? 'rgb(48, 94, 192)' : 'transparent',

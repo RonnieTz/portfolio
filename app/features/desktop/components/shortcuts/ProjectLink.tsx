@@ -48,7 +48,10 @@ const ProjectLink = ({
   useEffect(() => {
     const clickEnter = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && selected) {
-        console.log(title);
+        dispatch(changeToFolder({ windowID, title, location: linkID }));
+        dispatch(openWindow({ windowID }));
+        dispatch(unSelectAllShortcuts());
+        setIsHovered(false);
       }
     };
     addEventListener('keyup', clickEnter);
@@ -62,7 +65,7 @@ const ProjectLink = ({
       onMouseEnter={() => {
         const newTimeout = setTimeout(() => {
           setIsHovered(true);
-        }, 500);
+        }, 400);
         setTimeoutID(newTimeout);
       }}
       onMouseLeave={() => {

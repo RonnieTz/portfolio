@@ -6,28 +6,31 @@ import { RootState } from '@/app/redux/store';
 import { useState } from 'react';
 import { navigateFolderForward } from '@/app/redux/app/appSlice';
 import Image from 'next/image';
+import { FolderWindow } from '@/app/redux/app/types';
 
-const ForwardArrow = () => {
-  const [hover, setHover] = useState(false);
+type Props = {
+  windowID: string;
+};
+
+const ForwardArrow = ({ windowID }: Props) => {
   const dispatch = useDispatch();
-  // const className =
-  //   currentFolder < locationHistory.length - 1
-  //     ? 'forward-button'
-  //     : 'forward-button button-disabled';
+  const { windows } = useSelector((state: RootState) => state.app);
+  const { history } = windows.find(
+    (window) => window.windowID === windowID
+  )! as FolderWindow;
+  const { currentLocation, locations } = history;
+
   return (
     <div
       onClick={() => {
-        // if (currentFolder < locationHistory.length - 1) {
-        //   dispatch(navigateFolderForward());
-        // }
+        if (currentLocation < locations.length - 1) {
+          dispatch(navigateFolderForward({ windowID }));
+        }
       }}
-      onMouseEnter={() => {
-        // if (currentFolder < locationHistory.length - 1) setHover(true);
-      }}
-      onMouseLeave={() => {
-        setHover(false);
-      }}
-      className={'forward-button button-disabled'}
+      className={`forward-button ${
+        currentLocation < locations.length - 1 ? '' : 'button-disabled'
+      }`}
+      style={{ width: '55px' }}
     >
       <span className="back-arrow">
         <Image
@@ -37,18 +40,6 @@ const ForwardArrow = () => {
           alt="forward arrow"
         />
       </span>
-      {/* {className.includes('hover') && (
-        <span
-          style={{
-            height: '100%',
-            position: 'absolute',
-            left: '68%',
-            top: '5%',
-          }}
-        >
-          <VerticalDivider />
-        </span>
-      )} */}
       <span className="arrow-down">
         <Image
           priority={true}

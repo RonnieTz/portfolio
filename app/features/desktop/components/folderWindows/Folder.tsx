@@ -7,13 +7,14 @@ import MainArea from './MainArea';
 type Props = {
   folderID: string;
   folderLocation: string;
+  windowID: string;
 };
 
-const Folder = ({ folderID, folderLocation }: Props) => {
+const Folder = ({ folderID, folderLocation, windowID }: Props) => {
   return (
     <div className="folder-window-container">
       <TopBar />
-      <Navbar />
+      <Navbar windowID={windowID} />
       <AddressBar folderID={folderID} />
       <MainArea folderLocation={folderLocation} folderID={folderID} />
     </div>

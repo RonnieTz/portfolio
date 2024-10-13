@@ -201,6 +201,7 @@ const DesktopMainArea = () => {
                 <Folder
                   folderID={window.windowID}
                   folderLocation={locations[currentLocation]?.locationID}
+                  windowID={window.windowID}
                 />
               </Window>
             );
