@@ -10,6 +10,7 @@ type Props = { windowID: string | undefined; folderID: string | undefined };
 const NewFolderButton = ({ folderID, windowID }: Props) => {
   const dispatch = useDispatch();
   const [newTextIsHovered, setNewTextIsHovered] = useState(false);
+
   return (
     <div
       onClick={() => {

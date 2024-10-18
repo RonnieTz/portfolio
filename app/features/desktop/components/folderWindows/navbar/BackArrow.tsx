@@ -20,7 +20,6 @@ const BackArrow = ({ windowID }: Props) => {
   )! as FolderWindow;
 
   const { currentLocation, locations } = history;
-  console.log(locations.length);
 
   return (
     <div

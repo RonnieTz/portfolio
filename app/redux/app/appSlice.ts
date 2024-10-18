@@ -3,6 +3,8 @@ import { initialState } from './initialState';
 import { set_WindowPosition } from './reducers/setWindowPosition';
 import { set_WindowFullScreen } from './reducers/setWindowFullScreen';
 import { allReducers } from './reducers/allReducers';
+import { nanoid } from '@reduxjs/toolkit';
+import { act } from 'react';
 
 const appSlice = createSlice({
   name: 'app',
@@ -193,8 +195,8 @@ const appSlice = createSlice({
         link.selected = false;
       });
     },
-    setLoaded: (state) => {
-      state.loaded = true;
+    setLoaded: (state, action: PayloadAction<boolean>) => {
+      state.loaded = action.payload;
     },
 
     changeToFolder: (
@@ -289,6 +291,43 @@ const appSlice = createSlice({
         }
       }
     },
+    cutPasteLink: (
+      state,
+      action: PayloadAction<{
+        linkID: string;
+        linkLocation: string;
+        linkNewLocation: string;
+      }>
+    ) => {
+      const { linkID, linkLocation, linkNewLocation } = action.payload;
+      // console.log(action.payload);
+
+      if (linkID === linkNewLocation) {
+        return;
+      }
+      const link = state.links.find((link) => link.linkID === linkID);
+      state.links = state.links.filter((link) => link.linkID !== linkID);
+      if (link) {
+        const { name } = link;
+        const linksInNewLocation = state.links.filter(
+          (item) => item.folderLocation === linkNewLocation
+        );
+        if (linksInNewLocation.some((item) => item.name === name)) {
+          const findNewName = (existingName: string) => {
+            let i = 1;
+            let newName = existingName;
+            while (linksInNewLocation.some((item) => item.name === newName)) {
+              i++;
+              newName = `${existingName} (${i})`;
+            }
+            return newName;
+          };
+          link.name = findNewName(name);
+        }
+        link.folderLocation = linkNewLocation;
+        state.links.push(link);
+      }
+    },
     ...allReducers,
   },
 });
@@ -319,5 +358,6 @@ export const {
   newFolder,
   deleteLink,
   newTextFile,
+  cutPasteLink,
 } = appSlice.actions;
 export default appSlice.reducer;

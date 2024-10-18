@@ -44,6 +44,10 @@ const Window = ({
 
   return (
     <div
+      onDragOver={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+      }}
       onContextMenu={(e) => {
         e.preventDefault();
         e.stopPropagation();

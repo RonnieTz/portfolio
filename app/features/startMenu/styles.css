@@ -50,7 +50,6 @@
 .turn-off-window-container {
   height: 300px;
   width: 500px;
-  background-color: rgb(28, 84, 172);
 }
 
 @keyframes turnOff {

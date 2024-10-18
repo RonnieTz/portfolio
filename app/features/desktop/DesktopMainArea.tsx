@@ -19,14 +19,22 @@ import {
   setPosition,
   showContextMenu,
   setTarget,
+  setDragTarget,
+  copy_cut,
 } from '@/app/redux/contextMenu/contextSlice';
 import ProjectLink from './components/shortcuts/ProjectLink';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
+import { cutPasteLink } from '@/app/redux/app/appSlice';
 
 const DesktopMainArea = () => {
   const dispatch = useDispatch();
   const { windows, links } = useSelector((state: RootState) => state.app);
-  const { showContext } = useSelector((state: RootState) => state.context);
+  const { showContext, target, clipboard, dragTarget } = useSelector(
+    (state: RootState) => state.context
+  );
+  useEffect(() => {
+    // console.log(dragTarget);
+  }, [target, clipboard]);
 
   return (
     <div
@@ -36,14 +44,37 @@ const DesktopMainArea = () => {
         dispatch(hideContextMenu());
         dispatch(removeRenameStates());
       }}
+      onDragOver={(e) => {
+        e.preventDefault();
+        dispatch(setDragTarget({ target: 'desktop' }));
+      }}
+      onDragEnd={() => {
+        if (target?.linkType === 'program') {
+          dispatch(
+            cutPasteLink({
+              linkID: target?.folderID!,
+              linkNewLocation: dragTarget!,
+              linkLocation: target?.linkID!,
+            })
+          );
+        }
+      }}
       onContextMenu={(e) => {
         e.preventDefault();
         dispatch(showContextMenu());
         dispatch(setPosition({ x: e.clientX, y: e.clientY }));
         dispatch(
-          setTarget({ target: { type: 'folder', folderID: 'desktop' } })
+          setTarget({
+            target: {
+              targetType: 'window',
+              linkID: undefined,
+              folderID: 'desktop',
+              linkType: undefined,
+            },
+          })
         );
         dispatch(removeRenameStates());
+        dispatch(unSelectAllShortcuts());
       }}
       style={{
         position: 'absolute',

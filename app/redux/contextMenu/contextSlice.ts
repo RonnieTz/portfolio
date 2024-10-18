@@ -22,11 +22,40 @@ const contextSlice = createSlice({
         target: Target;
       }>
     ) => {
+      // console.log(action.payload.target);
+
       state.target = action.payload.target;
+    },
+    setDragTarget: (
+      state,
+      action: PayloadAction<{
+        target: string;
+      }>
+    ) => {
+      state.dragTarget = action.payload.target;
+    },
+    copy_cut: (
+      state,
+      action: PayloadAction<{
+        target: Target;
+        functionType: 'cut' | 'copy';
+      }>
+    ) => {
+      state.clipboard = action.payload;
+    },
+    clearClipboard: (state) => {
+      state.clipboard = undefined;
     },
   },
 });
 
-export const { hideContextMenu, showContextMenu, setPosition, setTarget } =
-  contextSlice.actions;
+export const {
+  hideContextMenu,
+  showContextMenu,
+  setPosition,
+  setTarget,
+  copy_cut,
+  clearClipboard,
+  setDragTarget,
+} = contextSlice.actions;
 export default contextSlice.reducer;

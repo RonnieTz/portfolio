@@ -20,19 +20,14 @@ const Desktop = () => {
   const dispatch = useDispatch();
   const sessionLoaded = sessionStorage.getItem('loaded');
   useEffect(() => {
-    if (sessionLoaded === 'true') {
-      dispatch(setLoaded());
-    }
-
     document.addEventListener('contextmenu', (event) => {
       event.preventDefault();
     });
     setTimeout(() => {
-      dispatch(setLoaded());
+      dispatch(setLoaded(false));
     }, 2000);
     setTimeout(() => {
       dispatch(setWelcome(false));
-      sessionStorage.setItem('loaded', 'true');
     }, 4000);
 
     return () => {
@@ -44,9 +39,9 @@ const Desktop = () => {
   return (
     <>
       {turnOff && <TurnOffWindow />}
-      {!loaded && welcome && <LoadScreen />}
-      {loaded && welcome && !sessionLoaded && <WelcomeScreen />}
-      {sessionLoaded && (
+      {loaded && welcome && <LoadScreen />}
+      {!loaded && welcome && <WelcomeScreen />}
+      {!loaded && !welcome && (
         <Box
           height={'100vh'}
           width={'100vw'}

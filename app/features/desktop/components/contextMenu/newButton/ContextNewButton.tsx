@@ -1,11 +1,6 @@
 import arrow from '@/public/triangle-down.svg';
-import text from '@/public/text.png';
-import folder from '@/public/Folder Closed.png';
 import Image from 'next/image';
 import { useState } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
-import { newTextFile } from '@/app/redux/app/appSlice';
-import { useDispatch } from 'react-redux';
 import NewTextFileButton from './NewTextFileButton';
 import NewFolderButton from './NewFolderButton';
 
@@ -17,6 +12,7 @@ type Props = {
 
 const ContextNewButton = ({ folderID, windowID, enabled }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div
       onMouseEnter={() => {

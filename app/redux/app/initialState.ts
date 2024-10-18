@@ -32,7 +32,7 @@ export const initialState: InitialState = {
   ],
   welcome: true,
   turnOff: false,
-  loaded: false,
+  loaded: true,
   taskList: [],
   links: [
     { ...folderLink, name: 'My Projects' },

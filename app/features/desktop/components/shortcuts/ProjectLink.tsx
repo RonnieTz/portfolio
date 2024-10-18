@@ -44,9 +44,13 @@ const ProjectLink = ({
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout | null>(null);
+  const { windows } = useSelector((state: RootState) => state.app);
+
+  const { type } = windows.find((window) => window.windowID === windowID)!;
 
   useEffect(() => {
     const clickEnter = (e: KeyboardEvent) => {
+      if (rename) return;
       if (e.key === 'Enter' && selected) {
         dispatch(changeToFolder({ windowID, title, location: linkID }));
         dispatch(openWindow({ windowID }));
@@ -58,7 +62,7 @@ const ProjectLink = ({
     return () => {
       removeEventListener('keyup', clickEnter);
     };
-  }, [selected]);
+  }, [selected, rename, dispatch, windowID, title, linkID]);
 
   return (
     <div
@@ -74,6 +78,19 @@ const ProjectLink = ({
           setIsHovered(false);
         }
       }}
+      onDragStart={() => {
+        dispatch(
+          setTarget({
+            target: {
+              targetType: 'link',
+              linkID,
+              folderID: linkID,
+              linkType: type === 'folder' ? 'folder' : 'program',
+            },
+          })
+        );
+        setIsHovered(false);
+      }}
       onContextMenu={(e) => {
         const x = e.clientX;
         const y = e.clientY;
@@ -82,7 +99,16 @@ const ProjectLink = ({
         dispatch(selectShortcut({ linkID }));
         dispatch(showContextMenu());
         dispatch(setPosition({ x, y }));
-        dispatch(setTarget({ target: { type: 'link', linkID } }));
+        dispatch(
+          setTarget({
+            target: {
+              targetType: 'link',
+              linkID,
+              folderID: linkID,
+              linkType: type === 'folder' ? 'folder' : 'program',
+            },
+          })
+        );
       }}
       onClick={(e) => {
         e.stopPropagation();

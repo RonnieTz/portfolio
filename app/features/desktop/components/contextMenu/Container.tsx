@@ -16,10 +16,11 @@ import ContextDetailsButton from './ContextDetailsButton';
 const Container = () => {
   const { position, target } = useSelector((state: RootState) => state.context);
   const { links } = useSelector((state: RootState) => state.app);
-  const folderID = target?.type === 'folder' ? target.folderID : undefined;
+  const folderID = target?.folderID;
+
   const windowID = links.find((link) => link.linkID === folderID)?.windowID;
-  const isLink = target?.type === 'link';
-  const isFolder = target?.type === 'folder';
+  const isLink = target?.targetType === 'link';
+  const isFolder = target?.targetType === 'window';
 
   return (
     <div
@@ -53,7 +54,7 @@ const Container = () => {
       <Divider />
       <ContextDeleteButton
         enabled={isLink}
-        linkID={target?.type === 'link' ? target.linkID : ''}
+        linkID={target?.targetType === 'link' ? target.linkID : ''}
       />
       <ContextRenameButton
         enabled={isLink}

@@ -5,6 +5,7 @@ import {
   showContextMenu,
   setPosition,
   setTarget,
+  setDragTarget,
 } from '@/app/redux/contextMenu/contextSlice';
 import ProjectLink from '../../shortcuts/ProjectLink';
 
@@ -16,16 +17,29 @@ type Props = {
 const FolderArea = ({ folderID, folderLocation }: Props) => {
   const dispatch = useDispatch();
   const { links } = useSelector((state: RootState) => state.app);
+  const { dragTarget } = useSelector((state: RootState) => state.context);
 
   return (
     <div
+      onDragOver={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        dispatch(setDragTarget({ target: folderLocation }));
+      }}
       onContextMenu={(e) => {
         e.preventDefault();
         e.stopPropagation();
         dispatch(showContextMenu());
         dispatch(setPosition({ x: e.clientX, y: e.clientY }));
         dispatch(
-          setTarget({ target: { type: 'folder', folderID: folderLocation } })
+          setTarget({
+            target: {
+              targetType: 'window',
+              linkID: undefined,
+              folderID: folderLocation,
+              linkType: undefined,
+            },
+          })
         );
       }}
       onClick={() => {
