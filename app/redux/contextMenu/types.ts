@@ -3,7 +3,6 @@ export type InitialState = {
   position: { x: number; y: number };
   target: Target | undefined;
   clipboard: Clipboard | undefined;
-  dragTarget: string | undefined;
 };
 
 export type Clipboard = { functionType: 'cut' | 'copy'; target: Target };
@@ -13,4 +12,5 @@ export type Target = {
   linkID: string | undefined;
   folderID: string | undefined;
   linkType: 'folder' | 'program' | undefined;
+  windowID: string;
 };

@@ -31,6 +31,7 @@ export const newTextFile = (
     selected: false,
     windowID,
     rename: true,
+    windowType: 'program',
   };
   const newWindow: TextFileWindow = {
     windowID,

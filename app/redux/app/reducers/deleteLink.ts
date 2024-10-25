@@ -9,21 +9,27 @@ export const deleteLink = (
   const link = state.links.find(
     (link) => link.linkID === action.payload.linkID
   );
-  console.log(link?.linkID);
 
-  if (
-    link?.linkID === 'PortfolioLinkID2' ||
-    link?.linkID === 'QuizLinkID2' ||
-    link?.linkID === 'ChessLinkID2'
-  ) {
-    return;
-  }
   if (link) {
     state.links = state.links.filter(
       (link) => link.linkID !== action.payload.linkID
     );
-    state.windows = state.windows.filter(
-      (window) => window.windowID !== link.windowID
+    const window = state.windows.find(
+      (window) => window.windowID === link.windowID
     );
+    const removeItemsInFolder = (folderLocation: string) => {
+      const linksInFolder = state.links.filter(
+        (link) => link.folderLocation === folderLocation
+      );
+      linksInFolder.forEach((link) => {
+        state.links = state.links.filter((item) => item.linkID !== link.linkID);
+        if (window?.type === 'folder') {
+          removeItemsInFolder(link.linkID);
+        }
+      });
+    };
+    if (window?.type === 'folder') {
+      removeItemsInFolder(link.linkID);
+    }
   }
 };

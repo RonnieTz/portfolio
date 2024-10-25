@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
   setWindowPosition,
   setWindowFullScreen,
+  setDraggingWindow,
 } from '@/app/redux/app/appSlice';
 import { hideContextMenu } from '@/app/redux/contextMenu/contextSlice';
 import WindowBarBackground from './WindowBarBackground';
@@ -54,6 +55,7 @@ const WindowBar = ({
         e.dataTransfer.setDragImage(new Image(), 0, 0);
         ref.current = { x: x - position.x, y: y - position.y };
         dispatch(hideContextMenu());
+        dispatch(setDraggingWindow(true));
       }}
       onDragEnd={(e) => {
         const x = e.clientX;
@@ -66,6 +68,7 @@ const WindowBar = ({
             windowID,
           })
         );
+        dispatch(setDraggingWindow(false));
       }}
       onDrag={(e) => {
         setPosition({

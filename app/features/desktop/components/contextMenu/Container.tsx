@@ -54,7 +54,9 @@ const Container = () => {
       <Divider />
       <ContextDeleteButton
         enabled={isLink}
-        linkID={target?.targetType === 'link' ? target.linkID : ''}
+        linkID={
+          target?.targetType === 'link' ? target.linkID! : target?.linkID!
+        }
       />
       <ContextRenameButton
         enabled={isLink}

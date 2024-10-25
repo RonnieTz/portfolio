@@ -4,6 +4,7 @@ import {
   copy_cut,
   hideContextMenu,
 } from '@/app/redux/contextMenu/contextSlice';
+import { unSelectAllShortcuts } from '@/app/redux/app/appSlice';
 
 type Props = { enabled: boolean };
 
@@ -14,9 +15,11 @@ const ContextCopyButton = ({ enabled }: Props) => {
   return (
     <div
       onClick={() => {
-        if (enabled && target) {
-        }
         dispatch(hideContextMenu());
+        dispatch(unSelectAllShortcuts());
+        if (enabled) {
+          dispatch(copy_cut({ functionType: 'copy', target: target! }));
+        }
       }}
       className={`context-menu-item ${enabled ? '' : 'button-disabled'}`}
     >

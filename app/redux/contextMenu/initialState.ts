@@ -5,5 +5,4 @@ export const initialState: InitialState = {
   position: { x: 0, y: 0 },
   clipboard: undefined,
   target: undefined,
-  dragTarget: undefined,
 };

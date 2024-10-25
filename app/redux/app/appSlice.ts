@@ -214,6 +214,15 @@ const appSlice = createSlice({
       if (window?.type === 'folder') {
         const { history } = window;
         const { locations, currentLocation } = history;
+        if (
+          locations.some((item) => item.locationID === action.payload.location)
+        ) {
+          const index = locations.findIndex(
+            (item) => item.locationID === action.payload.location
+          );
+          window.history.currentLocation = index;
+          return;
+        }
         window.history.locations = locations.slice(0, currentLocation + 1);
         window.history.locations.push({
           title: action.payload.title,
@@ -291,41 +300,40 @@ const appSlice = createSlice({
         }
       }
     },
-    cutPasteLink: (
+    setDraggingWindow: (state, action: PayloadAction<boolean>) => {
+      state.draggingWindow = action.payload;
+    },
+    setLinkPosition: (
       state,
       action: PayloadAction<{
         linkID: string;
-        linkLocation: string;
-        linkNewLocation: string;
+        position: { x: number; y: number };
       }>
     ) => {
-      const { linkID, linkLocation, linkNewLocation } = action.payload;
-      // console.log(action.payload);
-
-      if (linkID === linkNewLocation) {
+      const { linkID, position } = action.payload;
+      if (
+        state.links.some((link) => {
+          return (
+            link.position.x === position.x && link.position.y === position.y
+          );
+        })
+      ) {
         return;
       }
       const link = state.links.find((link) => link.linkID === linkID);
-      state.links = state.links.filter((link) => link.linkID !== linkID);
       if (link) {
-        const { name } = link;
-        const linksInNewLocation = state.links.filter(
-          (item) => item.folderLocation === linkNewLocation
-        );
-        if (linksInNewLocation.some((item) => item.name === name)) {
-          const findNewName = (existingName: string) => {
-            let i = 1;
-            let newName = existingName;
-            while (linksInNewLocation.some((item) => item.name === newName)) {
-              i++;
-              newName = `${existingName} (${i})`;
-            }
-            return newName;
-          };
-          link.name = findNewName(name);
-        }
-        link.folderLocation = linkNewLocation;
-        state.links.push(link);
+        link.position = position;
+      }
+    },
+    setLinkIsDragged: (
+      state,
+      action: PayloadAction<{ linkID: string; isDragged: boolean }>
+    ) => {
+      const link = state.links.find(
+        (link) => link.linkID === action.payload.linkID
+      );
+      if (link) {
+        link.isDragged = action.payload.isDragged;
       }
     },
     ...allReducers,
@@ -359,5 +367,12 @@ export const {
   deleteLink,
   newTextFile,
   cutPasteLink,
+  cutPasteFolder,
+  copyPasteLink,
+  copyPasteTextFile,
+  copyPasteFolder,
+  setDraggingWindow,
+  setLinkPosition,
+  setLinkIsDragged,
 } = appSlice.actions;
 export default appSlice.reducer;

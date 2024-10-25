@@ -22,18 +22,9 @@ const contextSlice = createSlice({
         target: Target;
       }>
     ) => {
-      // console.log(action.payload.target);
-
       state.target = action.payload.target;
     },
-    setDragTarget: (
-      state,
-      action: PayloadAction<{
-        target: string;
-      }>
-    ) => {
-      state.dragTarget = action.payload.target;
-    },
+
     copy_cut: (
       state,
       action: PayloadAction<{
@@ -56,6 +47,5 @@ export const {
   setTarget,
   copy_cut,
   clearClipboard,
-  setDragTarget,
 } = contextSlice.actions;
 export default contextSlice.reducer;

@@ -1,10 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/redux/store';
-import { cutPasteLink } from '@/app/redux/app/appSlice';
+import {
+  cutPasteLink,
+  cutPasteFolder,
+  copyPasteLink,
+} from '@/app/redux/app/appSlice';
 import {
   hideContextMenu,
   clearClipboard,
 } from '@/app/redux/contextMenu/contextSlice';
+import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
 
 const ContextPasteButton = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,8 +27,6 @@ const ContextPasteButton = () => {
           target?.targetType === 'window' &&
           clipboard.target.linkType === 'program'
         ) {
-          console.log(clipboard.target);
-
           const { folderLocation: linkLocation, linkID } = links.find(
             (link) => {
               if (clipboard.target?.targetType === 'link') {
@@ -42,6 +45,40 @@ const ContextPasteButton = () => {
           );
           dispatch(clearClipboard());
         }
+        if (
+          clipboard?.functionType === 'cut' &&
+          clipboard.target?.targetType === 'link' &&
+          target?.targetType === 'window' &&
+          clipboard.target.linkType === 'folder'
+        ) {
+          const { linkID } = links.find(
+            (link) => link.linkID === clipboard.target.linkID
+          )!;
+          const newFolderLocation = target.folderID;
+          dispatch(
+            cutPasteFolder({
+              folderLinkID: linkID,
+              newFolderLocation: newFolderLocation!,
+              windowID: target.windowID,
+            })
+          );
+        }
+
+        const { linkID } = links.find((link) => {
+          if (clipboard?.target?.targetType === 'link') {
+            return link.linkID === clipboard?.target.linkID;
+          }
+        })!;
+
+        const linkNewLocation = target?.folderID;
+        dispatch(
+          copyPaste({
+            linkID,
+            linkNewLocation: linkNewLocation!,
+          })
+        );
+
+        dispatch(clearClipboard());
         dispatch(hideContextMenu());
       }}
       className={`context-menu-item ${disabled ? 'button-disabled' : ''}`}

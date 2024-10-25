@@ -10,10 +10,6 @@
   padding-top: 5px;
 }
 
-.project-link:active {
-  cursor: initial;
-}
-
 .project-link-rename {
   width: 100%;
   border: 1px solid rgb(46, 42, 34);

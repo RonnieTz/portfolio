@@ -4,6 +4,7 @@ import {
   changeToFolder,
   openWindow,
   unSelectAllShortcuts,
+  cutPasteFolder,
 } from '@/app/redux/app/appSlice';
 import { hideContextMenu } from '@/app/redux/contextMenu/contextSlice';
 
@@ -29,6 +30,13 @@ const ContextOpenButton = ({ enabled, linkID }: Props) => {
         }
         dispatch(hideContextMenu());
         dispatch(unSelectAllShortcuts());
+        dispatch(
+          cutPasteFolder({
+            folderLinkID: linkID!,
+            newFolderLocation: linkID!,
+            windowID: link!.windowID,
+          })
+        );
       }}
       style={{ fontWeight: 'bolder' }}
       className={`context-menu-item ${!enabled && 'button-disabled'}`}

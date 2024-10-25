@@ -188,6 +188,9 @@ export const profileLink: Link = {
   windowID: 'ProfileID123',
   logo: profileLogo,
   rename: false,
+  windowType: 'program',
+  position: { x: -1, y: -1 },
+  isDragged: false,
 };
 
 export const minesweeperLink: Link = {
@@ -198,6 +201,9 @@ export const minesweeperLink: Link = {
   windowID: 'MinesweeperID123',
   logo: minesweeperLogo,
   rename: false,
+  windowType: 'program',
+  position: { x: -1, y: -1 },
+  isDragged: false,
 };
 
 export const textFileLink: Link = {
@@ -208,6 +214,9 @@ export const textFileLink: Link = {
   windowID: 'TextFileID123',
   logo: textLogo,
   rename: false,
+  windowType: 'program',
+  position: { x: -1, y: -1 },
+  isDragged: false,
 };
 
 export const folderLink: Link = {
@@ -218,6 +227,9 @@ export const folderLink: Link = {
   windowID: 'FolderID123',
   logo: folderLogo,
   rename: false,
+  windowType: 'folder',
+  position: { x: -1, y: -1 },
+  isDragged: false,
 };
 
 export const chessLink: Link = {
@@ -228,6 +240,9 @@ export const chessLink: Link = {
   windowID: 'ChessID123',
   logo: logo as any,
   rename: false,
+  windowType: 'program',
+  position: { x: -1, y: -1 },
+  isDragged: false,
 };
 
 export const quizLink: Link = {
@@ -238,6 +253,9 @@ export const quizLink: Link = {
   windowID: 'QuizID123',
   logo: quizLogo,
   rename: false,
+  windowType: 'program',
+  position: { x: -1, y: -1 },
+  isDragged: false,
 };
 
 export const portfolioLink: Link = {
@@ -248,4 +266,7 @@ export const portfolioLink: Link = {
   windowID: 'PortfolioID123',
   logo: portfolioLogo,
   rename: false,
+  windowType: 'program',
+  position: { x: -1, y: -1 },
+  isDragged: false,
 };

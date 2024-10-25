@@ -2,15 +2,52 @@ import logo from '@/public/Minesweeper.png';
 import './styles.css';
 import { Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/app/redux/store';
-import { openWindow, setStartOpen } from '@/app/redux/app/appSlice';
+import { RootState, AppDispatch } from '@/app/redux/store';
+import {
+  cutPasteFolder,
+  openWindow,
+  setLinkIsDragged,
+  setStartOpen,
+} from '@/app/redux/app/appSlice';
 import Image from 'next/image';
+import { copy_cut, setTarget } from '@/app/redux/contextMenu/contextSlice';
+import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
+import { set } from 'mongoose';
 
 const Minesweeper = () => {
-  const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.minesweeper);
+  const dispatch = useDispatch<AppDispatch>();
+  const { target } = useSelector((state: RootState) => state.context);
   return (
     <div
+      draggable={true}
+      onDragStart={() => {
+        setTimeout(() => {
+          dispatch(setStartOpen(false));
+        }, 300);
+        dispatch(
+          setLinkIsDragged({ linkID: 'MinesweeperLinkID123', isDragged: true })
+        );
+        dispatch(
+          copy_cut({
+            functionType: 'copy',
+            target: {
+              targetType: 'link',
+              linkID: 'MinesweeperLinkID123',
+              folderID: 'MinesweeperLinkID123',
+              linkType: 'program',
+              windowID: 'MinesweeperID123',
+            },
+          })
+        );
+      }}
+      onDragEnd={() => {
+        dispatch(
+          copyPaste({
+            linkID: 'MinesweeperLinkID123',
+            linkNewLocation: target?.folderID!,
+          })
+        );
+      }}
       onClick={() => {
         dispatch(
           openWindow({

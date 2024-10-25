@@ -15,7 +15,9 @@ import {
   profileLink,
   textFileLink,
   textEditorFonts,
+  minesweeperLink,
 } from './lib';
+import { nanoid } from '@reduxjs/toolkit';
 
 export const initialState: InitialState = {
   start: { open: false, hover: false },
@@ -35,8 +37,8 @@ export const initialState: InitialState = {
   loaded: true,
   taskList: [],
   links: [
-    { ...folderLink, name: 'My Projects' },
-    profileLink,
+    { ...folderLink, name: 'My Projects', position: { x: 0, y: 2 } },
+    { ...profileLink, position: { x: 0, y: 3 } },
     {
       ...chessLink,
       folderLocation: 'FolderLinkID1',
@@ -52,6 +54,17 @@ export const initialState: InitialState = {
       folderLocation: 'FolderLinkID1',
       linkID: 'PortfolioLinkID2',
     },
-    textFileLink,
+    // textFileLink,
+    {
+      ...minesweeperLink,
+      folderLocation: 'MinesweeperLinkID123',
+    },
+    {
+      ...minesweeperLink,
+      folderLocation: 'desktop',
+      linkID: nanoid(),
+      position: { x: 0, y: 1 },
+    },
   ],
+  draggingWindow: false,
 };

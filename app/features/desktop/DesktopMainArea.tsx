@@ -1,10 +1,12 @@
 import Window from './components/windowTemplate/Window';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/app/redux/store';
+import { RootState, AppDispatch } from '@/app/redux/store';
 import {
   setStartOpen,
   unSelectAllShortcuts,
   removeRenameStates,
+  setLinkPosition,
+  setLinkIsDragged,
 } from '@/app/redux/app/appSlice';
 import Profile from './components/profile/Profile';
 import Folder from './components/folderWindows/Folder';
@@ -19,22 +21,111 @@ import {
   setPosition,
   showContextMenu,
   setTarget,
-  setDragTarget,
   copy_cut,
 } from '@/app/redux/contextMenu/contextSlice';
 import ProjectLink from './components/shortcuts/ProjectLink';
-import { Fragment, useEffect } from 'react';
-import { cutPasteLink } from '@/app/redux/app/appSlice';
+import { Fragment, use, useEffect } from 'react';
+import {
+  cutPasteLink,
+  cutPasteFolder,
+  deleteLink,
+} from '@/app/redux/app/appSlice';
+import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
+
+const backgroundSlots = new Array(16 * 8).fill(0).map((_, i) => i);
 
 const DesktopMainArea = () => {
-  const dispatch = useDispatch();
-  const { windows, links } = useSelector((state: RootState) => state.app);
-  const { showContext, target, clipboard, dragTarget } = useSelector(
+  const dispatch = useDispatch<AppDispatch>();
+  const { windows, links, draggingWindow } = useSelector(
+    (state: RootState) => state.app
+  );
+  const selectedLink = links.find((link) => link.selected);
+  const { showContext, target, clipboard } = useSelector(
     (state: RootState) => state.context
   );
   useEffect(() => {
-    // console.log(dragTarget);
-  }, [target, clipboard]);
+    const clickCopy = (e: KeyboardEvent) => {
+      if (selectedLink) {
+        const { linkID, windowID } = selectedLink;
+        const { type } = windows.find(
+          (window) => window.windowID === windowID
+        )!;
+
+        if (e.key === 'Delete') {
+          dispatch(deleteLink({ linkID }));
+        }
+        if (e.key === 'c' && e.ctrlKey) {
+          dispatch(
+            copy_cut({
+              functionType: 'copy',
+              target: {
+                linkID,
+                folderID: linkID,
+                windowID,
+                linkType: type === 'folder' ? 'folder' : 'program',
+                targetType: 'link',
+              },
+            })
+          );
+        }
+        if (e.key === 'x' && e.ctrlKey) {
+          dispatch(
+            copy_cut({
+              functionType: 'cut',
+              target: {
+                linkID,
+                folderID: linkID,
+                windowID,
+                linkType: type === 'folder' ? 'folder' : 'program',
+                targetType: 'link',
+              },
+            })
+          );
+        }
+      }
+      if (clipboard?.functionType === 'cut') {
+        if (e.key === 'v' && e.ctrlKey) {
+          const link = links.find(
+            (link) => link.linkID === clipboard?.target.linkID
+          );
+          if (clipboard?.target?.linkType === 'program') {
+            dispatch(
+              cutPasteLink({
+                linkID: clipboard?.target.linkID!,
+                linkNewLocation: target?.folderID!,
+                linkLocation: link?.folderLocation!,
+              })
+            );
+          }
+          if (clipboard?.target?.linkType === 'folder') {
+            const { linkID } = links.find(
+              (link) => link.linkID === clipboard?.target.linkID
+            )!;
+            dispatch(
+              cutPasteFolder({
+                folderLinkID: linkID,
+                newFolderLocation: target?.folderID!,
+                windowID: target?.windowID!,
+              })
+            );
+          }
+        }
+      }
+
+      if (clipboard?.functionType === 'copy' && e.key === 'v' && e.ctrlKey) {
+        dispatch(
+          copyPaste({
+            linkID: clipboard?.target?.linkID!,
+            linkNewLocation: target?.folderID!,
+          })
+        );
+      }
+    };
+    document.addEventListener('keyup', clickCopy);
+    return () => {
+      document.removeEventListener('keyup', clickCopy);
+    };
+  }, [clipboard, target, selectedLink, links, windows, dispatch]);
 
   return (
     <div
@@ -43,18 +134,68 @@ const DesktopMainArea = () => {
         dispatch(unSelectAllShortcuts());
         dispatch(hideContextMenu());
         dispatch(removeRenameStates());
+        if (!showContext) {
+          dispatch(
+            setTarget({
+              target: {
+                targetType: 'window',
+                linkID: undefined,
+                folderID: 'desktop',
+                linkType: undefined,
+                windowID: 'desktop',
+              },
+            })
+          );
+        }
       }}
       onDragOver={(e) => {
         e.preventDefault();
-        dispatch(setDragTarget({ target: 'desktop' }));
+        dispatch(
+          setTarget({
+            target: {
+              targetType: 'window',
+              linkID: undefined,
+              folderID: 'desktop',
+              linkType: undefined,
+              windowID: 'desktop',
+            },
+          })
+        );
       }}
       onDragEnd={() => {
-        if (target?.linkType === 'program') {
+        dispatch(
+          setLinkIsDragged({
+            linkID: selectedLink?.linkID!,
+            isDragged: false,
+          })
+        );
+        if (draggingWindow) {
+          return;
+        }
+        const link = links.find(
+          (link) => link.linkID === clipboard?.target.linkID
+        );
+        if (link?.folderLocation === target?.folderID) {
+          return;
+        }
+        if (clipboard?.target?.linkType === 'program') {
           dispatch(
             cutPasteLink({
-              linkID: target?.folderID!,
-              linkNewLocation: dragTarget!,
-              linkLocation: target?.linkID!,
+              linkID: clipboard?.target.linkID!,
+              linkNewLocation: target?.folderID!,
+              linkLocation: link?.folderLocation!,
+            })
+          );
+        }
+        if (clipboard?.target?.linkType === 'folder') {
+          const { linkID } = links.find(
+            (link) => link.linkID === clipboard?.target.linkID
+          )!;
+          dispatch(
+            cutPasteFolder({
+              folderLinkID: linkID,
+              newFolderLocation: target?.folderID!,
+              windowID: target?.windowID!,
             })
           );
         }
@@ -70,6 +211,7 @@ const DesktopMainArea = () => {
               linkID: undefined,
               folderID: 'desktop',
               linkType: undefined,
+              windowID: 'desktop',
             },
           })
         );
@@ -103,9 +245,11 @@ const DesktopMainArea = () => {
               title={link.name}
               windowID={link.windowID}
               linkID={link.linkID}
-              key={link.windowID + 'link'}
+              key={link.linkID + 'link'}
               rename={link.rename}
               folderLocation={link.folderLocation}
+              position={link.position}
+              isDragged={link.isDragged}
             />
           );
         }
@@ -268,6 +412,43 @@ const DesktopMainArea = () => {
         }
         return <Fragment key={window.windowID + 'program'} />;
       })}
+      <div
+        style={{
+          opacity: 0,
+          height: '100%',
+          width: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(16, 1fr)',
+          gridTemplateRows: 'repeat(8, 1fr)',
+          zIndex: -1,
+        }}
+      >
+        {backgroundSlots.map((slot) => (
+          <div
+            key={slot}
+            onDragOverCapture={(e) => {
+              console.log({ x: slot % 16, y: Math.floor(slot / 16) });
+              dispatch(
+                setLinkPosition({
+                  linkID: selectedLink?.linkID!,
+                  position: { x: slot % 16, y: Math.floor(slot / 16) },
+                })
+              );
+            }}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              boxSizing: 'border-box',
+            }}
+          >
+            {slot}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

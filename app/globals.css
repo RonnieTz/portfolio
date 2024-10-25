@@ -23,6 +23,7 @@ main {
 
 .window {
   animation: fadeIn 0.2s forwards;
+  cursor: default;
 }
 
 .window-enter {

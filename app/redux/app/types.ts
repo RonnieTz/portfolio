@@ -118,9 +118,12 @@ export type Link = {
   name: string;
   linkID: string;
   windowID: string;
+  windowType: 'folder' | 'program';
   folderLocation: string;
   logo: any;
   rename: boolean;
+  position: { y: number; x: number };
+  isDragged: boolean;
 };
 
 export type InitialState = {
@@ -131,4 +134,5 @@ export type InitialState = {
   loaded: boolean;
   taskList: WindowType[];
   links: Link[];
+  draggingWindow: boolean;
 };

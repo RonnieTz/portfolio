@@ -6,12 +6,14 @@ import {
   openWindow,
   unSelectAllShortcuts,
   changeToFolder,
+  setLinkIsDragged,
 } from '@/app/redux/app/appSlice';
 import {
   showContextMenu,
   setPosition,
   setTarget,
   hideContextMenu,
+  copy_cut,
 } from '@/app/redux/contextMenu/contextSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
@@ -30,6 +32,8 @@ type Props = {
   linkID: string;
   rename: boolean;
   folderLocation: string;
+  position: { x: number; y: number };
+  isDragged: boolean;
 };
 const ProjectLink = ({
   color,
@@ -40,13 +44,18 @@ const ProjectLink = ({
   linkID,
   rename,
   folderLocation,
+  position,
+  isDragged,
 }: Props) => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout | null>(null);
-  const { windows } = useSelector((state: RootState) => state.app);
+  const { windows } = useSelector((state: RootState) => state.app)!;
+  const { target, clipboard } = useSelector(
+    (state: RootState) => state.context
+  );
 
-  const { type } = windows.find((window) => window.windowID === windowID)!;
+  const window = windows.find((window) => window.windowID === windowID);
 
   useEffect(() => {
     const clickEnter = (e: KeyboardEvent) => {
@@ -66,6 +75,7 @@ const ProjectLink = ({
 
   return (
     <div
+      draggable={true}
       onMouseEnter={() => {
         const newTimeout = setTimeout(() => {
           setIsHovered(true);
@@ -79,13 +89,28 @@ const ProjectLink = ({
         }
       }}
       onDragStart={() => {
+        dispatch(selectShortcut({ linkID }));
+        dispatch(setLinkIsDragged({ linkID, isDragged: true }));
         dispatch(
           setTarget({
             target: {
               targetType: 'link',
               linkID,
               folderID: linkID,
-              linkType: type === 'folder' ? 'folder' : 'program',
+              linkType: window?.type === 'folder' ? 'folder' : 'program',
+              windowID,
+            },
+          })
+        );
+        dispatch(
+          copy_cut({
+            functionType: 'cut',
+            target: {
+              targetType: 'link',
+              linkID,
+              folderID: linkID,
+              linkType: window?.type === 'folder' ? 'folder' : 'program',
+              windowID,
             },
           })
         );
@@ -105,7 +130,8 @@ const ProjectLink = ({
               targetType: 'link',
               linkID,
               folderID: linkID,
-              linkType: type === 'folder' ? 'folder' : 'program',
+              linkType: window?.type === 'folder' ? 'folder' : 'program',
+              windowID,
             },
           })
         );
@@ -122,7 +148,13 @@ const ProjectLink = ({
         setIsHovered(false);
       }}
       className="project-link"
-      style={{ height: color === 'dark' ? '80px' : undefined }}
+      style={{
+        height: color === 'dark' ? '80px' : undefined,
+        position: folderLocation === 'desktop' ? 'absolute' : undefined,
+        top: `${position?.y * 12.57 + 2}%`,
+        left: `${position?.x * 6.23 + 0.5}%`,
+        opacity: isDragged ? 0 : 1,
+      }}
     >
       <Logo key={windowID} logo={logo} selected={selected} />
       {!rename && (

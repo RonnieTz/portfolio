@@ -33,6 +33,7 @@ export const newFolder = (
       selected: false,
       windowID: newWindowID,
       rename: true,
+      windowType: 'folder',
     };
 
     const newWindow: FolderWindow = {
@@ -67,6 +68,7 @@ export const newFolder = (
     selected: false,
     windowID: action.payload.windowID,
     rename: true,
+    windowType: 'folder',
   };
   state.links.push(newLink);
 };
