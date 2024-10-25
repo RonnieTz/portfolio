@@ -65,6 +65,8 @@ export const initialState: InitialState = {
       linkID: nanoid(),
       position: { x: 0, y: 1 },
     },
+    { ...profileLink, folderLocation: 'ProfileLinkID123' },
+    { ...profileLink, folderLocation: 'desktop' },
   ],
   draggingWindow: false,
 };

@@ -151,8 +151,14 @@ const ProjectLink = ({
       style={{
         height: color === 'dark' ? '80px' : undefined,
         position: folderLocation === 'desktop' ? 'absolute' : undefined,
-        top: `${position?.y * 12.57 + 2}%`,
-        left: `${position?.x * 6.23 + 0.5}%`,
+        top:
+          folderLocation === 'desktop'
+            ? `${position?.y * 12.57 + 2}%`
+            : undefined,
+        left:
+          folderLocation === 'desktop'
+            ? `${position?.x * 6.23 + 0.5}%`
+            : undefined,
         opacity: isDragged ? 0 : 1,
       }}
     >

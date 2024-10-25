@@ -23,6 +23,24 @@ export const newFolder = (
   const linkID = nanoid();
   const newWindowID = nanoid();
 
+  const findEmptyPosition = () => {
+    let x = 0;
+    let y = 0;
+    while (
+      state.links.some(({ position }) => position.x === x && position.y === y)
+    ) {
+      y++;
+      if (y === 8) {
+        y = 0;
+        x++;
+        if (x === 15 && y === 7) {
+          return;
+        }
+      }
+    }
+    return { x, y };
+  };
+
   if (action.payload.folderID === 'desktop') {
     const newName = findNewName();
     const newLink: Link = {
@@ -34,6 +52,8 @@ export const newFolder = (
       windowID: newWindowID,
       rename: true,
       windowType: 'folder',
+      isDragged: false,
+      position: findEmptyPosition() || { x: -1, y: -1 },
     };
 
     const newWindow: FolderWindow = {
@@ -69,6 +89,8 @@ export const newFolder = (
     windowID: action.payload.windowID,
     rename: true,
     windowType: 'folder',
+    isDragged: false,
+    position: { y: -1, x: -1 },
   };
   state.links.push(newLink);
 };

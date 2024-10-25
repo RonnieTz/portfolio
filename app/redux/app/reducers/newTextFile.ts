@@ -20,6 +20,23 @@ export const newTextFile = (
     }
     return newName;
   }
+  const findEmptyPosition = () => {
+    let x = 0;
+    let y = 0;
+    while (
+      state.links.some(({ position }) => position.x === x && position.y === y)
+    ) {
+      y++;
+      if (y === 8) {
+        y = 0;
+        x++;
+        if (x === 15 && y === 7) {
+          return;
+        }
+      }
+    }
+    return { x, y };
+  };
   const windowID = nanoid();
   const fontWindowID = windowID + 'font';
   const linkID = nanoid();
@@ -32,6 +49,8 @@ export const newTextFile = (
     windowID,
     rename: true,
     windowType: 'program',
+    isDragged: false,
+    position: findEmptyPosition() || { x: -1, y: -1 },
   };
   const newWindow: TextFileWindow = {
     windowID,

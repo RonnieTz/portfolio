@@ -84,6 +84,8 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
               key={link.linkID}
               rename={link.rename}
               folderLocation={link.folderLocation}
+              isDragged={false}
+              position={{ x: 2, y: 2 }}
             />
           );
         }

@@ -12,7 +12,6 @@ import {
 import Image from 'next/image';
 import { copy_cut, setTarget } from '@/app/redux/contextMenu/contextSlice';
 import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
-import { set } from 'mongoose';
 
 const Minesweeper = () => {
   const dispatch = useDispatch<AppDispatch>();

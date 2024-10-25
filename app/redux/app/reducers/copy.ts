@@ -35,6 +35,23 @@ export const copyPasteLink = (
     }
     return newName;
   };
+  const findEmptyPosition = () => {
+    let x = 0;
+    let y = 0;
+    while (
+      state.links.some(({ position }) => position.x === x && position.y === y)
+    ) {
+      y++;
+      if (y === 8) {
+        y = 0;
+        x++;
+        if (x === 15 && y === 7) {
+          return;
+        }
+      }
+    }
+    return { x, y };
+  };
   if (type !== 'folder' && type !== 'textFile') {
     const { name } = state.links.find((link) => link.linkID === linkID)!;
     const newName = findNewName(name);
@@ -48,7 +65,7 @@ export const copyPasteLink = (
       rename,
       windowType,
       isDragged: false,
-      position: { x: -1, y: -1 },
+      position: findEmptyPosition() || { x: -1, y: -1 },
     };
     state.links.push(newLink);
   }
@@ -81,6 +98,23 @@ export const copyPasteTextFile = (
     }
     return newName;
   };
+  const findEmptyPosition = () => {
+    let x = 0;
+    let y = 0;
+    while (
+      state.links.some(({ position }) => position.x === x && position.y === y)
+    ) {
+      y++;
+      if (y === 8) {
+        y = 0;
+        x++;
+        if (x === 15 && y === 7) {
+          return;
+        }
+      }
+    }
+    return { x, y };
+  };
   if (type === 'textFile') {
     const newWindowID = nanoid();
     const newFontWindowID = newWindowID + 'font';
@@ -96,7 +130,7 @@ export const copyPasteTextFile = (
       rename,
       windowType: 'program',
       isDragged: false,
-      position: { x: -1, y: -1 },
+      position: findEmptyPosition() || { x: -1, y: -1 },
     };
     const newWindow: TextFileWindow = {
       windowID: newWindowID,
@@ -166,6 +200,23 @@ export const copyPasteFolder = (
   };
 
   const newWindowID = nanoid();
+  const findEmptyPosition = () => {
+    let x = 0;
+    let y = 0;
+    while (
+      state.links.some(({ position }) => position.x === x && position.y === y)
+    ) {
+      y++;
+      if (y === 8) {
+        y = 0;
+        x++;
+        if (x === 15 && y === 7) {
+          return;
+        }
+      }
+    }
+    return { x, y };
+  };
 
   const newFolderLink: Link = {
     linkID: newFolderLinkID,
@@ -182,7 +233,7 @@ export const copyPasteFolder = (
     windowType: state.links.find((link) => link.linkID === folderLinkID)!
       .windowType,
     isDragged: false,
-    position: { x: -1, y: -1 },
+    position: findEmptyPosition() || { x: -1, y: -1 },
   };
   const newFolderWindow: FolderWindow = {
     windowID: newWindowID,

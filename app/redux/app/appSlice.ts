@@ -115,6 +115,9 @@ const appSlice = createSlice({
       const window = state.windows.find(
         (window) => window.windowID === action.payload.windowID
       );
+      const task = state.taskList.find(
+        (task) => task.windowID === action.payload.windowID
+      );
       if (window) {
         window.open = true;
         window.minimized = false;
@@ -127,6 +130,11 @@ const appSlice = createSlice({
         ) {
           state.taskList.push(window);
         }
+      }
+      if (task) {
+        task.open = true;
+        task.minimized = false;
+        task.focused = true;
       }
       state.windows.forEach((window) => {
         if (window.windowID !== action.payload.windowID) {
@@ -314,7 +322,8 @@ const appSlice = createSlice({
       if (
         state.links.some((link) => {
           return (
-            link.position.x === position.x && link.position.y === position.y
+            link?.position?.x === position?.x &&
+            link?.position?.y === position?.y
           );
         })
       ) {

@@ -1,14 +1,51 @@
 import profile from '@/public/profile.png';
 import './styles.css';
 import { Typography } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { openWindow, setStartOpen } from '@/app/redux/app/appSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/app/redux/store';
+import {
+  openWindow,
+  setLinkIsDragged,
+  setStartOpen,
+} from '@/app/redux/app/appSlice';
 import Image from 'next/image';
+import { copy_cut } from '@/app/redux/contextMenu/contextSlice';
+import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
 
 const MyProfile = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const { target } = useSelector((state: RootState) => state.context);
   return (
     <div
+      draggable={true}
+      onDragStart={() => {
+        setTimeout(() => {
+          dispatch(setStartOpen(false));
+        }, 300);
+        dispatch(
+          setLinkIsDragged({ linkID: 'ProfileLinkID123', isDragged: true })
+        );
+        dispatch(
+          copy_cut({
+            functionType: 'copy',
+            target: {
+              targetType: 'link',
+              linkID: 'ProfileLinkID123',
+              folderID: 'ProfileLinkID123',
+              linkType: 'program',
+              windowID: 'MinesweeperID123',
+            },
+          })
+        );
+      }}
+      onDragEnd={() => {
+        dispatch(
+          copyPaste({
+            linkID: 'ProfileLinkID123',
+            linkNewLocation: target?.folderID!,
+          })
+        );
+      }}
       onClick={() => {
         dispatch(
           openWindow({
