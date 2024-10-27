@@ -1,0 +1,116 @@
+.turn-off-button {
+  position: absolute;
+  z-index: 100;
+  bottom: 1%;
+  right: 2%;
+  width: 170px;
+  height: 40px;
+  transition: all 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.turn-off-button span {
+  font-size: 16px;
+  font-weight: lighter;
+  color: rgb(234, 241, 244);
+  text-shadow: 0.5px 0.5px 0.5px rgb(91, 154, 226);
+}
+
+.turn-off-button:hover {
+  background-color: rgb(48, 104, 192);
+}
+
+.turn-off-button:active {
+  filter: brightness(1.1);
+}
+
+.turn-off-window {
+  position: absolute;
+  z-index: 11100;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  backdrop-filter: grayscale(100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: turnOff 5s forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.turn-off-window-container > .top {
+  background-color: rgb(0, 48, 152);
+  width: 100%;
+  height: 20%;
+  color: rgb(248, 252, 248);
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  position: relative;
+  text-shadow: 0.5px 0.5px 0.5px rgba(100, 100, 100, 0.6),
+    -0.5px -0.5px 0.5px rgba(100, 100, 100, 0.6);
+}
+.turn-off-window-container > .bottom {
+  background-color: rgb(0, 48, 152);
+  width: 100%;
+  height: 20.5%;
+}
+.turn-off-window-container > .divider-one {
+  background: linear-gradient(
+    to right,
+    rgb(86, 127, 219),
+    rgb(186, 226, 255) 45%,
+    rgb(90, 126, 220) 95%
+  );
+  width: 100%;
+  height: 1%;
+}
+.turn-off-window-container > .divider-two {
+  background: linear-gradient(
+    to right,
+    rgb(86, 127, 219),
+    /* rgb(186, 226, 255) 25%, */ rgb(90, 126, 220) 95%
+  );
+  width: 100%;
+  height: 0.5%;
+}
+.turn-off-window-container > .middle {
+  background: radial-gradient(circle, rgb(152, 184, 240), rgb(88, 124, 216));
+  width: 100%;
+  height: 58%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20%;
+}
+
+.turn-off-window-container {
+  height: 300px;
+  width: 500px;
+  border: 1.5px solid rgb(0, 14, 46);
+  box-shadow: 0px 0px 0px 1px rgba(0, 14, 46, 0.3);
+  background-color: lightyellow;
+}
+
+@keyframes turnOff {
+  0% {
+    backdrop-filter: grayscale(0%);
+  }
+
+  100% {
+    backdrop-filter: grayscale(100%);
+  }
+}

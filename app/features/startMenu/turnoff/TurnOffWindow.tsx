@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { setTurnOff } from '@/app/redux/app/appSlice';
-import window from '@/public/turnoff.png';
-import Image from 'next/image';
+import Top from './Top';
+import Middle from './Middle';
 
 const TurnOffWindow = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const TurnOffWindow = () => {
     <div
       onClick={(e) => {
         e.stopPropagation();
-        // dispatch(setTurnOff(false));
+        dispatch(setTurnOff(false));
       }}
       className="turn-off-window"
     >
@@ -19,11 +19,11 @@ const TurnOffWindow = () => {
         }}
         className="turn-off-window-container"
       >
-        <Image
-          src={window}
-          style={{ width: '100%', height: '100%' }}
-          alt="turn off window"
-        />
+        <Top />
+        <div className="divider-one"></div>
+        <Middle />
+        <div className="divider-two"></div>
+        <div className="bottom"></div>
       </div>
     </div>
   );

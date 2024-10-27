@@ -9,7 +9,7 @@ import MenuBackgroundImage from './MenuBackgroundImage';
 import RightSide from './RightSide';
 import Divider from './Divider';
 import StartMenuPhoto from './StartMenuPhoto';
-import TurnOff from './TurnOff';
+import TurnOff from './turnoff/TurnOff';
 
 const Menu = () => {
   const dispatch = useDispatch();

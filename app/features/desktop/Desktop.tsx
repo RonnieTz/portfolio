@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import { setWelcome, setLoaded } from '@/app/redux/app/appSlice';
 import WelcomeScreen from './components/welcome/WelcomeScreen';
-import TurnOffWindow from '../startMenu/TurnOffWindow';
+import TurnOffWindow from '../startMenu/turnoff/TurnOffWindow';
 import LoadScreen from './components/load/LoadScreen';
 import Image from 'next/image';
 
