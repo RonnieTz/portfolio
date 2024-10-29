@@ -124,6 +124,7 @@ export type Link = {
   rename: boolean;
   position: { y: number; x: number };
   isDragged: boolean;
+  dateModified: Date;
 };
 
 export type InitialState = {
@@ -132,6 +133,7 @@ export type InitialState = {
   windows: WindowType[];
   turnOff: boolean;
   loaded: boolean;
+  turningOff: boolean;
   taskList: WindowType[];
   links: Link[];
   draggingWindow: boolean;

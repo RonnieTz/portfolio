@@ -3,8 +3,6 @@ import { initialState } from './initialState';
 import { set_WindowPosition } from './reducers/setWindowPosition';
 import { set_WindowFullScreen } from './reducers/setWindowFullScreen';
 import { allReducers } from './reducers/allReducers';
-import { nanoid } from '@reduxjs/toolkit';
-import { act } from 'react';
 
 const appSlice = createSlice({
   name: 'app',
@@ -13,6 +11,10 @@ const appSlice = createSlice({
     setTurnOff: (state, action: PayloadAction<boolean>) => {
       state.turnOff = action.payload;
     },
+    setTurningOff: (state, action: PayloadAction<boolean>) => {
+      state.turningOff = action.payload;
+    },
+
     setWelcome: (state, action: PayloadAction<boolean>) => {
       state.welcome = action.payload;
     },
@@ -345,6 +347,15 @@ const appSlice = createSlice({
         link.isDragged = action.payload.isDragged;
       }
     },
+    resetApp: (state) => {
+      state.loaded = true;
+      state.turnOff = false;
+      state.welcome = true;
+      state.windows.forEach((window) => {
+        window.open = false;
+      });
+      state.taskList = [];
+    },
     ...allReducers,
   },
 });
@@ -383,5 +394,7 @@ export const {
   setDraggingWindow,
   setLinkPosition,
   setLinkIsDragged,
+  setTurningOff,
+  resetApp,
 } = appSlice.actions;
 export default appSlice.reducer;

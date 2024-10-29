@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import SidebarItemDetails from './SidebarItemDetails';
 import SidebarItemTitle from './SidebarItemTitle';
+import FileFolderTasks from './FileFolderTasks';
 
-type Props = { title: string };
+type Props = {
+  title: string;
+  folderLocation: string;
+  children: ReactNode;
+};
 
-const SidebarItem = ({ title }: Props) => {
+const SidebarItem = ({ title, folderLocation, children }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   return (
     <div
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
         setIsExpanded(!isExpanded);
       }}
       onMouseEnter={() => {
@@ -25,7 +31,12 @@ const SidebarItem = ({ title }: Props) => {
         isHovered={isHovered}
         isExpanded={isExpanded}
       />
-      <SidebarItemDetails isExpanded={isExpanded} />
+      <SidebarItemDetails
+        folderLocation={folderLocation}
+        isExpanded={isExpanded}
+      >
+        {children}
+      </SidebarItemDetails>
     </div>
   );
 };

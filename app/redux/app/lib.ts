@@ -191,6 +191,7 @@ export const profileLink: Link = {
   windowType: 'program',
   position: { x: -1, y: -1 },
   isDragged: false,
+  dateModified: new Date(),
 };
 
 export const minesweeperLink: Link = {
@@ -204,6 +205,7 @@ export const minesweeperLink: Link = {
   windowType: 'program',
   position: { x: -1, y: -1 },
   isDragged: false,
+  dateModified: new Date(),
 };
 
 export const textFileLink: Link = {
@@ -217,6 +219,7 @@ export const textFileLink: Link = {
   windowType: 'program',
   position: { x: -1, y: -1 },
   isDragged: false,
+  dateModified: new Date(),
 };
 
 export const folderLink: Link = {
@@ -230,6 +233,7 @@ export const folderLink: Link = {
   windowType: 'folder',
   position: { x: -1, y: -1 },
   isDragged: false,
+  dateModified: new Date(),
 };
 
 export const chessLink: Link = {
@@ -243,6 +247,7 @@ export const chessLink: Link = {
   windowType: 'program',
   position: { x: -1, y: -1 },
   isDragged: false,
+  dateModified: new Date(),
 };
 
 export const quizLink: Link = {
@@ -256,6 +261,7 @@ export const quizLink: Link = {
   windowType: 'program',
   position: { x: -1, y: -1 },
   isDragged: false,
+  dateModified: new Date(),
 };
 
 export const portfolioLink: Link = {
@@ -269,4 +275,5 @@ export const portfolioLink: Link = {
   windowType: 'program',
   position: { x: -1, y: -1 },
   isDragged: false,
+  dateModified: new Date(),
 };

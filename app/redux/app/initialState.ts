@@ -20,6 +20,7 @@ import {
 import { nanoid } from '@reduxjs/toolkit';
 
 export const initialState: InitialState = {
+  turningOff: false,
   start: { open: false, hover: false },
   windows: [
     scores,
@@ -35,10 +36,11 @@ export const initialState: InitialState = {
   welcome: true,
   turnOff: false,
   loaded: true,
+  draggingWindow: false,
   taskList: [],
   links: [
-    { ...folderLink, name: 'My Projects', position: { x: 0, y: 2 } },
-    { ...profileLink, position: { x: 0, y: 3 } },
+    { ...folderLink, name: 'My Projects', position: { x: 0, y: 0 } },
+    { ...profileLink, position: { x: 0, y: 1 } },
     {
       ...chessLink,
       folderLocation: 'FolderLinkID1',
@@ -54,19 +56,11 @@ export const initialState: InitialState = {
       folderLocation: 'FolderLinkID1',
       linkID: 'PortfolioLinkID2',
     },
-    // textFileLink,
     {
       ...minesweeperLink,
       folderLocation: 'MinesweeperLinkID123',
     },
-    {
-      ...minesweeperLink,
-      folderLocation: 'desktop',
-      linkID: nanoid(),
-      position: { x: 0, y: 1 },
-    },
+
     { ...profileLink, folderLocation: 'ProfileLinkID123' },
-    { ...profileLink, folderLocation: 'desktop' },
   ],
-  draggingWindow: false,
 };

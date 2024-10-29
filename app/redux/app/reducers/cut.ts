@@ -35,6 +35,7 @@ export const cutPasteLink = (
       link.name = findNewName(name);
     }
     link.folderLocation = linkNewLocation;
+    link.dateModified = new Date();
     state.links.push(link);
   }
 };

@@ -12,13 +12,14 @@ import WelcomeScreen from './components/welcome/WelcomeScreen';
 import TurnOffWindow from '../startMenu/turnoff/TurnOffWindow';
 import LoadScreen from './components/load/LoadScreen';
 import Image from 'next/image';
+import TurningOffScreen from './components/welcome/TurningOffScreen';
 
 const Desktop = () => {
-  const { welcome, turnOff, loaded } = useSelector(
+  const { welcome, turnOff, loaded, turningOff } = useSelector(
     (state: RootState) => state.app
   );
+  useEffect(() => {}, [turningOff]);
   const dispatch = useDispatch();
-  const sessionLoaded = sessionStorage.getItem('loaded');
   useEffect(() => {
     document.addEventListener('contextmenu', (event) => {
       event.preventDefault();
@@ -35,9 +36,10 @@ const Desktop = () => {
         event.preventDefault();
       });
     };
-  }, [dispatch, sessionLoaded]);
+  }, [dispatch]);
   return (
     <>
+      {turningOff && <TurningOffScreen />}
       {turnOff && <TurnOffWindow />}
       {loaded && welcome && <LoadScreen />}
       {!loaded && welcome && <WelcomeScreen />}

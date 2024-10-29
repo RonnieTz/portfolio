@@ -9,7 +9,7 @@ type Props = {
 const MainArea = ({ folderID, folderLocation }: Props) => {
   return (
     <div className="main-area">
-      <Sidebar />
+      <Sidebar folderLocation={folderLocation} />
       <FolderArea folderID={folderID} folderLocation={folderLocation} />
     </div>
   );

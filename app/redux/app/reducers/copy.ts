@@ -66,6 +66,7 @@ export const copyPasteLink = (
       windowType,
       isDragged: false,
       position: findEmptyPosition() || { x: -1, y: -1 },
+      dateModified: new Date(),
     };
     state.links.push(newLink);
   }
@@ -131,6 +132,7 @@ export const copyPasteTextFile = (
       windowType: 'program',
       isDragged: false,
       position: findEmptyPosition() || { x: -1, y: -1 },
+      dateModified: new Date(),
     };
     const newWindow: TextFileWindow = {
       windowID: newWindowID,
@@ -234,6 +236,7 @@ export const copyPasteFolder = (
       .windowType,
     isDragged: false,
     position: findEmptyPosition() || { x: -1, y: -1 },
+    dateModified: new Date(),
   };
   const newFolderWindow: FolderWindow = {
     windowID: newWindowID,
