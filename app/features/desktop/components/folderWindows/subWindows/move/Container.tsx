@@ -1,6 +1,5 @@
 import desktop from '@/public/Desktop.png';
 import Image from 'next/image';
-import { useFolderTree } from '@/app/utilities/hooks/useFolderTree';
 import Link from './Link';
 
 type Folder = {
@@ -20,7 +19,7 @@ type Props = {
   };
 };
 
-const Container = ({ folderTree }: Props = { folderTree: useFolderTree() }) => {
+const Container = ({ folderTree }: Props) => {
   const { tree, selectFolder, expandFolder } = folderTree;
 
   return (
