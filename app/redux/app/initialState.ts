@@ -17,7 +17,6 @@ import {
   textEditorFonts,
   minesweeperLink,
 } from './lib';
-import { nanoid } from '@reduxjs/toolkit';
 
 export const initialState: InitialState = {
   turningOff: false,
@@ -63,4 +62,5 @@ export const initialState: InitialState = {
 
     { ...profileLink, folderLocation: 'ProfileLinkID123' },
   ],
+  selectedLinkForMoveWindow: '',
 };

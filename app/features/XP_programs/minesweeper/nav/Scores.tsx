@@ -1,10 +1,5 @@
-import bar from '@/public/windowTopBar.jpg';
-import logo from '@/public/description.png';
-import exit from '@/public/Exit.png';
-import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/redux/store';
-import { showHighScores } from '@/app/redux/minesweeper/minesweeperSlice';
 import { useEffect } from 'react';
 import { fetchHighScores } from '@/app/redux/minesweeper/fetchHighScores';
 

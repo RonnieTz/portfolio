@@ -50,6 +50,7 @@ const WindowBar = ({
         dispatch(setWindowFullScreen({ windowID, fullscreen: !fullScreen }));
       }}
       onDragStart={(e) => {
+        if (subWindow) return;
         const x = e.clientX;
         const y = e.clientY;
         e.dataTransfer.setDragImage(new Image(), 0, 0);
@@ -58,6 +59,7 @@ const WindowBar = ({
         dispatch(setDraggingWindow(true));
       }}
       onDragEnd={(e) => {
+        if (subWindow) return;
         const x = e.clientX;
         const y = e.clientY;
         setPosition({ x: x - ref.current.x, y: y - ref.current.y });
@@ -71,6 +73,7 @@ const WindowBar = ({
         dispatch(setDraggingWindow(false));
       }}
       onDrag={(e) => {
+        if (subWindow) return;
         setPosition({
           x: e.clientX - ref.current.x,
           y: e.clientY - ref.current.y,

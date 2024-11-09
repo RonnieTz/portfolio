@@ -1,5 +1,6 @@
 import SidebarItem from './SidebarItem';
 import FileFolderTasks from './FileFolderTasks';
+import Details from './Details';
 
 type Props = { folderLocation: string };
 
@@ -19,7 +20,7 @@ const Sidebar = ({ folderLocation }: Props) => {
         <FileFolderTasks folderLocation={folderLocation} />
       </SidebarItem>
       <SidebarItem folderLocation={folderLocation} title="Details">
-        <div></div>
+        <Details folderLocation={folderLocation} />
       </SidebarItem>
     </div>
   );

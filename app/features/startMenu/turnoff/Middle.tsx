@@ -7,6 +7,7 @@ import { resetApp, setTurnOff, setTurningOff } from '@/app/redux/app/appSlice';
 import Tooltip from './Tooltip';
 import './styles.css';
 import { useState } from 'react';
+import Button from './Button';
 
 const Middle = () => {
   const [showTooltip1, setShowTooltip1] = useState(false);
@@ -17,7 +18,7 @@ const Middle = () => {
   const dispatch = useDispatch();
   return (
     <div className="middle">
-      <Image
+      {/* <Image
         style={{ height: '30%', width: 'auto', opacity: 0.4 }}
         src={standby}
         alt="restart"
@@ -60,7 +61,6 @@ const Middle = () => {
       </div>
       <div
         onMouseEnter={() => {
-          // if (tooltipTimout) clearTimeout(tooltipTimout);
           const timeout = setTimeout(() => {
             setShowTooltip2(true);
           }, 500);
@@ -93,7 +93,19 @@ const Middle = () => {
             text="Shuts down Window and then starts Windows again."
           />
         )}
-      </div>
+      </div> */}
+      <Button
+        text="Puts the computer into a low-power state so you can quickly resume your work."
+        title="Standby"
+      />
+      <Button
+        text="Shuts down Windows so you can safely turn off the computer."
+        title="Turn Off"
+      />
+      <Button
+        text="Shuts down Window and then starts Windows again."
+        title="Restart"
+      />
     </div>
   );
 };

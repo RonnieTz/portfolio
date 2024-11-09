@@ -36,9 +36,6 @@ const Tooltip = ({ contentID, subWindowID, windowID }: Props) => {
       </span>
       <span
         onClick={(e) => {
-          const x = e.clientX;
-          const y = e.clientY;
-
           dispatch(
             openWindow({
               windowID: windowID + 'font',

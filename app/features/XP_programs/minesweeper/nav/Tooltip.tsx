@@ -20,7 +20,6 @@ type Props = {
 
 const Tooltip = ({ setIsHovered, mouseOutTimer, setMouseOutTimer }: Props) => {
   const dispatch = useDispatch();
-  const { windows } = useSelector((state: RootState) => state.app);
 
   const mineswweeper = useSelector((state: RootState) => state.minesweeper);
 

@@ -79,7 +79,7 @@ const appSlice = createSlice({
     ) => {
       state.windows.forEach((window) => {
         if (window.windowID === action.payload.windowID) {
-          window.focused = true;
+          window.focused = action.payload.focus;
           window.zIndex = 10;
         } else {
           window.focused = false;
@@ -98,8 +98,6 @@ const appSlice = createSlice({
       state,
       action: PayloadAction<{ windowID: string; focus: boolean }>
     ) => {
-      console.log(action.payload);
-
       const window = state.windows.find(
         (window) => window.windowID === action.payload.windowID
       );
@@ -162,14 +160,19 @@ const appSlice = createSlice({
         (window) => window.windowID === action.payload.windowID
       );
       if (window) {
-        if (window.type === 'program' || window.type === 'textFile') {
+        if (
+          window.type === 'program' ||
+          window.type === 'textFile' ||
+          window.type === 'folder'
+        ) {
           window.subWindow = action.payload.subWindow;
         }
       }
       if (taskListWindow) {
         if (
           taskListWindow.type === 'program' ||
-          taskListWindow.type === 'textFile'
+          taskListWindow.type === 'textFile' ||
+          taskListWindow.type === 'folder'
         ) {
           taskListWindow.subWindow = action.payload.subWindow;
         }
@@ -356,6 +359,9 @@ const appSlice = createSlice({
       });
       state.taskList = [];
     },
+    setSelectedLinkForMoveWindow: (state, action: PayloadAction<string>) => {
+      state.selectedLinkForMoveWindow = action.payload;
+    },
     ...allReducers,
   },
 });
@@ -396,5 +402,7 @@ export const {
   setLinkIsDragged,
   setTurningOff,
   resetApp,
+  newSubWindow,
+  setSelectedLinkForMoveWindow,
 } = appSlice.actions;
 export default appSlice.reducer;

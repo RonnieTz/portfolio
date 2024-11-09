@@ -22,9 +22,6 @@ const SidebarItemDetails = ({
       onClick={(e) => {
         e.stopPropagation();
       }}
-      style={{
-        height: !isExpanded ? '0px' : selectedFolder ? '120px' : '40px',
-      }}
       className={
         isExpanded ? 'sidebar-item-details' : 'sidebar-item-details-hidden'
       }

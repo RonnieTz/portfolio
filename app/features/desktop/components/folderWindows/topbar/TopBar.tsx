@@ -1,13 +1,26 @@
 import Logo from './Logo';
-import Tooltip from './Tooltip';
+import '../../contextMenu/styles.css';
+import File from './file/File';
+import Edit from './edit/Edit';
+import Views from './views/Views';
+import './styles.css';
 import { useState } from 'react';
 
-const TopBar = () => {
-  const [titles, setTitles] = useState(
-    ['File', 'Action', 'Media', 'Clipboard', 'View', 'Help'].map((title) => {
-      return { title, tooltip: false };
-    })
-  );
+type Props = {
+  windowID: string;
+  folderLocationID: string;
+  isMenuOpen: 'File' | 'Edit' | 'Views' | false;
+  setIsMenuOpen: React.Dispatch<
+    React.SetStateAction<'File' | 'Edit' | 'Views' | false>
+  >;
+};
+
+const TopBar = ({
+  windowID,
+  folderLocationID,
+  isMenuOpen,
+  setIsMenuOpen,
+}: Props) => {
   return (
     <div
       onContextMenu={(e) => {
@@ -16,25 +29,19 @@ const TopBar = () => {
       }}
       className="topbar"
     >
-      {titles.map((title, index) => (
-        <div
-          onMouseEnter={() => {
-            const newTitles = [...titles];
-            newTitles[index].tooltip = true;
-            setTitles(newTitles);
-          }}
-          onMouseLeave={() => {
-            const newTitles = [...titles];
-            newTitles[index].tooltip = false;
-            setTitles(newTitles);
-          }}
-          key={title.title}
-          className="topbar-title"
-        >
-          {title.title}
-          {title.tooltip && <Tooltip />}
-        </div>
-      ))}
+      <File
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        windowID={windowID}
+        folderLocationID={folderLocationID}
+      />
+      <Edit
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        folderLocationID={folderLocationID}
+        windowID={windowID}
+      />
+      <Views isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
       <Logo />
     </div>
   );

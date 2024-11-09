@@ -22,15 +22,17 @@ import {
   showContextMenu,
   setTarget,
   copy_cut,
+  clearClipboard,
 } from '@/app/redux/contextMenu/contextSlice';
 import ProjectLink from './components/shortcuts/ProjectLink';
-import { Fragment, use, useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import {
   cutPasteLink,
   cutPasteFolder,
   deleteLink,
 } from '@/app/redux/app/appSlice';
 import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
+import MoveItem from './components/folderWindows/subWindows/move/MoveItem';
 
 const backgroundSlots = new Array(16 * 8).fill(0).map((_, i) => i);
 
@@ -43,6 +45,7 @@ const DesktopMainArea = () => {
   const { showContext, target, clipboard } = useSelector(
     (state: RootState) => state.context
   );
+
   useEffect(() => {
     const clickCopy = (e: KeyboardEvent) => {
       if (selectedLink) {
@@ -109,6 +112,7 @@ const DesktopMainArea = () => {
               })
             );
           }
+          dispatch(clearClipboard());
         }
       }
 
@@ -169,6 +173,8 @@ const DesktopMainArea = () => {
             isDragged: false,
           })
         );
+        dispatch(clearClipboard());
+        dispatch(unSelectAllShortcuts());
         if (draggingWindow) {
           return;
         }
@@ -324,6 +330,7 @@ const DesktopMainArea = () => {
                     windowID={window.windowID}
                   />
                 )}
+                {window.title === 'Move Item' && <MoveItem />}
               </Window>
             );
           }
@@ -371,12 +378,13 @@ const DesktopMainArea = () => {
                 left={window.position.x}
                 top={window.position.y}
                 link=""
-                subWindow=""
+                subWindow={window.subWindow}
               >
                 <Folder
                   folderID={window.windowID}
                   folderLocation={locations[currentLocation]?.locationID}
                   windowID={window.windowID}
+                  subWindowID={window.subWindow}
                 />
               </Window>
             );
@@ -430,7 +438,6 @@ const DesktopMainArea = () => {
           <div
             key={slot}
             onDragOverCapture={(e) => {
-              console.log({ x: slot % 16, y: Math.floor(slot / 16) });
               dispatch(
                 setLinkPosition({
                   linkID: selectedLink?.linkID!,

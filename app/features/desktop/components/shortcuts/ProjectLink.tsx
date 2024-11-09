@@ -34,6 +34,9 @@ type Props = {
   folderLocation: string;
   position: { x: number; y: number };
   isDragged: boolean;
+  setMenuOpen?: React.Dispatch<
+    React.SetStateAction<'File' | 'Edit' | 'Views' | false>
+  >;
 };
 const ProjectLink = ({
   color,
@@ -46,30 +49,41 @@ const ProjectLink = ({
   folderLocation,
   position,
   isDragged,
+  setMenuOpen,
 }: Props) => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
   const [timeoutID, setTimeoutID] = useState<NodeJS.Timeout | null>(null);
   const { windows } = useSelector((state: RootState) => state.app)!;
-  const { target, clipboard } = useSelector(
-    (state: RootState) => state.context
-  );
+  const { clipboard } = useSelector((state: RootState) => state.context);
 
   const window = windows.find((window) => window.windowID === windowID);
+
+  const linkIsCut = (linkID: string) => {
+    if (clipboard) {
+      if (
+        clipboard.target.linkID === linkID &&
+        clipboard.functionType === 'cut'
+      ) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   useEffect(() => {
     const clickEnter = (e: KeyboardEvent) => {
       if (rename) return;
-      if (e.key === 'Enter' && selected) {
+      if (e.key === 'Enter' && selected && !rename) {
         dispatch(changeToFolder({ windowID, title, location: linkID }));
         dispatch(openWindow({ windowID }));
         dispatch(unSelectAllShortcuts());
         setIsHovered(false);
       }
     };
-    addEventListener('keyup', clickEnter);
+    addEventListener('keydown', clickEnter);
     return () => {
-      removeEventListener('keyup', clickEnter);
+      removeEventListener('keydown', clickEnter);
     };
   }, [selected, rename, dispatch, windowID, title, linkID]);
 
@@ -138,6 +152,9 @@ const ProjectLink = ({
       }}
       onClick={(e) => {
         e.stopPropagation();
+        if (setMenuOpen) {
+          setMenuOpen(false);
+        }
         dispatch(selectShortcut({ linkID }));
         dispatch(hideContextMenu());
       }}
@@ -162,7 +179,12 @@ const ProjectLink = ({
         opacity: isDragged ? 0 : 1,
       }}
     >
-      <Logo key={windowID} logo={logo} selected={selected} />
+      <Logo
+        key={windowID}
+        logo={logo}
+        selected={selected}
+        isCut={linkIsCut(linkID)}
+      />
       {!rename && (
         <Title color={color} selected={selected} title={title} type="project" />
       )}

@@ -16,10 +16,11 @@ const FileFolderTasks = ({ folderLocation }: Props) => {
   );
   return (
     <div>
-      {!selectedFolder && <MakeFolder />}
+      {!selectedFolder && <MakeFolder folderLocation={folderLocation} />}
       {selectedFolder && (
         <>
           <RenameFolder
+            folderLocationID={folderLocation}
             title={
               selectedFolder.windowType === 'folder'
                 ? 'Rename this folder'
@@ -41,6 +42,7 @@ const FileFolderTasks = ({ folderLocation }: Props) => {
             }
           />
           <DeleteFolder
+            folderLocationID={folderLocation}
             title={
               selectedFolder.windowType === 'folder'
                 ? 'Delete this folder'

@@ -253,6 +253,7 @@ export const copyPasteFolder = (
     open: false,
     type: 'folder',
     history: { currentLocation: 0, locations: [] },
+    subWindow: '',
   };
   state.links.push(newFolderLink);
   if (action.payload.targetWindowID === 'desktop') {

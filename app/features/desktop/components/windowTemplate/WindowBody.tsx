@@ -8,8 +8,13 @@ const WindowBody = ({ children }: { link: string; children: ReactNode }) => {
       width={'100%'}
       position={'absolute'}
       bottom={0}
+      sx={{
+        border: '1px solid rgb(0, 84, 224)',
+        boxSizing: 'border-box',
+        borderWidth: ' 0 2.5px 2.5px 2.5px',
+      }}
     >
-      <Box
+      {/* <Box
         width={'100%'}
         height={'100%'}
         sx={{
@@ -17,9 +22,9 @@ const WindowBody = ({ children }: { link: string; children: ReactNode }) => {
           boxSizing: 'border-box',
           borderWidth: ' 0 2.5px 2.5px 2.5px',
         }}
-      >
-        {children}
-      </Box>
+      > */}
+      {children}
+      {/* </Box> */}
     </Box>
   );
 };

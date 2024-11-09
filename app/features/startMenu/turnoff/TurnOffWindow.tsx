@@ -10,7 +10,6 @@ const TurnOffWindow = () => {
     <div
       onClick={(e) => {
         e.stopPropagation();
-        // dispatch(setTurnOff(false));
       }}
       className="turn-off-window"
     >

@@ -15,7 +15,9 @@ const ExitButton = ({ id, focused, subWindow }: Props) => {
 
   const parentWindowID = windows.find(
     (window) =>
-      (window.type === 'program' || window.type === 'textFile') &&
+      (window.type === 'program' ||
+        window.type === 'textFile' ||
+        window.type === 'folder') &&
       window.subWindow === id
   )?.windowID;
 

@@ -75,6 +75,7 @@ export const newFolder = (
         locations: [],
         currentLocation: 0,
       },
+      subWindow: '',
     };
     state.windows.push(newWindow);
     state.links.push(newLink);

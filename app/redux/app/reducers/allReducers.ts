@@ -3,6 +3,7 @@ import { newTextFile } from './newTextFile';
 import { deleteLink } from './deleteLink';
 import { cutPasteLink, cutPasteFolder } from './cut';
 import { copyPasteLink, copyPasteTextFile, copyPasteFolder } from './copy';
+import { newSubWindow } from './newSubWindow';
 
 export const allReducers = {
   newFolder,
@@ -13,4 +14,5 @@ export const allReducers = {
   copyPasteLink,
   copyPasteTextFile,
   copyPasteFolder,
+  newSubWindow,
 };

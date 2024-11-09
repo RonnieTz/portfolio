@@ -119,6 +119,7 @@ export const cutPasteFolder = (
           locations: [],
         },
         selected: false,
+        subWindow: '',
       };
       state.windows.push(newFolderWindow);
       folder.windowID = windowID;

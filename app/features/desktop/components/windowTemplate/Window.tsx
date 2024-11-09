@@ -4,7 +4,7 @@ import React, { useState, ReactNode, useEffect } from 'react';
 import WindowBody from './WindowBody';
 import WindowBar from './WindowBar';
 import { useDispatch } from 'react-redux';
-import { focusWindow, setMinimize } from '@/app/redux/app/appSlice';
+import { focusWindow, setFocus, setMinimize } from '@/app/redux/app/appSlice';
 
 type WindowProps = {
   top: number;
@@ -42,6 +42,30 @@ const Window = ({
   const [position, setPosition] = useState({ x: left, y: top });
   const dispatch = useDispatch();
 
+  const flick = () => {
+    if (subWindow !== '') {
+      const flickSubWindow = (time: number, focus: boolean) => {
+        setTimeout(() => {
+          if (time === 100) {
+            dispatch(focusWindow({ windowID: subWindow, focus: true }));
+          }
+          dispatch(setFocus({ windowID: subWindow, focus }));
+        }, time);
+      };
+
+      flickSubWindow(100, true);
+      flickSubWindow(200, false);
+      flickSubWindow(300, true);
+      flickSubWindow(400, false);
+      flickSubWindow(500, true);
+      flickSubWindow(600, false);
+      flickSubWindow(700, true);
+
+      dispatch(setMinimize({ windowID: subWindow, minimize: false }));
+      return;
+    }
+  };
+
   return (
     <div
       onDragOver={(e) => {
@@ -53,17 +77,23 @@ const Window = ({
         e.stopPropagation();
       }}
       className="window"
-      onClick={(e) => {
-        const x = e.clientX;
-        const y = e.clientY;
-
-        if (subWindow) {
-          dispatch(focusWindow({ windowID: subWindow, focus: true }));
-          dispatch(setMinimize({ windowID: subWindow, minimize: false }));
+      onClickCapture={(e) => {
+        if (!subWindow) {
+          dispatch(focusWindow({ windowID, focus: true }));
           return;
         }
-
-        dispatch(focusWindow({ windowID, focus: true }));
+        e.stopPropagation();
+        flick();
+      }}
+      onDoubleClickCapture={(e) => {
+        if (!subWindow) return;
+        e.stopPropagation();
+        flick();
+      }}
+      onDragStartCapture={(e) => {
+        if (!subWindow) return;
+        e.stopPropagation();
+        flick();
       }}
       style={{
         backgroundColor: 'whitesmoke',

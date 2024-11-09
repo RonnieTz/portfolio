@@ -1,12 +1,8 @@
 import { useState, useRef } from 'react';
 import Tooltip from './Tooltip';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/app/redux/store';
 
 const Navbar = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const { windows } = useSelector((state: RootState) => state.app);
-  const window = windows.find((window) => window.title === 'Minesweeper');
   const timestamp = useRef<number>(0);
   const [mouseInTimer, setMouseInTimer] = useState<NodeJS.Timeout | null>(null);
   const [mouseOutTimer, setMouseOutTimer] = useState<NodeJS.Timeout | null>(

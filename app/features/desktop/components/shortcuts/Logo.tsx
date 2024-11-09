@@ -1,6 +1,14 @@
 import Image from 'next/image';
 
-const Logo = ({ logo, selected }: { logo: string; selected: boolean }) => {
+const Logo = ({
+  logo,
+  selected,
+  isCut,
+}: {
+  logo: string;
+  selected: boolean;
+  isCut: boolean;
+}) => {
   return (
     <Image
       priority={true}
@@ -12,6 +20,7 @@ const Logo = ({ logo, selected }: { logo: string; selected: boolean }) => {
         filter: selected
           ? 'sepia(100%) hue-rotate(190deg) saturate(1800%)'
           : 'none',
+        opacity: isCut ? 0.3 : 1,
       }}
     />
   );

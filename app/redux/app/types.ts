@@ -87,6 +87,7 @@ export type FolderWindow = {
     locations: { title: string; locationID: string }[];
     currentLocation: number;
   };
+  subWindow: string;
 };
 
 export type ProfileWindow = {
@@ -137,4 +138,5 @@ export type InitialState = {
   taskList: WindowType[];
   links: Link[];
   draggingWindow: boolean;
+  selectedLinkForMoveWindow: string;
 };

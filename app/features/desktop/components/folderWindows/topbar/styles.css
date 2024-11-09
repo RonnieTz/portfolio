@@ -1,0 +1,53 @@
+.topbar-title-text {
+  font-family: 'Roboto', sans-serif;
+}
+
+.topbar-tooltip-container {
+  width: 150px;
+  background-color: rgb(248, 252, 248);
+  border: 1.5px solid rgb(177, 176, 162);
+  border-radius: 1px;
+  box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  padding: 3px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: rgb(20, 20, 20);
+  min-width: 100px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  animation: fadeIn 0.1s forwards;
+}
+
+.topbar-title:hover {
+  background-color: rgb(48, 104, 192);
+  color: rgb(228, 237, 242);
+}
+
+.topbar-divider {
+  background-color: rgb(177, 176, 162);
+  height: 1px;
+  width: 95%;
+  margin: 2px auto;
+  border-radius: 1px;
+}
+
+.topbar-tooltip-item {
+  padding: 2px 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.7rem;
+  color: rgb(20, 20, 20);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.topbar-tooltip-item-disabled {
+  opacity: 0.2;
+}
+
+.topbar-tooltip-item:hover:not(.topbar-tooltip-item-disabled) {
+  background-color: rgb(48, 104, 192);
+  color: rgb(228, 237, 242);
+}

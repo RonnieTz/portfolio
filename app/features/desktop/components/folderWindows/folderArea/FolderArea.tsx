@@ -1,19 +1,26 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/redux/store';
-import { unSelectAllShortcuts } from '@/app/redux/app/appSlice';
+import {
+  unSelectAllShortcuts,
+  removeRenameStates,
+} from '@/app/redux/app/appSlice';
 import {
   showContextMenu,
   setPosition,
   setTarget,
+  hideContextMenu,
 } from '@/app/redux/contextMenu/contextSlice';
 import ProjectLink from '../../shortcuts/ProjectLink';
 
 type Props = {
   folderID: string;
   folderLocation: string;
+  setIsMenuOpen: React.Dispatch<
+    React.SetStateAction<'File' | 'Edit' | 'Views' | false>
+  >;
 };
 
-const FolderArea = ({ folderID, folderLocation }: Props) => {
+const FolderArea = ({ folderID, folderLocation, setIsMenuOpen }: Props) => {
   const dispatch = useDispatch();
   const { links } = useSelector((state: RootState) => state.app);
   const { showContext } = useSelector((state: RootState) => state.context);
@@ -54,7 +61,10 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
       }}
       onClick={(e) => {
         e.stopPropagation();
+        setIsMenuOpen(false);
         dispatch(unSelectAllShortcuts());
+        dispatch(removeRenameStates());
+        dispatch(hideContextMenu());
         if (!showContext) {
           dispatch(
             setTarget({
@@ -86,6 +96,7 @@ const FolderArea = ({ folderID, folderLocation }: Props) => {
               folderLocation={link.folderLocation}
               isDragged={false}
               position={{ x: 2, y: 2 }}
+              setMenuOpen={setIsMenuOpen}
             />
           );
         }
