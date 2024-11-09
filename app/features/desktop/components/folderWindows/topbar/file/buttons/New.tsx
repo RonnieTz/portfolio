@@ -26,7 +26,6 @@ const New = ({ folderID, windowID }: CloseProps) => {
         if (hoverTimeOut) clearTimeout(hoverTimeOut);
         setIsHovered(false);
       }}
-      onClick={(e) => {}}
       className="topbar-tooltip-item"
     >
       <span

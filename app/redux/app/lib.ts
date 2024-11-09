@@ -178,6 +178,7 @@ export const folder: FolderWindow = {
     locations: [],
     currentLocation: 0,
   },
+  subWindow: '',
 };
 
 export const profileLink: Link = {

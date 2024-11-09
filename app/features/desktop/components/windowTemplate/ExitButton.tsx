@@ -20,6 +20,7 @@ const ExitButton = ({ id, focused, subWindow }: Props) => {
         window.type === 'folder') &&
       window.subWindow === id
   )?.windowID;
+  //
 
   const dispatch = useDispatch();
   return (

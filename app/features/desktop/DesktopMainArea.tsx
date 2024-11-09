@@ -330,7 +330,9 @@ const DesktopMainArea = () => {
                     windowID={window.windowID}
                   />
                 )}
-                {window.title === 'Move Item' && <MoveItem />}
+                {window.title === 'Move Item' && (
+                  <MoveItem windowID={window.windowID} />
+                )}
               </Window>
             );
           }
