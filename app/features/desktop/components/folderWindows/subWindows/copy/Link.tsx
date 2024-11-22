@@ -3,6 +3,7 @@ import closedFolder from '@/public/Folder Closed.png';
 import openedFolder from '@/public/Folder Opened.png';
 import Checkbox from './Checkbox';
 import { useRedux } from '@/app/utilities/hooks/useRedux';
+import { setTarget } from '@/app/redux/contextMenu/contextSlice';
 
 type Folder = {
   id: string;
@@ -18,7 +19,7 @@ type Props = {
 };
 
 const Link = ({ id, folders, selectFolder, expandFolder, selected }: Props) => {
-  const [_dispatch, app] = useRedux();
+  const [dispatch, app] = useRedux();
   const { links } = app;
   const link = links.find((link) => link.linkID === id);
   return (
@@ -40,6 +41,17 @@ const Link = ({ id, folders, selectFolder, expandFolder, selected }: Props) => {
           onClick={(e) => {
             e.stopPropagation();
             selectFolder(id);
+            dispatch(
+              setTarget({
+                target: {
+                  folderID: id,
+                  targetType: 'window',
+                  linkID: id,
+                  linkType: 'folder',
+                  windowID: link?.windowID!,
+                },
+              })
+            );
           }}
           className="move-item-window-link-text"
           style={{

@@ -193,6 +193,7 @@ export const profileLink: Link = {
   position: { x: -1, y: -1 },
   isDragged: false,
   dateModified: new Date(),
+  expanded: false,
 };
 
 export const minesweeperLink: Link = {
@@ -207,6 +208,7 @@ export const minesweeperLink: Link = {
   position: { x: -1, y: -1 },
   isDragged: false,
   dateModified: new Date(),
+  expanded: false,
 };
 
 export const textFileLink: Link = {
@@ -221,6 +223,7 @@ export const textFileLink: Link = {
   position: { x: -1, y: -1 },
   isDragged: false,
   dateModified: new Date(),
+  expanded: false,
 };
 
 export const folderLink: Link = {
@@ -235,6 +238,7 @@ export const folderLink: Link = {
   position: { x: -1, y: -1 },
   isDragged: false,
   dateModified: new Date(),
+  expanded: false,
 };
 
 export const chessLink: Link = {
@@ -249,6 +253,7 @@ export const chessLink: Link = {
   position: { x: -1, y: -1 },
   isDragged: false,
   dateModified: new Date(),
+  expanded: false,
 };
 
 export const quizLink: Link = {
@@ -263,6 +268,7 @@ export const quizLink: Link = {
   position: { x: -1, y: -1 },
   isDragged: false,
   dateModified: new Date(),
+  expanded: false,
 };
 
 export const portfolioLink: Link = {
@@ -277,4 +283,5 @@ export const portfolioLink: Link = {
   position: { x: -1, y: -1 },
   isDragged: false,
   dateModified: new Date(),
+  expanded: false,
 };

@@ -55,6 +55,7 @@ export const newFolder = (
       isDragged: false,
       position: findEmptyPosition() || { x: -1, y: -1 },
       dateModified: new Date(),
+      expanded: false,
     };
 
     const newWindow: FolderWindow = {
@@ -94,6 +95,7 @@ export const newFolder = (
     isDragged: false,
     position: { y: -1, x: -1 },
     dateModified: new Date(),
+    expanded: false,
   };
   state.links.push(newLink);
 };

@@ -1,6 +1,6 @@
 'use client';
 import { Box } from '@mui/material';
-import image from '@/public/image.jpg';
+import image from '@/public/wallpaper.webp';
 import Taskbar from '../taskbar/Taskbar';
 import Menu from '../startMenu/Menu';
 import DesktopMainArea from './DesktopMainArea';

@@ -2,6 +2,7 @@ import { WritableDraft } from 'immer';
 import { FolderWindow, InitialState, SubWindow, ProgramWindow } from '../types';
 import { PayloadAction } from '@reduxjs/toolkit';
 import folder from '@/public/Folder Closed.png';
+import { act } from 'react';
 
 export const newSubWindow = (
   state: WritableDraft<InitialState>,
@@ -17,6 +18,10 @@ export const newSubWindow = (
   const subWindow = state.windows.find(
     (window) => window.windowID === action.payload.subWindowID
   ) as SubWindow;
+
+  const task = state.taskList.find(
+    (window) => window.windowID === action.payload.windowID
+  );
 
   const newWindow: SubWindow = {
     fixedSize: true,
@@ -34,9 +39,10 @@ export const newSubWindow = (
     selected: false,
     type: 'subWindow',
   };
-
-  window.subWindow = action.payload.subWindowID;
-  window.focused = false;
+  if (window) {
+    window.subWindow = action.payload.subWindowID;
+    window.focused = false;
+  }
 
   if (!subWindow) {
     state.windows.push(newWindow);
@@ -48,5 +54,8 @@ export const newSubWindow = (
     subWindow.zIndex = 100;
     subWindow.position = window.position;
     state.taskList.push(subWindow);
+  }
+  if (task) {
+    task.focused = false;
   }
 };

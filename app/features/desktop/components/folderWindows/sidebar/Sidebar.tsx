@@ -2,9 +2,9 @@ import SidebarItem from './SidebarItem';
 import FileFolderTasks from './FileFolderTasks';
 import Details from './Details';
 
-type Props = { folderLocation: string };
+type Props = { folderLocation: string; windowID: string };
 
-const Sidebar = ({ folderLocation }: Props) => {
+const Sidebar = ({ folderLocation, windowID }: Props) => {
   return (
     <div
       onContextMenu={(e) => {
@@ -13,13 +13,10 @@ const Sidebar = ({ folderLocation }: Props) => {
       }}
       className="sidebar"
     >
-      <SidebarItem
-        folderLocation={folderLocation}
-        title="File and Folders Tasks"
-      >
-        <FileFolderTasks folderLocation={folderLocation} />
+      <SidebarItem title="File and Folders Tasks">
+        <FileFolderTasks folderLocation={folderLocation} windowID={windowID} />
       </SidebarItem>
-      <SidebarItem folderLocation={folderLocation} title="Details">
+      <SidebarItem title="Details">
         <Details folderLocation={folderLocation} />
       </SidebarItem>
     </div>

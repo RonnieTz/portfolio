@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/app/redux/store';
 import RenameFolder from './FolderTasks/RenameFolder';
 import MoveFolder from './FolderTasks/MoveFolder';
@@ -6,10 +6,9 @@ import CopyFolder from './FolderTasks/CopyFolder';
 import DeleteFolder from './FolderTasks/DeleteFolder';
 import MakeFolder from './FolderTasks/MakeFolder';
 
-type Props = { folderLocation: string };
+type Props = { folderLocation: string; windowID: string };
 
-const FileFolderTasks = ({ folderLocation }: Props) => {
-  const dispatch = useDispatch();
+const FileFolderTasks = ({ folderLocation, windowID }: Props) => {
   const { links } = useSelector((state: RootState) => state.app);
   const selectedFolder = links.find(
     (link) => link.folderLocation === folderLocation && link.selected
@@ -28,6 +27,7 @@ const FileFolderTasks = ({ folderLocation }: Props) => {
             }
           />
           <MoveFolder
+            windowID={windowID}
             title={
               selectedFolder.windowType === 'folder'
                 ? 'Move this folder'

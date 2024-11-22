@@ -13,11 +13,12 @@ export const copyPaste = createAsyncThunk(
     },
     thunkAPI
   ) => {
+    console.log(payload);
+
     const { getState, dispatch } = thunkAPI;
     const state = getState() as RootState;
     const { app, context, editor } = state;
     const { clipboard, target } = context;
-    console.log(app.links);
 
     const { windowID } = app.links.find((link) => {
       return link.linkID === payload.linkID;

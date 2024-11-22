@@ -126,6 +126,7 @@ export type Link = {
   position: { y: number; x: number };
   isDragged: boolean;
   dateModified: Date;
+  expanded: boolean;
 };
 
 export type InitialState = {

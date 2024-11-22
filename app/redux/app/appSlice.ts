@@ -271,6 +271,14 @@ const appSlice = createSlice({
         }
       }
     },
+    expandLink: (state, action: PayloadAction<{ linkID: string }>) => {
+      const link = state.links.find(
+        (link) => link.linkID === action.payload.linkID
+      );
+      if (link) {
+        link.expanded = !link.expanded;
+      }
+    },
     setRenameState: (state, action: PayloadAction<{ linkID: string }>) => {
       const link = state.links.find(
         (link) => link.linkID === action.payload.linkID
@@ -404,5 +412,6 @@ export const {
   resetApp,
   newSubWindow,
   setSelectedLinkForMoveWindow,
+  expandLink,
 } = appSlice.actions;
 export default appSlice.reducer;

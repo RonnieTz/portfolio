@@ -5,11 +5,10 @@ import FileFolderTasks from './FileFolderTasks';
 
 type Props = {
   title: string;
-  folderLocation: string;
   children: ReactNode;
 };
 
-const SidebarItem = ({ title, folderLocation, children }: Props) => {
+const SidebarItem = ({ title, children }: Props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   return (
@@ -31,10 +30,7 @@ const SidebarItem = ({ title, folderLocation, children }: Props) => {
         isHovered={isHovered}
         isExpanded={isExpanded}
       />
-      <SidebarItemDetails
-        folderLocation={folderLocation}
-        isExpanded={isExpanded}
-      >
+      <SidebarItemDetails isExpanded={isExpanded}>
         {children}
       </SidebarItemDetails>
     </div>

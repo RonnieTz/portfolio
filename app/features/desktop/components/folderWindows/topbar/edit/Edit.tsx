@@ -74,6 +74,7 @@ const Edit = ({
             <CopyToFolder
               disabled={!Boolean(selectedLink)}
               folderLocationID={folderLocationID}
+              windowID={windowID}
             />
             <MoveToFolder
               disabled={!Boolean(selectedLink)}

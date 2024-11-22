@@ -12,14 +12,14 @@ type Props = {
   subWindowID: string;
 };
 
-const Folder = ({ folderID, folderLocation, windowID, subWindowID }: Props) => {
+const Folder = ({ folderID, folderLocation, windowID }: Props) => {
   const [isMenuOpen, setIsMenuOpen] = useState<
     'File' | 'Edit' | 'Views' | false
   >(false);
 
   return (
     <div
-      onClick={(e) => {
+      onClick={() => {
         setIsMenuOpen(false);
       }}
       className="folder-window-container"
@@ -33,6 +33,7 @@ const Folder = ({ folderID, folderLocation, windowID, subWindowID }: Props) => {
       <Navbar windowID={windowID} />
       <AddressBar folderID={folderID} />
       <MainArea
+        windowID={windowID}
         folderLocation={folderLocation}
         folderID={folderID}
         setIsMenuOpen={setIsMenuOpen}

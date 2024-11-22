@@ -17,7 +17,7 @@ const Copy = ({ disabled, folderLocationID }: CutProps) => {
         disabled ? 'topbar-tooltip-item-disabled' : ''
       }`}
     >
-      Copy{' '}
+      Copy
       <span
         style={{
           fontFamily: 'inherit',

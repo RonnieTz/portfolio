@@ -52,6 +52,7 @@ export const newTextFile = (
     isDragged: false,
     position: findEmptyPosition() || { x: -1, y: -1 },
     dateModified: new Date(),
+    expanded: false,
   };
   const newWindow: TextFileWindow = {
     windowID,

@@ -33,6 +33,7 @@ import {
 } from '@/app/redux/app/appSlice';
 import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
 import MoveItem from './components/folderWindows/subWindows/move/MoveItem';
+import CopyItem from './components/folderWindows/subWindows/copy/CopyItem';
 
 const backgroundSlots = new Array(16 * 8).fill(0).map((_, i) => i);
 
@@ -332,6 +333,9 @@ const DesktopMainArea = () => {
                 )}
                 {window.title === 'Move Item' && (
                   <MoveItem windowID={window.windowID} />
+                )}
+                {window.title === 'Copy Item' && (
+                  <CopyItem windowID={window.windowID} />
                 )}
               </Window>
             );

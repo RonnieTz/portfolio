@@ -1,15 +1,13 @@
 import { useRedux } from './useRedux';
 import { useEffect, useState } from 'react';
+import { expandLink } from '@/app/redux/app/appSlice';
 
 export const useFolderTree = () => {
-  const [_dispatch, app] = useRedux();
+  const [dispatch, app] = useRedux();
   const { links } = app;
   type Folder = {
-    name: string;
     id: string;
-    selected: boolean;
     folders: Folder[];
-    expanded: boolean;
   };
   const findFolders = (id: string): Folder[] => {
     const folders = links.filter(
@@ -17,29 +15,39 @@ export const useFolderTree = () => {
     );
     const tree = folders.map((folder) => {
       return {
-        name: folder.name,
         id: folder.linkID,
-        selected: false,
         folders: findFolders(folder.linkID),
-        expanded: false,
       };
     });
     return tree;
   };
   const [tree, setTree] = useState<Folder[]>(findFolders('desktop'));
-  useEffect(() => {
-    setTree(findFolders('desktop'));
-  }, [links]);
   const [selectedFolder, setSelectedFolder] = useState<string>('desktop');
+  useEffect(() => {
+    setTree(
+      findFolders('desktop').map((folder) => {
+        const mutateFolder = (subfolder: Folder): Folder => {
+          return {
+            ...subfolder,
+            folders: subfolder.folders.map(mutateFolder),
+          };
+        };
+        return {
+          ...folder,
+          folders: folder.folders.map(mutateFolder),
+        };
+      })
+    );
+  }, [links]);
 
   const selectFolder = (id: string) => {
+    if (id === 'desktop') {
+      setSelectedFolder('desktop');
+    }
     const select = (tree: Folder[]) => {
       tree.forEach((folder) => {
         if (folder.id === id) {
-          folder.selected = true;
           setSelectedFolder(id);
-        } else {
-          folder.selected = false;
         }
         select(folder.folders);
       });
@@ -50,17 +58,7 @@ export const useFolderTree = () => {
   };
 
   const expandFolder = (id: string) => {
-    const expand = (tree: Folder[]) => {
-      tree.forEach((folder) => {
-        if (folder.id === id) {
-          folder.expanded = !folder.expanded;
-        }
-        expand(folder.folders);
-      });
-
-      return tree;
-    };
-    setTree(expand(tree));
+    dispatch(expandLink({ linkID: id }));
   };
 
   return { tree, selectFolder, expandFolder, selectedFolder };

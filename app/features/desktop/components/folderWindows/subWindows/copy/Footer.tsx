@@ -5,7 +5,8 @@ import {
   setSubWindow,
   newFolder,
 } from '@/app/redux/app/appSlice';
-import { useOpenMoveToFolder } from '@/app/utilities/hooks/useOpenMoveToFolder';
+import { useOpenCopyToFolder } from '@/app/utilities/hooks/useOpenCopyToFolder';
+import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
 
 type Props = {
   windowID: string;
@@ -14,9 +15,10 @@ type Props = {
 };
 
 const Footer = ({ windowID, selectedFolder, expandFolder }: Props) => {
-  const [_, moveToFolder] = useOpenMoveToFolder(windowID);
+  const [_, copyToFolder] = useOpenCopyToFolder(windowID);
+
   const [dispatch, app] = useRedux();
-  const { windows, links } = app;
+  const { windows, links, selectedLinkForMoveWindow } = app;
   const link = links.find((link) => link.linkID === selectedFolder);
 
   const parentWindowID = windows.find(
@@ -46,15 +48,21 @@ const Footer = ({ windowID, selectedFolder, expandFolder }: Props) => {
       <button
         onClick={(e) => {
           e.stopPropagation();
-          moveToFolder({ newFolderLocation: selectedFolder });
-          close();
+          // copyToFolder({ newFolderLocation: selectedFolder });
+          // close();
+          dispatch(
+            copyPaste({
+              linkID: selectedLinkForMoveWindow,
+              linkNewLocation: selectedFolder,
+            })
+          );
         }}
         style={{
           translate: '45px',
         }}
         className="move-item-window-button"
       >
-        Move
+        Copy
       </button>
       <button onClick={close} className="move-item-window-button">
         Cancel

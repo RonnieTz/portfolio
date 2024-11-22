@@ -1,12 +1,10 @@
 import { useRedux } from './useRedux';
 import { newSubWindow, setSubWindow } from '@/app/redux/app/appSlice';
+import { cutPasteFolder, cutPasteLink } from '@/app/redux/app/appSlice';
 
-export const useOpenMoveToFolder = (
-  folderLocationID: string,
-  windowID: string
-) => {
+export const useOpenMoveToFolder = (windowID: string) => {
   const [dispatch, app] = useRedux();
-  //   const { windows } = app;
+  const { selectedLinkForMoveWindow, links } = app;
 
   const openMoveToFolder = () => {
     dispatch(
@@ -24,5 +22,46 @@ export const useOpenMoveToFolder = (
     );
   };
 
-  return [openMoveToFolder];
+  const moveToFolder = ({
+    newFolderLocation,
+  }: {
+    newFolderLocation: string;
+  }) => {
+    const link = links.find(
+      (link) => link.linkID === selectedLinkForMoveWindow
+    );
+
+    if (link?.windowType === 'program') {
+      dispatch(
+        cutPasteLink({
+          linkID: selectedLinkForMoveWindow,
+          linkLocation: link.folderLocation,
+          linkNewLocation: newFolderLocation,
+        })
+      );
+    } else {
+      if (newFolderLocation === 'desktop') {
+        dispatch(
+          cutPasteFolder({
+            folderLinkID: selectedLinkForMoveWindow,
+            newFolderLocation,
+            windowID: '',
+          })
+        );
+      } else {
+        const { windowID } = links.find(
+          (link) => link.linkID === newFolderLocation
+        )!;
+        dispatch(
+          cutPasteFolder({
+            folderLinkID: selectedLinkForMoveWindow,
+            newFolderLocation,
+            windowID,
+          })
+        );
+      }
+    }
+  };
+
+  return [openMoveToFolder, moveToFolder] as const;
 };

@@ -13,7 +13,7 @@ import { copyPaste } from '@/app/redux/app/reducers/copyReducerThunk';
 export const usePasteLink = (folderLocationID: string, windowID: string) => {
   const [dispatch, app, context] = useRedux();
   const { links } = app;
-  const { clipboard, target } = context;
+  const { clipboard } = context;
 
   const pasteLink = () => {
     if (
